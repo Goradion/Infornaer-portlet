@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="de.ki.sbam.model.Category" />
+	<import class="de.ki.sbam.model.Difficulty" />
+	<import class="de.ki.sbam.model.Highscore" />
+	<import class="de.ki.sbam.model.Question" />
+	<import class="de.ki.sbam.model.UserQuestion" />
+	<class name="de.ki.sbam.model.impl.CategoryImpl" table="sbam_Category">
+		<id name="categoryId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="categoryName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="de.ki.sbam.model.impl.DifficultyImpl" table="sbam_Difficulty">
+		<id name="difficultyId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="difficultyName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="de.ki.sbam.model.impl.HighscoreImpl" table="sbam_Highscore">
+		<id name="userId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="score" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+	<class name="de.ki.sbam.model.impl.QuestionImpl" table="sbam_Question">
+		<id name="questionId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="questionContent" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="answerA" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="answerB" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="answerC" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="answerD" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="categoryId_fk" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="category" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="difficulty" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="rightAnswer" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="de.ki.sbam.model.impl.UserQuestionImpl" table="sbam_UserQuestion">
+		<id name="questionId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="question" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="answerA" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="answerB" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="answerC" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="answerD" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="category" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="difficulty" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="rightAnswer" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+</hibernate-mapping>
