@@ -15,7 +15,7 @@
 package de.ki.sbam.service.impl;
 
 import aQute.bnd.annotation.ProviderType;
-
+import de.ki.sbam.service.HighscoreLocalServiceUtil;
 import de.ki.sbam.service.base.HighscoreLocalServiceBaseImpl;
 
 /**

@@ -61,6 +61,25 @@ public interface UserQuestionLocalService extends BaseLocalService,
 	 *
 	 * Never modify or reference this interface directly. Always use {@link UserQuestionLocalServiceUtil} to access the user question local service. Add custom service methods to {@link de.ki.sbam.service.impl.UserQuestionLocalServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public ActionableDynamicQuery getActionableDynamicQuery();
+
+	public DynamicQuery dynamicQuery();
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery();
+
+	/**
+	* @throws PortalException
+	*/
+	@Override
+	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
+		throws PortalException;
+
+	@Override
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
+		throws PortalException;
 
 	/**
 	* Adds the user question to the database. Also notifies the appropriate model listeners.
@@ -80,11 +99,13 @@ public interface UserQuestionLocalService extends BaseLocalService,
 	public UserQuestion createUserQuestion(long questionId);
 
 	/**
-	* @throws PortalException
+	* Deletes the user question from the database. Also notifies the appropriate model listeners.
+	*
+	* @param userQuestion the user question
+	* @return the user question that was removed
 	*/
-	@Override
-	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
-		throws PortalException;
+	@Indexable(type = IndexableType.DELETE)
+	public UserQuestion deleteUserQuestion(UserQuestion userQuestion);
 
 	/**
 	* Deletes the user question with the primary key from the database. Also notifies the appropriate model listeners.
@@ -97,16 +118,48 @@ public interface UserQuestionLocalService extends BaseLocalService,
 	public UserQuestion deleteUserQuestion(long questionId)
 		throws PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public UserQuestion fetchUserQuestion(long questionId);
+
 	/**
-	* Deletes the user question from the database. Also notifies the appropriate model listeners.
+	* Returns the user question with the primary key.
+	*
+	* @param questionId the primary key of the user question
+	* @return the user question
+	* @throws PortalException if a user question with the primary key could not be found
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public UserQuestion getUserQuestion(long questionId)
+		throws PortalException;
+
+	/**
+	* Updates the user question in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
 	*
 	* @param userQuestion the user question
-	* @return the user question that was removed
+	* @return the user question that was updated
 	*/
-	@Indexable(type = IndexableType.DELETE)
-	public UserQuestion deleteUserQuestion(UserQuestion userQuestion);
+	@Indexable(type = IndexableType.REINDEX)
+	public UserQuestion updateUserQuestion(UserQuestion userQuestion);
 
-	public DynamicQuery dynamicQuery();
+	/**
+	* Returns the number of user questions.
+	*
+	* @return the number of user questions
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getUserQuestionsCount();
+
+	@Override
+	public java.lang.Object invokeMethod(java.lang.String name,
+		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
+		throws java.lang.Throwable;
+
+	/**
+	* Returns the OSGi service identifier.
+	*
+	* @return the OSGi service identifier
+	*/
+	public java.lang.String getOSGiServiceIdentifier();
 
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.
@@ -148,6 +201,20 @@ public interface UserQuestionLocalService extends BaseLocalService,
 		int end, OrderByComparator<T> orderByComparator);
 
 	/**
+	* Returns a range of all the user questions.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link de.ki.sbam.model.impl.UserQuestionModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param start the lower bound of the range of user questions
+	* @param end the upper bound of the range of user questions (not inclusive)
+	* @return the range of user questions
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<UserQuestion> getUserQuestions(int start, int end);
+
+	/**
 	* Returns the number of rows matching the dynamic query.
 	*
 	* @param dynamicQuery the dynamic query
@@ -164,72 +231,4 @@ public interface UserQuestionLocalService extends BaseLocalService,
 	*/
 	public long dynamicQueryCount(DynamicQuery dynamicQuery,
 		Projection projection);
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public UserQuestion fetchUserQuestion(long questionId);
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public ActionableDynamicQuery getActionableDynamicQuery();
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery();
-
-	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
-	public java.lang.String getOSGiServiceIdentifier();
-
-	@Override
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
-		throws PortalException;
-
-	/**
-	* Returns the user question with the primary key.
-	*
-	* @param questionId the primary key of the user question
-	* @return the user question
-	* @throws PortalException if a user question with the primary key could not be found
-	*/
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public UserQuestion getUserQuestion(long questionId)
-		throws PortalException;
-
-	/**
-	* Returns a range of all the user questions.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link de.ki.sbam.model.impl.UserQuestionModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param start the lower bound of the range of user questions
-	* @param end the upper bound of the range of user questions (not inclusive)
-	* @return the range of user questions
-	*/
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<UserQuestion> getUserQuestions(int start, int end);
-
-	/**
-	* Returns the number of user questions.
-	*
-	* @return the number of user questions
-	*/
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getUserQuestionsCount();
-
-	@Override
-	public java.lang.Object invokeMethod(java.lang.String name,
-		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
-		throws java.lang.Throwable;
-
-	/**
-	* Updates the user question in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
-	*
-	* @param userQuestion the user question
-	* @return the user question that was updated
-	*/
-	@Indexable(type = IndexableType.REINDEX)
-	public UserQuestion updateUserQuestion(UserQuestion userQuestion);
 }

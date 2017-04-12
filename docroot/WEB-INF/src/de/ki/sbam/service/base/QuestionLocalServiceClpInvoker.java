@@ -117,26 +117,18 @@ public class QuestionLocalServiceClpInvoker {
 
 		_methodParameterTypes19 = new String[] { "de.ki.sbam.model.Question" };
 
-		_methodName54 = "getOSGiServiceIdentifier";
+		_methodName58 = "getOSGiServiceIdentifier";
 
-		_methodParameterTypes54 = new String[] {  };
+		_methodParameterTypes58 = new String[] {  };
 
-		_methodName59 = "addQuestion";
+		_methodName63 = "addQuestion";
 
-		_methodParameterTypes59 = new String[] {
+		_methodParameterTypes63 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "int",
 				"com.liferay.portal.kernel.model.User"
 			};
-
-		_methodName60 = "findByDifficulty";
-
-		_methodParameterTypes60 = new String[] { "int" };
-
-		_methodName61 = "findByCategory";
-
-		_methodParameterTypes61 = new String[] { "java.lang.String" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -243,29 +235,19 @@ public class QuestionLocalServiceClpInvoker {
 			return QuestionLocalServiceUtil.updateQuestion((de.ki.sbam.model.Question)arguments[0]);
 		}
 
-		if (_methodName54.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes54, parameterTypes)) {
+		if (_methodName58.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes58, parameterTypes)) {
 			return QuestionLocalServiceUtil.getOSGiServiceIdentifier();
 		}
 
-		if (_methodName59.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes59, parameterTypes)) {
+		if (_methodName63.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes63, parameterTypes)) {
 			return QuestionLocalServiceUtil.addQuestion((java.lang.String)arguments[0],
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
 				(java.lang.String)arguments[3], (java.lang.String)arguments[4],
 				(java.lang.String)arguments[5], (java.lang.String)arguments[6],
 				((Integer)arguments[7]).intValue(),
 				(com.liferay.portal.kernel.model.User)arguments[8]);
-		}
-
-		if (_methodName60.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes60, parameterTypes)) {
-			return QuestionLocalServiceUtil.findByDifficulty(((Integer)arguments[0]).intValue());
-		}
-
-		if (_methodName61.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes61, parameterTypes)) {
-			return QuestionLocalServiceUtil.findByCategory((java.lang.String)arguments[0]);
 		}
 
 		throw new UnsupportedOperationException();
@@ -309,12 +291,8 @@ public class QuestionLocalServiceClpInvoker {
 	private String[] _methodParameterTypes18;
 	private String _methodName19;
 	private String[] _methodParameterTypes19;
-	private String _methodName54;
-	private String[] _methodParameterTypes54;
-	private String _methodName59;
-	private String[] _methodParameterTypes59;
-	private String _methodName60;
-	private String[] _methodParameterTypes60;
-	private String _methodName61;
-	private String[] _methodParameterTypes61;
+	private String _methodName58;
+	private String[] _methodParameterTypes58;
+	private String _methodName63;
+	private String[] _methodParameterTypes63;
 }

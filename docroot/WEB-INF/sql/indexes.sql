@@ -4,6 +4,9 @@ create index IX_AF875B31 on sbam_Question (category[$COLUMN_LENGTH:75$], difficu
 create index IX_E50389BF on sbam_Question (difficulty);
 create index IX_80CF1425 on sbam_Question (questionId);
 
+create index IX_1477E12D on sbam_UserQuestion (category[$COLUMN_LENGTH:75$]);
+create index IX_169DB56A on sbam_UserQuestion (difficulty);
+
 create index IX_A4D2D45A on wwi_Highscore (userId);
 
 create index IX_46746223 on wwi_Question (category[$COLUMN_LENGTH:75$], difficulty);

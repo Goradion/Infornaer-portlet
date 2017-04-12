@@ -680,7 +680,7 @@ public class UserQuestionClp extends BaseModelImpl<UserQuestion>
 	private int _difficulty;
 	private String _rightAnswer;
 	private BaseModel<?> _userQuestionRemoteModel;
-	private Class<?> _clpSerializerClass = de.ki.sbam.service.ClpSerializer.class;
+	private Class<?> _clpSerializerClass = ClpSerializer.class;
 	private boolean _entityCacheEnabled;
 	private boolean _finderCacheEnabled;
 }

@@ -30,6 +30,8 @@ import de.ki.sbam.service.QuestionLocalServiceUtil;
 import de.ki.sbam.service.QuestionServiceUtil;
 import de.ki.sbam.service.UserQuestionLocalServiceUtil;
 import de.ki.sbam.service.UserQuestionServiceUtil;
+import de.ki.sbam.service.UserStatisticsLocalServiceUtil;
+import de.ki.sbam.service.UserStatisticsServiceUtil;
 
 /**
  * @author Alexander Mueller
@@ -62,6 +64,9 @@ public class ClpMessageListener extends BaseMessageListener {
 			UserQuestionLocalServiceUtil.clearService();
 
 			UserQuestionServiceUtil.clearService();
+			UserStatisticsLocalServiceUtil.clearService();
+
+			UserStatisticsServiceUtil.clearService();
 		}
 	}
 }

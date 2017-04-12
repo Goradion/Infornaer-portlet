@@ -42,6 +42,96 @@ public interface UserQuestionPersistence extends BasePersistence<UserQuestion> {
 	 */
 
 	/**
+	* Returns the user question where category = &#63; or throws a {@link NoSuchUserQuestionException} if it could not be found.
+	*
+	* @param category the category
+	* @return the matching user question
+	* @throws NoSuchUserQuestionException if a matching user question could not be found
+	*/
+	public UserQuestion findByCategory(java.lang.String category)
+		throws NoSuchUserQuestionException;
+
+	/**
+	* Returns the user question where category = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param category the category
+	* @return the matching user question, or <code>null</code> if a matching user question could not be found
+	*/
+	public UserQuestion fetchByCategory(java.lang.String category);
+
+	/**
+	* Returns the user question where category = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param category the category
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the matching user question, or <code>null</code> if a matching user question could not be found
+	*/
+	public UserQuestion fetchByCategory(java.lang.String category,
+		boolean retrieveFromCache);
+
+	/**
+	* Removes the user question where category = &#63; from the database.
+	*
+	* @param category the category
+	* @return the user question that was removed
+	*/
+	public UserQuestion removeByCategory(java.lang.String category)
+		throws NoSuchUserQuestionException;
+
+	/**
+	* Returns the number of user questions where category = &#63;.
+	*
+	* @param category the category
+	* @return the number of matching user questions
+	*/
+	public int countByCategory(java.lang.String category);
+
+	/**
+	* Returns the user question where difficulty = &#63; or throws a {@link NoSuchUserQuestionException} if it could not be found.
+	*
+	* @param difficulty the difficulty
+	* @return the matching user question
+	* @throws NoSuchUserQuestionException if a matching user question could not be found
+	*/
+	public UserQuestion findByDifficulty(int difficulty)
+		throws NoSuchUserQuestionException;
+
+	/**
+	* Returns the user question where difficulty = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param difficulty the difficulty
+	* @return the matching user question, or <code>null</code> if a matching user question could not be found
+	*/
+	public UserQuestion fetchByDifficulty(int difficulty);
+
+	/**
+	* Returns the user question where difficulty = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param difficulty the difficulty
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the matching user question, or <code>null</code> if a matching user question could not be found
+	*/
+	public UserQuestion fetchByDifficulty(int difficulty,
+		boolean retrieveFromCache);
+
+	/**
+	* Removes the user question where difficulty = &#63; from the database.
+	*
+	* @param difficulty the difficulty
+	* @return the user question that was removed
+	*/
+	public UserQuestion removeByDifficulty(int difficulty)
+		throws NoSuchUserQuestionException;
+
+	/**
+	* Returns the number of user questions where difficulty = &#63;.
+	*
+	* @param difficulty the difficulty
+	* @return the number of matching user questions
+	*/
+	public int countByDifficulty(int difficulty);
+
+	/**
 	* Caches the user question in the entity cache if it is enabled.
 	*
 	* @param userQuestion the user question

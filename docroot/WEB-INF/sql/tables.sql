@@ -46,3 +46,11 @@ create table sbam_UserQuestion (
 	difficulty INTEGER,
 	rightAnswer VARCHAR(75) null
 );
+
+create table sbam_UserStatistics (
+	userId LONG not null primary key,
+	gamesWon LONG,
+	gamesLost LONG,
+	rightAnswers LONG,
+	wrongAnswers LONG
+);

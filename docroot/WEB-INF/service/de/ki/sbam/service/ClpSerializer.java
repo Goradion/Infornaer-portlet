@@ -30,6 +30,7 @@ import de.ki.sbam.model.DifficultyClp;
 import de.ki.sbam.model.HighscoreClp;
 import de.ki.sbam.model.QuestionClp;
 import de.ki.sbam.model.UserQuestionClp;
+import de.ki.sbam.model.UserStatisticsClp;
 
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -127,6 +128,10 @@ public class ClpSerializer {
 			return translateInputUserQuestion(oldModel);
 		}
 
+		if (oldModelClassName.equals(UserStatisticsClp.class.getName())) {
+			return translateInputUserStatistics(oldModel);
+		}
+
 		return oldModel;
 	}
 
@@ -186,6 +191,16 @@ public class ClpSerializer {
 		UserQuestionClp oldClpModel = (UserQuestionClp)oldModel;
 
 		BaseModel<?> newModel = oldClpModel.getUserQuestionRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
+	}
+
+	public static Object translateInputUserStatistics(BaseModel<?> oldModel) {
+		UserStatisticsClp oldClpModel = (UserStatisticsClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getUserStatisticsRemoteModel();
 
 		newModel.setModelAttributes(oldClpModel.getModelAttributes());
 
@@ -389,6 +404,42 @@ public class ClpSerializer {
 			}
 		}
 
+		if (oldModelClassName.equals("de.ki.sbam.model.impl.UserStatisticsImpl")) {
+			return translateOutputUserStatistics(oldModel);
+		}
+		else if (oldModelClassName.endsWith("Clp")) {
+			try {
+				ClassLoader classLoader = ClpSerializer.class.getClassLoader();
+
+				Method getClpSerializerClassMethod = oldModelClass.getMethod(
+						"getClpSerializerClass");
+
+				Class<?> oldClpSerializerClass = (Class<?>)getClpSerializerClassMethod.invoke(oldModel);
+
+				Class<?> newClpSerializerClass = classLoader.loadClass(oldClpSerializerClass.getName());
+
+				Method translateOutputMethod = newClpSerializerClass.getMethod("translateOutput",
+						BaseModel.class);
+
+				Class<?> oldModelModelClass = oldModel.getModelClass();
+
+				Method getRemoteModelMethod = oldModelClass.getMethod("get" +
+						oldModelModelClass.getSimpleName() + "RemoteModel");
+
+				Object oldRemoteModel = getRemoteModelMethod.invoke(oldModel);
+
+				BaseModel<?> newModel = (BaseModel<?>)translateOutputMethod.invoke(null,
+						oldRemoteModel);
+
+				return newModel;
+			}
+			catch (Throwable t) {
+				if (_log.isInfoEnabled()) {
+					_log.info("Unable to translate " + oldModelClassName, t);
+				}
+			}
+		}
+
 		return oldModel;
 	}
 
@@ -493,6 +544,12 @@ public class ClpSerializer {
 				throwable.getCause());
 		}
 
+		if (className.equals(
+					"de.ki.sbam.exception.NoSuchUserStatisticsException")) {
+			return new de.ki.sbam.exception.NoSuchUserStatisticsException(throwable.getMessage(),
+				throwable.getCause());
+		}
+
 		return throwable;
 	}
 
@@ -542,6 +599,16 @@ public class ClpSerializer {
 		newModel.setModelAttributes(oldModel.getModelAttributes());
 
 		newModel.setUserQuestionRemoteModel(oldModel);
+
+		return newModel;
+	}
+
+	public static Object translateOutputUserStatistics(BaseModel<?> oldModel) {
+		UserStatisticsClp newModel = new UserStatisticsClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setUserStatisticsRemoteModel(oldModel);
 
 		return newModel;
 	}

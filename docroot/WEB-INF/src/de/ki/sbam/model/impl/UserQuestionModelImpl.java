@@ -110,7 +110,12 @@ public class UserQuestionModelImpl extends BaseModelImpl<UserQuestion>
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
 				"value.object.finder.cache.enabled.de.ki.sbam.model.UserQuestion"),
 			true);
-	public static final boolean COLUMN_BITMASK_ENABLED = false;
+	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
+				"value.object.column.bitmask.enabled.de.ki.sbam.model.UserQuestion"),
+			true);
+	public static final long CATEGORY_COLUMN_BITMASK = 1L;
+	public static final long DIFFICULTY_COLUMN_BITMASK = 2L;
+	public static final long QUESTIONID_COLUMN_BITMASK = 4L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -434,7 +439,17 @@ public class UserQuestionModelImpl extends BaseModelImpl<UserQuestion>
 
 	@Override
 	public void setCategory(String category) {
+		_columnBitmask |= CATEGORY_COLUMN_BITMASK;
+
+		if (_originalCategory == null) {
+			_originalCategory = _category;
+		}
+
 		_category = category;
+	}
+
+	public String getOriginalCategory() {
+		return GetterUtil.getString(_originalCategory);
 	}
 
 	@JSON
@@ -445,7 +460,19 @@ public class UserQuestionModelImpl extends BaseModelImpl<UserQuestion>
 
 	@Override
 	public void setDifficulty(int difficulty) {
+		_columnBitmask |= DIFFICULTY_COLUMN_BITMASK;
+
+		if (!_setOriginalDifficulty) {
+			_setOriginalDifficulty = true;
+
+			_originalDifficulty = _difficulty;
+		}
+
 		_difficulty = difficulty;
+	}
+
+	public int getOriginalDifficulty() {
+		return _originalDifficulty;
 	}
 
 	@JSON
@@ -462,6 +489,10 @@ public class UserQuestionModelImpl extends BaseModelImpl<UserQuestion>
 	@Override
 	public void setRightAnswer(String rightAnswer) {
 		_rightAnswer = rightAnswer;
+	}
+
+	public long getColumnBitmask() {
+		return _columnBitmask;
 	}
 
 	@Override
@@ -562,6 +593,15 @@ public class UserQuestionModelImpl extends BaseModelImpl<UserQuestion>
 
 	@Override
 	public void resetOriginalValues() {
+		UserQuestionModelImpl userQuestionModelImpl = this;
+
+		userQuestionModelImpl._originalCategory = userQuestionModelImpl._category;
+
+		userQuestionModelImpl._originalDifficulty = userQuestionModelImpl._difficulty;
+
+		userQuestionModelImpl._setOriginalDifficulty = false;
+
+		userQuestionModelImpl._columnBitmask = 0;
 	}
 
 	@Override
@@ -743,7 +783,11 @@ public class UserQuestionModelImpl extends BaseModelImpl<UserQuestion>
 	private String _answerC;
 	private String _answerD;
 	private String _category;
+	private String _originalCategory;
 	private int _difficulty;
+	private int _originalDifficulty;
+	private boolean _setOriginalDifficulty;
 	private String _rightAnswer;
+	private long _columnBitmask;
 	private UserQuestion _escapedModel;
 }

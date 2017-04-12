@@ -32,6 +32,13 @@ public class UserQuestionServiceWrapper implements UserQuestionService,
 		_userQuestionService = userQuestionService;
 	}
 
+	@Override
+	public java.lang.Object invokeMethod(java.lang.String name,
+		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
+		throws java.lang.Throwable {
+		return _userQuestionService.invokeMethod(name, parameterTypes, arguments);
+	}
+
 	/**
 	* Returns the OSGi service identifier.
 	*
@@ -40,13 +47,6 @@ public class UserQuestionServiceWrapper implements UserQuestionService,
 	@Override
 	public java.lang.String getOSGiServiceIdentifier() {
 		return _userQuestionService.getOSGiServiceIdentifier();
-	}
-
-	@Override
-	public java.lang.Object invokeMethod(java.lang.String name,
-		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
-		throws java.lang.Throwable {
-		return _userQuestionService.invokeMethod(name, parameterTypes, arguments);
 	}
 
 	@Override

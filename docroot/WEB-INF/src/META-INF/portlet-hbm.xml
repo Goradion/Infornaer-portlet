@@ -7,6 +7,7 @@
 	<import class="de.ki.sbam.model.Highscore" />
 	<import class="de.ki.sbam.model.Question" />
 	<import class="de.ki.sbam.model.UserQuestion" />
+	<import class="de.ki.sbam.model.UserStatistics" />
 	<class name="de.ki.sbam.model.impl.CategoryImpl" table="sbam_Category">
 		<id name="categoryId" type="long">
 			<generator class="assigned" />
@@ -60,5 +61,14 @@
 		<property name="category" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="difficulty" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="rightAnswer" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="de.ki.sbam.model.impl.UserStatisticsImpl" table="sbam_UserStatistics">
+		<id name="userId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="gamesWon" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="gamesLost" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="rightAnswers" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="wrongAnswers" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>
 </hibernate-mapping>

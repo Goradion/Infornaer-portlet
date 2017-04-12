@@ -14,24 +14,25 @@
 
 package de.ki.sbam.service.impl;
 
-import java.util.List;
-
 import com.liferay.portal.kernel.exception.NoSuchUserException;
 import com.liferay.portal.kernel.model.User;
 
 import aQute.bnd.annotation.ProviderType;
 import de.ki.sbam.model.Question;
 import de.ki.sbam.service.base.QuestionLocalServiceBaseImpl;
-import de.ki.sbam.service.persistence.QuestionUtil;
 
 /**
  * The implementation of the question local service.
  *
  * <p>
- * All custom service methods should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link de.ki.sbam.service.QuestionLocalService} interface.
+ * All custom service methods should be put in this class. Whenever methods are
+ * added, rerun ServiceBuilder to copy their definitions into the
+ * {@link de.ki.sbam.service.QuestionLocalService} interface.
  *
  * <p>
- * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
+ * This is a local service. Methods of this service will not have security
+ * checks based on the propagated JAAS credentials because this service can only
+ * be accessed from within the same VM.
  * </p>
  *
  * @author Alexander Mueller
@@ -43,9 +44,11 @@ public class QuestionLocalServiceImpl extends QuestionLocalServiceBaseImpl {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never reference this class directly. Always use {@link de.ki.sbam.service.QuestionLocalServiceUtil} to access the question local service.
+	 * Never reference this class directly. Always use {@link
+	 * de.ki.sbam.service.QuestionLocalServiceUtil} to access the question local
+	 * service.
 	 */
-	
+
 	/**
 	 * Adds a Question
 	 * 
@@ -72,34 +75,31 @@ public class QuestionLocalServiceImpl extends QuestionLocalServiceBaseImpl {
 	 */
 	public Question addQuestion(String questionContent, String answerA, String answerB, String answerC, String answerD,
 			String rightAnswer, String category, int difficulty, User user) throws NoSuchUserException {
-		long questionId = counterLocalService.increment();
-		Question question = questionPersistence.create(questionId);
-
-		question.setQuestionContent(questionContent);
-		question.setAnswerA(answerA);
-		question.setAnswerB(answerB);
-		question.setAnswerC(answerC);
-		question.setAnswerD(answerD);
-		question.setRightAnswer(rightAnswer);
-		question.setCategory(category);
-		question.setDifficulty(difficulty);
-		question.setUserId(user.getUserId());
-		if(user.getFullName().isEmpty()){
-			question.setUserName("guest");
-		} else {
-			question.setUserName(user.getFullName());
-		}
-
-		questionPersistence.update(question);
-		return question;
-
-	}
+		// check whether user is eligible or not (admin or not?) to add a question
+		// if so add the question
+		// else throw NoSuchUserException with message "not eligible to add"
+		if (/*user is eligible */true){
+			long questionId = counterLocalService.increment();
+			Question question = questionPersistence.create(questionId);
+			
+			question.setQuestionContent(questionContent);
+			question.setAnswerA(answerA);
+			question.setAnswerB(answerB);
+			question.setAnswerC(answerC);
+			question.setAnswerD(answerD);
+			question.setRightAnswer(rightAnswer);
+			question.setCategory(category);
+			question.setDifficulty(difficulty);
+			question.setUserId(user.getUserId());
+			if(user.getFullName().isEmpty()){
+				question.setUserName("unknown");
+			} else {
+				question.setUserName(user.getFullName());
+			}
 	
-	public List<Question> findByDifficulty(int difficulty) {
-		return QuestionUtil.findByDifficulty(difficulty);
-	}
-
-	public List<Question> findByCategory(String category) {
-		return QuestionUtil.findByCategory(category);
+			questionPersistence.update(question);
+			return question;
+		}
+		return null;
 	}
 }

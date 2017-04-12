@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.dao.orm.FinderCache;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
+import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.log.Log;
@@ -31,6 +32,7 @@ import com.liferay.portal.kernel.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 
 import de.ki.sbam.exception.NoSuchUserQuestionException;
 import de.ki.sbam.model.UserQuestion;
@@ -46,6 +48,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -82,6 +85,459 @@ public class UserQuestionPersistenceImpl extends BasePersistenceImpl<UserQuestio
 	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(UserQuestionModelImpl.ENTITY_CACHE_ENABLED,
 			UserQuestionModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll", new String[0]);
+	public static final FinderPath FINDER_PATH_FETCH_BY_CATEGORY = new FinderPath(UserQuestionModelImpl.ENTITY_CACHE_ENABLED,
+			UserQuestionModelImpl.FINDER_CACHE_ENABLED, UserQuestionImpl.class,
+			FINDER_CLASS_NAME_ENTITY, "fetchByCategory",
+			new String[] { String.class.getName() },
+			UserQuestionModelImpl.CATEGORY_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_CATEGORY = new FinderPath(UserQuestionModelImpl.ENTITY_CACHE_ENABLED,
+			UserQuestionModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByCategory",
+			new String[] { String.class.getName() });
+
+	/**
+	 * Returns the user question where category = &#63; or throws a {@link NoSuchUserQuestionException} if it could not be found.
+	 *
+	 * @param category the category
+	 * @return the matching user question
+	 * @throws NoSuchUserQuestionException if a matching user question could not be found
+	 */
+	@Override
+	public UserQuestion findByCategory(String category)
+		throws NoSuchUserQuestionException {
+		UserQuestion userQuestion = fetchByCategory(category);
+
+		if (userQuestion == null) {
+			StringBundler msg = new StringBundler(4);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("category=");
+			msg.append(category);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isDebugEnabled()) {
+				_log.debug(msg.toString());
+			}
+
+			throw new NoSuchUserQuestionException(msg.toString());
+		}
+
+		return userQuestion;
+	}
+
+	/**
+	 * Returns the user question where category = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param category the category
+	 * @return the matching user question, or <code>null</code> if a matching user question could not be found
+	 */
+	@Override
+	public UserQuestion fetchByCategory(String category) {
+		return fetchByCategory(category, true);
+	}
+
+	/**
+	 * Returns the user question where category = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param category the category
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the matching user question, or <code>null</code> if a matching user question could not be found
+	 */
+	@Override
+	public UserQuestion fetchByCategory(String category,
+		boolean retrieveFromCache) {
+		Object[] finderArgs = new Object[] { category };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = finderCache.getResult(FINDER_PATH_FETCH_BY_CATEGORY,
+					finderArgs, this);
+		}
+
+		if (result instanceof UserQuestion) {
+			UserQuestion userQuestion = (UserQuestion)result;
+
+			if (!Objects.equals(category, userQuestion.getCategory())) {
+				result = null;
+			}
+		}
+
+		if (result == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_SELECT_USERQUESTION_WHERE);
+
+			boolean bindCategory = false;
+
+			if (category == null) {
+				query.append(_FINDER_COLUMN_CATEGORY_CATEGORY_1);
+			}
+			else if (category.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_CATEGORY_CATEGORY_3);
+			}
+			else {
+				bindCategory = true;
+
+				query.append(_FINDER_COLUMN_CATEGORY_CATEGORY_2);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (bindCategory) {
+					qPos.add(category);
+				}
+
+				List<UserQuestion> list = q.list();
+
+				if (list.isEmpty()) {
+					finderCache.putResult(FINDER_PATH_FETCH_BY_CATEGORY,
+						finderArgs, list);
+				}
+				else {
+					if ((list.size() > 1) && _log.isWarnEnabled()) {
+						_log.warn(
+							"UserQuestionPersistenceImpl.fetchByCategory(String, boolean) with parameters (" +
+							StringUtil.merge(finderArgs) +
+							") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
+					}
+
+					UserQuestion userQuestion = list.get(0);
+
+					result = userQuestion;
+
+					cacheResult(userQuestion);
+
+					if ((userQuestion.getCategory() == null) ||
+							!userQuestion.getCategory().equals(category)) {
+						finderCache.putResult(FINDER_PATH_FETCH_BY_CATEGORY,
+							finderArgs, userQuestion);
+					}
+				}
+			}
+			catch (Exception e) {
+				finderCache.removeResult(FINDER_PATH_FETCH_BY_CATEGORY,
+					finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		if (result instanceof List<?>) {
+			return null;
+		}
+		else {
+			return (UserQuestion)result;
+		}
+	}
+
+	/**
+	 * Removes the user question where category = &#63; from the database.
+	 *
+	 * @param category the category
+	 * @return the user question that was removed
+	 */
+	@Override
+	public UserQuestion removeByCategory(String category)
+		throws NoSuchUserQuestionException {
+		UserQuestion userQuestion = findByCategory(category);
+
+		return remove(userQuestion);
+	}
+
+	/**
+	 * Returns the number of user questions where category = &#63;.
+	 *
+	 * @param category the category
+	 * @return the number of matching user questions
+	 */
+	@Override
+	public int countByCategory(String category) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_CATEGORY;
+
+		Object[] finderArgs = new Object[] { category };
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_USERQUESTION_WHERE);
+
+			boolean bindCategory = false;
+
+			if (category == null) {
+				query.append(_FINDER_COLUMN_CATEGORY_CATEGORY_1);
+			}
+			else if (category.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_CATEGORY_CATEGORY_3);
+			}
+			else {
+				bindCategory = true;
+
+				query.append(_FINDER_COLUMN_CATEGORY_CATEGORY_2);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (bindCategory) {
+					qPos.add(category);
+				}
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_CATEGORY_CATEGORY_1 = "userQuestion.category IS NULL";
+	private static final String _FINDER_COLUMN_CATEGORY_CATEGORY_2 = "userQuestion.category = ?";
+	private static final String _FINDER_COLUMN_CATEGORY_CATEGORY_3 = "(userQuestion.category IS NULL OR userQuestion.category = '')";
+	public static final FinderPath FINDER_PATH_FETCH_BY_DIFFICULTY = new FinderPath(UserQuestionModelImpl.ENTITY_CACHE_ENABLED,
+			UserQuestionModelImpl.FINDER_CACHE_ENABLED, UserQuestionImpl.class,
+			FINDER_CLASS_NAME_ENTITY, "fetchByDifficulty",
+			new String[] { Integer.class.getName() },
+			UserQuestionModelImpl.DIFFICULTY_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_DIFFICULTY = new FinderPath(UserQuestionModelImpl.ENTITY_CACHE_ENABLED,
+			UserQuestionModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByDifficulty",
+			new String[] { Integer.class.getName() });
+
+	/**
+	 * Returns the user question where difficulty = &#63; or throws a {@link NoSuchUserQuestionException} if it could not be found.
+	 *
+	 * @param difficulty the difficulty
+	 * @return the matching user question
+	 * @throws NoSuchUserQuestionException if a matching user question could not be found
+	 */
+	@Override
+	public UserQuestion findByDifficulty(int difficulty)
+		throws NoSuchUserQuestionException {
+		UserQuestion userQuestion = fetchByDifficulty(difficulty);
+
+		if (userQuestion == null) {
+			StringBundler msg = new StringBundler(4);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("difficulty=");
+			msg.append(difficulty);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isDebugEnabled()) {
+				_log.debug(msg.toString());
+			}
+
+			throw new NoSuchUserQuestionException(msg.toString());
+		}
+
+		return userQuestion;
+	}
+
+	/**
+	 * Returns the user question where difficulty = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param difficulty the difficulty
+	 * @return the matching user question, or <code>null</code> if a matching user question could not be found
+	 */
+	@Override
+	public UserQuestion fetchByDifficulty(int difficulty) {
+		return fetchByDifficulty(difficulty, true);
+	}
+
+	/**
+	 * Returns the user question where difficulty = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param difficulty the difficulty
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the matching user question, or <code>null</code> if a matching user question could not be found
+	 */
+	@Override
+	public UserQuestion fetchByDifficulty(int difficulty,
+		boolean retrieveFromCache) {
+		Object[] finderArgs = new Object[] { difficulty };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = finderCache.getResult(FINDER_PATH_FETCH_BY_DIFFICULTY,
+					finderArgs, this);
+		}
+
+		if (result instanceof UserQuestion) {
+			UserQuestion userQuestion = (UserQuestion)result;
+
+			if ((difficulty != userQuestion.getDifficulty())) {
+				result = null;
+			}
+		}
+
+		if (result == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_SELECT_USERQUESTION_WHERE);
+
+			query.append(_FINDER_COLUMN_DIFFICULTY_DIFFICULTY_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(difficulty);
+
+				List<UserQuestion> list = q.list();
+
+				if (list.isEmpty()) {
+					finderCache.putResult(FINDER_PATH_FETCH_BY_DIFFICULTY,
+						finderArgs, list);
+				}
+				else {
+					if ((list.size() > 1) && _log.isWarnEnabled()) {
+						_log.warn(
+							"UserQuestionPersistenceImpl.fetchByDifficulty(int, boolean) with parameters (" +
+							StringUtil.merge(finderArgs) +
+							") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
+					}
+
+					UserQuestion userQuestion = list.get(0);
+
+					result = userQuestion;
+
+					cacheResult(userQuestion);
+
+					if ((userQuestion.getDifficulty() != difficulty)) {
+						finderCache.putResult(FINDER_PATH_FETCH_BY_DIFFICULTY,
+							finderArgs, userQuestion);
+					}
+				}
+			}
+			catch (Exception e) {
+				finderCache.removeResult(FINDER_PATH_FETCH_BY_DIFFICULTY,
+					finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		if (result instanceof List<?>) {
+			return null;
+		}
+		else {
+			return (UserQuestion)result;
+		}
+	}
+
+	/**
+	 * Removes the user question where difficulty = &#63; from the database.
+	 *
+	 * @param difficulty the difficulty
+	 * @return the user question that was removed
+	 */
+	@Override
+	public UserQuestion removeByDifficulty(int difficulty)
+		throws NoSuchUserQuestionException {
+		UserQuestion userQuestion = findByDifficulty(difficulty);
+
+		return remove(userQuestion);
+	}
+
+	/**
+	 * Returns the number of user questions where difficulty = &#63;.
+	 *
+	 * @param difficulty the difficulty
+	 * @return the number of matching user questions
+	 */
+	@Override
+	public int countByDifficulty(int difficulty) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_DIFFICULTY;
+
+		Object[] finderArgs = new Object[] { difficulty };
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_USERQUESTION_WHERE);
+
+			query.append(_FINDER_COLUMN_DIFFICULTY_DIFFICULTY_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(difficulty);
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_DIFFICULTY_DIFFICULTY_2 = "userQuestion.difficulty = ?";
 
 	public UserQuestionPersistenceImpl() {
 		setModelClass(UserQuestion.class);
@@ -96,6 +552,12 @@ public class UserQuestionPersistenceImpl extends BasePersistenceImpl<UserQuestio
 	public void cacheResult(UserQuestion userQuestion) {
 		entityCache.putResult(UserQuestionModelImpl.ENTITY_CACHE_ENABLED,
 			UserQuestionImpl.class, userQuestion.getPrimaryKey(), userQuestion);
+
+		finderCache.putResult(FINDER_PATH_FETCH_BY_CATEGORY,
+			new Object[] { userQuestion.getCategory() }, userQuestion);
+
+		finderCache.putResult(FINDER_PATH_FETCH_BY_DIFFICULTY,
+			new Object[] { userQuestion.getDifficulty() }, userQuestion);
 
 		userQuestion.resetOriginalValues();
 	}
@@ -149,6 +611,8 @@ public class UserQuestionPersistenceImpl extends BasePersistenceImpl<UserQuestio
 
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		clearUniqueFindersCache((UserQuestionModelImpl)userQuestion);
 	}
 
 	@Override
@@ -159,6 +623,79 @@ public class UserQuestionPersistenceImpl extends BasePersistenceImpl<UserQuestio
 		for (UserQuestion userQuestion : userQuestions) {
 			entityCache.removeResult(UserQuestionModelImpl.ENTITY_CACHE_ENABLED,
 				UserQuestionImpl.class, userQuestion.getPrimaryKey());
+
+			clearUniqueFindersCache((UserQuestionModelImpl)userQuestion);
+		}
+	}
+
+	protected void cacheUniqueFindersCache(
+		UserQuestionModelImpl userQuestionModelImpl, boolean isNew) {
+		if (isNew) {
+			Object[] args = new Object[] { userQuestionModelImpl.getCategory() };
+
+			finderCache.putResult(FINDER_PATH_COUNT_BY_CATEGORY, args,
+				Long.valueOf(1));
+			finderCache.putResult(FINDER_PATH_FETCH_BY_CATEGORY, args,
+				userQuestionModelImpl);
+
+			args = new Object[] { userQuestionModelImpl.getDifficulty() };
+
+			finderCache.putResult(FINDER_PATH_COUNT_BY_DIFFICULTY, args,
+				Long.valueOf(1));
+			finderCache.putResult(FINDER_PATH_FETCH_BY_DIFFICULTY, args,
+				userQuestionModelImpl);
+		}
+		else {
+			if ((userQuestionModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_CATEGORY.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] { userQuestionModelImpl.getCategory() };
+
+				finderCache.putResult(FINDER_PATH_COUNT_BY_CATEGORY, args,
+					Long.valueOf(1));
+				finderCache.putResult(FINDER_PATH_FETCH_BY_CATEGORY, args,
+					userQuestionModelImpl);
+			}
+
+			if ((userQuestionModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_DIFFICULTY.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						userQuestionModelImpl.getDifficulty()
+					};
+
+				finderCache.putResult(FINDER_PATH_COUNT_BY_DIFFICULTY, args,
+					Long.valueOf(1));
+				finderCache.putResult(FINDER_PATH_FETCH_BY_DIFFICULTY, args,
+					userQuestionModelImpl);
+			}
+		}
+	}
+
+	protected void clearUniqueFindersCache(
+		UserQuestionModelImpl userQuestionModelImpl) {
+		Object[] args = new Object[] { userQuestionModelImpl.getCategory() };
+
+		finderCache.removeResult(FINDER_PATH_COUNT_BY_CATEGORY, args);
+		finderCache.removeResult(FINDER_PATH_FETCH_BY_CATEGORY, args);
+
+		if ((userQuestionModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_CATEGORY.getColumnBitmask()) != 0) {
+			args = new Object[] { userQuestionModelImpl.getOriginalCategory() };
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_CATEGORY, args);
+			finderCache.removeResult(FINDER_PATH_FETCH_BY_CATEGORY, args);
+		}
+
+		args = new Object[] { userQuestionModelImpl.getDifficulty() };
+
+		finderCache.removeResult(FINDER_PATH_COUNT_BY_DIFFICULTY, args);
+		finderCache.removeResult(FINDER_PATH_FETCH_BY_DIFFICULTY, args);
+
+		if ((userQuestionModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_DIFFICULTY.getColumnBitmask()) != 0) {
+			args = new Object[] { userQuestionModelImpl.getOriginalDifficulty() };
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_DIFFICULTY, args);
+			finderCache.removeResult(FINDER_PATH_FETCH_BY_DIFFICULTY, args);
 		}
 	}
 
@@ -210,8 +747,8 @@ public class UserQuestionPersistenceImpl extends BasePersistenceImpl<UserQuestio
 					primaryKey);
 
 			if (userQuestion == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
+				if (_log.isDebugEnabled()) {
+					_log.debug(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchUserQuestionException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
@@ -269,6 +806,8 @@ public class UserQuestionPersistenceImpl extends BasePersistenceImpl<UserQuestio
 
 		boolean isNew = userQuestion.isNew();
 
+		UserQuestionModelImpl userQuestionModelImpl = (UserQuestionModelImpl)userQuestion;
+
 		Session session = null;
 
 		try {
@@ -292,13 +831,16 @@ public class UserQuestionPersistenceImpl extends BasePersistenceImpl<UserQuestio
 
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 
-		if (isNew) {
+		if (isNew || !UserQuestionModelImpl.COLUMN_BITMASK_ENABLED) {
 			finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 		}
 
 		entityCache.putResult(UserQuestionModelImpl.ENTITY_CACHE_ENABLED,
 			UserQuestionImpl.class, userQuestion.getPrimaryKey(), userQuestion,
 			false);
+
+		clearUniqueFindersCache(userQuestionModelImpl);
+		cacheUniqueFindersCache(userQuestionModelImpl, isNew);
 
 		userQuestion.resetOriginalValues();
 
@@ -343,8 +885,8 @@ public class UserQuestionPersistenceImpl extends BasePersistenceImpl<UserQuestio
 		UserQuestion userQuestion = fetchByPrimaryKey(primaryKey);
 
 		if (userQuestion == null) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
+			if (_log.isDebugEnabled()) {
+				_log.debug(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 			}
 
 			throw new NoSuchUserQuestionException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
@@ -729,9 +1271,12 @@ public class UserQuestionPersistenceImpl extends BasePersistenceImpl<UserQuestio
 	protected FinderCache finderCache = FinderCacheUtil.getFinderCache();
 	private static final String _SQL_SELECT_USERQUESTION = "SELECT userQuestion FROM UserQuestion userQuestion";
 	private static final String _SQL_SELECT_USERQUESTION_WHERE_PKS_IN = "SELECT userQuestion FROM UserQuestion userQuestion WHERE questionId IN (";
+	private static final String _SQL_SELECT_USERQUESTION_WHERE = "SELECT userQuestion FROM UserQuestion userQuestion WHERE ";
 	private static final String _SQL_COUNT_USERQUESTION = "SELECT COUNT(userQuestion) FROM UserQuestion userQuestion";
+	private static final String _SQL_COUNT_USERQUESTION_WHERE = "SELECT COUNT(userQuestion) FROM UserQuestion userQuestion WHERE ";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "userQuestion.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No UserQuestion exists with the primary key ";
+	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No UserQuestion exists with the key {";
 	private static final Log _log = LogFactoryUtil.getLog(UserQuestionPersistenceImpl.class);
 	private static final UserQuestion _nullUserQuestion = new UserQuestionImpl() {
 			@Override

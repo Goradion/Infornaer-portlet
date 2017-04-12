@@ -110,6 +110,116 @@ public class UserQuestionUtil {
 	}
 
 	/**
+	* Returns the user question where category = &#63; or throws a {@link NoSuchUserQuestionException} if it could not be found.
+	*
+	* @param category the category
+	* @return the matching user question
+	* @throws NoSuchUserQuestionException if a matching user question could not be found
+	*/
+	public static UserQuestion findByCategory(java.lang.String category)
+		throws de.ki.sbam.exception.NoSuchUserQuestionException {
+		return getPersistence().findByCategory(category);
+	}
+
+	/**
+	* Returns the user question where category = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param category the category
+	* @return the matching user question, or <code>null</code> if a matching user question could not be found
+	*/
+	public static UserQuestion fetchByCategory(java.lang.String category) {
+		return getPersistence().fetchByCategory(category);
+	}
+
+	/**
+	* Returns the user question where category = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param category the category
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the matching user question, or <code>null</code> if a matching user question could not be found
+	*/
+	public static UserQuestion fetchByCategory(java.lang.String category,
+		boolean retrieveFromCache) {
+		return getPersistence().fetchByCategory(category, retrieveFromCache);
+	}
+
+	/**
+	* Removes the user question where category = &#63; from the database.
+	*
+	* @param category the category
+	* @return the user question that was removed
+	*/
+	public static UserQuestion removeByCategory(java.lang.String category)
+		throws de.ki.sbam.exception.NoSuchUserQuestionException {
+		return getPersistence().removeByCategory(category);
+	}
+
+	/**
+	* Returns the number of user questions where category = &#63;.
+	*
+	* @param category the category
+	* @return the number of matching user questions
+	*/
+	public static int countByCategory(java.lang.String category) {
+		return getPersistence().countByCategory(category);
+	}
+
+	/**
+	* Returns the user question where difficulty = &#63; or throws a {@link NoSuchUserQuestionException} if it could not be found.
+	*
+	* @param difficulty the difficulty
+	* @return the matching user question
+	* @throws NoSuchUserQuestionException if a matching user question could not be found
+	*/
+	public static UserQuestion findByDifficulty(int difficulty)
+		throws de.ki.sbam.exception.NoSuchUserQuestionException {
+		return getPersistence().findByDifficulty(difficulty);
+	}
+
+	/**
+	* Returns the user question where difficulty = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param difficulty the difficulty
+	* @return the matching user question, or <code>null</code> if a matching user question could not be found
+	*/
+	public static UserQuestion fetchByDifficulty(int difficulty) {
+		return getPersistence().fetchByDifficulty(difficulty);
+	}
+
+	/**
+	* Returns the user question where difficulty = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param difficulty the difficulty
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the matching user question, or <code>null</code> if a matching user question could not be found
+	*/
+	public static UserQuestion fetchByDifficulty(int difficulty,
+		boolean retrieveFromCache) {
+		return getPersistence().fetchByDifficulty(difficulty, retrieveFromCache);
+	}
+
+	/**
+	* Removes the user question where difficulty = &#63; from the database.
+	*
+	* @param difficulty the difficulty
+	* @return the user question that was removed
+	*/
+	public static UserQuestion removeByDifficulty(int difficulty)
+		throws de.ki.sbam.exception.NoSuchUserQuestionException {
+		return getPersistence().removeByDifficulty(difficulty);
+	}
+
+	/**
+	* Returns the number of user questions where difficulty = &#63;.
+	*
+	* @param difficulty the difficulty
+	* @return the number of matching user questions
+	*/
+	public static int countByDifficulty(int difficulty) {
+		return getPersistence().countByDifficulty(difficulty);
+	}
+
+	/**
 	* Caches the user question in the entity cache if it is enabled.
 	*
 	* @param userQuestion the user question

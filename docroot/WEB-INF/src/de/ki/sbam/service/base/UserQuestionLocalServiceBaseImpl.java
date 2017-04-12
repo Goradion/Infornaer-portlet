@@ -47,6 +47,7 @@ import de.ki.sbam.service.persistence.DifficultyPersistence;
 import de.ki.sbam.service.persistence.HighscorePersistence;
 import de.ki.sbam.service.persistence.QuestionPersistence;
 import de.ki.sbam.service.persistence.UserQuestionPersistence;
+import de.ki.sbam.service.persistence.UserStatisticsPersistence;
 
 import java.io.Serializable;
 
@@ -232,7 +233,7 @@ public abstract class UserQuestionLocalServiceBaseImpl
 	public ActionableDynamicQuery getActionableDynamicQuery() {
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
-		actionableDynamicQuery.setBaseLocalService(de.ki.sbam.service.UserQuestionLocalServiceUtil.getService());
+		actionableDynamicQuery.setBaseLocalService(userQuestionLocalService);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
 		actionableDynamicQuery.setModelClass(UserQuestion.class);
 
@@ -245,7 +246,7 @@ public abstract class UserQuestionLocalServiceBaseImpl
 	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery() {
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
-		indexableActionableDynamicQuery.setBaseLocalService(de.ki.sbam.service.UserQuestionLocalServiceUtil.getService());
+		indexableActionableDynamicQuery.setBaseLocalService(userQuestionLocalService);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
 		indexableActionableDynamicQuery.setModelClass(UserQuestion.class);
 
@@ -256,7 +257,7 @@ public abstract class UserQuestionLocalServiceBaseImpl
 
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
-		actionableDynamicQuery.setBaseLocalService(de.ki.sbam.service.UserQuestionLocalServiceUtil.getService());
+		actionableDynamicQuery.setBaseLocalService(userQuestionLocalService);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
 		actionableDynamicQuery.setModelClass(UserQuestion.class);
 
@@ -505,6 +506,44 @@ public abstract class UserQuestionLocalServiceBaseImpl
 	}
 
 	/**
+	 * Returns the user statistics local service.
+	 *
+	 * @return the user statistics local service
+	 */
+	public de.ki.sbam.service.UserStatisticsLocalService getUserStatisticsLocalService() {
+		return userStatisticsLocalService;
+	}
+
+	/**
+	 * Sets the user statistics local service.
+	 *
+	 * @param userStatisticsLocalService the user statistics local service
+	 */
+	public void setUserStatisticsLocalService(
+		de.ki.sbam.service.UserStatisticsLocalService userStatisticsLocalService) {
+		this.userStatisticsLocalService = userStatisticsLocalService;
+	}
+
+	/**
+	 * Returns the user statistics persistence.
+	 *
+	 * @return the user statistics persistence
+	 */
+	public UserStatisticsPersistence getUserStatisticsPersistence() {
+		return userStatisticsPersistence;
+	}
+
+	/**
+	 * Sets the user statistics persistence.
+	 *
+	 * @param userStatisticsPersistence the user statistics persistence
+	 */
+	public void setUserStatisticsPersistence(
+		UserStatisticsPersistence userStatisticsPersistence) {
+		this.userStatisticsPersistence = userStatisticsPersistence;
+	}
+
+	/**
 	 * Returns the counter local service.
 	 *
 	 * @return the counter local service
@@ -710,10 +749,14 @@ public abstract class UserQuestionLocalServiceBaseImpl
 	protected de.ki.sbam.service.QuestionLocalService questionLocalService;
 	@BeanReference(type = QuestionPersistence.class)
 	protected QuestionPersistence questionPersistence;
-	@BeanReference(type = de.ki.sbam.service.UserQuestionLocalService.class)
+	@BeanReference(type = UserQuestionLocalService.class)
 	protected UserQuestionLocalService userQuestionLocalService;
 	@BeanReference(type = UserQuestionPersistence.class)
 	protected UserQuestionPersistence userQuestionPersistence;
+	@BeanReference(type = de.ki.sbam.service.UserStatisticsLocalService.class)
+	protected de.ki.sbam.service.UserStatisticsLocalService userStatisticsLocalService;
+	@BeanReference(type = UserStatisticsPersistence.class)
+	protected UserStatisticsPersistence userStatisticsPersistence;
 	@BeanReference(type = com.liferay.counter.kernel.service.CounterLocalService.class)
 	protected com.liferay.counter.kernel.service.CounterLocalService counterLocalService;
 	@BeanReference(type = com.liferay.portal.kernel.service.ClassNameLocalService.class)

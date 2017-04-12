@@ -52,4 +52,11 @@
 		<field name="difficulty" type="int" />
 		<field name="rightAnswer" type="String" />
 	</model>
+	<model name="de.ki.sbam.model.UserStatistics">
+		<field name="userId" type="long" />
+		<field name="gamesWon" type="long" />
+		<field name="gamesLost" type="long" />
+		<field name="rightAnswers" type="long" />
+		<field name="wrongAnswers" type="long" />
+	</model>
 </model-hints>

@@ -317,7 +317,7 @@ public class CategoryClp extends BaseModelImpl<Category> implements Category {
 	private long _categoryId;
 	private String _categoryName;
 	private BaseModel<?> _categoryRemoteModel;
-	private Class<?> _clpSerializerClass = de.ki.sbam.service.ClpSerializer.class;
+	private Class<?> _clpSerializerClass = ClpSerializer.class;
 	private boolean _entityCacheEnabled;
 	private boolean _finderCacheEnabled;
 }
