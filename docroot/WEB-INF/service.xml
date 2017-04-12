@@ -101,6 +101,23 @@
 		<column name="difficulty" type="int" />
 		<column name="rightAnswer" type="String" />
 		
+		<finder return-type="UserQuestion" name="Category">
+			<finder-column name="category"></finder-column>
+		</finder>
+		
+		<finder return-type="UserQuestion" name="Difficulty">
+			<finder-column name="difficulty"></finder-column>
+		</finder>
+		
+	</entity>
+	
+	<entity name="UserStatistics" local-service="true" remote-service="true">
+		<column name="userId" type="long" primary="true"></column>
+		<column name="gamesWon" type="long"></column>
+		<column name="gamesLost" type="long"></column>
+		<column name="rightAnswers" type="long"></column>
+		<column name="wrongAnswers" type="long"></column>
+		<!-- hier können noch mehr Sachen stehen -->
 	</entity>
 	
 </service-builder>
