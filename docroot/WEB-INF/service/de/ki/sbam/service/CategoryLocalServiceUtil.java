@@ -54,6 +54,18 @@ public class CategoryLocalServiceUtil {
 	}
 
 	/**
+	* Adds a category
+	*
+	* @param categoryName
+	name for added category
+	* @return Category category added
+	*/
+	public static de.ki.sbam.model.Category addCategory(
+		java.lang.String categoryName) {
+		return getService().addCategory(categoryName);
+	}
+
+	/**
 	* Creates a new category with the primary key. Does not add the category to the database.
 	*
 	* @param categoryId the primary key for the new category
@@ -61,6 +73,10 @@ public class CategoryLocalServiceUtil {
 	*/
 	public static de.ki.sbam.model.Category createCategory(long categoryId) {
 		return getService().createCategory(categoryId);
+	}
+
+	public static void deleteAllCategories() {
+		getService().deleteAllCategories();
 	}
 
 	/**
@@ -80,9 +96,11 @@ public class CategoryLocalServiceUtil {
 	* @param categoryId the primary key of the category
 	* @return the category that was removed
 	* @throws PortalException if a category with the primary key could not be found
+	* @throws NoSuchCategoryException
 	*/
 	public static de.ki.sbam.model.Category deleteCategory(long categoryId)
-		throws com.liferay.portal.kernel.exception.PortalException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			de.ki.sbam.exception.NoSuchCategoryException {
 		return getService().deleteCategory(categoryId);
 	}
 
@@ -171,6 +189,20 @@ public class CategoryLocalServiceUtil {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery,
 		com.liferay.portal.kernel.dao.orm.Projection projection) {
 		return getService().dynamicQueryCount(dynamicQuery, projection);
+	}
+
+	/**
+	* Edits a category.
+	*
+	* @param categoryId
+	id of the category to edit
+	* @param categoryName_new
+	new name of the edited category
+	* @return
+	*/
+	public static de.ki.sbam.model.Category editCategory(long categoryId,
+		java.lang.String categoryName_new) {
+		return getService().editCategory(categoryId, categoryName_new);
 	}
 
 	public static de.ki.sbam.model.Category fetchCategory(long categoryId) {

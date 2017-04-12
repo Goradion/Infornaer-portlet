@@ -120,6 +120,26 @@ public class CategoryLocalServiceClpInvoker {
 		_methodName54 = "getOSGiServiceIdentifier";
 
 		_methodParameterTypes54 = new String[] {  };
+
+		_methodName59 = "addCategory";
+
+		_methodParameterTypes59 = new String[] { "java.lang.String" };
+
+		_methodName60 = "editCategory";
+
+		_methodParameterTypes60 = new String[] { "long", "java.lang.String" };
+
+		_methodName61 = "deleteCategory";
+
+		_methodParameterTypes61 = new String[] { "long" };
+
+		_methodName62 = "deleteCategory";
+
+		_methodParameterTypes62 = new String[] { "de.ki.sbam.model.Category" };
+
+		_methodName63 = "deleteAllCategories";
+
+		_methodParameterTypes63 = new String[] {  };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -231,6 +251,34 @@ public class CategoryLocalServiceClpInvoker {
 			return CategoryLocalServiceUtil.getOSGiServiceIdentifier();
 		}
 
+		if (_methodName59.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes59, parameterTypes)) {
+			return CategoryLocalServiceUtil.addCategory((java.lang.String)arguments[0]);
+		}
+
+		if (_methodName60.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes60, parameterTypes)) {
+			return CategoryLocalServiceUtil.editCategory(((Long)arguments[0]).longValue(),
+				(java.lang.String)arguments[1]);
+		}
+
+		if (_methodName61.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes61, parameterTypes)) {
+			return CategoryLocalServiceUtil.deleteCategory(((Long)arguments[0]).longValue());
+		}
+
+		if (_methodName62.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes62, parameterTypes)) {
+			return CategoryLocalServiceUtil.deleteCategory((de.ki.sbam.model.Category)arguments[0]);
+		}
+
+		if (_methodName63.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes63, parameterTypes)) {
+			CategoryLocalServiceUtil.deleteAllCategories();
+
+			return null;
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -274,4 +322,14 @@ public class CategoryLocalServiceClpInvoker {
 	private String[] _methodParameterTypes19;
 	private String _methodName54;
 	private String[] _methodParameterTypes54;
+	private String _methodName59;
+	private String[] _methodParameterTypes59;
+	private String _methodName60;
+	private String[] _methodParameterTypes60;
+	private String _methodName61;
+	private String[] _methodParameterTypes61;
+	private String _methodName62;
+	private String[] _methodParameterTypes62;
+	private String _methodName63;
+	private String[] _methodParameterTypes63;
 }

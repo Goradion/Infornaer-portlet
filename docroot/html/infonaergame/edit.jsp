@@ -1,5 +1,6 @@
 <%@ include file="/init.jsp"%>
-
+<%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
+<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 
 
 <portlet:actionURL name="gotoMainMenu" var="mainMenu"></portlet:actionURL>
@@ -24,8 +25,14 @@
 </p>
 <p><a href=<%=loadFromFile%>> Load Question From File </a></p>
 <p>
-	<a href=<%=newQuestion%>>Edit manually</a>
+	<a href=<%=newQuestion%>>Neue Nachricht</a>
 </p>
 <p>
 	<a href=<%=questionOverview%>>Fragen Überblick</a>
+</p>
+<portlet:actionURL name="addCategory" var="addCategory">
+	<portlet:param name="category" value="Test"/>
+</portlet:actionURL>
+<p>
+	<a href=<%=addCategory%>>Test Kategorie hinzufügen</a>
 </p>

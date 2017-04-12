@@ -106,10 +106,12 @@ public abstract class CategoryLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 * @param categoryId the primary key of the category
 	 * @return the category that was removed
 	 * @throws PortalException if a category with the primary key could not be found
+	 * @throws de.ki.sbam.exception.NoSuchCategoryException
 	 */
 	@Indexable(type = IndexableType.DELETE)
 	@Override
-	public Category deleteCategory(long categoryId) throws PortalException {
+	public Category deleteCategory(long categoryId)
+		throws PortalException, de.ki.sbam.exception.NoSuchCategoryException {
 		return categoryPersistence.remove(categoryId);
 	}
 

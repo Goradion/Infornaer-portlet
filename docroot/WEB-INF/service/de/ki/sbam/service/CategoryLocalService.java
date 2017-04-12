@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
 import com.liferay.portal.kernel.util.OrderByComparator;
 
+import de.ki.sbam.exception.NoSuchCategoryException;
 import de.ki.sbam.model.Category;
 
 import java.io.Serializable;
@@ -72,12 +73,23 @@ public interface CategoryLocalService extends BaseLocalService,
 	public Category addCategory(Category category);
 
 	/**
+	* Adds a category
+	*
+	* @param categoryName
+	name for added category
+	* @return Category category added
+	*/
+	public Category addCategory(java.lang.String categoryName);
+
+	/**
 	* Creates a new category with the primary key. Does not add the category to the database.
 	*
 	* @param categoryId the primary key for the new category
 	* @return the new category
 	*/
 	public Category createCategory(long categoryId);
+
+	public void deleteAllCategories();
 
 	/**
 	* Deletes the category from the database. Also notifies the appropriate model listeners.
@@ -94,9 +106,11 @@ public interface CategoryLocalService extends BaseLocalService,
 	* @param categoryId the primary key of the category
 	* @return the category that was removed
 	* @throws PortalException if a category with the primary key could not be found
+	* @throws NoSuchCategoryException
 	*/
 	@Indexable(type = IndexableType.DELETE)
-	public Category deleteCategory(long categoryId) throws PortalException;
+	public Category deleteCategory(long categoryId)
+		throws PortalException, NoSuchCategoryException;
 
 	/**
 	* @throws PortalException
@@ -163,6 +177,18 @@ public interface CategoryLocalService extends BaseLocalService,
 	*/
 	public long dynamicQueryCount(DynamicQuery dynamicQuery,
 		Projection projection);
+
+	/**
+	* Edits a category.
+	*
+	* @param categoryId
+	id of the category to edit
+	* @param categoryName_new
+	new name of the edited category
+	* @return
+	*/
+	public Category editCategory(long categoryId,
+		java.lang.String categoryName_new);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public Category fetchCategory(long categoryId);

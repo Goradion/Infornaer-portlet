@@ -13,7 +13,7 @@ public final class Constants {
 	public static final String NEW_GAME_JSP = "/html/infonaergame/new_game.jsp";
 	public static final String LOAD_QUESTION_FROM_FILE_JSP = "/html/infonaergame/load_question_from_file.jsp";
 	public static final String QUESTION_OVERVIEW_JSP = "/html/infonaergame/question_overview.jsp";
-	
+	public static final String CATEGORY_OVERVIEW_JSP = "/html/infonaergame/category_overview.jsp";
 	/* Difficulty levels */
 	public static int EASY = 0;
 	public static int NORMAL = 1;

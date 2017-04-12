@@ -35,8 +35,11 @@ import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 
+import de.ki.sbam.exception.NoSuchCategoryException;
+import de.ki.sbam.model.Category;
 import de.ki.sbam.model.Highscore;
 import de.ki.sbam.model.Question;
+import de.ki.sbam.service.CategoryLocalServiceUtil;
 import de.ki.sbam.service.HighscoreLocalServiceUtil;
 import de.ki.sbam.service.QuestionLocalServiceUtil;
 
@@ -44,6 +47,7 @@ import de.ki.sbam.service.QuestionLocalServiceUtil;
  * Portlet implementation class InfonaerGame
  */
 public class InfonaerGamePortlet extends MVCPortlet {
+
 
 	@Override
 	public void doEdit(RenderRequest renderRequest, RenderResponse renderResponse)
@@ -64,39 +68,48 @@ public class InfonaerGamePortlet extends MVCPortlet {
 		if (o != null) {
 			curPage = o.toString();
 			portletRequestDispatcher = portletContext.getRequestDispatcher(curPage);
-//			if (curPage.equals(VIEW_JSP)) {
-//				portletRequestDispatcher = portletContext.getRequestDispatcher(VIEW_JSP);
-//			} else {
-//				switch (curPage) {
-//				case VIEW_JSP:
-//					portletRequestDispatcher = portletContext.getRequestDispatcher(VIEW_JSP);
-//					break;
-//				case EDIT_JSP:
-//					portletRequestDispatcher = portletContext.getRequestDispatcher(EDIT_JSP);
-//					break;
-//				case EDIT_MANUALLY_JSP:
-//					portletRequestDispatcher = portletContext.getRequestDispatcher(EDIT_MANUALLY_JSP);
-//					break;
-//				case HELP_JSP:
-//					portletRequestDispatcher = portletContext.getRequestDispatcher(HELP_JSP);
-//					break;
-//				case NEW_GAME_JSP:
-//					portletRequestDispatcher = portletContext.getRequestDispatcher(NEW_GAME_JSP);
-//					break;
-//				case HIGHSCORES_JSP:
-//					portletRequestDispatcher = portletContext.getRequestDispatcher(HIGHSCORES_JSP);
-//					break;
-//				case GAME_OVER_JSP:
-//					portletRequestDispatcher = portletContext.getRequestDispatcher(GAME_OVER_JSP);
-//					break;
-//				case LOAD_QUESTION_FROM_FILE_JSP:
-//					portletRequestDispatcher = portletContext.getRequestDispatcher(LOAD_QUESTION_FROM_FILE_JSP);
-//					break;
-//				default:
-//					break;
-//				}
-//
-//			}
+			// if (curPage.equals(VIEW_JSP)) {
+			// portletRequestDispatcher =
+			// portletContext.getRequestDispatcher(VIEW_JSP);
+			// } else {
+			// switch (curPage) {
+			// case VIEW_JSP:
+			// portletRequestDispatcher =
+			// portletContext.getRequestDispatcher(VIEW_JSP);
+			// break;
+			// case EDIT_JSP:
+			// portletRequestDispatcher =
+			// portletContext.getRequestDispatcher(EDIT_JSP);
+			// break;
+			// case EDIT_MANUALLY_JSP:
+			// portletRequestDispatcher =
+			// portletContext.getRequestDispatcher(EDIT_MANUALLY_JSP);
+			// break;
+			// case HELP_JSP:
+			// portletRequestDispatcher =
+			// portletContext.getRequestDispatcher(HELP_JSP);
+			// break;
+			// case NEW_GAME_JSP:
+			// portletRequestDispatcher =
+			// portletContext.getRequestDispatcher(NEW_GAME_JSP);
+			// break;
+			// case HIGHSCORES_JSP:
+			// portletRequestDispatcher =
+			// portletContext.getRequestDispatcher(HIGHSCORES_JSP);
+			// break;
+			// case GAME_OVER_JSP:
+			// portletRequestDispatcher =
+			// portletContext.getRequestDispatcher(GAME_OVER_JSP);
+			// break;
+			// case LOAD_QUESTION_FROM_FILE_JSP:
+			// portletRequestDispatcher =
+			// portletContext.getRequestDispatcher(LOAD_QUESTION_FROM_FILE_JSP);
+			// break;
+			// default:
+			// break;
+			// }
+			//
+			// }
 		}
 
 		portletRequestDispatcher.include(renderRequest, renderResponse);
@@ -146,11 +159,10 @@ public class InfonaerGamePortlet extends MVCPortlet {
 		actionRequest.getPortletSession().setAttribute("currentPage", LOAD_QUESTION_FROM_FILE_JSP,
 				PortletSession.PORTLET_SCOPE);
 	}
-	
+
 	public void gotoEditQuestion(ActionRequest actionRequest, ActionResponse actionResponse)
 			throws IOException, PortletException {
-		actionRequest.getPortletSession().setAttribute("currentPage", EDIT_QUESTION_JSP,
-				PortletSession.PORTLET_SCOPE);
+		actionRequest.getPortletSession().setAttribute("currentPage", EDIT_QUESTION_JSP, PortletSession.PORTLET_SCOPE);
 		fillEditForm(actionRequest, actionResponse);
 	}
 
@@ -160,7 +172,6 @@ public class InfonaerGamePortlet extends MVCPortlet {
 		try {
 			Question question = QuestionLocalServiceUtil.getQuestion(id);
 			actionRequest.setAttribute("questionId", question.getQuestionId());
-			System.out.println(question.getQuestionContent());
 			actionRequest.setAttribute("question", question.getQuestionContent());
 			actionRequest.setAttribute("answerA", question.getAnswerA());
 			actionRequest.setAttribute("answerB", question.getAnswerB());
@@ -197,12 +208,13 @@ public class InfonaerGamePortlet extends MVCPortlet {
 		int difficulty = Integer.parseInt(actionRequest.getParameter("difficulty"));
 		String category = actionRequest.getParameter("category");
 		ThemeDisplay td = (ThemeDisplay) actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
+		long userId = td.getUserId();
 		User user = null;
 		try {
 			user = UserLocalServiceUtil.getUser(td.getUserId());
-			if (questionId == null){
-			QuestionLocalServiceUtil.addQuestion(questionContent, answerA, answerB, answerC, answerD, rightAnswer,
-					category, difficulty, user);
+			if (questionId == null) {
+				QuestionLocalServiceUtil.addQuestion(questionContent, answerA, answerB, answerC, answerD, rightAnswer,
+						category, difficulty, user);
 			} else {
 				long id = Long.parseLong(questionId);
 				Question question = QuestionLocalServiceUtil.getQuestion(id);
@@ -221,65 +233,121 @@ public class InfonaerGamePortlet extends MVCPortlet {
 		} catch (PortalException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-		} 
+		}
 
 	}
 
-	public void test(ActionRequest actionRequest, ActionResponse actionResponse) {
-		actionRequest.getPortletSession().setAttribute("currentPage", EDIT_QUESTION_JSP,
-				PortletSession.PORTLET_SCOPE);
-		System.out.println("testing edit");
-		long id = 41273;
+	public void deleteQuestion(ActionRequest actionRequest, ActionResponse actionResponse) {
+		String questionId = actionRequest.getParameter("questionId");
 		try {
-			Question question = QuestionLocalServiceUtil.getQuestion(id);
-			actionRequest.setAttribute("questionId", question.getQuestionId());
-			actionRequest.setAttribute("questionContent", question.getQuestionContent());
-			actionRequest.setAttribute("answerA", question.getAnswerA());
-			actionRequest.setAttribute("answerB", question.getAnswerB());
-			actionRequest.setAttribute("answerC", question.getAnswerC());
-			actionRequest.setAttribute("answerD", question.getAnswerD());
-			actionRequest.setAttribute("rightAnswer", question.getRightAnswer());
-			actionRequest.setAttribute("difficulty", question.getDifficulty());
-			actionRequest.setAttribute("category", question.getCategory());
-			question.setAnswerA("neue Antwort A");
+			QuestionLocalServiceUtil.deleteQuestion(Long.parseLong(questionId));
 		} catch (PortalException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-	}
-	
-	public void getHighscore(ActionRequest actionRequest, ActionResponse actionResponse){
-		
-	}
-	
-	public void addHighscore(ActionRequest actionRequest, ActionResponse actionResponse){
-		ThemeDisplay td = (ThemeDisplay) actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
-//		HighscoreLocalServiceUtil.createHighscore(td.getUserId());
+		goToQuestionOverview(actionRequest, actionResponse);
 	}
 
-	public void goToQuestionOverview(ActionRequest actionRequest, ActionResponse actionResponse){
-		actionRequest.getPortletSession().setAttribute("currentPage", QUESTION_OVERVIEW_JSP, PortletSession.PORTLET_SCOPE);
-		
+	public void test(ActionRequest actionRequest, ActionResponse actionResponse) {
+		actionRequest.getPortletSession().setAttribute("currentPage", EDIT_QUESTION_JSP, PortletSession.PORTLET_SCOPE);
+
+	}
+
+	public void getHighscore(ActionRequest actionRequest, ActionResponse actionResponse) {
+
+	}
+
+	public void addHighscore(ActionRequest actionRequest, ActionResponse actionResponse) {
+		ThemeDisplay td = (ThemeDisplay) actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
+		// HighscoreLocalServiceUtil.createHighscore(td.getUserId());
+	}
+
+	public void goToQuestionOverview(ActionRequest actionRequest, ActionResponse actionResponse) {
+		actionRequest.getPortletSession().setAttribute("currentPage", QUESTION_OVERVIEW_JSP,
+				PortletSession.PORTLET_SCOPE);
+
 		questionPagination(actionRequest, actionResponse);
 	}
 
 	public void questionPagination(ActionRequest actionRequest, ActionResponse actionResponse) {
 		int page = 1;
 		int recordsPerPage = 5;
-		if (actionRequest.getParameter("page") != null){
+		if (actionRequest.getParameter("page") != null) {
 			page = Integer.parseInt(actionRequest.getParameter("page"));
 		}
 		int questionsCount = QuestionLocalServiceUtil.getQuestionsCount();
 		int noOfPages = (int) Math.ceil(questionsCount * 1.0 / recordsPerPage);
-		int start = (page-1)*recordsPerPage;
+		int start = (page - 1) * recordsPerPage;
 		int end = start + recordsPerPage;
-		if (end >= questionsCount){
-			end = questionsCount - 1;
+		if (end > questionsCount) {
+			end = questionsCount;
 		}
 		List<Question> questions = QuestionLocalServiceUtil.getQuestions(start, end);
 		actionRequest.setAttribute("qList", questions);
+		actionRequest.setAttribute("noOfPages", noOfPages);
+		actionRequest.setAttribute("currentPage", page);
+	}
+	
+	public void addCategory(ActionRequest actionRequest, ActionResponse actionResponse){
+		String categoryName = actionRequest.getParameter("category");
+		CategoryLocalServiceUtil.addCategory(categoryName);
+	}
+	
+	public void editCategory(ActionRequest actionRequest, ActionResponse actionResponse){
+		String categoryId= actionRequest.getParameter("categoryId");
+		String categoryName = actionRequest.getParameter("category");
+		
+		try {
+			Category category = CategoryLocalServiceUtil.getCategory(Long.parseLong(categoryId));
+			category.setCategoryName(categoryName);
+			CategoryLocalServiceUtil.updateCategory(category);
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (PortalException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void deleteCategory(ActionRequest actionRequest, ActionResponse actionResponse){
+		String categoryId= actionRequest.getParameter("categoryId");
+		try {
+			CategoryLocalServiceUtil.deleteCategory(Long.parseLong(categoryId));
+		} catch (NoSuchCategoryException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (PortalException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void goToCategoryOverview(ActionRequest actionRequest, ActionResponse actionResponse) {
+		actionRequest.getPortletSession().setAttribute("currentPage", CATEGORY_OVERVIEW_JSP,
+				PortletSession.PORTLET_SCOPE);
+
+		categoryPagination(actionRequest, actionResponse);
+	}
+
+	public void categoryPagination(ActionRequest actionRequest, ActionResponse actionResponse) {
+		int page = 1;
+		int recordsPerPage = 5;
+		if (actionRequest.getParameter("page") != null) {
+			page = Integer.parseInt(actionRequest.getParameter("page"));
+		}
+		int categoryCount = CategoryLocalServiceUtil.getCategoriesCount();
+		int noOfPages = (int) Math.ceil(categoryCount * 1.0 / recordsPerPage);
+		int start = (page - 1) * recordsPerPage;
+		int end = start + recordsPerPage;
+		if (end > categoryCount) {
+			end = categoryCount;
+		}
+		List<Category> categories = CategoryLocalServiceUtil.getCategories(start, end);
+		actionRequest.setAttribute("cList", categories);
 		actionRequest.setAttribute("noOfPages", noOfPages);
 		actionRequest.setAttribute("currentPage", page);
 	}

@@ -46,6 +46,18 @@ public class CategoryLocalServiceWrapper implements CategoryLocalService,
 	}
 
 	/**
+	* Adds a category
+	*
+	* @param categoryName
+	name for added category
+	* @return Category category added
+	*/
+	@Override
+	public de.ki.sbam.model.Category addCategory(java.lang.String categoryName) {
+		return _categoryLocalService.addCategory(categoryName);
+	}
+
+	/**
 	* Creates a new category with the primary key. Does not add the category to the database.
 	*
 	* @param categoryId the primary key for the new category
@@ -54,6 +66,11 @@ public class CategoryLocalServiceWrapper implements CategoryLocalService,
 	@Override
 	public de.ki.sbam.model.Category createCategory(long categoryId) {
 		return _categoryLocalService.createCategory(categoryId);
+	}
+
+	@Override
+	public void deleteAllCategories() {
+		_categoryLocalService.deleteAllCategories();
 	}
 
 	/**
@@ -74,10 +91,12 @@ public class CategoryLocalServiceWrapper implements CategoryLocalService,
 	* @param categoryId the primary key of the category
 	* @return the category that was removed
 	* @throws PortalException if a category with the primary key could not be found
+	* @throws NoSuchCategoryException
 	*/
 	@Override
 	public de.ki.sbam.model.Category deleteCategory(long categoryId)
-		throws com.liferay.portal.kernel.exception.PortalException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			de.ki.sbam.exception.NoSuchCategoryException {
 		return _categoryLocalService.deleteCategory(categoryId);
 	}
 
@@ -173,6 +192,21 @@ public class CategoryLocalServiceWrapper implements CategoryLocalService,
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery,
 		com.liferay.portal.kernel.dao.orm.Projection projection) {
 		return _categoryLocalService.dynamicQueryCount(dynamicQuery, projection);
+	}
+
+	/**
+	* Edits a category.
+	*
+	* @param categoryId
+	id of the category to edit
+	* @param categoryName_new
+	new name of the edited category
+	* @return
+	*/
+	@Override
+	public de.ki.sbam.model.Category editCategory(long categoryId,
+		java.lang.String categoryName_new) {
+		return _categoryLocalService.editCategory(categoryId, categoryName_new);
 	}
 
 	@Override

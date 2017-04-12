@@ -6,7 +6,7 @@
 <portlet:actionURL name="addQuestion" var="addQuestionURL" />
 
 <portlet:actionURL name="goToQuestionOverview" var="questionOverview"></portlet:actionURL>
-<h1>Neue Frage</h1>
+<h1>Frage ändern</h1>
 <form method="POST" action="${addQuestionURL}" >
 	Id: <br/>
 	<input type="text" name="<portlet:namespace />questionId" value="${questionId}" maxlength="75" readonly/> <br />

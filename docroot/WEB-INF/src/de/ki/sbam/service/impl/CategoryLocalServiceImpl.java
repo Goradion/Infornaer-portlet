@@ -15,8 +15,10 @@
 package de.ki.sbam.service.impl;
 
 import aQute.bnd.annotation.ProviderType;
-
+import de.ki.sbam.exception.NoSuchCategoryException;
+import de.ki.sbam.model.Category;
 import de.ki.sbam.service.base.CategoryLocalServiceBaseImpl;
+import de.ki.sbam.service.persistence.CategoryUtil;
 
 /**
  * The implementation of the category local service.
@@ -37,6 +39,65 @@ public class CategoryLocalServiceImpl extends CategoryLocalServiceBaseImpl {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never reference this class directly. Always use {@link de.ki.sbam.service.CategoryLocalServiceUtil} to access the category local service.
+	 * Never reference this class directly. Always use {@link com.liferay.sample.service.CategoryLocalServiceUtil} to access the category local service.
 	 */
+	/**
+	 * Adds a category
+	 * 
+	 * @param categoryName
+	 *            name for added category
+	 * @return Category category added
+	 */
+	public Category addCategory(String categoryName) {
+		long categoryId = counterLocalService.increment();
+		Category category = categoryPersistence.create(categoryId);
+		category.setCategoryName(categoryName);
+		categoryPersistence.update(category);
+		return category;
+	}
+
+	/**
+	 * Edits a category.
+	 * 
+	 * @param categoryId
+	 *            id of the category to edit
+	 * @param categoryName_new
+	 *            new name of the edited category
+	 * @return
+	 */
+	public Category editCategory(long categoryId, String categoryName_new) {
+		Category category = categoryPersistence.fetchByPrimaryKey(categoryId);
+		category.setCategoryName(categoryName_new);
+		categoryPersistence.update(category);
+		return category;
+	}
+
+	/**
+	 * Deletes category
+	 * 
+	 * @param categoryId
+	 *            id of the category to delete
+	 * @param serviceContext
+	 * @return Category category deleted
+	 * @throws NoSuchCategoryException
+	 */
+	public Category deleteCategory(long categoryId) throws NoSuchCategoryException {
+		return categoryPersistence.remove(categoryId);
+	}
+
+	/**
+	 * Deletes category
+	 * 
+	 * @param category
+	 *            category to be deleted
+	 * @param serviceContext
+	 * @return Category deleted category
+	 */
+	public Category deleteCategory(Category category) {
+		return categoryPersistence.remove(category);
+	}
+	
+	public void deleteAllCategories(){
+		CategoryUtil.removeAll();
+	}
 }
