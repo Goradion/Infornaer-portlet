@@ -6,6 +6,8 @@
 <%@ page import="de.ki.sbam.service.QuestionLocalServiceUtil"%>
 <%@ page import="de.ki.sbam.model.Question"%>
 <%@ page import="de.ki.sbam.service.persistence.QuestionUtil"%>
+<%@ page import="game.infonaer.portlet.QuestionFromFileBuilder" %>
+<%@ page import="java.util.*" %>
 
 <portlet:defineObjects/>
 <theme:defineObjects/>
