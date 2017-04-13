@@ -23,7 +23,7 @@ import com.liferay.portal.kernel.util.Accessor;
 /**
  * The extended model interface for the Category service. Represents a row in the &quot;sbam_Category&quot; database table, with each column mapped to a property of this class.
  *
- * @author Alexander Mueller
+ * @author Alexander Mueller, Simon Bastian
  * @see CategoryModel
  * @see de.ki.sbam.model.impl.CategoryImpl
  * @see de.ki.sbam.model.impl.CategoryModelImpl

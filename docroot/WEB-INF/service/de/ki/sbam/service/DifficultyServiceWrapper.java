@@ -21,7 +21,7 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
 /**
  * Provides a wrapper for {@link DifficultyService}.
  *
- * @author Alexander Mueller
+ * @author Alexander Mueller, Simon Bastian
  * @see DifficultyService
  * @generated
  */
@@ -32,13 +32,6 @@ public class DifficultyServiceWrapper implements DifficultyService,
 		_difficultyService = difficultyService;
 	}
 
-	@Override
-	public java.lang.Object invokeMethod(java.lang.String name,
-		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
-		throws java.lang.Throwable {
-		return _difficultyService.invokeMethod(name, parameterTypes, arguments);
-	}
-
 	/**
 	* Returns the OSGi service identifier.
 	*
@@ -47,6 +40,13 @@ public class DifficultyServiceWrapper implements DifficultyService,
 	@Override
 	public java.lang.String getOSGiServiceIdentifier() {
 		return _difficultyService.getOSGiServiceIdentifier();
+	}
+
+	@Override
+	public java.lang.Object invokeMethod(java.lang.String name,
+		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
+		throws java.lang.Throwable {
+		return _difficultyService.invokeMethod(name, parameterTypes, arguments);
 	}
 
 	@Override

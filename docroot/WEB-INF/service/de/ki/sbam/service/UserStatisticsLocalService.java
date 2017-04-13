@@ -45,7 +45,7 @@ import java.util.List;
  * credentials because this service can only be accessed from within the same
  * VM.
  *
- * @author Alexander Mueller
+ * @author Alexander Mueller, Simon Bastian
  * @see UserStatisticsLocalServiceUtil
  * @see de.ki.sbam.service.base.UserStatisticsLocalServiceBaseImpl
  * @see de.ki.sbam.service.impl.UserStatisticsLocalServiceImpl
@@ -61,25 +61,6 @@ public interface UserStatisticsLocalService extends BaseLocalService,
 	 *
 	 * Never modify or reference this interface directly. Always use {@link UserStatisticsLocalServiceUtil} to access the user statistics local service. Add custom service methods to {@link de.ki.sbam.service.impl.UserStatisticsLocalServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public ActionableDynamicQuery getActionableDynamicQuery();
-
-	public DynamicQuery dynamicQuery();
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery();
-
-	/**
-	* @throws PortalException
-	*/
-	@Override
-	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
-		throws PortalException;
-
-	@Override
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
-		throws PortalException;
 
 	/**
 	* Adds the user statistics to the database. Also notifies the appropriate model listeners.
@@ -99,13 +80,11 @@ public interface UserStatisticsLocalService extends BaseLocalService,
 	public UserStatistics createUserStatistics(long userId);
 
 	/**
-	* Deletes the user statistics from the database. Also notifies the appropriate model listeners.
-	*
-	* @param userStatistics the user statistics
-	* @return the user statistics that was removed
+	* @throws PortalException
 	*/
-	@Indexable(type = IndexableType.DELETE)
-	public UserStatistics deleteUserStatistics(UserStatistics userStatistics);
+	@Override
+	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
+		throws PortalException;
 
 	/**
 	* Deletes the user statistics with the primary key from the database. Also notifies the appropriate model listeners.
@@ -118,48 +97,16 @@ public interface UserStatisticsLocalService extends BaseLocalService,
 	public UserStatistics deleteUserStatistics(long userId)
 		throws PortalException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public UserStatistics fetchUserStatistics(long userId);
-
 	/**
-	* Returns the user statistics with the primary key.
-	*
-	* @param userId the primary key of the user statistics
-	* @return the user statistics
-	* @throws PortalException if a user statistics with the primary key could not be found
-	*/
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public UserStatistics getUserStatistics(long userId)
-		throws PortalException;
-
-	/**
-	* Updates the user statistics in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
+	* Deletes the user statistics from the database. Also notifies the appropriate model listeners.
 	*
 	* @param userStatistics the user statistics
-	* @return the user statistics that was updated
+	* @return the user statistics that was removed
 	*/
-	@Indexable(type = IndexableType.REINDEX)
-	public UserStatistics updateUserStatistics(UserStatistics userStatistics);
+	@Indexable(type = IndexableType.DELETE)
+	public UserStatistics deleteUserStatistics(UserStatistics userStatistics);
 
-	/**
-	* Returns the number of user statisticses.
-	*
-	* @return the number of user statisticses
-	*/
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getUserStatisticsesCount();
-
-	@Override
-	public java.lang.Object invokeMethod(java.lang.String name,
-		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
-		throws java.lang.Throwable;
-
-	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
-	public java.lang.String getOSGiServiceIdentifier();
+	public DynamicQuery dynamicQuery();
 
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.
@@ -201,20 +148,6 @@ public interface UserStatisticsLocalService extends BaseLocalService,
 		int end, OrderByComparator<T> orderByComparator);
 
 	/**
-	* Returns a range of all the user statisticses.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link de.ki.sbam.model.impl.UserStatisticsModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param start the lower bound of the range of user statisticses
-	* @param end the upper bound of the range of user statisticses (not inclusive)
-	* @return the range of user statisticses
-	*/
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<UserStatistics> getUserStatisticses(int start, int end);
-
-	/**
 	* Returns the number of rows matching the dynamic query.
 	*
 	* @param dynamicQuery the dynamic query
@@ -231,4 +164,72 @@ public interface UserStatisticsLocalService extends BaseLocalService,
 	*/
 	public long dynamicQueryCount(DynamicQuery dynamicQuery,
 		Projection projection);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public UserStatistics fetchUserStatistics(long userId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public ActionableDynamicQuery getActionableDynamicQuery();
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery();
+
+	/**
+	* Returns the OSGi service identifier.
+	*
+	* @return the OSGi service identifier
+	*/
+	public java.lang.String getOSGiServiceIdentifier();
+
+	@Override
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
+		throws PortalException;
+
+	/**
+	* Returns the user statistics with the primary key.
+	*
+	* @param userId the primary key of the user statistics
+	* @return the user statistics
+	* @throws PortalException if a user statistics with the primary key could not be found
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public UserStatistics getUserStatistics(long userId)
+		throws PortalException;
+
+	/**
+	* Returns a range of all the user statisticses.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link de.ki.sbam.model.impl.UserStatisticsModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param start the lower bound of the range of user statisticses
+	* @param end the upper bound of the range of user statisticses (not inclusive)
+	* @return the range of user statisticses
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<UserStatistics> getUserStatisticses(int start, int end);
+
+	/**
+	* Returns the number of user statisticses.
+	*
+	* @return the number of user statisticses
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getUserStatisticsesCount();
+
+	@Override
+	public java.lang.Object invokeMethod(java.lang.String name,
+		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
+		throws java.lang.Throwable;
+
+	/**
+	* Updates the user statistics in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
+	*
+	* @param userStatistics the user statistics
+	* @return the user statistics that was updated
+	*/
+	@Indexable(type = IndexableType.REINDEX)
+	public UserStatistics updateUserStatistics(UserStatistics userStatistics);
 }

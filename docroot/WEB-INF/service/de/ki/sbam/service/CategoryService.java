@@ -30,7 +30,7 @@ import com.liferay.portal.kernel.transaction.Transactional;
  * service are expected to have security checks based on the propagated JAAS
  * credentials because this service can be accessed remotely.
  *
- * @author Alexander Mueller
+ * @author Alexander Mueller, Simon Bastian
  * @see CategoryServiceUtil
  * @see de.ki.sbam.service.base.CategoryServiceBaseImpl
  * @see de.ki.sbam.service.impl.CategoryServiceImpl
@@ -47,10 +47,6 @@ public interface CategoryService extends BaseService, InvokableService {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CategoryServiceUtil} to access the category remote service. Add custom service methods to {@link de.ki.sbam.service.impl.CategoryServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	@Override
-	public java.lang.Object invokeMethod(java.lang.String name,
-		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
-		throws java.lang.Throwable;
 
 	/**
 	* Returns the OSGi service identifier.
@@ -58,4 +54,9 @@ public interface CategoryService extends BaseService, InvokableService {
 	* @return the OSGi service identifier
 	*/
 	public java.lang.String getOSGiServiceIdentifier();
+
+	@Override
+	public java.lang.Object invokeMethod(java.lang.String name,
+		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
+		throws java.lang.Throwable;
 }

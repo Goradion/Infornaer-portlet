@@ -41,7 +41,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author Alexander Mueller
+ * @author Alexander Mueller, Simon Bastian
  */
 @ProviderType
 public class ClpSerializer {

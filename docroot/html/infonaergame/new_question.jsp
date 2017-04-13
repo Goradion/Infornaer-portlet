@@ -3,7 +3,7 @@
 
 
 
-<portlet:actionURL name="addQuestion" var="addQuestionURL" />
+<portlet:actionURL name="goToQuestionOverview" var="questionOverview"></portlet:actionURL>
 
 <portlet:actionURL name="gotoEditMode" var="editMode"></portlet:actionURL>
 <h1>Neue Frage</h1>
@@ -25,6 +25,7 @@
 	    <option value="C">C</option>
 	    <option value="D">D</option>
 	</select>
+	<br />
 	Schwierigkeit: <br />
 	<select name="<portlet:namespace />difficulty" >
 	    <option value="1">Leicht</option>
@@ -33,7 +34,11 @@
 	</select>
 	<br/>
 	Kategorie: <br />
-	<input type="text" name="<portlet:namespace />category" value="" maxlength="75" required/> <br />
+	<select name= "<portlet:namespace />category" >
+		<c:forEach items="${cList}" var="c">
+			<option value="${c.getCategoryId()}">${c.getCategoryName()}</option>
+		</c:forEach>
+	</select>
 	<input type="submit" value="Abschicken"> <br>
 </form>	
-<p><a href=<%=editMode%>>Back</a></p>
+<p><a href=<%=questionOverview%>>Back</a></p>

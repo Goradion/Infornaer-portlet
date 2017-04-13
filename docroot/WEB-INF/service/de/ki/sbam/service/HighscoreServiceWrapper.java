@@ -21,7 +21,7 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
 /**
  * Provides a wrapper for {@link HighscoreService}.
  *
- * @author Alexander Mueller
+ * @author Alexander Mueller, Simon Bastian
  * @see HighscoreService
  * @generated
  */
@@ -32,13 +32,6 @@ public class HighscoreServiceWrapper implements HighscoreService,
 		_highscoreService = highscoreService;
 	}
 
-	@Override
-	public java.lang.Object invokeMethod(java.lang.String name,
-		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
-		throws java.lang.Throwable {
-		return _highscoreService.invokeMethod(name, parameterTypes, arguments);
-	}
-
 	/**
 	* Returns the OSGi service identifier.
 	*
@@ -47,6 +40,13 @@ public class HighscoreServiceWrapper implements HighscoreService,
 	@Override
 	public java.lang.String getOSGiServiceIdentifier() {
 		return _highscoreService.getOSGiServiceIdentifier();
+	}
+
+	@Override
+	public java.lang.Object invokeMethod(java.lang.String name,
+		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
+		throws java.lang.Throwable {
+		return _highscoreService.invokeMethod(name, parameterTypes, arguments);
 	}
 
 	@Override

@@ -55,7 +55,7 @@ import java.util.Set;
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
- * @author Alexander Mueller
+ * @author Alexander Mueller, Simon Bastian
  * @see CategoryPersistence
  * @see de.ki.sbam.service.persistence.CategoryUtil
  * @generated
@@ -208,8 +208,8 @@ public class CategoryPersistenceImpl extends BasePersistenceImpl<Category>
 					primaryKey);
 
 			if (category == null) {
-				if (_log.isDebugEnabled()) {
-					_log.debug(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
+				if (_log.isWarnEnabled()) {
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchCategoryException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
@@ -331,8 +331,8 @@ public class CategoryPersistenceImpl extends BasePersistenceImpl<Category>
 		Category category = fetchByPrimaryKey(primaryKey);
 
 		if (category == null) {
-			if (_log.isDebugEnabled()) {
-				_log.debug(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
+			if (_log.isWarnEnabled()) {
+				_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 			}
 
 			throw new NoSuchCategoryException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +

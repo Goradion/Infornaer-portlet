@@ -30,7 +30,7 @@ import java.io.ObjectOutput;
 /**
  * The cache model class for representing UserStatistics in entity cache.
  *
- * @author Alexander Mueller
+ * @author Alexander Mueller, Simon Bastian
  * @see UserStatistics
  * @generated
  */

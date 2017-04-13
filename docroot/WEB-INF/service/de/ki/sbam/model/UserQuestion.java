@@ -23,7 +23,7 @@ import com.liferay.portal.kernel.util.Accessor;
 /**
  * The extended model interface for the UserQuestion service. Represents a row in the &quot;sbam_UserQuestion&quot; database table, with each column mapped to a property of this class.
  *
- * @author Alexander Mueller
+ * @author Alexander Mueller, Simon Bastian
  * @see UserQuestionModel
  * @see de.ki.sbam.model.impl.UserQuestionImpl
  * @see de.ki.sbam.model.impl.UserQuestionModelImpl

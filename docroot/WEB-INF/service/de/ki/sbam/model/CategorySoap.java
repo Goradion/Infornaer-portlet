@@ -24,7 +24,7 @@ import java.util.List;
 /**
  * This class is used by SOAP remote services, specifically {@link de.ki.sbam.service.http.CategoryServiceSoap}.
  *
- * @author Alexander Mueller
+ * @author Alexander Mueller, Simon Bastian
  * @see de.ki.sbam.service.http.CategoryServiceSoap
  * @generated
  */

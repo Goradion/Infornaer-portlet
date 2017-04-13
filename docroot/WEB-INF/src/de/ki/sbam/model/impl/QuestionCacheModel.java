@@ -33,7 +33,7 @@ import java.util.Date;
 /**
  * The cache model class for representing Question in entity cache.
  *
- * @author Alexander Mueller
+ * @author Alexander Mueller, Simon Bastian
  * @see Question
  * @generated
  */

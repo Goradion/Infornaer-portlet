@@ -34,7 +34,7 @@ import de.ki.sbam.service.UserStatisticsLocalServiceUtil;
 import de.ki.sbam.service.UserStatisticsServiceUtil;
 
 /**
- * @author Alexander Mueller
+ * @author Alexander Mueller, Simon Bastian
  */
 @ProviderType
 public class ClpMessageListener extends BaseMessageListener {

@@ -20,19 +20,19 @@ import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * <p>
  * This class is a wrapper for {@link Highscore}.
  * </p>
  *
- * @author Alexander Mueller
+ * @author Alexander Mueller, Simon Bastian
  * @see Highscore
  * @generated
  */
@@ -85,38 +85,8 @@ public class HighscoreWrapper implements Highscore, ModelWrapper<Highscore> {
 	}
 
 	@Override
-	public boolean isCachedModel() {
-		return _highscore.isCachedModel();
-	}
-
-	@Override
-	public boolean isEscapedModel() {
-		return _highscore.isEscapedModel();
-	}
-
-	@Override
-	public boolean isNew() {
-		return _highscore.isNew();
-	}
-
-	@Override
-	public ExpandoBridge getExpandoBridge() {
-		return _highscore.getExpandoBridge();
-	}
-
-	@Override
-	public com.liferay.portal.kernel.model.CacheModel<de.ki.sbam.model.Highscore> toCacheModel() {
-		return _highscore.toCacheModel();
-	}
-
-	@Override
-	public de.ki.sbam.model.Highscore toEscapedModel() {
-		return new HighscoreWrapper(_highscore.toEscapedModel());
-	}
-
-	@Override
-	public de.ki.sbam.model.Highscore toUnescapedModel() {
-		return new HighscoreWrapper(_highscore.toUnescapedModel());
+	public java.lang.Object clone() {
+		return new HighscoreWrapper((Highscore)_highscore.clone());
 	}
 
 	@Override
@@ -125,8 +95,18 @@ public class HighscoreWrapper implements Highscore, ModelWrapper<Highscore> {
 	}
 
 	@Override
-	public int hashCode() {
-		return _highscore.hashCode();
+	public ExpandoBridge getExpandoBridge() {
+		return _highscore.getExpandoBridge();
+	}
+
+	/**
+	* Returns the primary key of this highscore.
+	*
+	* @return the primary key of this highscore
+	*/
+	@Override
+	public long getPrimaryKey() {
+		return _highscore.getPrimaryKey();
 	}
 
 	@Override
@@ -134,9 +114,24 @@ public class HighscoreWrapper implements Highscore, ModelWrapper<Highscore> {
 		return _highscore.getPrimaryKeyObj();
 	}
 
+	/**
+	* Returns the score of this highscore.
+	*
+	* @return the score of this highscore
+	*/
 	@Override
-	public java.lang.Object clone() {
-		return new HighscoreWrapper((Highscore)_highscore.clone());
+	public long getScore() {
+		return _highscore.getScore();
+	}
+
+	/**
+	* Returns the user ID of this highscore.
+	*
+	* @return the user ID of this highscore
+	*/
+	@Override
+	public long getUserId() {
+		return _highscore.getUserId();
 	}
 
 	/**
@@ -160,43 +155,23 @@ public class HighscoreWrapper implements Highscore, ModelWrapper<Highscore> {
 	}
 
 	@Override
-	public java.lang.String toString() {
-		return _highscore.toString();
+	public int hashCode() {
+		return _highscore.hashCode();
 	}
 
 	@Override
-	public java.lang.String toXmlString() {
-		return _highscore.toXmlString();
+	public boolean isCachedModel() {
+		return _highscore.isCachedModel();
 	}
 
-	/**
-	* Returns the primary key of this highscore.
-	*
-	* @return the primary key of this highscore
-	*/
 	@Override
-	public long getPrimaryKey() {
-		return _highscore.getPrimaryKey();
+	public boolean isEscapedModel() {
+		return _highscore.isEscapedModel();
 	}
 
-	/**
-	* Returns the score of this highscore.
-	*
-	* @return the score of this highscore
-	*/
 	@Override
-	public long getScore() {
-		return _highscore.getScore();
-	}
-
-	/**
-	* Returns the user ID of this highscore.
-	*
-	* @return the user ID of this highscore
-	*/
-	@Override
-	public long getUserId() {
-		return _highscore.getUserId();
+	public boolean isNew() {
+		return _highscore.isNew();
 	}
 
 	@Override
@@ -210,14 +185,14 @@ public class HighscoreWrapper implements Highscore, ModelWrapper<Highscore> {
 	}
 
 	@Override
-	public void setExpandoBridgeAttributes(ExpandoBridge expandoBridge) {
-		_highscore.setExpandoBridgeAttributes(expandoBridge);
-	}
-
-	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.kernel.model.BaseModel<?> baseModel) {
 		_highscore.setExpandoBridgeAttributes(baseModel);
+	}
+
+	@Override
+	public void setExpandoBridgeAttributes(ExpandoBridge expandoBridge) {
+		_highscore.setExpandoBridgeAttributes(expandoBridge);
 	}
 
 	@Override
@@ -286,6 +261,31 @@ public class HighscoreWrapper implements Highscore, ModelWrapper<Highscore> {
 	}
 
 	@Override
+	public com.liferay.portal.kernel.model.CacheModel<de.ki.sbam.model.Highscore> toCacheModel() {
+		return _highscore.toCacheModel();
+	}
+
+	@Override
+	public de.ki.sbam.model.Highscore toEscapedModel() {
+		return new HighscoreWrapper(_highscore.toEscapedModel());
+	}
+
+	@Override
+	public java.lang.String toString() {
+		return _highscore.toString();
+	}
+
+	@Override
+	public de.ki.sbam.model.Highscore toUnescapedModel() {
+		return new HighscoreWrapper(_highscore.toUnescapedModel());
+	}
+
+	@Override
+	public java.lang.String toXmlString() {
+		return _highscore.toXmlString();
+	}
+
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
@@ -297,7 +297,7 @@ public class HighscoreWrapper implements Highscore, ModelWrapper<Highscore> {
 
 		HighscoreWrapper highscoreWrapper = (HighscoreWrapper)obj;
 
-		if (Objects.equals(_highscore, highscoreWrapper._highscore)) {
+		if (Validator.equals(_highscore, highscoreWrapper._highscore)) {
 			return true;
 		}
 

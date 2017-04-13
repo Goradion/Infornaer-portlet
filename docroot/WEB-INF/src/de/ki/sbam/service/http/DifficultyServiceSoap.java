@@ -50,7 +50,7 @@ import aQute.bnd.annotation.ProviderType;
  * The SOAP utility is only generated for remote services.
  * </p>
  *
- * @author Alexander Mueller
+ * @author Alexander Mueller, Simon Bastian
  * @see DifficultyServiceHttp
  * @see de.ki.sbam.model.DifficultySoap
  * @see de.ki.sbam.service.DifficultyServiceUtil

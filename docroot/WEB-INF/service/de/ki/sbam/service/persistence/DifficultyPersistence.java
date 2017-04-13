@@ -28,7 +28,7 @@ import de.ki.sbam.model.Difficulty;
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
- * @author Alexander Mueller
+ * @author Alexander Mueller, Simon Bastian
  * @see de.ki.sbam.service.persistence.impl.DifficultyPersistenceImpl
  * @see DifficultyUtil
  * @generated

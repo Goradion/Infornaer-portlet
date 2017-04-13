@@ -28,7 +28,7 @@ import com.liferay.portal.kernel.util.ReferenceRegistry;
  * based on the propagated JAAS credentials because this service can only be
  * accessed from within the same VM.
  *
- * @author Alexander Mueller
+ * @author Alexander Mueller, Simon Bastian
  * @see UserQuestionLocalService
  * @see de.ki.sbam.service.base.UserQuestionLocalServiceBaseImpl
  * @see de.ki.sbam.service.impl.UserQuestionLocalServiceImpl
@@ -41,32 +41,6 @@ public class UserQuestionLocalServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to {@link de.ki.sbam.service.impl.UserQuestionLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
-	public static com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery getActionableDynamicQuery() {
-		return getService().getActionableDynamicQuery();
-	}
-
-	public static com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery() {
-		return getService().dynamicQuery();
-	}
-
-	public static com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery getIndexableActionableDynamicQuery() {
-		return getService().getIndexableActionableDynamicQuery();
-	}
-
-	/**
-	* @throws PortalException
-	*/
-	public static com.liferay.portal.kernel.model.PersistedModel deletePersistedModel(
-		com.liferay.portal.kernel.model.PersistedModel persistedModel)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().deletePersistedModel(persistedModel);
-	}
-
-	public static com.liferay.portal.kernel.model.PersistedModel getPersistedModel(
-		java.io.Serializable primaryKeyObj)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().getPersistedModel(primaryKeyObj);
-	}
 
 	/**
 	* Adds the user question to the database. Also notifies the appropriate model listeners.
@@ -91,14 +65,12 @@ public class UserQuestionLocalServiceUtil {
 	}
 
 	/**
-	* Deletes the user question from the database. Also notifies the appropriate model listeners.
-	*
-	* @param userQuestion the user question
-	* @return the user question that was removed
+	* @throws PortalException
 	*/
-	public static de.ki.sbam.model.UserQuestion deleteUserQuestion(
-		de.ki.sbam.model.UserQuestion userQuestion) {
-		return getService().deleteUserQuestion(userQuestion);
+	public static com.liferay.portal.kernel.model.PersistedModel deletePersistedModel(
+		com.liferay.portal.kernel.model.PersistedModel persistedModel)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().deletePersistedModel(persistedModel);
 	}
 
 	/**
@@ -114,56 +86,19 @@ public class UserQuestionLocalServiceUtil {
 		return getService().deleteUserQuestion(questionId);
 	}
 
-	public static de.ki.sbam.model.UserQuestion fetchUserQuestion(
-		long questionId) {
-		return getService().fetchUserQuestion(questionId);
-	}
-
 	/**
-	* Returns the user question with the primary key.
-	*
-	* @param questionId the primary key of the user question
-	* @return the user question
-	* @throws PortalException if a user question with the primary key could not be found
-	*/
-	public static de.ki.sbam.model.UserQuestion getUserQuestion(long questionId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().getUserQuestion(questionId);
-	}
-
-	/**
-	* Updates the user question in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
+	* Deletes the user question from the database. Also notifies the appropriate model listeners.
 	*
 	* @param userQuestion the user question
-	* @return the user question that was updated
+	* @return the user question that was removed
 	*/
-	public static de.ki.sbam.model.UserQuestion updateUserQuestion(
+	public static de.ki.sbam.model.UserQuestion deleteUserQuestion(
 		de.ki.sbam.model.UserQuestion userQuestion) {
-		return getService().updateUserQuestion(userQuestion);
+		return getService().deleteUserQuestion(userQuestion);
 	}
 
-	/**
-	* Returns the number of user questions.
-	*
-	* @return the number of user questions
-	*/
-	public static int getUserQuestionsCount() {
-		return getService().getUserQuestionsCount();
-	}
-
-	public static java.lang.Object invokeMethod(java.lang.String name,
-		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
-		throws java.lang.Throwable {
-		return getService().invokeMethod(name, parameterTypes, arguments);
-	}
-
-	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
-	public static java.lang.String getOSGiServiceIdentifier() {
-		return getService().getOSGiServiceIdentifier();
+	public static com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery() {
+		return getService().dynamicQuery();
 	}
 
 	/**
@@ -217,22 +152,6 @@ public class UserQuestionLocalServiceUtil {
 	}
 
 	/**
-	* Returns a range of all the user questions.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link de.ki.sbam.model.impl.UserQuestionModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param start the lower bound of the range of user questions
-	* @param end the upper bound of the range of user questions (not inclusive)
-	* @return the range of user questions
-	*/
-	public static java.util.List<de.ki.sbam.model.UserQuestion> getUserQuestions(
-		int start, int end) {
-		return getService().getUserQuestions(start, end);
-	}
-
-	/**
 	* Returns the number of rows matching the dynamic query.
 	*
 	* @param dynamicQuery the dynamic query
@@ -254,6 +173,88 @@ public class UserQuestionLocalServiceUtil {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery,
 		com.liferay.portal.kernel.dao.orm.Projection projection) {
 		return getService().dynamicQueryCount(dynamicQuery, projection);
+	}
+
+	public static de.ki.sbam.model.UserQuestion fetchUserQuestion(
+		long questionId) {
+		return getService().fetchUserQuestion(questionId);
+	}
+
+	public static com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery getActionableDynamicQuery() {
+		return getService().getActionableDynamicQuery();
+	}
+
+	public static com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery getIndexableActionableDynamicQuery() {
+		return getService().getIndexableActionableDynamicQuery();
+	}
+
+	/**
+	* Returns the OSGi service identifier.
+	*
+	* @return the OSGi service identifier
+	*/
+	public static java.lang.String getOSGiServiceIdentifier() {
+		return getService().getOSGiServiceIdentifier();
+	}
+
+	public static com.liferay.portal.kernel.model.PersistedModel getPersistedModel(
+		java.io.Serializable primaryKeyObj)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().getPersistedModel(primaryKeyObj);
+	}
+
+	/**
+	* Returns the user question with the primary key.
+	*
+	* @param questionId the primary key of the user question
+	* @return the user question
+	* @throws PortalException if a user question with the primary key could not be found
+	*/
+	public static de.ki.sbam.model.UserQuestion getUserQuestion(long questionId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().getUserQuestion(questionId);
+	}
+
+	/**
+	* Returns a range of all the user questions.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link de.ki.sbam.model.impl.UserQuestionModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param start the lower bound of the range of user questions
+	* @param end the upper bound of the range of user questions (not inclusive)
+	* @return the range of user questions
+	*/
+	public static java.util.List<de.ki.sbam.model.UserQuestion> getUserQuestions(
+		int start, int end) {
+		return getService().getUserQuestions(start, end);
+	}
+
+	/**
+	* Returns the number of user questions.
+	*
+	* @return the number of user questions
+	*/
+	public static int getUserQuestionsCount() {
+		return getService().getUserQuestionsCount();
+	}
+
+	public static java.lang.Object invokeMethod(java.lang.String name,
+		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
+		throws java.lang.Throwable {
+		return getService().invokeMethod(name, parameterTypes, arguments);
+	}
+
+	/**
+	* Updates the user question in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
+	*
+	* @param userQuestion the user question
+	* @return the user question that was updated
+	*/
+	public static de.ki.sbam.model.UserQuestion updateUserQuestion(
+		de.ki.sbam.model.UserQuestion userQuestion) {
+		return getService().updateUserQuestion(userQuestion);
 	}
 
 	public static void clearService() {

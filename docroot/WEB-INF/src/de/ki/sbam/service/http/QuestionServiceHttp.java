@@ -38,7 +38,7 @@ import aQute.bnd.annotation.ProviderType;
  * The HTTP utility is only generated for remote services.
  * </p>
  *
- * @author Alexander Mueller
+ * @author Alexander Mueller, Simon Bastian
  * @see QuestionServiceSoap
  * @see com.liferay.portal.kernel.security.auth.HttpPrincipal
  * @see de.ki.sbam.service.QuestionServiceUtil

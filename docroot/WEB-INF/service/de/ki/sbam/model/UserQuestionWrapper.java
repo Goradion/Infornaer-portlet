@@ -20,19 +20,19 @@ import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * <p>
  * This class is a wrapper for {@link UserQuestion}.
  * </p>
  *
- * @author Alexander Mueller
+ * @author Alexander Mueller, Simon Bastian
  * @see UserQuestion
  * @generated
  */
@@ -142,68 +142,13 @@ public class UserQuestionWrapper implements UserQuestion,
 	}
 
 	@Override
-	public boolean isCachedModel() {
-		return _userQuestion.isCachedModel();
-	}
-
-	@Override
-	public boolean isEscapedModel() {
-		return _userQuestion.isEscapedModel();
-	}
-
-	@Override
-	public boolean isNew() {
-		return _userQuestion.isNew();
-	}
-
-	@Override
-	public ExpandoBridge getExpandoBridge() {
-		return _userQuestion.getExpandoBridge();
-	}
-
-	@Override
-	public com.liferay.portal.kernel.model.CacheModel<de.ki.sbam.model.UserQuestion> toCacheModel() {
-		return _userQuestion.toCacheModel();
-	}
-
-	@Override
-	public de.ki.sbam.model.UserQuestion toEscapedModel() {
-		return new UserQuestionWrapper(_userQuestion.toEscapedModel());
-	}
-
-	@Override
-	public de.ki.sbam.model.UserQuestion toUnescapedModel() {
-		return new UserQuestionWrapper(_userQuestion.toUnescapedModel());
+	public java.lang.Object clone() {
+		return new UserQuestionWrapper((UserQuestion)_userQuestion.clone());
 	}
 
 	@Override
 	public int compareTo(de.ki.sbam.model.UserQuestion userQuestion) {
 		return _userQuestion.compareTo(userQuestion);
-	}
-
-	/**
-	* Returns the difficulty of this user question.
-	*
-	* @return the difficulty of this user question
-	*/
-	@Override
-	public int getDifficulty() {
-		return _userQuestion.getDifficulty();
-	}
-
-	@Override
-	public int hashCode() {
-		return _userQuestion.hashCode();
-	}
-
-	@Override
-	public Serializable getPrimaryKeyObj() {
-		return _userQuestion.getPrimaryKeyObj();
-	}
-
-	@Override
-	public java.lang.Object clone() {
-		return new UserQuestionWrapper((UserQuestion)_userQuestion.clone());
 	}
 
 	/**
@@ -257,6 +202,36 @@ public class UserQuestionWrapper implements UserQuestion,
 	}
 
 	/**
+	* Returns the difficulty of this user question.
+	*
+	* @return the difficulty of this user question
+	*/
+	@Override
+	public int getDifficulty() {
+		return _userQuestion.getDifficulty();
+	}
+
+	@Override
+	public ExpandoBridge getExpandoBridge() {
+		return _userQuestion.getExpandoBridge();
+	}
+
+	/**
+	* Returns the primary key of this user question.
+	*
+	* @return the primary key of this user question
+	*/
+	@Override
+	public long getPrimaryKey() {
+		return _userQuestion.getPrimaryKey();
+	}
+
+	@Override
+	public Serializable getPrimaryKeyObj() {
+		return _userQuestion.getPrimaryKeyObj();
+	}
+
+	/**
 	* Returns the question of this user question.
 	*
 	* @return the question of this user question
@@ -267,6 +242,16 @@ public class UserQuestionWrapper implements UserQuestion,
 	}
 
 	/**
+	* Returns the question ID of this user question.
+	*
+	* @return the question ID of this user question
+	*/
+	@Override
+	public long getQuestionId() {
+		return _userQuestion.getQuestionId();
+	}
+
+	/**
 	* Returns the right answer of this user question.
 	*
 	* @return the right answer of this user question
@@ -274,6 +259,16 @@ public class UserQuestionWrapper implements UserQuestion,
 	@Override
 	public java.lang.String getRightAnswer() {
 		return _userQuestion.getRightAnswer();
+	}
+
+	/**
+	* Returns the user ID of this user question.
+	*
+	* @return the user ID of this user question
+	*/
+	@Override
+	public long getUserId() {
+		return _userQuestion.getUserId();
 	}
 
 	/**
@@ -297,43 +292,23 @@ public class UserQuestionWrapper implements UserQuestion,
 	}
 
 	@Override
-	public java.lang.String toString() {
-		return _userQuestion.toString();
+	public int hashCode() {
+		return _userQuestion.hashCode();
 	}
 
 	@Override
-	public java.lang.String toXmlString() {
-		return _userQuestion.toXmlString();
+	public boolean isCachedModel() {
+		return _userQuestion.isCachedModel();
 	}
 
-	/**
-	* Returns the primary key of this user question.
-	*
-	* @return the primary key of this user question
-	*/
 	@Override
-	public long getPrimaryKey() {
-		return _userQuestion.getPrimaryKey();
+	public boolean isEscapedModel() {
+		return _userQuestion.isEscapedModel();
 	}
 
-	/**
-	* Returns the question ID of this user question.
-	*
-	* @return the question ID of this user question
-	*/
 	@Override
-	public long getQuestionId() {
-		return _userQuestion.getQuestionId();
-	}
-
-	/**
-	* Returns the user ID of this user question.
-	*
-	* @return the user ID of this user question
-	*/
-	@Override
-	public long getUserId() {
-		return _userQuestion.getUserId();
+	public boolean isNew() {
+		return _userQuestion.isNew();
 	}
 
 	@Override
@@ -407,14 +382,14 @@ public class UserQuestionWrapper implements UserQuestion,
 	}
 
 	@Override
-	public void setExpandoBridgeAttributes(ExpandoBridge expandoBridge) {
-		_userQuestion.setExpandoBridgeAttributes(expandoBridge);
-	}
-
-	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.kernel.model.BaseModel<?> baseModel) {
 		_userQuestion.setExpandoBridgeAttributes(baseModel);
+	}
+
+	@Override
+	public void setExpandoBridgeAttributes(ExpandoBridge expandoBridge) {
+		_userQuestion.setExpandoBridgeAttributes(expandoBridge);
 	}
 
 	@Override
@@ -503,6 +478,31 @@ public class UserQuestionWrapper implements UserQuestion,
 	}
 
 	@Override
+	public com.liferay.portal.kernel.model.CacheModel<de.ki.sbam.model.UserQuestion> toCacheModel() {
+		return _userQuestion.toCacheModel();
+	}
+
+	@Override
+	public de.ki.sbam.model.UserQuestion toEscapedModel() {
+		return new UserQuestionWrapper(_userQuestion.toEscapedModel());
+	}
+
+	@Override
+	public java.lang.String toString() {
+		return _userQuestion.toString();
+	}
+
+	@Override
+	public de.ki.sbam.model.UserQuestion toUnescapedModel() {
+		return new UserQuestionWrapper(_userQuestion.toUnescapedModel());
+	}
+
+	@Override
+	public java.lang.String toXmlString() {
+		return _userQuestion.toXmlString();
+	}
+
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
@@ -514,7 +514,7 @@ public class UserQuestionWrapper implements UserQuestion,
 
 		UserQuestionWrapper userQuestionWrapper = (UserQuestionWrapper)obj;
 
-		if (Objects.equals(_userQuestion, userQuestionWrapper._userQuestion)) {
+		if (Validator.equals(_userQuestion, userQuestionWrapper._userQuestion)) {
 			return true;
 		}
 

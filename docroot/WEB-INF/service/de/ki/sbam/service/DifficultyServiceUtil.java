@@ -28,7 +28,7 @@ import com.liferay.portal.kernel.util.ReferenceRegistry;
  * checks based on the propagated JAAS credentials because this service can be
  * accessed remotely.
  *
- * @author Alexander Mueller
+ * @author Alexander Mueller, Simon Bastian
  * @see DifficultyService
  * @see de.ki.sbam.service.base.DifficultyServiceBaseImpl
  * @see de.ki.sbam.service.impl.DifficultyServiceImpl
@@ -41,11 +41,6 @@ public class DifficultyServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to {@link de.ki.sbam.service.impl.DifficultyServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
-	public static java.lang.Object invokeMethod(java.lang.String name,
-		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
-		throws java.lang.Throwable {
-		return getService().invokeMethod(name, parameterTypes, arguments);
-	}
 
 	/**
 	* Returns the OSGi service identifier.
@@ -54,6 +49,12 @@ public class DifficultyServiceUtil {
 	*/
 	public static java.lang.String getOSGiServiceIdentifier() {
 		return getService().getOSGiServiceIdentifier();
+	}
+
+	public static java.lang.Object invokeMethod(java.lang.String name,
+		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
+		throws java.lang.Throwable {
+		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
 	public static void clearService() {

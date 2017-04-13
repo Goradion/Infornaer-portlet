@@ -4,8 +4,8 @@
 
 
 <portlet:actionURL name="gotoMainMenu" var="mainMenu"></portlet:actionURL>
-<portlet:actionURL name="gotoNewQuestion" var="newQuestion"></portlet:actionURL>
 <portlet:actionURL name="gotoLoadQuestionFromFile" var="loadFromFile"></portlet:actionURL>
+<portlet:actionURL name="goToCategoryOverview" var="categoryOverview"></portlet:actionURL>
 <portlet:actionURL name="goToQuestionOverview" var="questionOverview"></portlet:actionURL>
 
 <h1>Editor Modus</h1>
@@ -24,15 +24,10 @@
 	<a href=<%=mainMenu%>>Back</a>
 </p>
 <p><a href=<%=loadFromFile%>> Load Question From File </a></p>
+
 <p>
-	<a href=<%=newQuestion%>>Neue Nachricht</a>
+	<a href=<%=categoryOverview%>>Kategorien</a>
 </p>
 <p>
-	<a href=<%=questionOverview%>>Fragen Überblick</a>
-</p>
-<portlet:actionURL name="addCategory" var="addCategory">
-	<portlet:param name="category" value="Test"/>
-</portlet:actionURL>
-<p>
-	<a href=<%=addCategory%>>Test Kategorie hinzufügen</a>
+	<a href=<%=questionOverview%>>Fragen</a>
 </p>

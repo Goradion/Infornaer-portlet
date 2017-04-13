@@ -55,7 +55,7 @@ import java.util.Set;
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
- * @author Alexander Mueller
+ * @author Alexander Mueller, Simon Bastian
  * @see UserStatisticsPersistence
  * @see de.ki.sbam.service.persistence.UserStatisticsUtil
  * @generated
@@ -213,8 +213,8 @@ public class UserStatisticsPersistenceImpl extends BasePersistenceImpl<UserStati
 					primaryKey);
 
 			if (userStatistics == null) {
-				if (_log.isDebugEnabled()) {
-					_log.debug(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
+				if (_log.isWarnEnabled()) {
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchUserStatisticsException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
@@ -340,8 +340,8 @@ public class UserStatisticsPersistenceImpl extends BasePersistenceImpl<UserStati
 		UserStatistics userStatistics = fetchByPrimaryKey(primaryKey);
 
 		if (userStatistics == null) {
-			if (_log.isDebugEnabled()) {
-				_log.debug(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
+			if (_log.isWarnEnabled()) {
+				_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 			}
 
 			throw new NoSuchUserStatisticsException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +

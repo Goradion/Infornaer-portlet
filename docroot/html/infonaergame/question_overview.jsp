@@ -5,11 +5,8 @@
 
 
 <portlet:actionURL name="gotoEditMode" var="editMode"></portlet:actionURL>
-<portlet:actionURL name="test" var="test"></portlet:actionURL>
+<portlet:actionURL name="gotoNewQuestion" var="newQuestion"></portlet:actionURL>
 
-
-
-<p><a href=<%=test%>> Test </a></p>
 <table>
   <tr>
   	<th>Id</th>
@@ -74,7 +71,8 @@
 		<a href="<%=nextPage%>">&gt;</a>
 	</c:if>
 	
-
+<p>
+	<a href=<%=newQuestion%>>Neue Nachricht</a>
 </p>
 <p>
 	<a href=<%=editMode%>>Back</a>

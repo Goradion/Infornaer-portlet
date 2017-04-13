@@ -23,7 +23,7 @@ import com.liferay.portal.kernel.util.Accessor;
 /**
  * The extended model interface for the Difficulty service. Represents a row in the &quot;sbam_Difficulty&quot; database table, with each column mapped to a property of this class.
  *
- * @author Alexander Mueller
+ * @author Alexander Mueller, Simon Bastian
  * @see DifficultyModel
  * @see de.ki.sbam.model.impl.DifficultyImpl
  * @see de.ki.sbam.model.impl.DifficultyModelImpl

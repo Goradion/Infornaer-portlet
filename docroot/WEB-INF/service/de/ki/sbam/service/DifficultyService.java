@@ -30,7 +30,7 @@ import com.liferay.portal.kernel.transaction.Transactional;
  * service are expected to have security checks based on the propagated JAAS
  * credentials because this service can be accessed remotely.
  *
- * @author Alexander Mueller
+ * @author Alexander Mueller, Simon Bastian
  * @see DifficultyServiceUtil
  * @see de.ki.sbam.service.base.DifficultyServiceBaseImpl
  * @see de.ki.sbam.service.impl.DifficultyServiceImpl
@@ -47,10 +47,6 @@ public interface DifficultyService extends BaseService, InvokableService {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link DifficultyServiceUtil} to access the difficulty remote service. Add custom service methods to {@link de.ki.sbam.service.impl.DifficultyServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	@Override
-	public java.lang.Object invokeMethod(java.lang.String name,
-		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
-		throws java.lang.Throwable;
 
 	/**
 	* Returns the OSGi service identifier.
@@ -58,4 +54,9 @@ public interface DifficultyService extends BaseService, InvokableService {
 	* @return the OSGi service identifier
 	*/
 	public java.lang.String getOSGiServiceIdentifier();
+
+	@Override
+	public java.lang.Object invokeMethod(java.lang.String name,
+		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
+		throws java.lang.Throwable;
 }

@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 
 import de.ki.sbam.exception.NoSuchQuestionException;
 import de.ki.sbam.model.Question;
@@ -54,7 +55,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -64,7 +64,7 @@ import java.util.Set;
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
- * @author Alexander Mueller
+ * @author Alexander Mueller, Simon Bastian
  * @see QuestionPersistence
  * @see de.ki.sbam.service.persistence.QuestionUtil
  * @generated
@@ -199,7 +199,7 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 
 			if ((list != null) && !list.isEmpty()) {
 				for (Question question : list) {
-					if (!Objects.equals(category, question.getCategory())) {
+					if (!Validator.equals(category, question.getCategory())) {
 						list = null;
 
 						break;
@@ -1170,8 +1170,8 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
-			if (_log.isDebugEnabled()) {
-				_log.debug(msg.toString());
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
 			}
 
 			throw new NoSuchQuestionException(msg.toString());
@@ -1475,7 +1475,7 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 
 			if ((list != null) && !list.isEmpty()) {
 				for (Question question : list) {
-					if (!Objects.equals(category, question.getCategory()) ||
+					if (!Validator.equals(category, question.getCategory()) ||
 							(difficulty != question.getDifficulty())) {
 						list = null;
 
@@ -2116,8 +2116,8 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 					primaryKey);
 
 			if (question == null) {
-				if (_log.isDebugEnabled()) {
-					_log.debug(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
+				if (_log.isWarnEnabled()) {
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchQuestionException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
@@ -2339,8 +2339,8 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 		Question question = fetchByPrimaryKey(primaryKey);
 
 		if (question == null) {
-			if (_log.isDebugEnabled()) {
-				_log.debug(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
+			if (_log.isWarnEnabled()) {
+				_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 			}
 
 			throw new NoSuchQuestionException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +

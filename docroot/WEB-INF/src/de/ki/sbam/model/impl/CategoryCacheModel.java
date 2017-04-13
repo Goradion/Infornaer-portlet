@@ -31,7 +31,7 @@ import java.io.ObjectOutput;
 /**
  * The cache model class for representing Category in entity cache.
  *
- * @author Alexander Mueller
+ * @author Alexander Mueller, Simon Bastian
  * @see Category
  * @generated
  */

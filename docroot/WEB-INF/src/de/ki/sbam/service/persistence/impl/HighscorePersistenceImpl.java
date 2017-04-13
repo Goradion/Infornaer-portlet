@@ -57,7 +57,7 @@ import java.util.Set;
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
- * @author Alexander Mueller
+ * @author Alexander Mueller, Simon Bastian
  * @see HighscorePersistence
  * @see de.ki.sbam.service.persistence.HighscoreUtil
  * @generated
@@ -115,8 +115,8 @@ public class HighscorePersistenceImpl extends BasePersistenceImpl<Highscore>
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
-			if (_log.isDebugEnabled()) {
-				_log.debug(msg.toString());
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
 			}
 
 			throw new NoSuchHighscoreException(msg.toString());
@@ -464,8 +464,8 @@ public class HighscorePersistenceImpl extends BasePersistenceImpl<Highscore>
 					primaryKey);
 
 			if (highscore == null) {
-				if (_log.isDebugEnabled()) {
-					_log.debug(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
+				if (_log.isWarnEnabled()) {
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchHighscoreException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
@@ -593,8 +593,8 @@ public class HighscorePersistenceImpl extends BasePersistenceImpl<Highscore>
 		Highscore highscore = fetchByPrimaryKey(primaryKey);
 
 		if (highscore == null) {
-			if (_log.isDebugEnabled()) {
-				_log.debug(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
+			if (_log.isWarnEnabled()) {
+				_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 			}
 
 			throw new NoSuchHighscoreException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +

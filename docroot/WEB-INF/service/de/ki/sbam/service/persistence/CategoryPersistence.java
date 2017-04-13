@@ -28,7 +28,7 @@ import de.ki.sbam.model.Category;
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
- * @author Alexander Mueller
+ * @author Alexander Mueller, Simon Bastian
  * @see de.ki.sbam.service.persistence.impl.CategoryPersistenceImpl
  * @see CategoryUtil
  * @generated

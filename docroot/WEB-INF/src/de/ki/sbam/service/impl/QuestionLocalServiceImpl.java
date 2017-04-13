@@ -74,7 +74,7 @@ public class QuestionLocalServiceImpl extends QuestionLocalServiceBaseImpl {
 	 * @throws NoSuchUserException
 	 */
 	public Question addQuestion(String questionContent, String answerA, String answerB, String answerC, String answerD,
-			String rightAnswer, String category, int difficulty, User user) throws NoSuchUserException {
+			String rightAnswer, long categoryId, int difficulty, User user) throws NoSuchUserException {
 		// check whether user is eligible or not (admin or not?) to add a question
 		// if so add the question
 		// else throw NoSuchUserException with message "not eligible to add"
@@ -88,7 +88,8 @@ public class QuestionLocalServiceImpl extends QuestionLocalServiceBaseImpl {
 			question.setAnswerC(answerC);
 			question.setAnswerD(answerD);
 			question.setRightAnswer(rightAnswer);
-			question.setCategory(category);
+//			question.setCategory(category);
+			question.setCategoryId_fk(categoryId);
 			question.setDifficulty(difficulty);
 			question.setUserId(user.getUserId());
 			if(user.getFullName().isEmpty()){

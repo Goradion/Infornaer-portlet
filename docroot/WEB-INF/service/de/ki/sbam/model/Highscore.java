@@ -23,7 +23,7 @@ import com.liferay.portal.kernel.util.Accessor;
 /**
  * The extended model interface for the Highscore service. Represents a row in the &quot;sbam_Highscore&quot; database table, with each column mapped to a property of this class.
  *
- * @author Alexander Mueller
+ * @author Alexander Mueller, Simon Bastian
  * @see HighscoreModel
  * @see de.ki.sbam.model.impl.HighscoreImpl
  * @see de.ki.sbam.model.impl.HighscoreModelImpl

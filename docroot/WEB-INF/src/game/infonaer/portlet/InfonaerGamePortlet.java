@@ -48,7 +48,6 @@ import de.ki.sbam.service.QuestionLocalServiceUtil;
  */
 public class InfonaerGamePortlet extends MVCPortlet {
 
-
 	@Override
 	public void doEdit(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {
@@ -139,10 +138,7 @@ public class InfonaerGamePortlet extends MVCPortlet {
 		actionRequest.getPortletSession().setAttribute("currentPage", VIEW_JSP, PortletSession.PORTLET_SCOPE);
 	}
 
-	public void gotoNewQuestion(ActionRequest actionRequest, ActionResponse actionResponse)
-			throws IOException, PortletException {
-		actionRequest.getPortletSession().setAttribute("currentPage", NEW_QUESTION_JSP, PortletSession.PORTLET_SCOPE);
-	}
+	
 
 	public void gotoGameOver(ActionRequest actionRequest, ActionResponse actionResponse)
 			throws IOException, PortletException {
@@ -160,9 +156,21 @@ public class InfonaerGamePortlet extends MVCPortlet {
 				PortletSession.PORTLET_SCOPE);
 	}
 
+	public void gotoNewQuestion(ActionRequest actionRequest, ActionResponse actionResponse)
+			throws IOException, PortletException {
+		actionRequest.getPortletSession().setAttribute("currentPage", NEW_QUESTION_JSP, PortletSession.PORTLET_SCOPE);
+		insertCategories(actionRequest, actionResponse);
+	}
+	
+	public void insertCategories(ActionRequest actionRequest, ActionResponse actionResponse){
+		int categoriesCount = CategoryLocalServiceUtil.getCategoriesCount();
+		List<Category> categories = CategoryLocalServiceUtil.getCategories(0, categoriesCount);
+		actionRequest.setAttribute("cList", categories);
+	}
 	public void gotoEditQuestion(ActionRequest actionRequest, ActionResponse actionResponse)
 			throws IOException, PortletException {
 		actionRequest.getPortletSession().setAttribute("currentPage", EDIT_QUESTION_JSP, PortletSession.PORTLET_SCOPE);
+		insertCategories(actionRequest, actionResponse);
 		fillEditForm(actionRequest, actionResponse);
 	}
 
@@ -179,7 +187,7 @@ public class InfonaerGamePortlet extends MVCPortlet {
 			actionRequest.setAttribute("answerD", question.getAnswerD());
 			actionRequest.setAttribute("rightAnswer", question.getRightAnswer());
 			actionRequest.setAttribute("difficulty", question.getDifficulty());
-			actionRequest.setAttribute("category", question.getCategory());
+			actionRequest.setAttribute("category", question.getCategoryId_fk());
 			question.setAnswerA("neue Antwort A");
 		} catch (PortalException e) {
 			// TODO Auto-generated catch block
@@ -206,7 +214,8 @@ public class InfonaerGamePortlet extends MVCPortlet {
 		String answerD = actionRequest.getParameter("answerD");
 		String rightAnswer = actionRequest.getParameter("rightAnswer");
 		int difficulty = Integer.parseInt(actionRequest.getParameter("difficulty"));
-		String category = actionRequest.getParameter("category");
+		String categoryString = actionRequest.getParameter("category");
+		long categoryId = Long.parseLong(categoryString);
 		ThemeDisplay td = (ThemeDisplay) actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
 		long userId = td.getUserId();
 		User user = null;
@@ -214,10 +223,12 @@ public class InfonaerGamePortlet extends MVCPortlet {
 			user = UserLocalServiceUtil.getUser(td.getUserId());
 			if (questionId == null) {
 				QuestionLocalServiceUtil.addQuestion(questionContent, answerA, answerB, answerC, answerD, rightAnswer,
-						category, difficulty, user);
+						categoryId, difficulty, user);
 			} else {
 				long id = Long.parseLong(questionId);
+				
 				Question question = QuestionLocalServiceUtil.getQuestion(id);
+				Category category = CategoryLocalServiceUtil.getCategory(categoryId);
 				question.setQuestionContent(questionContent);
 				question.setAnswerA(answerA);
 				question.setAnswerB(answerB);
@@ -225,7 +236,8 @@ public class InfonaerGamePortlet extends MVCPortlet {
 				question.setAnswerD(answerD);
 				question.setRightAnswer(rightAnswer);
 				question.setDifficulty(difficulty);
-				question.setCategory(category);
+				
+				question.setCategoryId_fk(categoryId);
 				question.setModifiedDate(new Date());
 				QuestionLocalServiceUtil.updateQuestion(question);
 				goToQuestionOverview(actionRequest, actionResponse);
@@ -287,20 +299,18 @@ public class InfonaerGamePortlet extends MVCPortlet {
 		actionRequest.setAttribute("noOfPages", noOfPages);
 		actionRequest.setAttribute("currentPage", page);
 	}
-	
-	public void addCategory(ActionRequest actionRequest, ActionResponse actionResponse){
-		String categoryName = actionRequest.getParameter("category");
-		CategoryLocalServiceUtil.addCategory(categoryName);
-	}
-	
-	public void editCategory(ActionRequest actionRequest, ActionResponse actionResponse){
-		String categoryId= actionRequest.getParameter("categoryId");
-		String categoryName = actionRequest.getParameter("category");
-		
+
+	public void upsertCategory(ActionRequest actionRequest, ActionResponse actionResponse) {
+		String categoryId = actionRequest.getParameter("categoryId");
+		String categoryName = actionRequest.getParameter("categoryName");
 		try {
-			Category category = CategoryLocalServiceUtil.getCategory(Long.parseLong(categoryId));
-			category.setCategoryName(categoryName);
-			CategoryLocalServiceUtil.updateCategory(category);
+			if (categoryId == null) {
+				CategoryLocalServiceUtil.addCategory(categoryName);
+			} else {
+				Category category = CategoryLocalServiceUtil.getCategory(Long.parseLong(categoryId));
+				category.setCategoryName(categoryName);
+				CategoryLocalServiceUtil.updateCategory(category);
+			}
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -308,10 +318,11 @@ public class InfonaerGamePortlet extends MVCPortlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		goToCategoryOverview(actionRequest, actionResponse);
 	}
-	
-	public void deleteCategory(ActionRequest actionRequest, ActionResponse actionResponse){
-		String categoryId= actionRequest.getParameter("categoryId");
+
+	public void deleteCategory(ActionRequest actionRequest, ActionResponse actionResponse) {
+		String categoryId = actionRequest.getParameter("categoryId");
 		try {
 			CategoryLocalServiceUtil.deleteCategory(Long.parseLong(categoryId));
 		} catch (NoSuchCategoryException e) {
@@ -324,8 +335,9 @@ public class InfonaerGamePortlet extends MVCPortlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		categoryPagination(actionRequest, actionResponse);
 	}
-	
+
 	public void goToCategoryOverview(ActionRequest actionRequest, ActionResponse actionResponse) {
 		actionRequest.getPortletSession().setAttribute("currentPage", CATEGORY_OVERVIEW_JSP,
 				PortletSession.PORTLET_SCOPE);
@@ -350,5 +362,29 @@ public class InfonaerGamePortlet extends MVCPortlet {
 		actionRequest.setAttribute("cList", categories);
 		actionRequest.setAttribute("noOfPages", noOfPages);
 		actionRequest.setAttribute("currentPage", page);
+	}
+
+	public void gotoNewCategory(ActionRequest actionRequest, ActionResponse actionResponse){
+		actionRequest.getPortletSession().setAttribute("currentPage", NEW_CATEGORY_JSP, PortletSession.PORTLET_SCOPE);
+	}
+	
+	public void gotoEditCategory(ActionRequest actionRequest, ActionResponse actionResponse){
+		actionRequest.getPortletSession().setAttribute("currentPage", EDIT_CATEGORY_JSP, PortletSession.PORTLET_SCOPE);
+		fillCategoryInput(actionRequest, actionResponse);
+	}
+	public void fillCategoryInput(ActionRequest actionRequest, ActionResponse actionResponse){
+		String categoryId = actionRequest.getParameter("categoryId");
+		try {
+			Category category = CategoryLocalServiceUtil.getCategory(Long.parseLong(categoryId));
+			actionRequest.setAttribute("categoryId", category.getCategoryId());
+			actionRequest.setAttribute("categoryName", category.getCategoryName());
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (PortalException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		categoryPagination(actionRequest, actionResponse);
 	}
 }

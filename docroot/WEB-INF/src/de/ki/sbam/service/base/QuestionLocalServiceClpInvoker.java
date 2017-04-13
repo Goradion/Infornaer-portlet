@@ -21,7 +21,7 @@ import de.ki.sbam.service.QuestionLocalServiceUtil;
 import java.util.Arrays;
 
 /**
- * @author Alexander Mueller
+ * @author Alexander Mueller, Simon Bastian
  * @generated
  */
 @ProviderType
@@ -126,8 +126,7 @@ public class QuestionLocalServiceClpInvoker {
 		_methodParameterTypes63 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "int",
-				"com.liferay.portal.kernel.model.User"
+				"long", "int", "com.liferay.portal.kernel.model.User"
 			};
 	}
 
@@ -245,7 +244,8 @@ public class QuestionLocalServiceClpInvoker {
 			return QuestionLocalServiceUtil.addQuestion((java.lang.String)arguments[0],
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
 				(java.lang.String)arguments[3], (java.lang.String)arguments[4],
-				(java.lang.String)arguments[5], (java.lang.String)arguments[6],
+				(java.lang.String)arguments[5],
+				((Long)arguments[6]).longValue(),
 				((Integer)arguments[7]).intValue(),
 				(com.liferay.portal.kernel.model.User)arguments[8]);
 		}

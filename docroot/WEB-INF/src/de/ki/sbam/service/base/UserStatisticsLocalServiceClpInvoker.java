@@ -21,7 +21,7 @@ import de.ki.sbam.service.UserStatisticsLocalServiceUtil;
 import java.util.Arrays;
 
 /**
- * @author Alexander Mueller
+ * @author Alexander Mueller, Simon Bastian
  * @generated
  */
 @ProviderType

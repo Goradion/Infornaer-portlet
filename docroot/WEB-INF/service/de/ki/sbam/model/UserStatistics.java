@@ -23,7 +23,7 @@ import com.liferay.portal.kernel.util.Accessor;
 /**
  * The extended model interface for the UserStatistics service. Represents a row in the &quot;sbam_UserStatistics&quot; database table, with each column mapped to a property of this class.
  *
- * @author Alexander Mueller
+ * @author Alexander Mueller, Simon Bastian
  * @see UserStatisticsModel
  * @see de.ki.sbam.model.impl.UserStatisticsImpl
  * @see de.ki.sbam.model.impl.UserStatisticsModelImpl

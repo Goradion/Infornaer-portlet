@@ -20,19 +20,19 @@ import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * <p>
  * This class is a wrapper for {@link Category}.
  * </p>
  *
- * @author Alexander Mueller
+ * @author Alexander Mueller, Simon Bastian
  * @see Category
  * @generated
  */
@@ -78,78 +78,13 @@ public class CategoryWrapper implements Category, ModelWrapper<Category> {
 	}
 
 	@Override
-	public boolean isCachedModel() {
-		return _category.isCachedModel();
-	}
-
-	@Override
-	public boolean isEscapedModel() {
-		return _category.isEscapedModel();
-	}
-
-	@Override
-	public boolean isNew() {
-		return _category.isNew();
-	}
-
-	@Override
-	public ExpandoBridge getExpandoBridge() {
-		return _category.getExpandoBridge();
-	}
-
-	@Override
-	public com.liferay.portal.kernel.model.CacheModel<de.ki.sbam.model.Category> toCacheModel() {
-		return _category.toCacheModel();
-	}
-
-	@Override
-	public de.ki.sbam.model.Category toEscapedModel() {
-		return new CategoryWrapper(_category.toEscapedModel());
-	}
-
-	@Override
-	public de.ki.sbam.model.Category toUnescapedModel() {
-		return new CategoryWrapper(_category.toUnescapedModel());
+	public java.lang.Object clone() {
+		return new CategoryWrapper((Category)_category.clone());
 	}
 
 	@Override
 	public int compareTo(de.ki.sbam.model.Category category) {
 		return _category.compareTo(category);
-	}
-
-	@Override
-	public int hashCode() {
-		return _category.hashCode();
-	}
-
-	@Override
-	public Serializable getPrimaryKeyObj() {
-		return _category.getPrimaryKeyObj();
-	}
-
-	@Override
-	public java.lang.Object clone() {
-		return new CategoryWrapper((Category)_category.clone());
-	}
-
-	/**
-	* Returns the category name of this category.
-	*
-	* @return the category name of this category
-	*/
-	@Override
-	public java.lang.String getCategoryName() {
-		return _category.getCategoryName();
-	}
-
-	@Override
-	public java.lang.String toString() {
-		return _category.toString();
-	}
-
-	@Override
-	public java.lang.String toXmlString() {
-		return _category.toXmlString();
 	}
 
 	/**
@@ -163,6 +98,21 @@ public class CategoryWrapper implements Category, ModelWrapper<Category> {
 	}
 
 	/**
+	* Returns the category name of this category.
+	*
+	* @return the category name of this category
+	*/
+	@Override
+	public java.lang.String getCategoryName() {
+		return _category.getCategoryName();
+	}
+
+	@Override
+	public ExpandoBridge getExpandoBridge() {
+		return _category.getExpandoBridge();
+	}
+
+	/**
 	* Returns the primary key of this category.
 	*
 	* @return the primary key of this category
@@ -170,6 +120,31 @@ public class CategoryWrapper implements Category, ModelWrapper<Category> {
 	@Override
 	public long getPrimaryKey() {
 		return _category.getPrimaryKey();
+	}
+
+	@Override
+	public Serializable getPrimaryKeyObj() {
+		return _category.getPrimaryKeyObj();
+	}
+
+	@Override
+	public int hashCode() {
+		return _category.hashCode();
+	}
+
+	@Override
+	public boolean isCachedModel() {
+		return _category.isCachedModel();
+	}
+
+	@Override
+	public boolean isEscapedModel() {
+		return _category.isEscapedModel();
+	}
+
+	@Override
+	public boolean isNew() {
+		return _category.isNew();
 	}
 
 	@Override
@@ -203,14 +178,14 @@ public class CategoryWrapper implements Category, ModelWrapper<Category> {
 	}
 
 	@Override
-	public void setExpandoBridgeAttributes(ExpandoBridge expandoBridge) {
-		_category.setExpandoBridgeAttributes(expandoBridge);
-	}
-
-	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.kernel.model.BaseModel<?> baseModel) {
 		_category.setExpandoBridgeAttributes(baseModel);
+	}
+
+	@Override
+	public void setExpandoBridgeAttributes(ExpandoBridge expandoBridge) {
+		_category.setExpandoBridgeAttributes(expandoBridge);
 	}
 
 	@Override
@@ -239,6 +214,31 @@ public class CategoryWrapper implements Category, ModelWrapper<Category> {
 	}
 
 	@Override
+	public com.liferay.portal.kernel.model.CacheModel<de.ki.sbam.model.Category> toCacheModel() {
+		return _category.toCacheModel();
+	}
+
+	@Override
+	public de.ki.sbam.model.Category toEscapedModel() {
+		return new CategoryWrapper(_category.toEscapedModel());
+	}
+
+	@Override
+	public java.lang.String toString() {
+		return _category.toString();
+	}
+
+	@Override
+	public de.ki.sbam.model.Category toUnescapedModel() {
+		return new CategoryWrapper(_category.toUnescapedModel());
+	}
+
+	@Override
+	public java.lang.String toXmlString() {
+		return _category.toXmlString();
+	}
+
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
@@ -250,7 +250,7 @@ public class CategoryWrapper implements Category, ModelWrapper<Category> {
 
 		CategoryWrapper categoryWrapper = (CategoryWrapper)obj;
 
-		if (Objects.equals(_category, categoryWrapper._category)) {
+		if (Validator.equals(_category, categoryWrapper._category)) {
 			return true;
 		}
 
