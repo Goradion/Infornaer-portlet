@@ -56,13 +56,17 @@ public class QuestionFromFileBuilder {
 				break;
 			case 5:
 				String a = q[i].toLowerCase();
-				if(!(a.equals("a")||a.equals("b")||a.equals("c")||a.equals("d")))
-					return false;
+				if((a.equals("a")||a.equals("b")||a.equals("c")||a.equals("d")))
+					break;
+				return false;
 			case 6:
 				List<Category> cats = CategoryLocalServiceUtil.getCategories(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+				List<String> catNames = new LinkedList<String>();
 				for(Category c : cats){
-					if(c.getCategoryId()==Long.parseLong(q[i]))
-						break;
+					catNames.add(c.getCategoryName());
+				}
+				if(catNames.contains(q[i])){
+					break;
 				}
 				return false;
 			case 7:
