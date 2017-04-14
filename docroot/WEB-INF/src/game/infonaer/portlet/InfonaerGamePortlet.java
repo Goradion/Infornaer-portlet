@@ -42,6 +42,7 @@ import de.ki.sbam.model.Question;
 import de.ki.sbam.service.CategoryLocalServiceUtil;
 import de.ki.sbam.service.HighscoreLocalServiceUtil;
 import de.ki.sbam.service.QuestionLocalServiceUtil;
+import de.ki.sbam.service.persistence.CategoryUtil;
 import de.ki.sbam.service.persistence.QuestionUtil;
 
 /**
@@ -214,9 +215,14 @@ public class InfonaerGamePortlet extends MVCPortlet {
 			List<String[]> questions = qffb.getLoadedQuestions();
 			for (String[] q : questions) {
 				try {
-					QuestionLocalServiceUtil.addQuestion(q[0], q[1], q[2], q[3], q[4], q[5], Long.parseLong(q[6]), Integer.parseInt(q[7]),
+					// löse catName zu catId auf 
+					long catId = CategoryLocalServiceUtil.getCategoryByName(q[6]).getCategoryId();
+					QuestionLocalServiceUtil.addQuestion(q[0], q[1], q[2], q[3], q[4], q[5], catId, Integer.parseInt(q[7]),
 							td.getUser());
 				} catch (NoSuchUserException | NumberFormatException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (NoSuchCategoryException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}

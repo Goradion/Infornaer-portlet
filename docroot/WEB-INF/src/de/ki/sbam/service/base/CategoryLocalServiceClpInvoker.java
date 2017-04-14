@@ -140,6 +140,10 @@ public class CategoryLocalServiceClpInvoker {
 		_methodName67 = "deleteAllCategories";
 
 		_methodParameterTypes67 = new String[] {  };
+
+		_methodName68 = "getCategoryByName";
+
+		_methodParameterTypes68 = new String[] { "java.lang.String" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -279,6 +283,11 @@ public class CategoryLocalServiceClpInvoker {
 			return null;
 		}
 
+		if (_methodName68.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes68, parameterTypes)) {
+			return CategoryLocalServiceUtil.getCategoryByName((java.lang.String)arguments[0]);
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -332,4 +341,6 @@ public class CategoryLocalServiceClpInvoker {
 	private String[] _methodParameterTypes66;
 	private String _methodName67;
 	private String[] _methodParameterTypes67;
+	private String _methodName68;
+	private String[] _methodParameterTypes68;
 }

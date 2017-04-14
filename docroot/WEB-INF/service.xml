@@ -66,6 +66,9 @@
 		<column name="categoryId" type="long" primary="true"></column>
 		<column name="categoryName" type="String"></column>
 		<column name="questions" type="Collection" entity="Question"></column>
+		<finder return-type="Category" name="CategoryName">
+			<finder-column name="categoryName"></finder-column>
+		</finder>
 	</entity>
 	
 	<entity name="Difficulty" local-service="true" remote-service="true">

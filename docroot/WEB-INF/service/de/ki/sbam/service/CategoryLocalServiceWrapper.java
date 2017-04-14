@@ -160,6 +160,13 @@ public class CategoryLocalServiceWrapper implements CategoryLocalService,
 		return _categoryLocalService.getCategory(categoryId);
 	}
 
+	@Override
+	public de.ki.sbam.model.Category getCategoryByName(
+		java.lang.String categoryName)
+		throws de.ki.sbam.exception.NoSuchCategoryException {
+		return _categoryLocalService.getCategoryByName(categoryName);
+	}
+
 	/**
 	* Updates the category in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
 	*

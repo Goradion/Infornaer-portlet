@@ -28,7 +28,7 @@ public class QuestionFromFileBuilder {
 			List<String> lines = Files.readAllLines(file.toPath());
 			for(String line : lines){
 				questions.add(line);
-				String[] splitLine = line.split("|");
+				String[] splitLine = line.split("\\|");
 				if(splitLine.length==8){
 					if(isValidQuestion(splitLine))
 						questionsSplitted.add(splitLine);
@@ -79,6 +79,6 @@ public class QuestionFromFileBuilder {
 				return false;
 			}
 		}
-		return false;
+		return true; // all criteria are passed
 	}
 }

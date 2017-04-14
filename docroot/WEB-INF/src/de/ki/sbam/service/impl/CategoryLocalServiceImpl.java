@@ -100,4 +100,8 @@ public class CategoryLocalServiceImpl extends CategoryLocalServiceBaseImpl {
 	public void deleteAllCategories(){
 		CategoryUtil.removeAll();
 	}
+	
+	public Category getCategoryByName(String categoryName) throws NoSuchCategoryException{
+		return CategoryUtil.findByCategoryName(categoryName);
+	}
 }

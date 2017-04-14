@@ -154,6 +154,10 @@ public interface CategoryLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public Category getCategory(long categoryId) throws PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public Category getCategoryByName(java.lang.String categoryName)
+		throws NoSuchCategoryException;
+
 	/**
 	* Updates the category in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
 	*

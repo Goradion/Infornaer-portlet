@@ -27,7 +27,7 @@ if(portletSession.getAttribute("qffb")!=null){
 		</aui:input>		
 		<input type="submit" name="Laden"/>
 	</aui:form>
-<%}else{ %>
+<%}else { %>
 	<p style="color:#FF0000">There are unsubmitted Questions! Submit first.</p>
 <%} %>
 <%if(questions!=null){ %>
