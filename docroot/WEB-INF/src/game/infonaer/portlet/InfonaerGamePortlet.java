@@ -217,7 +217,7 @@ public class InfonaerGamePortlet extends MVCPortlet {
 				try {
 					// löse catName zu catId auf 
 					long catId = CategoryLocalServiceUtil.getCategoryByName(q[6]).getCategoryId();
-					QuestionLocalServiceUtil.addQuestion(q[0], q[1], q[2], q[3], q[4], q[5], catId, Integer.parseInt(q[7]),
+					QuestionLocalServiceUtil.addQuestion(q[0], q[1], q[2], q[3], q[4], q[5].toUpperCase(), catId, Integer.parseInt(q[7]),
 							td.getUser());
 				} catch (NoSuchUserException | NumberFormatException e) {
 					// TODO Auto-generated catch block
