@@ -72,7 +72,7 @@
 	</c:if>
 	
 <p>
-	<a href=<%=newQuestion%>>Neue Nachricht</a>
+	<a href=<%=newQuestion%>>Neue Frage</a>
 </p>
 <p>
 	<a href=<%=editMode%>>Back</a>

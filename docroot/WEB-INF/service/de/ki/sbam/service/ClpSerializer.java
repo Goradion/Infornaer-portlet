@@ -29,7 +29,7 @@ import de.ki.sbam.model.CategoryClp;
 import de.ki.sbam.model.DifficultyClp;
 import de.ki.sbam.model.HighscoreClp;
 import de.ki.sbam.model.QuestionClp;
-import de.ki.sbam.model.UserQuestionClp;
+import de.ki.sbam.model.QuestionStatisticsClp;
 import de.ki.sbam.model.UserStatisticsClp;
 
 import java.io.ObjectInputStream;
@@ -124,8 +124,8 @@ public class ClpSerializer {
 			return translateInputQuestion(oldModel);
 		}
 
-		if (oldModelClassName.equals(UserQuestionClp.class.getName())) {
-			return translateInputUserQuestion(oldModel);
+		if (oldModelClassName.equals(QuestionStatisticsClp.class.getName())) {
+			return translateInputQuestionStatistics(oldModel);
 		}
 
 		if (oldModelClassName.equals(UserStatisticsClp.class.getName())) {
@@ -187,10 +187,10 @@ public class ClpSerializer {
 		return newModel;
 	}
 
-	public static Object translateInputUserQuestion(BaseModel<?> oldModel) {
-		UserQuestionClp oldClpModel = (UserQuestionClp)oldModel;
+	public static Object translateInputQuestionStatistics(BaseModel<?> oldModel) {
+		QuestionStatisticsClp oldClpModel = (QuestionStatisticsClp)oldModel;
 
-		BaseModel<?> newModel = oldClpModel.getUserQuestionRemoteModel();
+		BaseModel<?> newModel = oldClpModel.getQuestionStatisticsRemoteModel();
 
 		newModel.setModelAttributes(oldClpModel.getModelAttributes());
 
@@ -368,8 +368,9 @@ public class ClpSerializer {
 			}
 		}
 
-		if (oldModelClassName.equals("de.ki.sbam.model.impl.UserQuestionImpl")) {
-			return translateOutputUserQuestion(oldModel);
+		if (oldModelClassName.equals(
+					"de.ki.sbam.model.impl.QuestionStatisticsImpl")) {
+			return translateOutputQuestionStatistics(oldModel);
 		}
 		else if (oldModelClassName.endsWith("Clp")) {
 			try {
@@ -539,8 +540,9 @@ public class ClpSerializer {
 				throwable.getCause());
 		}
 
-		if (className.equals("de.ki.sbam.exception.NoSuchUserQuestionException")) {
-			return new de.ki.sbam.exception.NoSuchUserQuestionException(throwable.getMessage(),
+		if (className.equals(
+					"de.ki.sbam.exception.NoSuchQuestionStatisticsException")) {
+			return new de.ki.sbam.exception.NoSuchQuestionStatisticsException(throwable.getMessage(),
 				throwable.getCause());
 		}
 
@@ -593,12 +595,13 @@ public class ClpSerializer {
 		return newModel;
 	}
 
-	public static Object translateOutputUserQuestion(BaseModel<?> oldModel) {
-		UserQuestionClp newModel = new UserQuestionClp();
+	public static Object translateOutputQuestionStatistics(
+		BaseModel<?> oldModel) {
+		QuestionStatisticsClp newModel = new QuestionStatisticsClp();
 
 		newModel.setModelAttributes(oldModel.getModelAttributes());
 
-		newModel.setUserQuestionRemoteModel(oldModel);
+		newModel.setQuestionStatisticsRemoteModel(oldModel);
 
 		return newModel;
 	}

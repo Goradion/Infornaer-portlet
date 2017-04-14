@@ -14,12 +14,19 @@
 
 package de.ki.sbam.service.impl;
 
+import java.util.List;
+
+import org.apache.commons.lang3.NotImplementedException;
+
 import com.liferay.portal.kernel.exception.NoSuchUserException;
+import com.liferay.portal.kernel.model.Role;
 import com.liferay.portal.kernel.model.User;
 
 import aQute.bnd.annotation.ProviderType;
 import de.ki.sbam.model.Question;
+import de.ki.sbam.service.QuestionLocalServiceUtil;
 import de.ki.sbam.service.base.QuestionLocalServiceBaseImpl;
+import de.ki.sbam.service.persistence.QuestionUtil;
 
 /**
  * The implementation of the question local service.
@@ -75,32 +82,34 @@ public class QuestionLocalServiceImpl extends QuestionLocalServiceBaseImpl {
 	 */
 	public Question addQuestion(String questionContent, String answerA, String answerB, String answerC, String answerD,
 			String rightAnswer, long categoryId, int difficulty, User user) throws NoSuchUserException {
-		// check whether user is eligible or not (admin or not?) to add a question
-		// if so add the question
-		// else throw NoSuchUserException with message "not eligible to add"
-		if (/*user is eligible */true){
+		// ob ein Benutzer eine Frage hizufügen darf wird im Portal eingestellt
 			long questionId = counterLocalService.increment();
-			Question question = questionPersistence.create(questionId);
-			
+			Question question = questionPersistence.create(questionId);			
 			question.setQuestionContent(questionContent);
 			question.setAnswerA(answerA);
 			question.setAnswerB(answerB);
 			question.setAnswerC(answerC);
 			question.setAnswerD(answerD);
 			question.setRightAnswer(rightAnswer);
-//			question.setCategory(category);
 			question.setCategoryId_fk(categoryId);
 			question.setDifficulty(difficulty);
 			question.setUserId(user.getUserId());
-			if(user.getFullName().isEmpty()){
-				question.setUserName("unknown");
-			} else {
-				question.setUserName(user.getFullName());
-			}
-	
 			questionPersistence.update(question);
 			return question;
-		}
-		return null;
 	}
+	
+	public List<Question> findByDifficulty(int difficulty){
+		return QuestionUtil.findByDifficulty(difficulty);
+	}
+	
+	public List<Question> findByCategory(String category){
+		return QuestionUtil.findByCategory(category);
+	}
+	
+	public List<Question> findByCategoryId(long categoryId){
+		return QuestionUtil.findByCategoryId(categoryId);
+	}
+	
+	
+	
 }

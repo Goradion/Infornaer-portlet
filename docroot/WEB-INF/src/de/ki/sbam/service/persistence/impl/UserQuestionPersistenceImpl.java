@@ -33,7 +33,6 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.Validator;
 
 import de.ki.sbam.exception.NoSuchUserQuestionException;
 import de.ki.sbam.model.UserQuestion;
@@ -49,6 +48,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -117,8 +117,8 @@ public class UserQuestionPersistenceImpl extends BasePersistenceImpl<UserQuestio
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
-			if (_log.isWarnEnabled()) {
-				_log.warn(msg.toString());
+			if (_log.isDebugEnabled()) {
+				_log.debug(msg.toString());
 			}
 
 			throw new NoSuchUserQuestionException(msg.toString());
@@ -160,7 +160,7 @@ public class UserQuestionPersistenceImpl extends BasePersistenceImpl<UserQuestio
 		if (result instanceof UserQuestion) {
 			UserQuestion userQuestion = (UserQuestion)result;
 
-			if (!Validator.equals(category, userQuestion.getCategory())) {
+			if (!Objects.equals(category, userQuestion.getCategory())) {
 				result = null;
 			}
 		}
@@ -359,8 +359,8 @@ public class UserQuestionPersistenceImpl extends BasePersistenceImpl<UserQuestio
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
-			if (_log.isWarnEnabled()) {
-				_log.warn(msg.toString());
+			if (_log.isDebugEnabled()) {
+				_log.debug(msg.toString());
 			}
 
 			throw new NoSuchUserQuestionException(msg.toString());
@@ -747,8 +747,8 @@ public class UserQuestionPersistenceImpl extends BasePersistenceImpl<UserQuestio
 					primaryKey);
 
 			if (userQuestion == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
+				if (_log.isDebugEnabled()) {
+					_log.debug(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchUserQuestionException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
@@ -885,8 +885,8 @@ public class UserQuestionPersistenceImpl extends BasePersistenceImpl<UserQuestio
 		UserQuestion userQuestion = fetchByPrimaryKey(primaryKey);
 
 		if (userQuestion == null) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
+			if (_log.isDebugEnabled()) {
+				_log.debug(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 			}
 
 			throw new NoSuchUserQuestionException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +

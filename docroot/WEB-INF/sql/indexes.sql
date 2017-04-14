@@ -1,6 +1,7 @@
 create index IX_665A3C8C on sbam_Highscore (userId);
 
 create index IX_AF875B31 on sbam_Question (category[$COLUMN_LENGTH:75$], difficulty);
+create index IX_13FE9AB on sbam_Question (categoryId_fk);
 create index IX_E50389BF on sbam_Question (difficulty);
 create index IX_80CF1425 on sbam_Question (questionId);
 

@@ -668,6 +668,167 @@ public class QuestionUtil {
 	}
 
 	/**
+	* Returns all the questions where categoryId_fk = &#63;.
+	*
+	* @param categoryId_fk the category id_fk
+	* @return the matching questions
+	*/
+	public static List<Question> findByCategoryId(long categoryId_fk) {
+		return getPersistence().findByCategoryId(categoryId_fk);
+	}
+
+	/**
+	* Returns a range of all the questions where categoryId_fk = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link QuestionModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param categoryId_fk the category id_fk
+	* @param start the lower bound of the range of questions
+	* @param end the upper bound of the range of questions (not inclusive)
+	* @return the range of matching questions
+	*/
+	public static List<Question> findByCategoryId(long categoryId_fk,
+		int start, int end) {
+		return getPersistence().findByCategoryId(categoryId_fk, start, end);
+	}
+
+	/**
+	* Returns an ordered range of all the questions where categoryId_fk = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link QuestionModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param categoryId_fk the category id_fk
+	* @param start the lower bound of the range of questions
+	* @param end the upper bound of the range of questions (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching questions
+	*/
+	public static List<Question> findByCategoryId(long categoryId_fk,
+		int start, int end, OrderByComparator<Question> orderByComparator) {
+		return getPersistence()
+				   .findByCategoryId(categoryId_fk, start, end,
+			orderByComparator);
+	}
+
+	/**
+	* Returns an ordered range of all the questions where categoryId_fk = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link QuestionModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param categoryId_fk the category id_fk
+	* @param start the lower bound of the range of questions
+	* @param end the upper bound of the range of questions (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the ordered range of matching questions
+	*/
+	public static List<Question> findByCategoryId(long categoryId_fk,
+		int start, int end, OrderByComparator<Question> orderByComparator,
+		boolean retrieveFromCache) {
+		return getPersistence()
+				   .findByCategoryId(categoryId_fk, start, end,
+			orderByComparator, retrieveFromCache);
+	}
+
+	/**
+	* Returns the first question in the ordered set where categoryId_fk = &#63;.
+	*
+	* @param categoryId_fk the category id_fk
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching question
+	* @throws NoSuchQuestionException if a matching question could not be found
+	*/
+	public static Question findByCategoryId_First(long categoryId_fk,
+		OrderByComparator<Question> orderByComparator)
+		throws de.ki.sbam.exception.NoSuchQuestionException {
+		return getPersistence()
+				   .findByCategoryId_First(categoryId_fk, orderByComparator);
+	}
+
+	/**
+	* Returns the first question in the ordered set where categoryId_fk = &#63;.
+	*
+	* @param categoryId_fk the category id_fk
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching question, or <code>null</code> if a matching question could not be found
+	*/
+	public static Question fetchByCategoryId_First(long categoryId_fk,
+		OrderByComparator<Question> orderByComparator) {
+		return getPersistence()
+				   .fetchByCategoryId_First(categoryId_fk, orderByComparator);
+	}
+
+	/**
+	* Returns the last question in the ordered set where categoryId_fk = &#63;.
+	*
+	* @param categoryId_fk the category id_fk
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching question
+	* @throws NoSuchQuestionException if a matching question could not be found
+	*/
+	public static Question findByCategoryId_Last(long categoryId_fk,
+		OrderByComparator<Question> orderByComparator)
+		throws de.ki.sbam.exception.NoSuchQuestionException {
+		return getPersistence()
+				   .findByCategoryId_Last(categoryId_fk, orderByComparator);
+	}
+
+	/**
+	* Returns the last question in the ordered set where categoryId_fk = &#63;.
+	*
+	* @param categoryId_fk the category id_fk
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching question, or <code>null</code> if a matching question could not be found
+	*/
+	public static Question fetchByCategoryId_Last(long categoryId_fk,
+		OrderByComparator<Question> orderByComparator) {
+		return getPersistence()
+				   .fetchByCategoryId_Last(categoryId_fk, orderByComparator);
+	}
+
+	/**
+	* Returns the questions before and after the current question in the ordered set where categoryId_fk = &#63;.
+	*
+	* @param questionId the primary key of the current question
+	* @param categoryId_fk the category id_fk
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next question
+	* @throws NoSuchQuestionException if a question with the primary key could not be found
+	*/
+	public static Question[] findByCategoryId_PrevAndNext(long questionId,
+		long categoryId_fk, OrderByComparator<Question> orderByComparator)
+		throws de.ki.sbam.exception.NoSuchQuestionException {
+		return getPersistence()
+				   .findByCategoryId_PrevAndNext(questionId, categoryId_fk,
+			orderByComparator);
+	}
+
+	/**
+	* Removes all the questions where categoryId_fk = &#63; from the database.
+	*
+	* @param categoryId_fk the category id_fk
+	*/
+	public static void removeByCategoryId(long categoryId_fk) {
+		getPersistence().removeByCategoryId(categoryId_fk);
+	}
+
+	/**
+	* Returns the number of questions where categoryId_fk = &#63;.
+	*
+	* @param categoryId_fk the category id_fk
+	* @return the number of matching questions
+	*/
+	public static int countByCategoryId(long categoryId_fk) {
+		return getPersistence().countByCategoryId(categoryId_fk);
+	}
+
+	/**
 	* Caches the question in the entity cache if it is enabled.
 	*
 	* @param question the question

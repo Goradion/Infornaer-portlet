@@ -128,6 +128,18 @@ public class QuestionLocalServiceClpInvoker {
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"long", "int", "com.liferay.portal.kernel.model.User"
 			};
+
+		_methodName64 = "findByDifficulty";
+
+		_methodParameterTypes64 = new String[] { "int" };
+
+		_methodName65 = "findByCategory";
+
+		_methodParameterTypes65 = new String[] { "java.lang.String" };
+
+		_methodName66 = "findByCategoryId";
+
+		_methodParameterTypes66 = new String[] { "long" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -250,6 +262,21 @@ public class QuestionLocalServiceClpInvoker {
 				(com.liferay.portal.kernel.model.User)arguments[8]);
 		}
 
+		if (_methodName64.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes64, parameterTypes)) {
+			return QuestionLocalServiceUtil.findByDifficulty(((Integer)arguments[0]).intValue());
+		}
+
+		if (_methodName65.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes65, parameterTypes)) {
+			return QuestionLocalServiceUtil.findByCategory((java.lang.String)arguments[0]);
+		}
+
+		if (_methodName66.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes66, parameterTypes)) {
+			return QuestionLocalServiceUtil.findByCategoryId(((Long)arguments[0]).longValue());
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -295,4 +322,10 @@ public class QuestionLocalServiceClpInvoker {
 	private String[] _methodParameterTypes58;
 	private String _methodName63;
 	private String[] _methodParameterTypes63;
+	private String _methodName64;
+	private String[] _methodParameterTypes64;
+	private String _methodName65;
+	private String[] _methodParameterTypes65;
+	private String _methodName66;
+	private String[] _methodParameterTypes66;
 }

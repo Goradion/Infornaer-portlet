@@ -42,6 +42,7 @@ import de.ki.sbam.model.Question;
 import de.ki.sbam.service.CategoryLocalServiceUtil;
 import de.ki.sbam.service.HighscoreLocalServiceUtil;
 import de.ki.sbam.service.QuestionLocalServiceUtil;
+import de.ki.sbam.service.persistence.QuestionUtil;
 
 /**
  * Portlet implementation class InfonaerGame
@@ -138,8 +139,6 @@ public class InfonaerGamePortlet extends MVCPortlet {
 		actionRequest.getPortletSession().setAttribute("currentPage", VIEW_JSP, PortletSession.PORTLET_SCOPE);
 	}
 
-	
-
 	public void gotoGameOver(ActionRequest actionRequest, ActionResponse actionResponse)
 			throws IOException, PortletException {
 		actionRequest.getPortletSession().setAttribute("currentPage", GAME_OVER_JSP, PortletSession.PORTLET_SCOPE);
@@ -161,12 +160,13 @@ public class InfonaerGamePortlet extends MVCPortlet {
 		actionRequest.getPortletSession().setAttribute("currentPage", NEW_QUESTION_JSP, PortletSession.PORTLET_SCOPE);
 		insertCategories(actionRequest, actionResponse);
 	}
-	
-	public void insertCategories(ActionRequest actionRequest, ActionResponse actionResponse){
+
+	public void insertCategories(ActionRequest actionRequest, ActionResponse actionResponse) {
 		int categoriesCount = CategoryLocalServiceUtil.getCategoriesCount();
 		List<Category> categories = CategoryLocalServiceUtil.getCategories(0, categoriesCount);
 		actionRequest.setAttribute("cList", categories);
 	}
+
 	public void gotoEditQuestion(ActionRequest actionRequest, ActionResponse actionResponse)
 			throws IOException, PortletException {
 		actionRequest.getPortletSession().setAttribute("currentPage", EDIT_QUESTION_JSP, PortletSession.PORTLET_SCOPE);
@@ -197,11 +197,33 @@ public class InfonaerGamePortlet extends MVCPortlet {
 
 	public void uploadQuestions(ActionRequest actionRequest, ActionResponse actionResponse)
 			throws IOException, PortletException, URISyntaxException {
-		ThemeDisplay themeDisplay = (ThemeDisplay) actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
+		System.out.println("Uploading questions requested...");
+		ThemeDisplay td = (ThemeDisplay) actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
 		UploadPortletRequest uploadPortletRequest = PortalUtil.getUploadPortletRequest(actionRequest);
-		File file = uploadPortletRequest.getFile("uploadedFile");
-		String fileName = uploadPortletRequest.getFileName("uploadedFile");
 
+		// String fileName = uploadPortletRequest.getFileName("uploadedFile");
+		QuestionFromFileBuilder qffb = null;
+		if(actionRequest.getPortletSession().getAttribute("qffb")!=null)
+			qffb = (QuestionFromFileBuilder) actionRequest.getPortletSession().getAttribute("qffb");
+		if (qffb == null) {
+			File file = uploadPortletRequest.getFile("uploadedFile");
+			qffb = new QuestionFromFileBuilder(file);
+			qffb.buildQuestions();
+			actionRequest.getPortletSession().setAttribute("qffb", qffb);
+		} else {
+			List<String[]> questions = qffb.getLoadedQuestions();
+			for (String[] q : questions) {
+				try {
+					QuestionLocalServiceUtil.addQuestion(q[0], q[1], q[2], q[3], q[4], q[5], Long.parseLong(q[6]), Integer.parseInt(q[7]),
+							td.getUser());
+				} catch (NoSuchUserException | NumberFormatException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			System.out.println("Questions uploaded and saved to DB.");
+			actionRequest.getPortletSession().removeAttribute("qffb");
+		}
 	}
 
 	public void addQuestion(ActionRequest actionRequest, ActionResponse actionResponse)
@@ -226,7 +248,7 @@ public class InfonaerGamePortlet extends MVCPortlet {
 						categoryId, difficulty, user);
 			} else {
 				long id = Long.parseLong(questionId);
-				
+
 				Question question = QuestionLocalServiceUtil.getQuestion(id);
 				Category category = CategoryLocalServiceUtil.getCategory(categoryId);
 				question.setQuestionContent(questionContent);
@@ -236,7 +258,7 @@ public class InfonaerGamePortlet extends MVCPortlet {
 				question.setAnswerD(answerD);
 				question.setRightAnswer(rightAnswer);
 				question.setDifficulty(difficulty);
-				
+
 				question.setCategoryId_fk(categoryId);
 				question.setModifiedDate(new Date());
 				QuestionLocalServiceUtil.updateQuestion(question);
@@ -364,15 +386,16 @@ public class InfonaerGamePortlet extends MVCPortlet {
 		actionRequest.setAttribute("currentPage", page);
 	}
 
-	public void gotoNewCategory(ActionRequest actionRequest, ActionResponse actionResponse){
+	public void gotoNewCategory(ActionRequest actionRequest, ActionResponse actionResponse) {
 		actionRequest.getPortletSession().setAttribute("currentPage", NEW_CATEGORY_JSP, PortletSession.PORTLET_SCOPE);
 	}
-	
-	public void gotoEditCategory(ActionRequest actionRequest, ActionResponse actionResponse){
+
+	public void gotoEditCategory(ActionRequest actionRequest, ActionResponse actionResponse) {
 		actionRequest.getPortletSession().setAttribute("currentPage", EDIT_CATEGORY_JSP, PortletSession.PORTLET_SCOPE);
 		fillCategoryInput(actionRequest, actionResponse);
 	}
-	public void fillCategoryInput(ActionRequest actionRequest, ActionResponse actionResponse){
+
+	public void fillCategoryInput(ActionRequest actionRequest, ActionResponse actionResponse) {
 		String categoryId = actionRequest.getParameter("categoryId");
 		try {
 			Category category = CategoryLocalServiceUtil.getCategory(Long.parseLong(categoryId));

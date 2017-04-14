@@ -57,6 +57,9 @@
 			<finder-column name="category"></finder-column>
 			<finder-column name="difficulty"></finder-column>
 		</finder>
+		<finder return-type="Collection" name="CategoryId">
+			<finder-column name="categoryId_fk"></finder-column>
+		</finder>
 	</entity>
 	
 	<entity name="Category" local-service="true" remote-service="true">
@@ -85,32 +88,14 @@
 		</finder>
 	</entity>
 	
-	<entity name="UserQuestion" local-service="true" remote-service="true">
-		<!-- User info -->
-		<column name="userId" type="long"></column>
-		<column name="userName" type="String"></column>
-		
-		<!-- Question related info -->
+	<entity name="QuestionStatistics" local-service="true" remote-service="true">
 		<column name="questionId" type="long" primary="true"></column>
-		<column name="question" type="String"></column>
-		<column name="answerA" type="String"></column>
-		<column name="answerB" type="String" />
-		<column name="answerC" type="String" />
-		<column name="answerD" type="String" />
-		<column name="category" type="String"></column>
-		<column name="difficulty" type="int" />
-		<column name="rightAnswer" type="String" />
-		
-		<finder return-type="UserQuestion" name="Category">
-			<finder-column name="category"></finder-column>
-		</finder>
-		
-		<finder return-type="UserQuestion" name="Difficulty">
-			<finder-column name="difficulty"></finder-column>
-		</finder>
-		
+		<column name="answered_a" type="long"></column>
+		<column name="answered_b" type="long"></column>
+		<column name="answered_c" type="long"></column>
+		<column name="answered_d" type="long"></column>
 	</entity>
-	
+			
 	<entity name="UserStatistics" local-service="true" remote-service="true">
 		<column name="userId" type="long" primary="true"></column>
 		<column name="gamesWon" type="long"></column>

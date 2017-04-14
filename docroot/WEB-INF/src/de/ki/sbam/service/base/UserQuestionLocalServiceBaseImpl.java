@@ -233,7 +233,7 @@ public abstract class UserQuestionLocalServiceBaseImpl
 	public ActionableDynamicQuery getActionableDynamicQuery() {
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
-		actionableDynamicQuery.setBaseLocalService(de.ki.sbam.service.UserQuestionLocalServiceUtil.getService());
+		actionableDynamicQuery.setBaseLocalService(userQuestionLocalService);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
 		actionableDynamicQuery.setModelClass(UserQuestion.class);
 
@@ -246,7 +246,7 @@ public abstract class UserQuestionLocalServiceBaseImpl
 	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery() {
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
-		indexableActionableDynamicQuery.setBaseLocalService(de.ki.sbam.service.UserQuestionLocalServiceUtil.getService());
+		indexableActionableDynamicQuery.setBaseLocalService(userQuestionLocalService);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
 		indexableActionableDynamicQuery.setModelClass(UserQuestion.class);
 
@@ -257,7 +257,7 @@ public abstract class UserQuestionLocalServiceBaseImpl
 
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
-		actionableDynamicQuery.setBaseLocalService(de.ki.sbam.service.UserQuestionLocalServiceUtil.getService());
+		actionableDynamicQuery.setBaseLocalService(userQuestionLocalService);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
 		actionableDynamicQuery.setModelClass(UserQuestion.class);
 
@@ -749,7 +749,7 @@ public abstract class UserQuestionLocalServiceBaseImpl
 	protected de.ki.sbam.service.QuestionLocalService questionLocalService;
 	@BeanReference(type = QuestionPersistence.class)
 	protected QuestionPersistence questionPersistence;
-	@BeanReference(type = de.ki.sbam.service.UserQuestionLocalService.class)
+	@BeanReference(type = UserQuestionLocalService.class)
 	protected UserQuestionLocalService userQuestionLocalService;
 	@BeanReference(type = UserQuestionPersistence.class)
 	protected UserQuestionPersistence userQuestionPersistence;

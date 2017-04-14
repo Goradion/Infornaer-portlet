@@ -2,6 +2,7 @@
 
 
 
+<<portlet:actionURL name="gotoLoadQuestionFromFile" var="loadFromFile"></portlet:actionURL>
 
 <portlet:actionURL name="goToQuestionOverview" var="questionOverview"></portlet:actionURL>
 
@@ -39,6 +40,6 @@
 			<option value="${c.getCategoryId()}">${c.getCategoryName()}</option>
 		</c:forEach>
 	</select>
-	<input type="submit" value="Abschicken"> <br>
+	<input type="submit" value="Abschicken"> <a href=<%=loadFromFile%>>Frage(n) auf einer Datei laden</a> <br>
 </form>	
 <p><a href=<%=questionOverview%>>Back</a></p>

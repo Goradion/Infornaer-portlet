@@ -3,19 +3,35 @@
 
 <portlet:actionURL name="gotoEditMode" var="editMode"></portlet:actionURL>
 <portlet:actionURL name="uploadQuestions" var="fileAdded"></portlet:actionURL>
-<h1>Load Question From File View</h1>
-<aui:fieldset>
+<portlet:actionURL name="gotoNewQuestion" var="newQuestion"></portlet:actionURL>
+
+<%
+QuestionFromFileBuilder qffb = null;
+
+
+List<String[]> questions = null;
+if(portletSession.getAttribute("qffb")!=null){
+	qffb = (QuestionFromFileBuilder)portletSession.getAttribute("qffb");
+	questions = new LinkedList<String[]>();
+	questions = qffb.getLoadedQuestions();
+}
+%>
+
+
+<h1>Load questions from file</h1>
+
+<%if(qffb==null){ %>
 	<aui:form action="<%=fileAdded %>" method="POST" >
-		<aui:input name="uploadedFile" id="uploadFile" type="file">
+		<aui:input name="uploadedFile" id="uploadFile" type="file" required="true">
 			<aui:validator name="acceptFiles" >'txt'</aui:validator>
-		</aui:input>
+		</aui:input>		
 		<input type="submit" name="Laden"/>
 	</aui:form>
-<% if((QuestionFromFileBuilder)session.getAttribute("qffb")!=null){	
-	QuestionFromFileBuilder qffb = (QuestionFromFileBuilder)session.getAttribute("qffb");
-	LinkedList<String[]> q = qffb.getLoadedQuestions();
-%>
-	<table>
+<%}else{ %>
+	<p style="color:#FF0000">There are unsubmitted Questions! Submit first.</p>
+<%} %>
+<%if(questions!=null){ %>
+<table>
   <tr>
   	<th>Frage</th>
   	<th>Antwort A</th>
@@ -23,26 +39,25 @@
   	<th>Antwort C</th>
   	<th>Antwort D</th>
   	<th>Lösung</th>
-  	<th>Schwierigkeit</th>
   	<th>Kategorie</th>
+  	<th>Schwierigkeit</th>
   </tr>
-  <c:forEach items="${q}" var="q">
+	<%for(String[] q: questions) {%>
     <tr>
-      <td><c:out value="${q[0]}" /></td>
-      <td><c:out value="${q[1]}" /></td>
-      <td><c:out value="${q[2]}" /></td>
-      <td><c:out value="${q[3]}" /></td>
-      <td><c:out value="${q[4]}" /></td>
-      <td><c:out value="${q[5]}" /></td>
-      <td><c:out value="${q[6]}" /></td>
-      <td><c:out value="${q[7]}" /></td>
+    	<td><%=q[0] %></td>
+    	<td><%=q[1] %></td>
+    	<td><%=q[2] %></td>
+    	<td><%=q[3] %></td>
+    	<td><%=q[4] %></td>
+    	<td><%=q[5] %></td>
+    	<td><%=q[6] %></td>
+    	<td><%=q[7] %></td>
     </tr>
-  </c:forEach>
+	<%} %>
 </table>
-<p><a>href=<%=fileAdded %>>Submit Questions</a></p>
-<%}%>
 
-</aui:fieldset>
+<p><a href=<%=fileAdded %>>Submit Questions</a></p>
+<% } %>
 
-<p><a href=<%=editMode%>> Done </a></p>
-<p><a href=<%=editMode%>> Back </a></p>
+
+<p><a href=<%=newQuestion%>> Back </a></p>

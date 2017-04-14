@@ -4,7 +4,6 @@
 
 
 <portlet:actionURL name="gotoMainMenu" var="mainMenu"></portlet:actionURL>
-<portlet:actionURL name="gotoLoadQuestionFromFile" var="loadFromFile"></portlet:actionURL>
 <portlet:actionURL name="goToCategoryOverview" var="categoryOverview"></portlet:actionURL>
 <portlet:actionURL name="goToQuestionOverview" var="questionOverview"></portlet:actionURL>
 
@@ -23,7 +22,6 @@
 <p>
 	<a href=<%=mainMenu%>>Back</a>
 </p>
-<p><a href=<%=loadFromFile%>> Load Question From File </a></p>
 
 <p>
 	<a href=<%=categoryOverview%>>Kategorien</a>
