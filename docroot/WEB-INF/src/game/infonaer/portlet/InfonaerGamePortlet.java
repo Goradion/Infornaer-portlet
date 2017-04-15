@@ -186,7 +186,7 @@ public class InfonaerGamePortlet extends MVCPortlet {
 			actionRequest.setAttribute("answerC", question.getAnswerC());
 			actionRequest.setAttribute("answerD", question.getAnswerD());
 			actionRequest.setAttribute("rightAnswer", question.getRightAnswer());
-			actionRequest.setAttribute("difficulty", question.getDifficulty());
+			actionRequest.setAttribute("difficulty", question.getDifficultyId_fk());
 			actionRequest.setAttribute("category", question.getCategoryId_fk());
 			question.setAnswerA("neue Antwort A");
 		} catch (PortalException e) {
@@ -213,7 +213,7 @@ public class InfonaerGamePortlet extends MVCPortlet {
 		String answerC = actionRequest.getParameter("answerC");
 		String answerD = actionRequest.getParameter("answerD");
 		String rightAnswer = actionRequest.getParameter("rightAnswer");
-		int difficulty = Integer.parseInt(actionRequest.getParameter("difficulty"));
+		long difficulty = Long.parseLong(actionRequest.getParameter("difficulty"));
 		String categoryString = actionRequest.getParameter("category");
 		long categoryId = Long.parseLong(categoryString);
 		ThemeDisplay td = (ThemeDisplay) actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
@@ -235,8 +235,7 @@ public class InfonaerGamePortlet extends MVCPortlet {
 				question.setAnswerC(answerC);
 				question.setAnswerD(answerD);
 				question.setRightAnswer(rightAnswer);
-				question.setDifficulty(difficulty);
-				
+				question.setDifficultyId_fk(difficulty);
 				question.setCategoryId_fk(categoryId);
 				question.setModifiedDate(new Date());
 				QuestionLocalServiceUtil.updateQuestion(question);

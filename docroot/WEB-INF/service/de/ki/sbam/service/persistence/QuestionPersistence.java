@@ -42,268 +42,268 @@ public interface QuestionPersistence extends BasePersistence<Question> {
 	 */
 
 	/**
-	* Returns all the questions where category = &#63;.
+	* Returns all the questions where categoryId_fk = &#63;.
 	*
-	* @param category the category
+	* @param categoryId_fk the category id_fk
 	* @return the matching questions
 	*/
-	public java.util.List<Question> findByCategory(java.lang.String category);
+	public java.util.List<Question> findByCategory(long categoryId_fk);
 
 	/**
-	* Returns a range of all the questions where category = &#63;.
+	* Returns a range of all the questions where categoryId_fk = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link QuestionModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
-	* @param category the category
+	* @param categoryId_fk the category id_fk
 	* @param start the lower bound of the range of questions
 	* @param end the upper bound of the range of questions (not inclusive)
 	* @return the range of matching questions
 	*/
-	public java.util.List<Question> findByCategory(java.lang.String category,
+	public java.util.List<Question> findByCategory(long categoryId_fk,
 		int start, int end);
 
 	/**
-	* Returns an ordered range of all the questions where category = &#63;.
+	* Returns an ordered range of all the questions where categoryId_fk = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link QuestionModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
-	* @param category the category
+	* @param categoryId_fk the category id_fk
 	* @param start the lower bound of the range of questions
 	* @param end the upper bound of the range of questions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching questions
 	*/
-	public java.util.List<Question> findByCategory(java.lang.String category,
+	public java.util.List<Question> findByCategory(long categoryId_fk,
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<Question> orderByComparator);
 
 	/**
-	* Returns an ordered range of all the questions where category = &#63;.
+	* Returns an ordered range of all the questions where categoryId_fk = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link QuestionModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
-	* @param category the category
+	* @param categoryId_fk the category id_fk
 	* @param start the lower bound of the range of questions
 	* @param end the upper bound of the range of questions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching questions
 	*/
-	public java.util.List<Question> findByCategory(java.lang.String category,
+	public java.util.List<Question> findByCategory(long categoryId_fk,
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<Question> orderByComparator,
 		boolean retrieveFromCache);
 
 	/**
-	* Returns the first question in the ordered set where category = &#63;.
+	* Returns the first question in the ordered set where categoryId_fk = &#63;.
 	*
-	* @param category the category
+	* @param categoryId_fk the category id_fk
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching question
 	* @throws NoSuchQuestionException if a matching question could not be found
 	*/
-	public Question findByCategory_First(java.lang.String category,
+	public Question findByCategory_First(long categoryId_fk,
 		com.liferay.portal.kernel.util.OrderByComparator<Question> orderByComparator)
 		throws NoSuchQuestionException;
 
 	/**
-	* Returns the first question in the ordered set where category = &#63;.
+	* Returns the first question in the ordered set where categoryId_fk = &#63;.
 	*
-	* @param category the category
+	* @param categoryId_fk the category id_fk
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching question, or <code>null</code> if a matching question could not be found
 	*/
-	public Question fetchByCategory_First(java.lang.String category,
+	public Question fetchByCategory_First(long categoryId_fk,
 		com.liferay.portal.kernel.util.OrderByComparator<Question> orderByComparator);
 
 	/**
-	* Returns the last question in the ordered set where category = &#63;.
+	* Returns the last question in the ordered set where categoryId_fk = &#63;.
 	*
-	* @param category the category
+	* @param categoryId_fk the category id_fk
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching question
 	* @throws NoSuchQuestionException if a matching question could not be found
 	*/
-	public Question findByCategory_Last(java.lang.String category,
+	public Question findByCategory_Last(long categoryId_fk,
 		com.liferay.portal.kernel.util.OrderByComparator<Question> orderByComparator)
 		throws NoSuchQuestionException;
 
 	/**
-	* Returns the last question in the ordered set where category = &#63;.
+	* Returns the last question in the ordered set where categoryId_fk = &#63;.
 	*
-	* @param category the category
+	* @param categoryId_fk the category id_fk
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching question, or <code>null</code> if a matching question could not be found
 	*/
-	public Question fetchByCategory_Last(java.lang.String category,
+	public Question fetchByCategory_Last(long categoryId_fk,
 		com.liferay.portal.kernel.util.OrderByComparator<Question> orderByComparator);
 
 	/**
-	* Returns the questions before and after the current question in the ordered set where category = &#63;.
+	* Returns the questions before and after the current question in the ordered set where categoryId_fk = &#63;.
 	*
 	* @param questionId the primary key of the current question
-	* @param category the category
+	* @param categoryId_fk the category id_fk
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next question
 	* @throws NoSuchQuestionException if a question with the primary key could not be found
 	*/
 	public Question[] findByCategory_PrevAndNext(long questionId,
-		java.lang.String category,
+		long categoryId_fk,
 		com.liferay.portal.kernel.util.OrderByComparator<Question> orderByComparator)
 		throws NoSuchQuestionException;
 
 	/**
-	* Removes all the questions where category = &#63; from the database.
+	* Removes all the questions where categoryId_fk = &#63; from the database.
 	*
-	* @param category the category
+	* @param categoryId_fk the category id_fk
 	*/
-	public void removeByCategory(java.lang.String category);
+	public void removeByCategory(long categoryId_fk);
 
 	/**
-	* Returns the number of questions where category = &#63;.
+	* Returns the number of questions where categoryId_fk = &#63;.
 	*
-	* @param category the category
+	* @param categoryId_fk the category id_fk
 	* @return the number of matching questions
 	*/
-	public int countByCategory(java.lang.String category);
+	public int countByCategory(long categoryId_fk);
 
 	/**
-	* Returns all the questions where difficulty = &#63;.
+	* Returns all the questions where difficultyId_fk = &#63;.
 	*
-	* @param difficulty the difficulty
+	* @param difficultyId_fk the difficulty id_fk
 	* @return the matching questions
 	*/
-	public java.util.List<Question> findByDifficulty(int difficulty);
+	public java.util.List<Question> findByDifficulty(long difficultyId_fk);
 
 	/**
-	* Returns a range of all the questions where difficulty = &#63;.
+	* Returns a range of all the questions where difficultyId_fk = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link QuestionModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
-	* @param difficulty the difficulty
+	* @param difficultyId_fk the difficulty id_fk
 	* @param start the lower bound of the range of questions
 	* @param end the upper bound of the range of questions (not inclusive)
 	* @return the range of matching questions
 	*/
-	public java.util.List<Question> findByDifficulty(int difficulty, int start,
-		int end);
+	public java.util.List<Question> findByDifficulty(long difficultyId_fk,
+		int start, int end);
 
 	/**
-	* Returns an ordered range of all the questions where difficulty = &#63;.
+	* Returns an ordered range of all the questions where difficultyId_fk = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link QuestionModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
-	* @param difficulty the difficulty
+	* @param difficultyId_fk the difficulty id_fk
 	* @param start the lower bound of the range of questions
 	* @param end the upper bound of the range of questions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching questions
 	*/
-	public java.util.List<Question> findByDifficulty(int difficulty, int start,
-		int end,
+	public java.util.List<Question> findByDifficulty(long difficultyId_fk,
+		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<Question> orderByComparator);
 
 	/**
-	* Returns an ordered range of all the questions where difficulty = &#63;.
+	* Returns an ordered range of all the questions where difficultyId_fk = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link QuestionModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
-	* @param difficulty the difficulty
+	* @param difficultyId_fk the difficulty id_fk
 	* @param start the lower bound of the range of questions
 	* @param end the upper bound of the range of questions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching questions
 	*/
-	public java.util.List<Question> findByDifficulty(int difficulty, int start,
-		int end,
+	public java.util.List<Question> findByDifficulty(long difficultyId_fk,
+		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<Question> orderByComparator,
 		boolean retrieveFromCache);
 
 	/**
-	* Returns the first question in the ordered set where difficulty = &#63;.
+	* Returns the first question in the ordered set where difficultyId_fk = &#63;.
 	*
-	* @param difficulty the difficulty
+	* @param difficultyId_fk the difficulty id_fk
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching question
 	* @throws NoSuchQuestionException if a matching question could not be found
 	*/
-	public Question findByDifficulty_First(int difficulty,
+	public Question findByDifficulty_First(long difficultyId_fk,
 		com.liferay.portal.kernel.util.OrderByComparator<Question> orderByComparator)
 		throws NoSuchQuestionException;
 
 	/**
-	* Returns the first question in the ordered set where difficulty = &#63;.
+	* Returns the first question in the ordered set where difficultyId_fk = &#63;.
 	*
-	* @param difficulty the difficulty
+	* @param difficultyId_fk the difficulty id_fk
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching question, or <code>null</code> if a matching question could not be found
 	*/
-	public Question fetchByDifficulty_First(int difficulty,
+	public Question fetchByDifficulty_First(long difficultyId_fk,
 		com.liferay.portal.kernel.util.OrderByComparator<Question> orderByComparator);
 
 	/**
-	* Returns the last question in the ordered set where difficulty = &#63;.
+	* Returns the last question in the ordered set where difficultyId_fk = &#63;.
 	*
-	* @param difficulty the difficulty
+	* @param difficultyId_fk the difficulty id_fk
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching question
 	* @throws NoSuchQuestionException if a matching question could not be found
 	*/
-	public Question findByDifficulty_Last(int difficulty,
+	public Question findByDifficulty_Last(long difficultyId_fk,
 		com.liferay.portal.kernel.util.OrderByComparator<Question> orderByComparator)
 		throws NoSuchQuestionException;
 
 	/**
-	* Returns the last question in the ordered set where difficulty = &#63;.
+	* Returns the last question in the ordered set where difficultyId_fk = &#63;.
 	*
-	* @param difficulty the difficulty
+	* @param difficultyId_fk the difficulty id_fk
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching question, or <code>null</code> if a matching question could not be found
 	*/
-	public Question fetchByDifficulty_Last(int difficulty,
+	public Question fetchByDifficulty_Last(long difficultyId_fk,
 		com.liferay.portal.kernel.util.OrderByComparator<Question> orderByComparator);
 
 	/**
-	* Returns the questions before and after the current question in the ordered set where difficulty = &#63;.
+	* Returns the questions before and after the current question in the ordered set where difficultyId_fk = &#63;.
 	*
 	* @param questionId the primary key of the current question
-	* @param difficulty the difficulty
+	* @param difficultyId_fk the difficulty id_fk
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next question
 	* @throws NoSuchQuestionException if a question with the primary key could not be found
 	*/
 	public Question[] findByDifficulty_PrevAndNext(long questionId,
-		int difficulty,
+		long difficultyId_fk,
 		com.liferay.portal.kernel.util.OrderByComparator<Question> orderByComparator)
 		throws NoSuchQuestionException;
 
 	/**
-	* Removes all the questions where difficulty = &#63; from the database.
+	* Removes all the questions where difficultyId_fk = &#63; from the database.
 	*
-	* @param difficulty the difficulty
+	* @param difficultyId_fk the difficulty id_fk
 	*/
-	public void removeByDifficulty(int difficulty);
+	public void removeByDifficulty(long difficultyId_fk);
 
 	/**
-	* Returns the number of questions where difficulty = &#63;.
+	* Returns the number of questions where difficultyId_fk = &#63;.
 	*
-	* @param difficulty the difficulty
+	* @param difficultyId_fk the difficulty id_fk
 	* @return the number of matching questions
 	*/
-	public int countByDifficulty(int difficulty);
+	public int countByDifficulty(long difficultyId_fk);
 
 	/**
 	* Returns the question where questionId = &#63; or throws a {@link NoSuchQuestionException} if it could not be found.
@@ -350,58 +350,58 @@ public interface QuestionPersistence extends BasePersistence<Question> {
 	public int countByQuestionId(long questionId);
 
 	/**
-	* Returns all the questions where category = &#63; and difficulty = &#63;.
+	* Returns all the questions where categoryId_fk = &#63; and difficultyId_fk = &#63;.
 	*
-	* @param category the category
-	* @param difficulty the difficulty
+	* @param categoryId_fk the category id_fk
+	* @param difficultyId_fk the difficulty id_fk
 	* @return the matching questions
 	*/
 	public java.util.List<Question> findByCategoryAndDifficulty(
-		java.lang.String category, int difficulty);
+		long categoryId_fk, long difficultyId_fk);
 
 	/**
-	* Returns a range of all the questions where category = &#63; and difficulty = &#63;.
+	* Returns a range of all the questions where categoryId_fk = &#63; and difficultyId_fk = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link QuestionModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
-	* @param category the category
-	* @param difficulty the difficulty
+	* @param categoryId_fk the category id_fk
+	* @param difficultyId_fk the difficulty id_fk
 	* @param start the lower bound of the range of questions
 	* @param end the upper bound of the range of questions (not inclusive)
 	* @return the range of matching questions
 	*/
 	public java.util.List<Question> findByCategoryAndDifficulty(
-		java.lang.String category, int difficulty, int start, int end);
+		long categoryId_fk, long difficultyId_fk, int start, int end);
 
 	/**
-	* Returns an ordered range of all the questions where category = &#63; and difficulty = &#63;.
+	* Returns an ordered range of all the questions where categoryId_fk = &#63; and difficultyId_fk = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link QuestionModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
-	* @param category the category
-	* @param difficulty the difficulty
+	* @param categoryId_fk the category id_fk
+	* @param difficultyId_fk the difficulty id_fk
 	* @param start the lower bound of the range of questions
 	* @param end the upper bound of the range of questions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching questions
 	*/
 	public java.util.List<Question> findByCategoryAndDifficulty(
-		java.lang.String category, int difficulty, int start, int end,
+		long categoryId_fk, long difficultyId_fk, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<Question> orderByComparator);
 
 	/**
-	* Returns an ordered range of all the questions where category = &#63; and difficulty = &#63;.
+	* Returns an ordered range of all the questions where categoryId_fk = &#63; and difficultyId_fk = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link QuestionModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
-	* @param category the category
-	* @param difficulty the difficulty
+	* @param categoryId_fk the category id_fk
+	* @param difficultyId_fk the difficulty id_fk
 	* @param start the lower bound of the range of questions
 	* @param end the upper bound of the range of questions (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
@@ -409,95 +409,95 @@ public interface QuestionPersistence extends BasePersistence<Question> {
 	* @return the ordered range of matching questions
 	*/
 	public java.util.List<Question> findByCategoryAndDifficulty(
-		java.lang.String category, int difficulty, int start, int end,
+		long categoryId_fk, long difficultyId_fk, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<Question> orderByComparator,
 		boolean retrieveFromCache);
 
 	/**
-	* Returns the first question in the ordered set where category = &#63; and difficulty = &#63;.
+	* Returns the first question in the ordered set where categoryId_fk = &#63; and difficultyId_fk = &#63;.
 	*
-	* @param category the category
-	* @param difficulty the difficulty
+	* @param categoryId_fk the category id_fk
+	* @param difficultyId_fk the difficulty id_fk
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching question
 	* @throws NoSuchQuestionException if a matching question could not be found
 	*/
-	public Question findByCategoryAndDifficulty_First(
-		java.lang.String category, int difficulty,
+	public Question findByCategoryAndDifficulty_First(long categoryId_fk,
+		long difficultyId_fk,
 		com.liferay.portal.kernel.util.OrderByComparator<Question> orderByComparator)
 		throws NoSuchQuestionException;
 
 	/**
-	* Returns the first question in the ordered set where category = &#63; and difficulty = &#63;.
+	* Returns the first question in the ordered set where categoryId_fk = &#63; and difficultyId_fk = &#63;.
 	*
-	* @param category the category
-	* @param difficulty the difficulty
+	* @param categoryId_fk the category id_fk
+	* @param difficultyId_fk the difficulty id_fk
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching question, or <code>null</code> if a matching question could not be found
 	*/
-	public Question fetchByCategoryAndDifficulty_First(
-		java.lang.String category, int difficulty,
+	public Question fetchByCategoryAndDifficulty_First(long categoryId_fk,
+		long difficultyId_fk,
 		com.liferay.portal.kernel.util.OrderByComparator<Question> orderByComparator);
 
 	/**
-	* Returns the last question in the ordered set where category = &#63; and difficulty = &#63;.
+	* Returns the last question in the ordered set where categoryId_fk = &#63; and difficultyId_fk = &#63;.
 	*
-	* @param category the category
-	* @param difficulty the difficulty
+	* @param categoryId_fk the category id_fk
+	* @param difficultyId_fk the difficulty id_fk
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching question
 	* @throws NoSuchQuestionException if a matching question could not be found
 	*/
-	public Question findByCategoryAndDifficulty_Last(
-		java.lang.String category, int difficulty,
+	public Question findByCategoryAndDifficulty_Last(long categoryId_fk,
+		long difficultyId_fk,
 		com.liferay.portal.kernel.util.OrderByComparator<Question> orderByComparator)
 		throws NoSuchQuestionException;
 
 	/**
-	* Returns the last question in the ordered set where category = &#63; and difficulty = &#63;.
+	* Returns the last question in the ordered set where categoryId_fk = &#63; and difficultyId_fk = &#63;.
 	*
-	* @param category the category
-	* @param difficulty the difficulty
+	* @param categoryId_fk the category id_fk
+	* @param difficultyId_fk the difficulty id_fk
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching question, or <code>null</code> if a matching question could not be found
 	*/
-	public Question fetchByCategoryAndDifficulty_Last(
-		java.lang.String category, int difficulty,
+	public Question fetchByCategoryAndDifficulty_Last(long categoryId_fk,
+		long difficultyId_fk,
 		com.liferay.portal.kernel.util.OrderByComparator<Question> orderByComparator);
 
 	/**
-	* Returns the questions before and after the current question in the ordered set where category = &#63; and difficulty = &#63;.
+	* Returns the questions before and after the current question in the ordered set where categoryId_fk = &#63; and difficultyId_fk = &#63;.
 	*
 	* @param questionId the primary key of the current question
-	* @param category the category
-	* @param difficulty the difficulty
+	* @param categoryId_fk the category id_fk
+	* @param difficultyId_fk the difficulty id_fk
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next question
 	* @throws NoSuchQuestionException if a question with the primary key could not be found
 	*/
 	public Question[] findByCategoryAndDifficulty_PrevAndNext(long questionId,
-		java.lang.String category, int difficulty,
+		long categoryId_fk, long difficultyId_fk,
 		com.liferay.portal.kernel.util.OrderByComparator<Question> orderByComparator)
 		throws NoSuchQuestionException;
 
 	/**
-	* Removes all the questions where category = &#63; and difficulty = &#63; from the database.
+	* Removes all the questions where categoryId_fk = &#63; and difficultyId_fk = &#63; from the database.
 	*
-	* @param category the category
-	* @param difficulty the difficulty
+	* @param categoryId_fk the category id_fk
+	* @param difficultyId_fk the difficulty id_fk
 	*/
-	public void removeByCategoryAndDifficulty(java.lang.String category,
-		int difficulty);
+	public void removeByCategoryAndDifficulty(long categoryId_fk,
+		long difficultyId_fk);
 
 	/**
-	* Returns the number of questions where category = &#63; and difficulty = &#63;.
+	* Returns the number of questions where categoryId_fk = &#63; and difficultyId_fk = &#63;.
 	*
-	* @param category the category
-	* @param difficulty the difficulty
+	* @param categoryId_fk the category id_fk
+	* @param difficultyId_fk the difficulty id_fk
 	* @return the number of matching questions
 	*/
-	public int countByCategoryAndDifficulty(java.lang.String category,
-		int difficulty);
+	public int countByCategoryAndDifficulty(long categoryId_fk,
+		long difficultyId_fk);
 
 	/**
 	* Caches the question in the entity cache if it is enabled.

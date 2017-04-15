@@ -35,8 +35,7 @@
 		<field name="answerC" type="String" />
 		<field name="answerD" type="String" />
 		<field name="categoryId_fk" type="long" />
-		<field name="category" type="String" />
-		<field name="difficulty" type="int" />
+		<field name="difficultyId_fk" type="long" />
 		<field name="rightAnswer" type="String" />
 	</model>
 	<model name="de.ki.sbam.model.UserQuestion">

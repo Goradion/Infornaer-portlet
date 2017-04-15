@@ -282,33 +282,18 @@ public interface QuestionModel extends BaseModel<Question>, GroupedModel,
 	public void setCategoryId_fk(long categoryId_fk);
 
 	/**
-	 * Returns the category of this question.
+	 * Returns the difficulty id_fk of this question.
 	 *
-	 * @return the category of this question
+	 * @return the difficulty id_fk of this question
 	 */
-	@AutoEscape
-	public String getCategory();
+	public long getDifficultyId_fk();
 
 	/**
-	 * Sets the category of this question.
+	 * Sets the difficulty id_fk of this question.
 	 *
-	 * @param category the category of this question
+	 * @param difficultyId_fk the difficulty id_fk of this question
 	 */
-	public void setCategory(String category);
-
-	/**
-	 * Returns the difficulty of this question.
-	 *
-	 * @return the difficulty of this question
-	 */
-	public int getDifficulty();
-
-	/**
-	 * Sets the difficulty of this question.
-	 *
-	 * @param difficulty the difficulty of this question
-	 */
-	public void setDifficulty(int difficulty);
+	public void setDifficultyId_fk(long difficultyId_fk);
 
 	/**
 	 * Returns the right answer of this question.

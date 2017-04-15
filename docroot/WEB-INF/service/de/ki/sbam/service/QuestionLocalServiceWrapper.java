@@ -62,7 +62,7 @@ public class QuestionLocalServiceWrapper implements QuestionLocalService,
 	the right answer (should be A || B || C || D)
 	* @param category
 	category to which this question belongs
-	* @param difficulty
+	* @param difficultyId
 	difficulty of the question
 	* @param userId
 	id of the user who added the question
@@ -74,11 +74,12 @@ public class QuestionLocalServiceWrapper implements QuestionLocalService,
 		java.lang.String questionContent, java.lang.String answerA,
 		java.lang.String answerB, java.lang.String answerC,
 		java.lang.String answerD, java.lang.String rightAnswer,
-		long categoryId, int difficulty,
+		long categoryId, long difficultyId,
 		com.liferay.portal.kernel.model.User user)
 		throws com.liferay.portal.kernel.exception.NoSuchUserException {
 		return _questionLocalService.addQuestion(questionContent, answerA,
-			answerB, answerC, answerD, rightAnswer, categoryId, difficulty, user);
+			answerB, answerC, answerD, rightAnswer, categoryId, difficultyId,
+			user);
 	}
 
 	/**
@@ -214,6 +215,13 @@ public class QuestionLocalServiceWrapper implements QuestionLocalService,
 	@Override
 	public de.ki.sbam.model.Question fetchQuestion(long questionId) {
 		return _questionLocalService.fetchQuestion(questionId);
+	}
+
+	@Override
+	public java.util.List<de.ki.sbam.model.Question> findByCategoryAndDifficulty(
+		long categoryId, long difficultyId) {
+		return _questionLocalService.findByCategoryAndDifficulty(categoryId,
+			difficultyId);
 	}
 
 	@Override

@@ -43,8 +43,7 @@
 		<property name="answerC" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="answerD" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="categoryId_fk" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="category" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="difficulty" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="difficultyId_fk" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="rightAnswer" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="de.ki.sbam.model.impl.UserQuestionImpl" table="sbam_UserQuestion">

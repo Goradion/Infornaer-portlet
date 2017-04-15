@@ -83,8 +83,7 @@ public class QuestionModelImpl extends BaseModelImpl<Question>
 			{ "answerC", Types.VARCHAR },
 			{ "answerD", Types.VARCHAR },
 			{ "categoryId_fk", Types.BIGINT },
-			{ "category", Types.VARCHAR },
-			{ "difficulty", Types.INTEGER },
+			{ "difficultyId_fk", Types.BIGINT },
 			{ "rightAnswer", Types.VARCHAR }
 		};
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP = new HashMap<String, Integer>();
@@ -103,12 +102,11 @@ public class QuestionModelImpl extends BaseModelImpl<Question>
 		TABLE_COLUMNS_MAP.put("answerC", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("answerD", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("categoryId_fk", Types.BIGINT);
-		TABLE_COLUMNS_MAP.put("category", Types.VARCHAR);
-		TABLE_COLUMNS_MAP.put("difficulty", Types.INTEGER);
+		TABLE_COLUMNS_MAP.put("difficultyId_fk", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("rightAnswer", Types.VARCHAR);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table sbam_Question (questionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,questionContent STRING null,answerA VARCHAR(75) null,answerB VARCHAR(75) null,answerC VARCHAR(75) null,answerD VARCHAR(75) null,categoryId_fk LONG,category VARCHAR(75) null,difficulty INTEGER,rightAnswer VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table sbam_Question (questionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,questionContent STRING null,answerA VARCHAR(75) null,answerB VARCHAR(75) null,answerC VARCHAR(75) null,answerD VARCHAR(75) null,categoryId_fk LONG,difficultyId_fk LONG,rightAnswer VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table sbam_Question";
 	public static final String ORDER_BY_JPQL = " ORDER BY question.questionId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY sbam_Question.questionId ASC";
@@ -124,8 +122,8 @@ public class QuestionModelImpl extends BaseModelImpl<Question>
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
 				"value.object.column.bitmask.enabled.de.ki.sbam.model.Question"),
 			true);
-	public static final long CATEGORY_COLUMN_BITMASK = 1L;
-	public static final long DIFFICULTY_COLUMN_BITMASK = 2L;
+	public static final long CATEGORYID_FK_COLUMN_BITMASK = 1L;
+	public static final long DIFFICULTYID_FK_COLUMN_BITMASK = 2L;
 	public static final long QUESTIONID_COLUMN_BITMASK = 4L;
 
 	/**
@@ -154,8 +152,7 @@ public class QuestionModelImpl extends BaseModelImpl<Question>
 		model.setAnswerC(soapModel.getAnswerC());
 		model.setAnswerD(soapModel.getAnswerD());
 		model.setCategoryId_fk(soapModel.getCategoryId_fk());
-		model.setCategory(soapModel.getCategory());
-		model.setDifficulty(soapModel.getDifficulty());
+		model.setDifficultyId_fk(soapModel.getDifficultyId_fk());
 		model.setRightAnswer(soapModel.getRightAnswer());
 
 		return model;
@@ -234,8 +231,7 @@ public class QuestionModelImpl extends BaseModelImpl<Question>
 		attributes.put("answerC", getAnswerC());
 		attributes.put("answerD", getAnswerD());
 		attributes.put("categoryId_fk", getCategoryId_fk());
-		attributes.put("category", getCategory());
-		attributes.put("difficulty", getDifficulty());
+		attributes.put("difficultyId_fk", getDifficultyId_fk());
 		attributes.put("rightAnswer", getRightAnswer());
 
 		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
@@ -324,16 +320,10 @@ public class QuestionModelImpl extends BaseModelImpl<Question>
 			setCategoryId_fk(categoryId_fk);
 		}
 
-		String category = (String)attributes.get("category");
+		Long difficultyId_fk = (Long)attributes.get("difficultyId_fk");
 
-		if (category != null) {
-			setCategory(category);
-		}
-
-		Integer difficulty = (Integer)attributes.get("difficulty");
-
-		if (difficulty != null) {
-			setDifficulty(difficulty);
+		if (difficultyId_fk != null) {
+			setDifficultyId_fk(difficultyId_fk);
 		}
 
 		String rightAnswer = (String)attributes.get("rightAnswer");
@@ -547,56 +537,42 @@ public class QuestionModelImpl extends BaseModelImpl<Question>
 
 	@Override
 	public void setCategoryId_fk(long categoryId_fk) {
+		_columnBitmask |= CATEGORYID_FK_COLUMN_BITMASK;
+
+		if (!_setOriginalCategoryId_fk) {
+			_setOriginalCategoryId_fk = true;
+
+			_originalCategoryId_fk = _categoryId_fk;
+		}
+
 		_categoryId_fk = categoryId_fk;
 	}
 
-	@JSON
-	@Override
-	public String getCategory() {
-		if (_category == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _category;
-		}
-	}
-
-	@Override
-	public void setCategory(String category) {
-		_columnBitmask |= CATEGORY_COLUMN_BITMASK;
-
-		if (_originalCategory == null) {
-			_originalCategory = _category;
-		}
-
-		_category = category;
-	}
-
-	public String getOriginalCategory() {
-		return GetterUtil.getString(_originalCategory);
+	public long getOriginalCategoryId_fk() {
+		return _originalCategoryId_fk;
 	}
 
 	@JSON
 	@Override
-	public int getDifficulty() {
-		return _difficulty;
+	public long getDifficultyId_fk() {
+		return _difficultyId_fk;
 	}
 
 	@Override
-	public void setDifficulty(int difficulty) {
-		_columnBitmask |= DIFFICULTY_COLUMN_BITMASK;
+	public void setDifficultyId_fk(long difficultyId_fk) {
+		_columnBitmask |= DIFFICULTYID_FK_COLUMN_BITMASK;
 
-		if (!_setOriginalDifficulty) {
-			_setOriginalDifficulty = true;
+		if (!_setOriginalDifficultyId_fk) {
+			_setOriginalDifficultyId_fk = true;
 
-			_originalDifficulty = _difficulty;
+			_originalDifficultyId_fk = _difficultyId_fk;
 		}
 
-		_difficulty = difficulty;
+		_difficultyId_fk = difficultyId_fk;
 	}
 
-	public int getOriginalDifficulty() {
-		return _originalDifficulty;
+	public long getOriginalDifficultyId_fk() {
+		return _originalDifficultyId_fk;
 	}
 
 	@JSON
@@ -659,8 +635,7 @@ public class QuestionModelImpl extends BaseModelImpl<Question>
 		questionImpl.setAnswerC(getAnswerC());
 		questionImpl.setAnswerD(getAnswerD());
 		questionImpl.setCategoryId_fk(getCategoryId_fk());
-		questionImpl.setCategory(getCategory());
-		questionImpl.setDifficulty(getDifficulty());
+		questionImpl.setDifficultyId_fk(getDifficultyId_fk());
 		questionImpl.setRightAnswer(getRightAnswer());
 
 		questionImpl.resetOriginalValues();
@@ -736,11 +711,13 @@ public class QuestionModelImpl extends BaseModelImpl<Question>
 
 		questionModelImpl._setModifiedDate = false;
 
-		questionModelImpl._originalCategory = questionModelImpl._category;
+		questionModelImpl._originalCategoryId_fk = questionModelImpl._categoryId_fk;
 
-		questionModelImpl._originalDifficulty = questionModelImpl._difficulty;
+		questionModelImpl._setOriginalCategoryId_fk = false;
 
-		questionModelImpl._setOriginalDifficulty = false;
+		questionModelImpl._originalDifficultyId_fk = questionModelImpl._difficultyId_fk;
+
+		questionModelImpl._setOriginalDifficultyId_fk = false;
 
 		questionModelImpl._columnBitmask = 0;
 	}
@@ -825,15 +802,7 @@ public class QuestionModelImpl extends BaseModelImpl<Question>
 
 		questionCacheModel.categoryId_fk = getCategoryId_fk();
 
-		questionCacheModel.category = getCategory();
-
-		String category = questionCacheModel.category;
-
-		if ((category != null) && (category.length() == 0)) {
-			questionCacheModel.category = null;
-		}
-
-		questionCacheModel.difficulty = getDifficulty();
+		questionCacheModel.difficultyId_fk = getDifficultyId_fk();
 
 		questionCacheModel.rightAnswer = getRightAnswer();
 
@@ -848,7 +817,7 @@ public class QuestionModelImpl extends BaseModelImpl<Question>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(33);
+		StringBundler sb = new StringBundler(31);
 
 		sb.append("{questionId=");
 		sb.append(getQuestionId());
@@ -876,10 +845,8 @@ public class QuestionModelImpl extends BaseModelImpl<Question>
 		sb.append(getAnswerD());
 		sb.append(", categoryId_fk=");
 		sb.append(getCategoryId_fk());
-		sb.append(", category=");
-		sb.append(getCategory());
-		sb.append(", difficulty=");
-		sb.append(getDifficulty());
+		sb.append(", difficultyId_fk=");
+		sb.append(getDifficultyId_fk());
 		sb.append(", rightAnswer=");
 		sb.append(getRightAnswer());
 		sb.append("}");
@@ -889,7 +856,7 @@ public class QuestionModelImpl extends BaseModelImpl<Question>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(52);
+		StringBundler sb = new StringBundler(49);
 
 		sb.append("<model><model-name>");
 		sb.append("de.ki.sbam.model.Question");
@@ -948,12 +915,8 @@ public class QuestionModelImpl extends BaseModelImpl<Question>
 		sb.append(getCategoryId_fk());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>category</column-name><column-value><![CDATA[");
-		sb.append(getCategory());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>difficulty</column-name><column-value><![CDATA[");
-		sb.append(getDifficulty());
+			"<column><column-name>difficultyId_fk</column-name><column-value><![CDATA[");
+		sb.append(getDifficultyId_fk());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>rightAnswer</column-name><column-value><![CDATA[");
@@ -985,11 +948,11 @@ public class QuestionModelImpl extends BaseModelImpl<Question>
 	private String _answerC;
 	private String _answerD;
 	private long _categoryId_fk;
-	private String _category;
-	private String _originalCategory;
-	private int _difficulty;
-	private int _originalDifficulty;
-	private boolean _setOriginalDifficulty;
+	private long _originalCategoryId_fk;
+	private boolean _setOriginalCategoryId_fk;
+	private long _difficultyId_fk;
+	private long _originalDifficultyId_fk;
+	private boolean _setOriginalDifficultyId_fk;
 	private String _rightAnswer;
 	private long _columnBitmask;
 	private Question _escapedModel;

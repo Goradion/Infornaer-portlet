@@ -93,8 +93,7 @@ public class QuestionClp extends BaseModelImpl<Question> implements Question {
 		attributes.put("answerC", getAnswerC());
 		attributes.put("answerD", getAnswerD());
 		attributes.put("categoryId_fk", getCategoryId_fk());
-		attributes.put("category", getCategory());
-		attributes.put("difficulty", getDifficulty());
+		attributes.put("difficultyId_fk", getDifficultyId_fk());
 		attributes.put("rightAnswer", getRightAnswer());
 
 		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
@@ -183,16 +182,10 @@ public class QuestionClp extends BaseModelImpl<Question> implements Question {
 			setCategoryId_fk(categoryId_fk);
 		}
 
-		String category = (String)attributes.get("category");
+		Long difficultyId_fk = (Long)attributes.get("difficultyId_fk");
 
-		if (category != null) {
-			setCategory(category);
-		}
-
-		Integer difficulty = (Integer)attributes.get("difficulty");
-
-		if (difficulty != null) {
-			setDifficulty(difficulty);
+		if (difficultyId_fk != null) {
+			setDifficultyId_fk(difficultyId_fk);
 		}
 
 		String rightAnswer = (String)attributes.get("rightAnswer");
@@ -522,44 +515,21 @@ public class QuestionClp extends BaseModelImpl<Question> implements Question {
 	}
 
 	@Override
-	public String getCategory() {
-		return _category;
+	public long getDifficultyId_fk() {
+		return _difficultyId_fk;
 	}
 
 	@Override
-	public void setCategory(String category) {
-		_category = category;
+	public void setDifficultyId_fk(long difficultyId_fk) {
+		_difficultyId_fk = difficultyId_fk;
 
 		if (_questionRemoteModel != null) {
 			try {
 				Class<?> clazz = _questionRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setCategory", String.class);
+				Method method = clazz.getMethod("setDifficultyId_fk", long.class);
 
-				method.invoke(_questionRemoteModel, category);
-			}
-			catch (Exception e) {
-				throw new UnsupportedOperationException(e);
-			}
-		}
-	}
-
-	@Override
-	public int getDifficulty() {
-		return _difficulty;
-	}
-
-	@Override
-	public void setDifficulty(int difficulty) {
-		_difficulty = difficulty;
-
-		if (_questionRemoteModel != null) {
-			try {
-				Class<?> clazz = _questionRemoteModel.getClass();
-
-				Method method = clazz.getMethod("setDifficulty", int.class);
-
-				method.invoke(_questionRemoteModel, difficulty);
+				method.invoke(_questionRemoteModel, difficultyId_fk);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -672,8 +642,7 @@ public class QuestionClp extends BaseModelImpl<Question> implements Question {
 		clone.setAnswerC(getAnswerC());
 		clone.setAnswerD(getAnswerD());
 		clone.setCategoryId_fk(getCategoryId_fk());
-		clone.setCategory(getCategory());
-		clone.setDifficulty(getDifficulty());
+		clone.setDifficultyId_fk(getDifficultyId_fk());
 		clone.setRightAnswer(getRightAnswer());
 
 		return clone;
@@ -743,7 +712,7 @@ public class QuestionClp extends BaseModelImpl<Question> implements Question {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(33);
+		StringBundler sb = new StringBundler(31);
 
 		sb.append("{questionId=");
 		sb.append(getQuestionId());
@@ -771,10 +740,8 @@ public class QuestionClp extends BaseModelImpl<Question> implements Question {
 		sb.append(getAnswerD());
 		sb.append(", categoryId_fk=");
 		sb.append(getCategoryId_fk());
-		sb.append(", category=");
-		sb.append(getCategory());
-		sb.append(", difficulty=");
-		sb.append(getDifficulty());
+		sb.append(", difficultyId_fk=");
+		sb.append(getDifficultyId_fk());
 		sb.append(", rightAnswer=");
 		sb.append(getRightAnswer());
 		sb.append("}");
@@ -784,7 +751,7 @@ public class QuestionClp extends BaseModelImpl<Question> implements Question {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(52);
+		StringBundler sb = new StringBundler(49);
 
 		sb.append("<model><model-name>");
 		sb.append("de.ki.sbam.model.Question");
@@ -843,12 +810,8 @@ public class QuestionClp extends BaseModelImpl<Question> implements Question {
 		sb.append(getCategoryId_fk());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>category</column-name><column-value><![CDATA[");
-		sb.append(getCategory());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>difficulty</column-name><column-value><![CDATA[");
-		sb.append(getDifficulty());
+			"<column><column-name>difficultyId_fk</column-name><column-value><![CDATA[");
+		sb.append(getDifficultyId_fk());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>rightAnswer</column-name><column-value><![CDATA[");
@@ -873,8 +836,7 @@ public class QuestionClp extends BaseModelImpl<Question> implements Question {
 	private String _answerC;
 	private String _answerD;
 	private long _categoryId_fk;
-	private String _category;
-	private int _difficulty;
+	private long _difficultyId_fk;
 	private String _rightAnswer;
 	private BaseModel<?> _questionRemoteModel;
 	private Class<?> _clpSerializerClass = de.ki.sbam.service.ClpSerializer.class;

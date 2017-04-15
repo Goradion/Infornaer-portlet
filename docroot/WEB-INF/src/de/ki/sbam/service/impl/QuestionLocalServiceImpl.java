@@ -14,6 +14,8 @@
 
 package de.ki.sbam.service.impl;
 
+import java.util.List;
+
 import com.liferay.portal.kernel.exception.NoSuchUserException;
 import com.liferay.portal.kernel.model.User;
 
@@ -66,7 +68,7 @@ public class QuestionLocalServiceImpl extends QuestionLocalServiceBaseImpl {
 	 *            the right answer (should be A || B || C || D)
 	 * @param category
 	 *            category to which this question belongs
-	 * @param difficulty
+	 * @param difficultyId
 	 *            difficulty of the question
 	 * @param userId
 	 *            id of the user who added the question
@@ -74,7 +76,7 @@ public class QuestionLocalServiceImpl extends QuestionLocalServiceBaseImpl {
 	 * @throws NoSuchUserException
 	 */
 	public Question addQuestion(String questionContent, String answerA, String answerB, String answerC, String answerD,
-			String rightAnswer, long categoryId, int difficulty, User user) throws NoSuchUserException {
+			String rightAnswer, long categoryId, long difficultyId, User user) throws NoSuchUserException {
 		// check whether user is eligible or not (admin or not?) to add a question
 		// if so add the question
 		// else throw NoSuchUserException with message "not eligible to add"
@@ -90,7 +92,7 @@ public class QuestionLocalServiceImpl extends QuestionLocalServiceBaseImpl {
 			question.setRightAnswer(rightAnswer);
 //			question.setCategory(category);
 			question.setCategoryId_fk(categoryId);
-			question.setDifficulty(difficulty);
+			question.setDifficultyId_fk(difficultyId);
 			question.setUserId(user.getUserId());
 			if(user.getFullName().isEmpty()){
 				question.setUserName("unknown");
@@ -103,4 +105,10 @@ public class QuestionLocalServiceImpl extends QuestionLocalServiceBaseImpl {
 		}
 		return null;
 	}
+	
+	public List<Question> findByCategoryAndDifficulty(long categoryId, long difficultyId){
+		return questionPersistence.findByCategoryAndDifficulty(categoryId, difficultyId);
+	}
+	
+	
 }

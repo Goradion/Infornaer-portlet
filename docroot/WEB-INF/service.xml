@@ -30,8 +30,7 @@
 		<column name="answerC" type="String" />
 		<column name="answerD" type="String" />
 		<column name="categoryId_fk" type="long"/>
-		<column name="category" type="String"></column>
-		<column name="difficulty" type="int" />
+		<column name="difficultyId_fk" type="long" />
 		<column name="rightAnswer" type="String" />
 
 		
@@ -45,17 +44,17 @@
 		<!-- Finder methods -->
 
 		<finder name="Category" return-type="Collection">
-			<finder-column name="category" />
+			<finder-column name="categoryId_fk" />
 		</finder>
 		<finder return-type="Collection" name="Difficulty">
-			<finder-column name="difficulty"></finder-column>
+			<finder-column name="difficultyId_fk"></finder-column>
 		</finder>
 		<finder return-type="Question" name="QuestionId">
 			<finder-column name="questionId"></finder-column>
 		</finder>
 		<finder return-type="Collection" name="CategoryAndDifficulty">
-			<finder-column name="category"></finder-column>
-			<finder-column name="difficulty"></finder-column>
+			<finder-column name="categoryId_fk"></finder-column>
+			<finder-column name="difficultyId_fk"></finder-column>
 		</finder>
 	</entity>
 	

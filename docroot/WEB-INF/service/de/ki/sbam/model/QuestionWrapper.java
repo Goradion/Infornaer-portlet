@@ -70,8 +70,7 @@ public class QuestionWrapper implements Question, ModelWrapper<Question> {
 		attributes.put("answerC", getAnswerC());
 		attributes.put("answerD", getAnswerD());
 		attributes.put("categoryId_fk", getCategoryId_fk());
-		attributes.put("category", getCategory());
-		attributes.put("difficulty", getDifficulty());
+		attributes.put("difficultyId_fk", getDifficultyId_fk());
 		attributes.put("rightAnswer", getRightAnswer());
 
 		return attributes;
@@ -157,16 +156,10 @@ public class QuestionWrapper implements Question, ModelWrapper<Question> {
 			setCategoryId_fk(categoryId_fk);
 		}
 
-		String category = (String)attributes.get("category");
+		Long difficultyId_fk = (Long)attributes.get("difficultyId_fk");
 
-		if (category != null) {
-			setCategory(category);
-		}
-
-		Integer difficulty = (Integer)attributes.get("difficulty");
-
-		if (difficulty != null) {
-			setDifficulty(difficulty);
+		if (difficultyId_fk != null) {
+			setDifficultyId_fk(difficultyId_fk);
 		}
 
 		String rightAnswer = (String)attributes.get("rightAnswer");
@@ -227,16 +220,6 @@ public class QuestionWrapper implements Question, ModelWrapper<Question> {
 	}
 
 	/**
-	* Returns the category of this question.
-	*
-	* @return the category of this question
-	*/
-	@Override
-	public java.lang.String getCategory() {
-		return _question.getCategory();
-	}
-
-	/**
 	* Returns the category id_fk of this question.
 	*
 	* @return the category id_fk of this question
@@ -267,13 +250,13 @@ public class QuestionWrapper implements Question, ModelWrapper<Question> {
 	}
 
 	/**
-	* Returns the difficulty of this question.
+	* Returns the difficulty id_fk of this question.
 	*
-	* @return the difficulty of this question
+	* @return the difficulty id_fk of this question
 	*/
 	@Override
-	public int getDifficulty() {
-		return _question.getDifficulty();
+	public long getDifficultyId_fk() {
+		return _question.getDifficultyId_fk();
 	}
 
 	@Override
@@ -447,16 +430,6 @@ public class QuestionWrapper implements Question, ModelWrapper<Question> {
 	}
 
 	/**
-	* Sets the category of this question.
-	*
-	* @param category the category of this question
-	*/
-	@Override
-	public void setCategory(java.lang.String category) {
-		_question.setCategory(category);
-	}
-
-	/**
 	* Sets the category id_fk of this question.
 	*
 	* @param categoryId_fk the category id_fk of this question
@@ -487,13 +460,13 @@ public class QuestionWrapper implements Question, ModelWrapper<Question> {
 	}
 
 	/**
-	* Sets the difficulty of this question.
+	* Sets the difficulty id_fk of this question.
 	*
-	* @param difficulty the difficulty of this question
+	* @param difficultyId_fk the difficulty id_fk of this question
 	*/
 	@Override
-	public void setDifficulty(int difficulty) {
-		_question.setDifficulty(difficulty);
+	public void setDifficultyId_fk(long difficultyId_fk) {
+		_question.setDifficultyId_fk(difficultyId_fk);
 	}
 
 	@Override

@@ -47,8 +47,7 @@ public class QuestionSoap implements Serializable {
 		soapModel.setAnswerC(model.getAnswerC());
 		soapModel.setAnswerD(model.getAnswerD());
 		soapModel.setCategoryId_fk(model.getCategoryId_fk());
-		soapModel.setCategory(model.getCategory());
-		soapModel.setDifficulty(model.getDifficulty());
+		soapModel.setDifficultyId_fk(model.getDifficultyId_fk());
 		soapModel.setRightAnswer(model.getRightAnswer());
 
 		return soapModel;
@@ -206,20 +205,12 @@ public class QuestionSoap implements Serializable {
 		_categoryId_fk = categoryId_fk;
 	}
 
-	public String getCategory() {
-		return _category;
+	public long getDifficultyId_fk() {
+		return _difficultyId_fk;
 	}
 
-	public void setCategory(String category) {
-		_category = category;
-	}
-
-	public int getDifficulty() {
-		return _difficulty;
-	}
-
-	public void setDifficulty(int difficulty) {
-		_difficulty = difficulty;
+	public void setDifficultyId_fk(long difficultyId_fk) {
+		_difficultyId_fk = difficultyId_fk;
 	}
 
 	public String getRightAnswer() {
@@ -243,7 +234,6 @@ public class QuestionSoap implements Serializable {
 	private String _answerC;
 	private String _answerD;
 	private long _categoryId_fk;
-	private String _category;
-	private int _difficulty;
+	private long _difficultyId_fk;
 	private String _rightAnswer;
 }

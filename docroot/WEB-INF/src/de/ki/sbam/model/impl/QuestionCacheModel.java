@@ -65,7 +65,7 @@ public class QuestionCacheModel implements CacheModel<Question>, Externalizable 
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(33);
+		StringBundler sb = new StringBundler(31);
 
 		sb.append("{questionId=");
 		sb.append(questionId);
@@ -93,10 +93,8 @@ public class QuestionCacheModel implements CacheModel<Question>, Externalizable 
 		sb.append(answerD);
 		sb.append(", categoryId_fk=");
 		sb.append(categoryId_fk);
-		sb.append(", category=");
-		sb.append(category);
-		sb.append(", difficulty=");
-		sb.append(difficulty);
+		sb.append(", difficultyId_fk=");
+		sb.append(difficultyId_fk);
 		sb.append(", rightAnswer=");
 		sb.append(rightAnswer);
 		sb.append("}");
@@ -170,15 +168,7 @@ public class QuestionCacheModel implements CacheModel<Question>, Externalizable 
 		}
 
 		questionImpl.setCategoryId_fk(categoryId_fk);
-
-		if (category == null) {
-			questionImpl.setCategory(StringPool.BLANK);
-		}
-		else {
-			questionImpl.setCategory(category);
-		}
-
-		questionImpl.setDifficulty(difficulty);
+		questionImpl.setDifficultyId_fk(difficultyId_fk);
 
 		if (rightAnswer == null) {
 			questionImpl.setRightAnswer(StringPool.BLANK);
@@ -211,9 +201,8 @@ public class QuestionCacheModel implements CacheModel<Question>, Externalizable 
 		answerD = objectInput.readUTF();
 
 		categoryId_fk = objectInput.readLong();
-		category = objectInput.readUTF();
 
-		difficulty = objectInput.readInt();
+		difficultyId_fk = objectInput.readLong();
 		rightAnswer = objectInput.readUTF();
 	}
 
@@ -275,14 +264,7 @@ public class QuestionCacheModel implements CacheModel<Question>, Externalizable 
 
 		objectOutput.writeLong(categoryId_fk);
 
-		if (category == null) {
-			objectOutput.writeUTF(StringPool.BLANK);
-		}
-		else {
-			objectOutput.writeUTF(category);
-		}
-
-		objectOutput.writeInt(difficulty);
+		objectOutput.writeLong(difficultyId_fk);
 
 		if (rightAnswer == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
@@ -305,7 +287,6 @@ public class QuestionCacheModel implements CacheModel<Question>, Externalizable 
 	public String answerC;
 	public String answerD;
 	public long categoryId_fk;
-	public String category;
-	public int difficulty;
+	public long difficultyId_fk;
 	public String rightAnswer;
 }

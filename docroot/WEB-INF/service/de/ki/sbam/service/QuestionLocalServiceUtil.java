@@ -70,7 +70,7 @@ public class QuestionLocalServiceUtil {
 	the right answer (should be A || B || C || D)
 	* @param category
 	category to which this question belongs
-	* @param difficulty
+	* @param difficultyId
 	difficulty of the question
 	* @param userId
 	id of the user who added the question
@@ -81,12 +81,12 @@ public class QuestionLocalServiceUtil {
 		java.lang.String questionContent, java.lang.String answerA,
 		java.lang.String answerB, java.lang.String answerC,
 		java.lang.String answerD, java.lang.String rightAnswer,
-		long categoryId, int difficulty,
+		long categoryId, long difficultyId,
 		com.liferay.portal.kernel.model.User user)
 		throws com.liferay.portal.kernel.exception.NoSuchUserException {
 		return getService()
 				   .addQuestion(questionContent, answerA, answerB, answerC,
-			answerD, rightAnswer, categoryId, difficulty, user);
+			answerD, rightAnswer, categoryId, difficultyId, user);
 	}
 
 	/**
@@ -211,6 +211,11 @@ public class QuestionLocalServiceUtil {
 
 	public static de.ki.sbam.model.Question fetchQuestion(long questionId) {
 		return getService().fetchQuestion(questionId);
+	}
+
+	public static java.util.List<de.ki.sbam.model.Question> findByCategoryAndDifficulty(
+		long categoryId, long difficultyId) {
+		return getService().findByCategoryAndDifficulty(categoryId, difficultyId);
 	}
 
 	public static com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery getActionableDynamicQuery() {

@@ -36,7 +36,7 @@ public class QuestionLocalServiceClp implements QuestionLocalService {
 		_methodParameterTypes1 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.String",
-				"long", "int", "com.liferay.portal.kernel.model.User"
+				"long", "long", "com.liferay.portal.kernel.model.User"
 			};
 
 		_methodName2 = "createQuestion";
@@ -97,37 +97,41 @@ public class QuestionLocalServiceClp implements QuestionLocalService {
 
 		_methodParameterTypes12 = new String[] { "long" };
 
-		_methodName13 = "getActionableDynamicQuery";
+		_methodName13 = "findByCategoryAndDifficulty";
 
-		_methodParameterTypes13 = new String[] {  };
+		_methodParameterTypes13 = new String[] { "long", "long" };
 
-		_methodName14 = "getIndexableActionableDynamicQuery";
+		_methodName14 = "getActionableDynamicQuery";
 
 		_methodParameterTypes14 = new String[] {  };
 
-		_methodName15 = "getOSGiServiceIdentifier";
+		_methodName15 = "getIndexableActionableDynamicQuery";
 
 		_methodParameterTypes15 = new String[] {  };
 
-		_methodName16 = "getPersistedModel";
+		_methodName16 = "getOSGiServiceIdentifier";
 
-		_methodParameterTypes16 = new String[] { "java.io.Serializable" };
+		_methodParameterTypes16 = new String[] {  };
 
-		_methodName17 = "getQuestion";
+		_methodName17 = "getPersistedModel";
 
-		_methodParameterTypes17 = new String[] { "long" };
+		_methodParameterTypes17 = new String[] { "java.io.Serializable" };
 
-		_methodName18 = "getQuestions";
+		_methodName18 = "getQuestion";
 
-		_methodParameterTypes18 = new String[] { "int", "int" };
+		_methodParameterTypes18 = new String[] { "long" };
 
-		_methodName19 = "getQuestionsCount";
+		_methodName19 = "getQuestions";
 
-		_methodParameterTypes19 = new String[] {  };
+		_methodParameterTypes19 = new String[] { "int", "int" };
 
-		_methodName21 = "updateQuestion";
+		_methodName20 = "getQuestionsCount";
 
-		_methodParameterTypes21 = new String[] { "de.ki.sbam.model.Question" };
+		_methodParameterTypes20 = new String[] {  };
+
+		_methodName22 = "updateQuestion";
+
+		_methodParameterTypes22 = new String[] { "de.ki.sbam.model.Question" };
 	}
 
 	@Override
@@ -160,7 +164,7 @@ public class QuestionLocalServiceClp implements QuestionLocalService {
 		java.lang.String questionContent, java.lang.String answerA,
 		java.lang.String answerB, java.lang.String answerC,
 		java.lang.String answerD, java.lang.String rightAnswer,
-		long categoryId, int difficulty,
+		long categoryId, long difficultyId,
 		com.liferay.portal.kernel.model.User user)
 		throws com.liferay.portal.kernel.exception.NoSuchUserException {
 		Object returnObj = null;
@@ -183,7 +187,7 @@ public class QuestionLocalServiceClp implements QuestionLocalService {
 						
 					categoryId,
 						
-					difficulty,
+					difficultyId,
 						
 					ClpSerializer.translateInput(user)
 					});
@@ -507,12 +511,37 @@ public class QuestionLocalServiceClp implements QuestionLocalService {
 	}
 
 	@Override
-	public com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery getActionableDynamicQuery() {
+	public java.util.List<de.ki.sbam.model.Question> findByCategoryAndDifficulty(
+		long categoryId, long difficultyId) {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName13,
-					_methodParameterTypes13, new Object[] {  });
+					_methodParameterTypes13,
+					new Object[] { categoryId, difficultyId });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<de.ki.sbam.model.Question>)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery getActionableDynamicQuery() {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName14,
+					_methodParameterTypes14, new Object[] {  });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -534,8 +563,8 @@ public class QuestionLocalServiceClp implements QuestionLocalService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName14,
-					_methodParameterTypes14, new Object[] {  });
+			returnObj = _invokableLocalService.invokeMethod(_methodName15,
+					_methodParameterTypes15, new Object[] {  });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -557,8 +586,8 @@ public class QuestionLocalServiceClp implements QuestionLocalService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName15,
-					_methodParameterTypes15, new Object[] {  });
+			returnObj = _invokableLocalService.invokeMethod(_methodName16,
+					_methodParameterTypes16, new Object[] {  });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -582,8 +611,8 @@ public class QuestionLocalServiceClp implements QuestionLocalService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName16,
-					_methodParameterTypes16,
+			returnObj = _invokableLocalService.invokeMethod(_methodName17,
+					_methodParameterTypes17,
 					new Object[] { ClpSerializer.translateInput(primaryKeyObj) });
 		}
 		catch (Throwable t) {
@@ -611,8 +640,8 @@ public class QuestionLocalServiceClp implements QuestionLocalService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName17,
-					_methodParameterTypes17, new Object[] { questionId });
+			returnObj = _invokableLocalService.invokeMethod(_methodName18,
+					_methodParameterTypes18, new Object[] { questionId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -639,8 +668,8 @@ public class QuestionLocalServiceClp implements QuestionLocalService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName18,
-					_methodParameterTypes18, new Object[] { start, end });
+			returnObj = _invokableLocalService.invokeMethod(_methodName19,
+					_methodParameterTypes19, new Object[] { start, end });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -662,8 +691,8 @@ public class QuestionLocalServiceClp implements QuestionLocalService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName19,
-					_methodParameterTypes19, new Object[] {  });
+			returnObj = _invokableLocalService.invokeMethod(_methodName20,
+					_methodParameterTypes20, new Object[] {  });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -693,8 +722,8 @@ public class QuestionLocalServiceClp implements QuestionLocalService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName21,
-					_methodParameterTypes21,
+			returnObj = _invokableLocalService.invokeMethod(_methodName22,
+					_methodParameterTypes22,
 					new Object[] { ClpSerializer.translateInput(question) });
 		}
 		catch (Throwable t) {
@@ -753,6 +782,8 @@ public class QuestionLocalServiceClp implements QuestionLocalService {
 	private String[] _methodParameterTypes18;
 	private String _methodName19;
 	private String[] _methodParameterTypes19;
-	private String _methodName21;
-	private String[] _methodParameterTypes21;
+	private String _methodName20;
+	private String[] _methodParameterTypes20;
+	private String _methodName22;
+	private String[] _methodParameterTypes22;
 }

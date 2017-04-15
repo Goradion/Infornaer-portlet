@@ -38,7 +38,6 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.Validator;
 
 import de.ki.sbam.exception.NoSuchQuestionException;
 import de.ki.sbam.model.Question;
@@ -95,7 +94,7 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 			QuestionModelImpl.FINDER_CACHE_ENABLED, QuestionImpl.class,
 			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByCategory",
 			new String[] {
-				String.class.getName(),
+				Long.class.getName(),
 				
 			Integer.class.getName(), Integer.class.getName(),
 				OrderByComparator.class.getName()
@@ -104,69 +103,69 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 		new FinderPath(QuestionModelImpl.ENTITY_CACHE_ENABLED,
 			QuestionModelImpl.FINDER_CACHE_ENABLED, QuestionImpl.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByCategory",
-			new String[] { String.class.getName() },
-			QuestionModelImpl.CATEGORY_COLUMN_BITMASK);
+			new String[] { Long.class.getName() },
+			QuestionModelImpl.CATEGORYID_FK_COLUMN_BITMASK);
 	public static final FinderPath FINDER_PATH_COUNT_BY_CATEGORY = new FinderPath(QuestionModelImpl.ENTITY_CACHE_ENABLED,
 			QuestionModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByCategory",
-			new String[] { String.class.getName() });
+			new String[] { Long.class.getName() });
 
 	/**
-	 * Returns all the questions where category = &#63;.
+	 * Returns all the questions where categoryId_fk = &#63;.
 	 *
-	 * @param category the category
+	 * @param categoryId_fk the category id_fk
 	 * @return the matching questions
 	 */
 	@Override
-	public List<Question> findByCategory(String category) {
-		return findByCategory(category, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-			null);
+	public List<Question> findByCategory(long categoryId_fk) {
+		return findByCategory(categoryId_fk, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the questions where category = &#63;.
+	 * Returns a range of all the questions where categoryId_fk = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link QuestionModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param category the category
+	 * @param categoryId_fk the category id_fk
 	 * @param start the lower bound of the range of questions
 	 * @param end the upper bound of the range of questions (not inclusive)
 	 * @return the range of matching questions
 	 */
 	@Override
-	public List<Question> findByCategory(String category, int start, int end) {
-		return findByCategory(category, start, end, null);
+	public List<Question> findByCategory(long categoryId_fk, int start, int end) {
+		return findByCategory(categoryId_fk, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the questions where category = &#63;.
+	 * Returns an ordered range of all the questions where categoryId_fk = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link QuestionModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param category the category
+	 * @param categoryId_fk the category id_fk
 	 * @param start the lower bound of the range of questions
 	 * @param end the upper bound of the range of questions (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching questions
 	 */
 	@Override
-	public List<Question> findByCategory(String category, int start, int end,
-		OrderByComparator<Question> orderByComparator) {
-		return findByCategory(category, start, end, orderByComparator, true);
+	public List<Question> findByCategory(long categoryId_fk, int start,
+		int end, OrderByComparator<Question> orderByComparator) {
+		return findByCategory(categoryId_fk, start, end, orderByComparator, true);
 	}
 
 	/**
-	 * Returns an ordered range of all the questions where category = &#63;.
+	 * Returns an ordered range of all the questions where categoryId_fk = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link QuestionModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param category the category
+	 * @param categoryId_fk the category id_fk
 	 * @param start the lower bound of the range of questions
 	 * @param end the upper bound of the range of questions (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
@@ -174,8 +173,9 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 	 * @return the ordered range of matching questions
 	 */
 	@Override
-	public List<Question> findByCategory(String category, int start, int end,
-		OrderByComparator<Question> orderByComparator, boolean retrieveFromCache) {
+	public List<Question> findByCategory(long categoryId_fk, int start,
+		int end, OrderByComparator<Question> orderByComparator,
+		boolean retrieveFromCache) {
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
@@ -184,11 +184,15 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 				(orderByComparator == null)) {
 			pagination = false;
 			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CATEGORY;
-			finderArgs = new Object[] { category };
+			finderArgs = new Object[] { categoryId_fk };
 		}
 		else {
 			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_CATEGORY;
-			finderArgs = new Object[] { category, start, end, orderByComparator };
+			finderArgs = new Object[] {
+					categoryId_fk,
+					
+					start, end, orderByComparator
+				};
 		}
 
 		List<Question> list = null;
@@ -199,7 +203,7 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 
 			if ((list != null) && !list.isEmpty()) {
 				for (Question question : list) {
-					if (!Validator.equals(category, question.getCategory())) {
+					if ((categoryId_fk != question.getCategoryId_fk())) {
 						list = null;
 
 						break;
@@ -221,19 +225,7 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 
 			query.append(_SQL_SELECT_QUESTION_WHERE);
 
-			boolean bindCategory = false;
-
-			if (category == null) {
-				query.append(_FINDER_COLUMN_CATEGORY_CATEGORY_1);
-			}
-			else if (category.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_CATEGORY_CATEGORY_3);
-			}
-			else {
-				bindCategory = true;
-
-				query.append(_FINDER_COLUMN_CATEGORY_CATEGORY_2);
-			}
+			query.append(_FINDER_COLUMN_CATEGORY_CATEGORYID_FK_2);
 
 			if (orderByComparator != null) {
 				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -255,9 +247,7 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				if (bindCategory) {
-					qPos.add(category);
-				}
+				qPos.add(categoryId_fk);
 
 				if (!pagination) {
 					list = (List<Question>)QueryUtil.list(q, getDialect(),
@@ -290,18 +280,19 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 	}
 
 	/**
-	 * Returns the first question in the ordered set where category = &#63;.
+	 * Returns the first question in the ordered set where categoryId_fk = &#63;.
 	 *
-	 * @param category the category
+	 * @param categoryId_fk the category id_fk
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching question
 	 * @throws NoSuchQuestionException if a matching question could not be found
 	 */
 	@Override
-	public Question findByCategory_First(String category,
+	public Question findByCategory_First(long categoryId_fk,
 		OrderByComparator<Question> orderByComparator)
 		throws NoSuchQuestionException {
-		Question question = fetchByCategory_First(category, orderByComparator);
+		Question question = fetchByCategory_First(categoryId_fk,
+				orderByComparator);
 
 		if (question != null) {
 			return question;
@@ -311,8 +302,8 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("category=");
-		msg.append(category);
+		msg.append("categoryId_fk=");
+		msg.append(categoryId_fk);
 
 		msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -320,71 +311,16 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 	}
 
 	/**
-	 * Returns the first question in the ordered set where category = &#63;.
+	 * Returns the first question in the ordered set where categoryId_fk = &#63;.
 	 *
-	 * @param category the category
+	 * @param categoryId_fk the category id_fk
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching question, or <code>null</code> if a matching question could not be found
 	 */
 	@Override
-	public Question fetchByCategory_First(String category,
+	public Question fetchByCategory_First(long categoryId_fk,
 		OrderByComparator<Question> orderByComparator) {
-		List<Question> list = findByCategory(category, 0, 1, orderByComparator);
-
-		if (!list.isEmpty()) {
-			return list.get(0);
-		}
-
-		return null;
-	}
-
-	/**
-	 * Returns the last question in the ordered set where category = &#63;.
-	 *
-	 * @param category the category
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching question
-	 * @throws NoSuchQuestionException if a matching question could not be found
-	 */
-	@Override
-	public Question findByCategory_Last(String category,
-		OrderByComparator<Question> orderByComparator)
-		throws NoSuchQuestionException {
-		Question question = fetchByCategory_Last(category, orderByComparator);
-
-		if (question != null) {
-			return question;
-		}
-
-		StringBundler msg = new StringBundler(4);
-
-		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-		msg.append("category=");
-		msg.append(category);
-
-		msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-		throw new NoSuchQuestionException(msg.toString());
-	}
-
-	/**
-	 * Returns the last question in the ordered set where category = &#63;.
-	 *
-	 * @param category the category
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching question, or <code>null</code> if a matching question could not be found
-	 */
-	@Override
-	public Question fetchByCategory_Last(String category,
-		OrderByComparator<Question> orderByComparator) {
-		int count = countByCategory(category);
-
-		if (count == 0) {
-			return null;
-		}
-
-		List<Question> list = findByCategory(category, count - 1, count,
+		List<Question> list = findByCategory(categoryId_fk, 0, 1,
 				orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -395,17 +331,74 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 	}
 
 	/**
-	 * Returns the questions before and after the current question in the ordered set where category = &#63;.
+	 * Returns the last question in the ordered set where categoryId_fk = &#63;.
+	 *
+	 * @param categoryId_fk the category id_fk
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching question
+	 * @throws NoSuchQuestionException if a matching question could not be found
+	 */
+	@Override
+	public Question findByCategory_Last(long categoryId_fk,
+		OrderByComparator<Question> orderByComparator)
+		throws NoSuchQuestionException {
+		Question question = fetchByCategory_Last(categoryId_fk,
+				orderByComparator);
+
+		if (question != null) {
+			return question;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("categoryId_fk=");
+		msg.append(categoryId_fk);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchQuestionException(msg.toString());
+	}
+
+	/**
+	 * Returns the last question in the ordered set where categoryId_fk = &#63;.
+	 *
+	 * @param categoryId_fk the category id_fk
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching question, or <code>null</code> if a matching question could not be found
+	 */
+	@Override
+	public Question fetchByCategory_Last(long categoryId_fk,
+		OrderByComparator<Question> orderByComparator) {
+		int count = countByCategory(categoryId_fk);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<Question> list = findByCategory(categoryId_fk, count - 1, count,
+				orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the questions before and after the current question in the ordered set where categoryId_fk = &#63;.
 	 *
 	 * @param questionId the primary key of the current question
-	 * @param category the category
+	 * @param categoryId_fk the category id_fk
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next question
 	 * @throws NoSuchQuestionException if a question with the primary key could not be found
 	 */
 	@Override
 	public Question[] findByCategory_PrevAndNext(long questionId,
-		String category, OrderByComparator<Question> orderByComparator)
+		long categoryId_fk, OrderByComparator<Question> orderByComparator)
 		throws NoSuchQuestionException {
 		Question question = findByPrimaryKey(questionId);
 
@@ -416,13 +409,13 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 
 			Question[] array = new QuestionImpl[3];
 
-			array[0] = getByCategory_PrevAndNext(session, question, category,
-					orderByComparator, true);
+			array[0] = getByCategory_PrevAndNext(session, question,
+					categoryId_fk, orderByComparator, true);
 
 			array[1] = question;
 
-			array[2] = getByCategory_PrevAndNext(session, question, category,
-					orderByComparator, false);
+			array[2] = getByCategory_PrevAndNext(session, question,
+					categoryId_fk, orderByComparator, false);
 
 			return array;
 		}
@@ -435,7 +428,7 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 	}
 
 	protected Question getByCategory_PrevAndNext(Session session,
-		Question question, String category,
+		Question question, long categoryId_fk,
 		OrderByComparator<Question> orderByComparator, boolean previous) {
 		StringBundler query = null;
 
@@ -450,19 +443,7 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 
 		query.append(_SQL_SELECT_QUESTION_WHERE);
 
-		boolean bindCategory = false;
-
-		if (category == null) {
-			query.append(_FINDER_COLUMN_CATEGORY_CATEGORY_1);
-		}
-		else if (category.equals(StringPool.BLANK)) {
-			query.append(_FINDER_COLUMN_CATEGORY_CATEGORY_3);
-		}
-		else {
-			bindCategory = true;
-
-			query.append(_FINDER_COLUMN_CATEGORY_CATEGORY_2);
-		}
+		query.append(_FINDER_COLUMN_CATEGORY_CATEGORYID_FK_2);
 
 		if (orderByComparator != null) {
 			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
@@ -532,9 +513,7 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
-		if (bindCategory) {
-			qPos.add(category);
-		}
+		qPos.add(categoryId_fk);
 
 		if (orderByComparator != null) {
 			Object[] values = orderByComparator.getOrderByConditionValues(question);
@@ -555,29 +534,29 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 	}
 
 	/**
-	 * Removes all the questions where category = &#63; from the database.
+	 * Removes all the questions where categoryId_fk = &#63; from the database.
 	 *
-	 * @param category the category
+	 * @param categoryId_fk the category id_fk
 	 */
 	@Override
-	public void removeByCategory(String category) {
-		for (Question question : findByCategory(category, QueryUtil.ALL_POS,
-				QueryUtil.ALL_POS, null)) {
+	public void removeByCategory(long categoryId_fk) {
+		for (Question question : findByCategory(categoryId_fk,
+				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(question);
 		}
 	}
 
 	/**
-	 * Returns the number of questions where category = &#63;.
+	 * Returns the number of questions where categoryId_fk = &#63;.
 	 *
-	 * @param category the category
+	 * @param categoryId_fk the category id_fk
 	 * @return the number of matching questions
 	 */
 	@Override
-	public int countByCategory(String category) {
+	public int countByCategory(long categoryId_fk) {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_CATEGORY;
 
-		Object[] finderArgs = new Object[] { category };
+		Object[] finderArgs = new Object[] { categoryId_fk };
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -586,19 +565,7 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 
 			query.append(_SQL_COUNT_QUESTION_WHERE);
 
-			boolean bindCategory = false;
-
-			if (category == null) {
-				query.append(_FINDER_COLUMN_CATEGORY_CATEGORY_1);
-			}
-			else if (category.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_CATEGORY_CATEGORY_3);
-			}
-			else {
-				bindCategory = true;
-
-				query.append(_FINDER_COLUMN_CATEGORY_CATEGORY_2);
-			}
+			query.append(_FINDER_COLUMN_CATEGORY_CATEGORYID_FK_2);
 
 			String sql = query.toString();
 
@@ -611,9 +578,7 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				if (bindCategory) {
-					qPos.add(category);
-				}
+				qPos.add(categoryId_fk);
 
 				count = (Long)q.uniqueResult();
 
@@ -632,15 +597,13 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_CATEGORY_CATEGORY_1 = "question.category IS NULL";
-	private static final String _FINDER_COLUMN_CATEGORY_CATEGORY_2 = "question.category = ?";
-	private static final String _FINDER_COLUMN_CATEGORY_CATEGORY_3 = "(question.category IS NULL OR question.category = '')";
+	private static final String _FINDER_COLUMN_CATEGORY_CATEGORYID_FK_2 = "question.categoryId_fk = ?";
 	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_DIFFICULTY =
 		new FinderPath(QuestionModelImpl.ENTITY_CACHE_ENABLED,
 			QuestionModelImpl.FINDER_CACHE_ENABLED, QuestionImpl.class,
 			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByDifficulty",
 			new String[] {
-				Integer.class.getName(),
+				Long.class.getName(),
 				
 			Integer.class.getName(), Integer.class.getName(),
 				OrderByComparator.class.getName()
@@ -649,69 +612,71 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 		new FinderPath(QuestionModelImpl.ENTITY_CACHE_ENABLED,
 			QuestionModelImpl.FINDER_CACHE_ENABLED, QuestionImpl.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByDifficulty",
-			new String[] { Integer.class.getName() },
-			QuestionModelImpl.DIFFICULTY_COLUMN_BITMASK);
+			new String[] { Long.class.getName() },
+			QuestionModelImpl.DIFFICULTYID_FK_COLUMN_BITMASK);
 	public static final FinderPath FINDER_PATH_COUNT_BY_DIFFICULTY = new FinderPath(QuestionModelImpl.ENTITY_CACHE_ENABLED,
 			QuestionModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByDifficulty",
-			new String[] { Integer.class.getName() });
+			new String[] { Long.class.getName() });
 
 	/**
-	 * Returns all the questions where difficulty = &#63;.
+	 * Returns all the questions where difficultyId_fk = &#63;.
 	 *
-	 * @param difficulty the difficulty
+	 * @param difficultyId_fk the difficulty id_fk
 	 * @return the matching questions
 	 */
 	@Override
-	public List<Question> findByDifficulty(int difficulty) {
-		return findByDifficulty(difficulty, QueryUtil.ALL_POS,
+	public List<Question> findByDifficulty(long difficultyId_fk) {
+		return findByDifficulty(difficultyId_fk, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the questions where difficulty = &#63;.
+	 * Returns a range of all the questions where difficultyId_fk = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link QuestionModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param difficulty the difficulty
+	 * @param difficultyId_fk the difficulty id_fk
 	 * @param start the lower bound of the range of questions
 	 * @param end the upper bound of the range of questions (not inclusive)
 	 * @return the range of matching questions
 	 */
 	@Override
-	public List<Question> findByDifficulty(int difficulty, int start, int end) {
-		return findByDifficulty(difficulty, start, end, null);
+	public List<Question> findByDifficulty(long difficultyId_fk, int start,
+		int end) {
+		return findByDifficulty(difficultyId_fk, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the questions where difficulty = &#63;.
+	 * Returns an ordered range of all the questions where difficultyId_fk = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link QuestionModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param difficulty the difficulty
+	 * @param difficultyId_fk the difficulty id_fk
 	 * @param start the lower bound of the range of questions
 	 * @param end the upper bound of the range of questions (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching questions
 	 */
 	@Override
-	public List<Question> findByDifficulty(int difficulty, int start, int end,
-		OrderByComparator<Question> orderByComparator) {
-		return findByDifficulty(difficulty, start, end, orderByComparator, true);
+	public List<Question> findByDifficulty(long difficultyId_fk, int start,
+		int end, OrderByComparator<Question> orderByComparator) {
+		return findByDifficulty(difficultyId_fk, start, end, orderByComparator,
+			true);
 	}
 
 	/**
-	 * Returns an ordered range of all the questions where difficulty = &#63;.
+	 * Returns an ordered range of all the questions where difficultyId_fk = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link QuestionModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param difficulty the difficulty
+	 * @param difficultyId_fk the difficulty id_fk
 	 * @param start the lower bound of the range of questions
 	 * @param end the upper bound of the range of questions (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
@@ -719,8 +684,9 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 	 * @return the ordered range of matching questions
 	 */
 	@Override
-	public List<Question> findByDifficulty(int difficulty, int start, int end,
-		OrderByComparator<Question> orderByComparator, boolean retrieveFromCache) {
+	public List<Question> findByDifficulty(long difficultyId_fk, int start,
+		int end, OrderByComparator<Question> orderByComparator,
+		boolean retrieveFromCache) {
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
@@ -729,11 +695,15 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 				(orderByComparator == null)) {
 			pagination = false;
 			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_DIFFICULTY;
-			finderArgs = new Object[] { difficulty };
+			finderArgs = new Object[] { difficultyId_fk };
 		}
 		else {
 			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_DIFFICULTY;
-			finderArgs = new Object[] { difficulty, start, end, orderByComparator };
+			finderArgs = new Object[] {
+					difficultyId_fk,
+					
+					start, end, orderByComparator
+				};
 		}
 
 		List<Question> list = null;
@@ -744,7 +714,7 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 
 			if ((list != null) && !list.isEmpty()) {
 				for (Question question : list) {
-					if ((difficulty != question.getDifficulty())) {
+					if ((difficultyId_fk != question.getDifficultyId_fk())) {
 						list = null;
 
 						break;
@@ -766,7 +736,7 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 
 			query.append(_SQL_SELECT_QUESTION_WHERE);
 
-			query.append(_FINDER_COLUMN_DIFFICULTY_DIFFICULTY_2);
+			query.append(_FINDER_COLUMN_DIFFICULTY_DIFFICULTYID_FK_2);
 
 			if (orderByComparator != null) {
 				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -788,7 +758,7 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(difficulty);
+				qPos.add(difficultyId_fk);
 
 				if (!pagination) {
 					list = (List<Question>)QueryUtil.list(q, getDialect(),
@@ -821,18 +791,18 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 	}
 
 	/**
-	 * Returns the first question in the ordered set where difficulty = &#63;.
+	 * Returns the first question in the ordered set where difficultyId_fk = &#63;.
 	 *
-	 * @param difficulty the difficulty
+	 * @param difficultyId_fk the difficulty id_fk
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching question
 	 * @throws NoSuchQuestionException if a matching question could not be found
 	 */
 	@Override
-	public Question findByDifficulty_First(int difficulty,
+	public Question findByDifficulty_First(long difficultyId_fk,
 		OrderByComparator<Question> orderByComparator)
 		throws NoSuchQuestionException {
-		Question question = fetchByDifficulty_First(difficulty,
+		Question question = fetchByDifficulty_First(difficultyId_fk,
 				orderByComparator);
 
 		if (question != null) {
@@ -843,8 +813,8 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("difficulty=");
-		msg.append(difficulty);
+		msg.append("difficultyId_fk=");
+		msg.append(difficultyId_fk);
 
 		msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -852,16 +822,16 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 	}
 
 	/**
-	 * Returns the first question in the ordered set where difficulty = &#63;.
+	 * Returns the first question in the ordered set where difficultyId_fk = &#63;.
 	 *
-	 * @param difficulty the difficulty
+	 * @param difficultyId_fk the difficulty id_fk
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching question, or <code>null</code> if a matching question could not be found
 	 */
 	@Override
-	public Question fetchByDifficulty_First(int difficulty,
+	public Question fetchByDifficulty_First(long difficultyId_fk,
 		OrderByComparator<Question> orderByComparator) {
-		List<Question> list = findByDifficulty(difficulty, 0, 1,
+		List<Question> list = findByDifficulty(difficultyId_fk, 0, 1,
 				orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -872,18 +842,19 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 	}
 
 	/**
-	 * Returns the last question in the ordered set where difficulty = &#63;.
+	 * Returns the last question in the ordered set where difficultyId_fk = &#63;.
 	 *
-	 * @param difficulty the difficulty
+	 * @param difficultyId_fk the difficulty id_fk
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching question
 	 * @throws NoSuchQuestionException if a matching question could not be found
 	 */
 	@Override
-	public Question findByDifficulty_Last(int difficulty,
+	public Question findByDifficulty_Last(long difficultyId_fk,
 		OrderByComparator<Question> orderByComparator)
 		throws NoSuchQuestionException {
-		Question question = fetchByDifficulty_Last(difficulty, orderByComparator);
+		Question question = fetchByDifficulty_Last(difficultyId_fk,
+				orderByComparator);
 
 		if (question != null) {
 			return question;
@@ -893,8 +864,8 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("difficulty=");
-		msg.append(difficulty);
+		msg.append("difficultyId_fk=");
+		msg.append(difficultyId_fk);
 
 		msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -902,23 +873,23 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 	}
 
 	/**
-	 * Returns the last question in the ordered set where difficulty = &#63;.
+	 * Returns the last question in the ordered set where difficultyId_fk = &#63;.
 	 *
-	 * @param difficulty the difficulty
+	 * @param difficultyId_fk the difficulty id_fk
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching question, or <code>null</code> if a matching question could not be found
 	 */
 	@Override
-	public Question fetchByDifficulty_Last(int difficulty,
+	public Question fetchByDifficulty_Last(long difficultyId_fk,
 		OrderByComparator<Question> orderByComparator) {
-		int count = countByDifficulty(difficulty);
+		int count = countByDifficulty(difficultyId_fk);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<Question> list = findByDifficulty(difficulty, count - 1, count,
-				orderByComparator);
+		List<Question> list = findByDifficulty(difficultyId_fk, count - 1,
+				count, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -928,17 +899,17 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 	}
 
 	/**
-	 * Returns the questions before and after the current question in the ordered set where difficulty = &#63;.
+	 * Returns the questions before and after the current question in the ordered set where difficultyId_fk = &#63;.
 	 *
 	 * @param questionId the primary key of the current question
-	 * @param difficulty the difficulty
+	 * @param difficultyId_fk the difficulty id_fk
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next question
 	 * @throws NoSuchQuestionException if a question with the primary key could not be found
 	 */
 	@Override
 	public Question[] findByDifficulty_PrevAndNext(long questionId,
-		int difficulty, OrderByComparator<Question> orderByComparator)
+		long difficultyId_fk, OrderByComparator<Question> orderByComparator)
 		throws NoSuchQuestionException {
 		Question question = findByPrimaryKey(questionId);
 
@@ -950,12 +921,12 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 			Question[] array = new QuestionImpl[3];
 
 			array[0] = getByDifficulty_PrevAndNext(session, question,
-					difficulty, orderByComparator, true);
+					difficultyId_fk, orderByComparator, true);
 
 			array[1] = question;
 
 			array[2] = getByDifficulty_PrevAndNext(session, question,
-					difficulty, orderByComparator, false);
+					difficultyId_fk, orderByComparator, false);
 
 			return array;
 		}
@@ -968,7 +939,7 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 	}
 
 	protected Question getByDifficulty_PrevAndNext(Session session,
-		Question question, int difficulty,
+		Question question, long difficultyId_fk,
 		OrderByComparator<Question> orderByComparator, boolean previous) {
 		StringBundler query = null;
 
@@ -983,7 +954,7 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 
 		query.append(_SQL_SELECT_QUESTION_WHERE);
 
-		query.append(_FINDER_COLUMN_DIFFICULTY_DIFFICULTY_2);
+		query.append(_FINDER_COLUMN_DIFFICULTY_DIFFICULTYID_FK_2);
 
 		if (orderByComparator != null) {
 			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
@@ -1053,7 +1024,7 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
-		qPos.add(difficulty);
+		qPos.add(difficultyId_fk);
 
 		if (orderByComparator != null) {
 			Object[] values = orderByComparator.getOrderByConditionValues(question);
@@ -1074,29 +1045,29 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 	}
 
 	/**
-	 * Removes all the questions where difficulty = &#63; from the database.
+	 * Removes all the questions where difficultyId_fk = &#63; from the database.
 	 *
-	 * @param difficulty the difficulty
+	 * @param difficultyId_fk the difficulty id_fk
 	 */
 	@Override
-	public void removeByDifficulty(int difficulty) {
-		for (Question question : findByDifficulty(difficulty,
+	public void removeByDifficulty(long difficultyId_fk) {
+		for (Question question : findByDifficulty(difficultyId_fk,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(question);
 		}
 	}
 
 	/**
-	 * Returns the number of questions where difficulty = &#63;.
+	 * Returns the number of questions where difficultyId_fk = &#63;.
 	 *
-	 * @param difficulty the difficulty
+	 * @param difficultyId_fk the difficulty id_fk
 	 * @return the number of matching questions
 	 */
 	@Override
-	public int countByDifficulty(int difficulty) {
+	public int countByDifficulty(long difficultyId_fk) {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_DIFFICULTY;
 
-		Object[] finderArgs = new Object[] { difficulty };
+		Object[] finderArgs = new Object[] { difficultyId_fk };
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -1105,7 +1076,7 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 
 			query.append(_SQL_COUNT_QUESTION_WHERE);
 
-			query.append(_FINDER_COLUMN_DIFFICULTY_DIFFICULTY_2);
+			query.append(_FINDER_COLUMN_DIFFICULTY_DIFFICULTYID_FK_2);
 
 			String sql = query.toString();
 
@@ -1118,7 +1089,7 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(difficulty);
+				qPos.add(difficultyId_fk);
 
 				count = (Long)q.uniqueResult();
 
@@ -1137,7 +1108,7 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_DIFFICULTY_DIFFICULTY_2 = "question.difficulty = ?";
+	private static final String _FINDER_COLUMN_DIFFICULTY_DIFFICULTYID_FK_2 = "question.difficultyId_fk = ?";
 	public static final FinderPath FINDER_PATH_FETCH_BY_QUESTIONID = new FinderPath(QuestionModelImpl.ENTITY_CACHE_ENABLED,
 			QuestionModelImpl.FINDER_CACHE_ENABLED, QuestionImpl.class,
 			FINDER_CLASS_NAME_ENTITY, "fetchByQuestionId",
@@ -1354,7 +1325,7 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 			FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
 			"findByCategoryAndDifficulty",
 			new String[] {
-				String.class.getName(), Integer.class.getName(),
+				Long.class.getName(), Long.class.getName(),
 				
 			Integer.class.getName(), Integer.class.getName(),
 				OrderByComparator.class.getName()
@@ -1364,80 +1335,80 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 			QuestionModelImpl.FINDER_CACHE_ENABLED, QuestionImpl.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
 			"findByCategoryAndDifficulty",
-			new String[] { String.class.getName(), Integer.class.getName() },
-			QuestionModelImpl.CATEGORY_COLUMN_BITMASK |
-			QuestionModelImpl.DIFFICULTY_COLUMN_BITMASK);
+			new String[] { Long.class.getName(), Long.class.getName() },
+			QuestionModelImpl.CATEGORYID_FK_COLUMN_BITMASK |
+			QuestionModelImpl.DIFFICULTYID_FK_COLUMN_BITMASK);
 	public static final FinderPath FINDER_PATH_COUNT_BY_CATEGORYANDDIFFICULTY = new FinderPath(QuestionModelImpl.ENTITY_CACHE_ENABLED,
 			QuestionModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
 			"countByCategoryAndDifficulty",
-			new String[] { String.class.getName(), Integer.class.getName() });
+			new String[] { Long.class.getName(), Long.class.getName() });
 
 	/**
-	 * Returns all the questions where category = &#63; and difficulty = &#63;.
+	 * Returns all the questions where categoryId_fk = &#63; and difficultyId_fk = &#63;.
 	 *
-	 * @param category the category
-	 * @param difficulty the difficulty
+	 * @param categoryId_fk the category id_fk
+	 * @param difficultyId_fk the difficulty id_fk
 	 * @return the matching questions
 	 */
 	@Override
-	public List<Question> findByCategoryAndDifficulty(String category,
-		int difficulty) {
-		return findByCategoryAndDifficulty(category, difficulty,
+	public List<Question> findByCategoryAndDifficulty(long categoryId_fk,
+		long difficultyId_fk) {
+		return findByCategoryAndDifficulty(categoryId_fk, difficultyId_fk,
 			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the questions where category = &#63; and difficulty = &#63;.
+	 * Returns a range of all the questions where categoryId_fk = &#63; and difficultyId_fk = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link QuestionModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param category the category
-	 * @param difficulty the difficulty
+	 * @param categoryId_fk the category id_fk
+	 * @param difficultyId_fk the difficulty id_fk
 	 * @param start the lower bound of the range of questions
 	 * @param end the upper bound of the range of questions (not inclusive)
 	 * @return the range of matching questions
 	 */
 	@Override
-	public List<Question> findByCategoryAndDifficulty(String category,
-		int difficulty, int start, int end) {
-		return findByCategoryAndDifficulty(category, difficulty, start, end,
-			null);
+	public List<Question> findByCategoryAndDifficulty(long categoryId_fk,
+		long difficultyId_fk, int start, int end) {
+		return findByCategoryAndDifficulty(categoryId_fk, difficultyId_fk,
+			start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the questions where category = &#63; and difficulty = &#63;.
+	 * Returns an ordered range of all the questions where categoryId_fk = &#63; and difficultyId_fk = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link QuestionModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param category the category
-	 * @param difficulty the difficulty
+	 * @param categoryId_fk the category id_fk
+	 * @param difficultyId_fk the difficulty id_fk
 	 * @param start the lower bound of the range of questions
 	 * @param end the upper bound of the range of questions (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching questions
 	 */
 	@Override
-	public List<Question> findByCategoryAndDifficulty(String category,
-		int difficulty, int start, int end,
+	public List<Question> findByCategoryAndDifficulty(long categoryId_fk,
+		long difficultyId_fk, int start, int end,
 		OrderByComparator<Question> orderByComparator) {
-		return findByCategoryAndDifficulty(category, difficulty, start, end,
-			orderByComparator, true);
+		return findByCategoryAndDifficulty(categoryId_fk, difficultyId_fk,
+			start, end, orderByComparator, true);
 	}
 
 	/**
-	 * Returns an ordered range of all the questions where category = &#63; and difficulty = &#63;.
+	 * Returns an ordered range of all the questions where categoryId_fk = &#63; and difficultyId_fk = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link QuestionModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param category the category
-	 * @param difficulty the difficulty
+	 * @param categoryId_fk the category id_fk
+	 * @param difficultyId_fk the difficulty id_fk
 	 * @param start the lower bound of the range of questions
 	 * @param end the upper bound of the range of questions (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
@@ -1445,8 +1416,8 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 	 * @return the ordered range of matching questions
 	 */
 	@Override
-	public List<Question> findByCategoryAndDifficulty(String category,
-		int difficulty, int start, int end,
+	public List<Question> findByCategoryAndDifficulty(long categoryId_fk,
+		long difficultyId_fk, int start, int end,
 		OrderByComparator<Question> orderByComparator, boolean retrieveFromCache) {
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -1456,12 +1427,12 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 				(orderByComparator == null)) {
 			pagination = false;
 			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CATEGORYANDDIFFICULTY;
-			finderArgs = new Object[] { category, difficulty };
+			finderArgs = new Object[] { categoryId_fk, difficultyId_fk };
 		}
 		else {
 			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_CATEGORYANDDIFFICULTY;
 			finderArgs = new Object[] {
-					category, difficulty,
+					categoryId_fk, difficultyId_fk,
 					
 					start, end, orderByComparator
 				};
@@ -1475,8 +1446,8 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 
 			if ((list != null) && !list.isEmpty()) {
 				for (Question question : list) {
-					if (!Validator.equals(category, question.getCategory()) ||
-							(difficulty != question.getDifficulty())) {
+					if ((categoryId_fk != question.getCategoryId_fk()) ||
+							(difficultyId_fk != question.getDifficultyId_fk())) {
 						list = null;
 
 						break;
@@ -1498,21 +1469,9 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 
 			query.append(_SQL_SELECT_QUESTION_WHERE);
 
-			boolean bindCategory = false;
+			query.append(_FINDER_COLUMN_CATEGORYANDDIFFICULTY_CATEGORYID_FK_2);
 
-			if (category == null) {
-				query.append(_FINDER_COLUMN_CATEGORYANDDIFFICULTY_CATEGORY_1);
-			}
-			else if (category.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_CATEGORYANDDIFFICULTY_CATEGORY_3);
-			}
-			else {
-				bindCategory = true;
-
-				query.append(_FINDER_COLUMN_CATEGORYANDDIFFICULTY_CATEGORY_2);
-			}
-
-			query.append(_FINDER_COLUMN_CATEGORYANDDIFFICULTY_DIFFICULTY_2);
+			query.append(_FINDER_COLUMN_CATEGORYANDDIFFICULTY_DIFFICULTYID_FK_2);
 
 			if (orderByComparator != null) {
 				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -1534,11 +1493,9 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				if (bindCategory) {
-					qPos.add(category);
-				}
+				qPos.add(categoryId_fk);
 
-				qPos.add(difficulty);
+				qPos.add(difficultyId_fk);
 
 				if (!pagination) {
 					list = (List<Question>)QueryUtil.list(q, getDialect(),
@@ -1571,20 +1528,20 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 	}
 
 	/**
-	 * Returns the first question in the ordered set where category = &#63; and difficulty = &#63;.
+	 * Returns the first question in the ordered set where categoryId_fk = &#63; and difficultyId_fk = &#63;.
 	 *
-	 * @param category the category
-	 * @param difficulty the difficulty
+	 * @param categoryId_fk the category id_fk
+	 * @param difficultyId_fk the difficulty id_fk
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching question
 	 * @throws NoSuchQuestionException if a matching question could not be found
 	 */
 	@Override
-	public Question findByCategoryAndDifficulty_First(String category,
-		int difficulty, OrderByComparator<Question> orderByComparator)
+	public Question findByCategoryAndDifficulty_First(long categoryId_fk,
+		long difficultyId_fk, OrderByComparator<Question> orderByComparator)
 		throws NoSuchQuestionException {
-		Question question = fetchByCategoryAndDifficulty_First(category,
-				difficulty, orderByComparator);
+		Question question = fetchByCategoryAndDifficulty_First(categoryId_fk,
+				difficultyId_fk, orderByComparator);
 
 		if (question != null) {
 			return question;
@@ -1594,11 +1551,11 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("category=");
-		msg.append(category);
+		msg.append("categoryId_fk=");
+		msg.append(categoryId_fk);
 
-		msg.append(", difficulty=");
-		msg.append(difficulty);
+		msg.append(", difficultyId_fk=");
+		msg.append(difficultyId_fk);
 
 		msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1606,18 +1563,18 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 	}
 
 	/**
-	 * Returns the first question in the ordered set where category = &#63; and difficulty = &#63;.
+	 * Returns the first question in the ordered set where categoryId_fk = &#63; and difficultyId_fk = &#63;.
 	 *
-	 * @param category the category
-	 * @param difficulty the difficulty
+	 * @param categoryId_fk the category id_fk
+	 * @param difficultyId_fk the difficulty id_fk
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching question, or <code>null</code> if a matching question could not be found
 	 */
 	@Override
-	public Question fetchByCategoryAndDifficulty_First(String category,
-		int difficulty, OrderByComparator<Question> orderByComparator) {
-		List<Question> list = findByCategoryAndDifficulty(category, difficulty,
-				0, 1, orderByComparator);
+	public Question fetchByCategoryAndDifficulty_First(long categoryId_fk,
+		long difficultyId_fk, OrderByComparator<Question> orderByComparator) {
+		List<Question> list = findByCategoryAndDifficulty(categoryId_fk,
+				difficultyId_fk, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -1627,20 +1584,20 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 	}
 
 	/**
-	 * Returns the last question in the ordered set where category = &#63; and difficulty = &#63;.
+	 * Returns the last question in the ordered set where categoryId_fk = &#63; and difficultyId_fk = &#63;.
 	 *
-	 * @param category the category
-	 * @param difficulty the difficulty
+	 * @param categoryId_fk the category id_fk
+	 * @param difficultyId_fk the difficulty id_fk
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching question
 	 * @throws NoSuchQuestionException if a matching question could not be found
 	 */
 	@Override
-	public Question findByCategoryAndDifficulty_Last(String category,
-		int difficulty, OrderByComparator<Question> orderByComparator)
+	public Question findByCategoryAndDifficulty_Last(long categoryId_fk,
+		long difficultyId_fk, OrderByComparator<Question> orderByComparator)
 		throws NoSuchQuestionException {
-		Question question = fetchByCategoryAndDifficulty_Last(category,
-				difficulty, orderByComparator);
+		Question question = fetchByCategoryAndDifficulty_Last(categoryId_fk,
+				difficultyId_fk, orderByComparator);
 
 		if (question != null) {
 			return question;
@@ -1650,11 +1607,11 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("category=");
-		msg.append(category);
+		msg.append("categoryId_fk=");
+		msg.append(categoryId_fk);
 
-		msg.append(", difficulty=");
-		msg.append(difficulty);
+		msg.append(", difficultyId_fk=");
+		msg.append(difficultyId_fk);
 
 		msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1662,24 +1619,24 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 	}
 
 	/**
-	 * Returns the last question in the ordered set where category = &#63; and difficulty = &#63;.
+	 * Returns the last question in the ordered set where categoryId_fk = &#63; and difficultyId_fk = &#63;.
 	 *
-	 * @param category the category
-	 * @param difficulty the difficulty
+	 * @param categoryId_fk the category id_fk
+	 * @param difficultyId_fk the difficulty id_fk
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching question, or <code>null</code> if a matching question could not be found
 	 */
 	@Override
-	public Question fetchByCategoryAndDifficulty_Last(String category,
-		int difficulty, OrderByComparator<Question> orderByComparator) {
-		int count = countByCategoryAndDifficulty(category, difficulty);
+	public Question fetchByCategoryAndDifficulty_Last(long categoryId_fk,
+		long difficultyId_fk, OrderByComparator<Question> orderByComparator) {
+		int count = countByCategoryAndDifficulty(categoryId_fk, difficultyId_fk);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<Question> list = findByCategoryAndDifficulty(category, difficulty,
-				count - 1, count, orderByComparator);
+		List<Question> list = findByCategoryAndDifficulty(categoryId_fk,
+				difficultyId_fk, count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -1689,18 +1646,18 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 	}
 
 	/**
-	 * Returns the questions before and after the current question in the ordered set where category = &#63; and difficulty = &#63;.
+	 * Returns the questions before and after the current question in the ordered set where categoryId_fk = &#63; and difficultyId_fk = &#63;.
 	 *
 	 * @param questionId the primary key of the current question
-	 * @param category the category
-	 * @param difficulty the difficulty
+	 * @param categoryId_fk the category id_fk
+	 * @param difficultyId_fk the difficulty id_fk
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next question
 	 * @throws NoSuchQuestionException if a question with the primary key could not be found
 	 */
 	@Override
 	public Question[] findByCategoryAndDifficulty_PrevAndNext(long questionId,
-		String category, int difficulty,
+		long categoryId_fk, long difficultyId_fk,
 		OrderByComparator<Question> orderByComparator)
 		throws NoSuchQuestionException {
 		Question question = findByPrimaryKey(questionId);
@@ -1713,12 +1670,14 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 			Question[] array = new QuestionImpl[3];
 
 			array[0] = getByCategoryAndDifficulty_PrevAndNext(session,
-					question, category, difficulty, orderByComparator, true);
+					question, categoryId_fk, difficultyId_fk,
+					orderByComparator, true);
 
 			array[1] = question;
 
 			array[2] = getByCategoryAndDifficulty_PrevAndNext(session,
-					question, category, difficulty, orderByComparator, false);
+					question, categoryId_fk, difficultyId_fk,
+					orderByComparator, false);
 
 			return array;
 		}
@@ -1731,7 +1690,7 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 	}
 
 	protected Question getByCategoryAndDifficulty_PrevAndNext(Session session,
-		Question question, String category, int difficulty,
+		Question question, long categoryId_fk, long difficultyId_fk,
 		OrderByComparator<Question> orderByComparator, boolean previous) {
 		StringBundler query = null;
 
@@ -1746,21 +1705,9 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 
 		query.append(_SQL_SELECT_QUESTION_WHERE);
 
-		boolean bindCategory = false;
+		query.append(_FINDER_COLUMN_CATEGORYANDDIFFICULTY_CATEGORYID_FK_2);
 
-		if (category == null) {
-			query.append(_FINDER_COLUMN_CATEGORYANDDIFFICULTY_CATEGORY_1);
-		}
-		else if (category.equals(StringPool.BLANK)) {
-			query.append(_FINDER_COLUMN_CATEGORYANDDIFFICULTY_CATEGORY_3);
-		}
-		else {
-			bindCategory = true;
-
-			query.append(_FINDER_COLUMN_CATEGORYANDDIFFICULTY_CATEGORY_2);
-		}
-
-		query.append(_FINDER_COLUMN_CATEGORYANDDIFFICULTY_DIFFICULTY_2);
+		query.append(_FINDER_COLUMN_CATEGORYANDDIFFICULTY_DIFFICULTYID_FK_2);
 
 		if (orderByComparator != null) {
 			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
@@ -1830,11 +1777,9 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
-		if (bindCategory) {
-			qPos.add(category);
-		}
+		qPos.add(categoryId_fk);
 
-		qPos.add(difficulty);
+		qPos.add(difficultyId_fk);
 
 		if (orderByComparator != null) {
 			Object[] values = orderByComparator.getOrderByConditionValues(question);
@@ -1855,31 +1800,33 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 	}
 
 	/**
-	 * Removes all the questions where category = &#63; and difficulty = &#63; from the database.
+	 * Removes all the questions where categoryId_fk = &#63; and difficultyId_fk = &#63; from the database.
 	 *
-	 * @param category the category
-	 * @param difficulty the difficulty
+	 * @param categoryId_fk the category id_fk
+	 * @param difficultyId_fk the difficulty id_fk
 	 */
 	@Override
-	public void removeByCategoryAndDifficulty(String category, int difficulty) {
-		for (Question question : findByCategoryAndDifficulty(category,
-				difficulty, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+	public void removeByCategoryAndDifficulty(long categoryId_fk,
+		long difficultyId_fk) {
+		for (Question question : findByCategoryAndDifficulty(categoryId_fk,
+				difficultyId_fk, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(question);
 		}
 	}
 
 	/**
-	 * Returns the number of questions where category = &#63; and difficulty = &#63;.
+	 * Returns the number of questions where categoryId_fk = &#63; and difficultyId_fk = &#63;.
 	 *
-	 * @param category the category
-	 * @param difficulty the difficulty
+	 * @param categoryId_fk the category id_fk
+	 * @param difficultyId_fk the difficulty id_fk
 	 * @return the number of matching questions
 	 */
 	@Override
-	public int countByCategoryAndDifficulty(String category, int difficulty) {
+	public int countByCategoryAndDifficulty(long categoryId_fk,
+		long difficultyId_fk) {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_CATEGORYANDDIFFICULTY;
 
-		Object[] finderArgs = new Object[] { category, difficulty };
+		Object[] finderArgs = new Object[] { categoryId_fk, difficultyId_fk };
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -1888,21 +1835,9 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 
 			query.append(_SQL_COUNT_QUESTION_WHERE);
 
-			boolean bindCategory = false;
+			query.append(_FINDER_COLUMN_CATEGORYANDDIFFICULTY_CATEGORYID_FK_2);
 
-			if (category == null) {
-				query.append(_FINDER_COLUMN_CATEGORYANDDIFFICULTY_CATEGORY_1);
-			}
-			else if (category.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_CATEGORYANDDIFFICULTY_CATEGORY_3);
-			}
-			else {
-				bindCategory = true;
-
-				query.append(_FINDER_COLUMN_CATEGORYANDDIFFICULTY_CATEGORY_2);
-			}
-
-			query.append(_FINDER_COLUMN_CATEGORYANDDIFFICULTY_DIFFICULTY_2);
+			query.append(_FINDER_COLUMN_CATEGORYANDDIFFICULTY_DIFFICULTYID_FK_2);
 
 			String sql = query.toString();
 
@@ -1915,11 +1850,9 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				if (bindCategory) {
-					qPos.add(category);
-				}
+				qPos.add(categoryId_fk);
 
-				qPos.add(difficulty);
+				qPos.add(difficultyId_fk);
 
 				count = (Long)q.uniqueResult();
 
@@ -1938,11 +1871,10 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_CATEGORYANDDIFFICULTY_CATEGORY_1 = "question.category IS NULL AND ";
-	private static final String _FINDER_COLUMN_CATEGORYANDDIFFICULTY_CATEGORY_2 = "question.category = ? AND ";
-	private static final String _FINDER_COLUMN_CATEGORYANDDIFFICULTY_CATEGORY_3 = "(question.category IS NULL OR question.category = '') AND ";
-	private static final String _FINDER_COLUMN_CATEGORYANDDIFFICULTY_DIFFICULTY_2 =
-		"question.difficulty = ?";
+	private static final String _FINDER_COLUMN_CATEGORYANDDIFFICULTY_CATEGORYID_FK_2 =
+		"question.categoryId_fk = ? AND ";
+	private static final String _FINDER_COLUMN_CATEGORYANDDIFFICULTY_DIFFICULTYID_FK_2 =
+		"question.difficultyId_fk = ?";
 
 	public QuestionPersistenceImpl() {
 		setModelClass(Question.class);
@@ -2230,14 +2162,14 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 			if ((questionModelImpl.getColumnBitmask() &
 					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CATEGORY.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
-						questionModelImpl.getOriginalCategory()
+						questionModelImpl.getOriginalCategoryId_fk()
 					};
 
 				finderCache.removeResult(FINDER_PATH_COUNT_BY_CATEGORY, args);
 				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CATEGORY,
 					args);
 
-				args = new Object[] { questionModelImpl.getCategory() };
+				args = new Object[] { questionModelImpl.getCategoryId_fk() };
 
 				finderCache.removeResult(FINDER_PATH_COUNT_BY_CATEGORY, args);
 				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CATEGORY,
@@ -2247,14 +2179,14 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 			if ((questionModelImpl.getColumnBitmask() &
 					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_DIFFICULTY.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
-						questionModelImpl.getOriginalDifficulty()
+						questionModelImpl.getOriginalDifficultyId_fk()
 					};
 
 				finderCache.removeResult(FINDER_PATH_COUNT_BY_DIFFICULTY, args);
 				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_DIFFICULTY,
 					args);
 
-				args = new Object[] { questionModelImpl.getDifficulty() };
+				args = new Object[] { questionModelImpl.getDifficultyId_fk() };
 
 				finderCache.removeResult(FINDER_PATH_COUNT_BY_DIFFICULTY, args);
 				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_DIFFICULTY,
@@ -2264,8 +2196,8 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 			if ((questionModelImpl.getColumnBitmask() &
 					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CATEGORYANDDIFFICULTY.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
-						questionModelImpl.getOriginalCategory(),
-						questionModelImpl.getOriginalDifficulty()
+						questionModelImpl.getOriginalCategoryId_fk(),
+						questionModelImpl.getOriginalDifficultyId_fk()
 					};
 
 				finderCache.removeResult(FINDER_PATH_COUNT_BY_CATEGORYANDDIFFICULTY,
@@ -2274,8 +2206,8 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 					args);
 
 				args = new Object[] {
-						questionModelImpl.getCategory(),
-						questionModelImpl.getDifficulty()
+						questionModelImpl.getCategoryId_fk(),
+						questionModelImpl.getDifficultyId_fk()
 					};
 
 				finderCache.removeResult(FINDER_PATH_COUNT_BY_CATEGORYANDDIFFICULTY,
@@ -2319,8 +2251,7 @@ public class QuestionPersistenceImpl extends BasePersistenceImpl<Question>
 		questionImpl.setAnswerC(question.getAnswerC());
 		questionImpl.setAnswerD(question.getAnswerD());
 		questionImpl.setCategoryId_fk(question.getCategoryId_fk());
-		questionImpl.setCategory(question.getCategory());
-		questionImpl.setDifficulty(question.getDifficulty());
+		questionImpl.setDifficultyId_fk(question.getDifficultyId_fk());
 		questionImpl.setRightAnswer(question.getRightAnswer());
 
 		return questionImpl;

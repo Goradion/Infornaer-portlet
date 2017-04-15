@@ -35,7 +35,7 @@
       <td><c:out value="${q.getAnswerD()}" /></td>
       <td><c:out value="${q.getRightAnswer()}" /></td>
       <td><c:out value="${q.getDifficulty()}" /></td>
-      <td><c:out value="${q.getCategory()}" /></td>
+      <td><c:out value="${question.getCategoryId_fk()}" /></td>
     </tr>
   </c:forEach>
 </table>
