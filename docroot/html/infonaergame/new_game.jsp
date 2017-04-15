@@ -1,8 +1,8 @@
 <%@ include file="/init.jsp"%>
 
 
-<portlet:actionURL name="gotoGameOver" var="gameOver"></portlet:actionURL>
-<h1>New Game View</h1>
+<portlet:actionURL name="startGame" var="game"></portlet:actionURL>
 
 
-<p><a href=<%=gameOver%>> To Game Over </a></p>
+<p><a href=<%=game%>> start the game </a></p>
+
