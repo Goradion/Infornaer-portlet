@@ -41,6 +41,32 @@ public class QuestionLocalServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to {@link de.ki.sbam.service.impl.QuestionLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
+	public static com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery getActionableDynamicQuery() {
+		return getService().getActionableDynamicQuery();
+	}
+
+	public static com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery() {
+		return getService().dynamicQuery();
+	}
+
+	public static com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery getIndexableActionableDynamicQuery() {
+		return getService().getIndexableActionableDynamicQuery();
+	}
+
+	/**
+	* @throws PortalException
+	*/
+	public static com.liferay.portal.kernel.model.PersistedModel deletePersistedModel(
+		com.liferay.portal.kernel.model.PersistedModel persistedModel)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().deletePersistedModel(persistedModel);
+	}
+
+	public static com.liferay.portal.kernel.model.PersistedModel getPersistedModel(
+		java.io.Serializable primaryKeyObj)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().getPersistedModel(primaryKeyObj);
+	}
 
 	/**
 	* Adds the question to the database. Also notifies the appropriate model listeners.
@@ -100,15 +126,6 @@ public class QuestionLocalServiceUtil {
 	}
 
 	/**
-	* @throws PortalException
-	*/
-	public static com.liferay.portal.kernel.model.PersistedModel deletePersistedModel(
-		com.liferay.portal.kernel.model.PersistedModel persistedModel)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().deletePersistedModel(persistedModel);
-	}
-
-	/**
 	* Deletes the question from the database. Also notifies the appropriate model listeners.
 	*
 	* @param question the question
@@ -131,8 +148,55 @@ public class QuestionLocalServiceUtil {
 		return getService().deleteQuestion(questionId);
 	}
 
-	public static com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery() {
-		return getService().dynamicQuery();
+	public static de.ki.sbam.model.Question fetchQuestion(long questionId) {
+		return getService().fetchQuestion(questionId);
+	}
+
+	/**
+	* Returns the question with the primary key.
+	*
+	* @param questionId the primary key of the question
+	* @return the question
+	* @throws PortalException if a question with the primary key could not be found
+	*/
+	public static de.ki.sbam.model.Question getQuestion(long questionId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().getQuestion(questionId);
+	}
+
+	/**
+	* Updates the question in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
+	*
+	* @param question the question
+	* @return the question that was updated
+	*/
+	public static de.ki.sbam.model.Question updateQuestion(
+		de.ki.sbam.model.Question question) {
+		return getService().updateQuestion(question);
+	}
+
+	/**
+	* Returns the number of questions.
+	*
+	* @return the number of questions
+	*/
+	public static int getQuestionsCount() {
+		return getService().getQuestionsCount();
+	}
+
+	public static java.lang.Object invokeMethod(java.lang.String name,
+		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
+		throws java.lang.Throwable {
+		return getService().invokeMethod(name, parameterTypes, arguments);
+	}
+
+	/**
+	* Returns the OSGi service identifier.
+	*
+	* @return the OSGi service identifier
+	*/
+	public static java.lang.String getOSGiServiceIdentifier() {
+		return getService().getOSGiServiceIdentifier();
 	}
 
 	/**
@@ -185,30 +249,12 @@ public class QuestionLocalServiceUtil {
 				   .dynamicQuery(dynamicQuery, start, end, orderByComparator);
 	}
 
-	/**
-	* Returns the number of rows matching the dynamic query.
-	*
-	* @param dynamicQuery the dynamic query
-	* @return the number of rows matching the dynamic query
-	*/
-	public static long dynamicQueryCount(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery) {
-		return getService().dynamicQueryCount(dynamicQuery);
+	public static java.util.List<de.ki.sbam.model.Question> findByCategory(
+		java.lang.String category) {
+		return getService().findByCategory(category);
 	}
 
-	/**
-	* Returns the number of rows matching the dynamic query.
-	*
-	* @param dynamicQuery the dynamic query
-	* @param projection the projection to apply to the query
-	* @return the number of rows matching the dynamic query
-	*/
-	public static long dynamicQueryCount(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery,
-		com.liferay.portal.kernel.dao.orm.Projection projection) {
-		return getService().dynamicQueryCount(dynamicQuery, projection);
-	}
-
+<<<<<<< HEAD
 	public static de.ki.sbam.model.Question fetchQuestion(long questionId) {
 		return getService().fetchQuestion(questionId);
 	}
@@ -239,18 +285,16 @@ public class QuestionLocalServiceUtil {
 		java.io.Serializable primaryKeyObj)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService().getPersistedModel(primaryKeyObj);
+=======
+	public static java.util.List<de.ki.sbam.model.Question> findByCategoryId(
+		long categoryId) {
+		return getService().findByCategoryId(categoryId);
+>>>>>>> 4efe1569ec40cba279a2c58de988bd69fc9b59d6
 	}
 
-	/**
-	* Returns the question with the primary key.
-	*
-	* @param questionId the primary key of the question
-	* @return the question
-	* @throws PortalException if a question with the primary key could not be found
-	*/
-	public static de.ki.sbam.model.Question getQuestion(long questionId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().getQuestion(questionId);
+	public static java.util.List<de.ki.sbam.model.Question> findByDifficulty(
+		int difficulty) {
+		return getService().findByDifficulty(difficulty);
 	}
 
 	/**
@@ -270,29 +314,27 @@ public class QuestionLocalServiceUtil {
 	}
 
 	/**
-	* Returns the number of questions.
+	* Returns the number of rows matching the dynamic query.
 	*
-	* @return the number of questions
+	* @param dynamicQuery the dynamic query
+	* @return the number of rows matching the dynamic query
 	*/
-	public static int getQuestionsCount() {
-		return getService().getQuestionsCount();
-	}
-
-	public static java.lang.Object invokeMethod(java.lang.String name,
-		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
-		throws java.lang.Throwable {
-		return getService().invokeMethod(name, parameterTypes, arguments);
+	public static long dynamicQueryCount(
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery) {
+		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
 	/**
-	* Updates the question in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
+	* Returns the number of rows matching the dynamic query.
 	*
-	* @param question the question
-	* @return the question that was updated
+	* @param dynamicQuery the dynamic query
+	* @param projection the projection to apply to the query
+	* @return the number of rows matching the dynamic query
 	*/
-	public static de.ki.sbam.model.Question updateQuestion(
-		de.ki.sbam.model.Question question) {
-		return getService().updateQuestion(question);
+	public static long dynamicQueryCount(
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery,
+		com.liferay.portal.kernel.dao.orm.Projection projection) {
+		return getService().dynamicQueryCount(dynamicQuery, projection);
 	}
 
 	public static void clearService() {

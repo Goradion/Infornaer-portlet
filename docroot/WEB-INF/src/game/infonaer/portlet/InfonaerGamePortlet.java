@@ -1,19 +1,24 @@
 package game.infonaer.portlet;
 
-import static game.infonaer.constants.Constants.*;
+import static game.infonaer.constants.Constants.CATEGORY_OVERVIEW_JSP;
+import static game.infonaer.constants.Constants.EDIT_CATEGORY_JSP;
+import static game.infonaer.constants.Constants.EDIT_JSP;
+import static game.infonaer.constants.Constants.EDIT_QUESTION_JSP;
+import static game.infonaer.constants.Constants.GAME_OVER_JSP;
+import static game.infonaer.constants.Constants.HIGHSCORES_JSP;
+import static game.infonaer.constants.Constants.LOAD_QUESTION_FROM_FILE_JSP;
+import static game.infonaer.constants.Constants.NEW_CATEGORY_JSP;
+import static game.infonaer.constants.Constants.NEW_GAME_JSP;
+import static game.infonaer.constants.Constants.NEW_QUESTION_JSP;
+import static game.infonaer.constants.Constants.QUESTION_OVERVIEW_JSP;
+import static game.infonaer.constants.Constants.VIEW_JSP;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
-import java.net.URI;
 import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Stream;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -37,10 +42,8 @@ import com.liferay.portal.kernel.util.WebKeys;
 
 import de.ki.sbam.exception.NoSuchCategoryException;
 import de.ki.sbam.model.Category;
-import de.ki.sbam.model.Highscore;
 import de.ki.sbam.model.Question;
 import de.ki.sbam.service.CategoryLocalServiceUtil;
-import de.ki.sbam.service.HighscoreLocalServiceUtil;
 import de.ki.sbam.service.QuestionLocalServiceUtil;
 
 /**
@@ -197,11 +200,38 @@ public class InfonaerGamePortlet extends MVCPortlet {
 
 	public void uploadQuestions(ActionRequest actionRequest, ActionResponse actionResponse)
 			throws IOException, PortletException, URISyntaxException {
-		ThemeDisplay themeDisplay = (ThemeDisplay) actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
+		System.out.println("Uploading questions requested...");
+		ThemeDisplay td = (ThemeDisplay) actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
 		UploadPortletRequest uploadPortletRequest = PortalUtil.getUploadPortletRequest(actionRequest);
-		File file = uploadPortletRequest.getFile("uploadedFile");
-		String fileName = uploadPortletRequest.getFileName("uploadedFile");
-
+		if(actionRequest.getPortletSession().getAttribute("questions")==null){
+			File file = uploadPortletRequest.getFile("uploadedFile");
+			QuestionFromFileBuilder qffb = new QuestionFromFileBuilder(file);
+			qffb.buildQuestions();
+			LinkedList<String[]> tokenizedQuestions = new LinkedList<String[]>(qffb.questionsTokenized);
+			if(!tokenizedQuestions.isEmpty()){
+				// pass to view
+				actionRequest.getPortletSession().setAttribute("questions", tokenizedQuestions);
+				return;
+			}
+		}else{
+			// create questions
+			LinkedList<String[]> tokenizedQuestions = (LinkedList<String[]>)actionRequest.getPortletSession().getAttribute("questions");
+			for (String[] q : tokenizedQuestions) {
+				try {
+					// löse catName zu catId auf 
+					long catId = CategoryLocalServiceUtil.getCategoryByName(q[6]).getCategoryId();
+					QuestionLocalServiceUtil.addQuestion(q[0], q[1], q[2], q[3], q[4], q[5].toUpperCase(), catId, Integer.parseInt(q[7]),
+							td.getUser());
+				} catch (NoSuchUserException | NumberFormatException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (NoSuchCategoryException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			actionRequest.getPortletSession().removeAttribute("questions");
+		}
 	}
 
 	public void addQuestion(ActionRequest actionRequest, ActionResponse actionResponse)

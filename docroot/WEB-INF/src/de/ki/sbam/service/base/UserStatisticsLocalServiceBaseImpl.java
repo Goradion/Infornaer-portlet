@@ -46,7 +46,7 @@ import de.ki.sbam.service.persistence.CategoryPersistence;
 import de.ki.sbam.service.persistence.DifficultyPersistence;
 import de.ki.sbam.service.persistence.HighscorePersistence;
 import de.ki.sbam.service.persistence.QuestionPersistence;
-import de.ki.sbam.service.persistence.UserQuestionPersistence;
+import de.ki.sbam.service.persistence.QuestionStatisticsPersistence;
 import de.ki.sbam.service.persistence.UserStatisticsPersistence;
 
 import java.io.Serializable;
@@ -233,7 +233,7 @@ public abstract class UserStatisticsLocalServiceBaseImpl
 	public ActionableDynamicQuery getActionableDynamicQuery() {
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
-		actionableDynamicQuery.setBaseLocalService(de.ki.sbam.service.UserStatisticsLocalServiceUtil.getService());
+		actionableDynamicQuery.setBaseLocalService(userStatisticsLocalService);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
 		actionableDynamicQuery.setModelClass(UserStatistics.class);
 
@@ -246,7 +246,7 @@ public abstract class UserStatisticsLocalServiceBaseImpl
 	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery() {
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
-		indexableActionableDynamicQuery.setBaseLocalService(de.ki.sbam.service.UserStatisticsLocalServiceUtil.getService());
+		indexableActionableDynamicQuery.setBaseLocalService(userStatisticsLocalService);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
 		indexableActionableDynamicQuery.setModelClass(UserStatistics.class);
 
@@ -257,7 +257,7 @@ public abstract class UserStatisticsLocalServiceBaseImpl
 
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
-		actionableDynamicQuery.setBaseLocalService(de.ki.sbam.service.UserStatisticsLocalServiceUtil.getService());
+		actionableDynamicQuery.setBaseLocalService(userStatisticsLocalService);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
 		actionableDynamicQuery.setModelClass(UserStatistics.class);
 
@@ -468,41 +468,41 @@ public abstract class UserStatisticsLocalServiceBaseImpl
 	}
 
 	/**
-	 * Returns the user question local service.
+	 * Returns the question statistics local service.
 	 *
-	 * @return the user question local service
+	 * @return the question statistics local service
 	 */
-	public de.ki.sbam.service.UserQuestionLocalService getUserQuestionLocalService() {
-		return userQuestionLocalService;
+	public de.ki.sbam.service.QuestionStatisticsLocalService getQuestionStatisticsLocalService() {
+		return questionStatisticsLocalService;
 	}
 
 	/**
-	 * Sets the user question local service.
+	 * Sets the question statistics local service.
 	 *
-	 * @param userQuestionLocalService the user question local service
+	 * @param questionStatisticsLocalService the question statistics local service
 	 */
-	public void setUserQuestionLocalService(
-		de.ki.sbam.service.UserQuestionLocalService userQuestionLocalService) {
-		this.userQuestionLocalService = userQuestionLocalService;
+	public void setQuestionStatisticsLocalService(
+		de.ki.sbam.service.QuestionStatisticsLocalService questionStatisticsLocalService) {
+		this.questionStatisticsLocalService = questionStatisticsLocalService;
 	}
 
 	/**
-	 * Returns the user question persistence.
+	 * Returns the question statistics persistence.
 	 *
-	 * @return the user question persistence
+	 * @return the question statistics persistence
 	 */
-	public UserQuestionPersistence getUserQuestionPersistence() {
-		return userQuestionPersistence;
+	public QuestionStatisticsPersistence getQuestionStatisticsPersistence() {
+		return questionStatisticsPersistence;
 	}
 
 	/**
-	 * Sets the user question persistence.
+	 * Sets the question statistics persistence.
 	 *
-	 * @param userQuestionPersistence the user question persistence
+	 * @param questionStatisticsPersistence the question statistics persistence
 	 */
-	public void setUserQuestionPersistence(
-		UserQuestionPersistence userQuestionPersistence) {
-		this.userQuestionPersistence = userQuestionPersistence;
+	public void setQuestionStatisticsPersistence(
+		QuestionStatisticsPersistence questionStatisticsPersistence) {
+		this.questionStatisticsPersistence = questionStatisticsPersistence;
 	}
 
 	/**
@@ -749,11 +749,11 @@ public abstract class UserStatisticsLocalServiceBaseImpl
 	protected de.ki.sbam.service.QuestionLocalService questionLocalService;
 	@BeanReference(type = QuestionPersistence.class)
 	protected QuestionPersistence questionPersistence;
-	@BeanReference(type = de.ki.sbam.service.UserQuestionLocalService.class)
-	protected de.ki.sbam.service.UserQuestionLocalService userQuestionLocalService;
-	@BeanReference(type = UserQuestionPersistence.class)
-	protected UserQuestionPersistence userQuestionPersistence;
-	@BeanReference(type = de.ki.sbam.service.UserStatisticsLocalService.class)
+	@BeanReference(type = de.ki.sbam.service.QuestionStatisticsLocalService.class)
+	protected de.ki.sbam.service.QuestionStatisticsLocalService questionStatisticsLocalService;
+	@BeanReference(type = QuestionStatisticsPersistence.class)
+	protected QuestionStatisticsPersistence questionStatisticsPersistence;
+	@BeanReference(type = UserStatisticsLocalService.class)
 	protected UserStatisticsLocalService userStatisticsLocalService;
 	@BeanReference(type = UserStatisticsPersistence.class)
 	protected UserStatisticsPersistence userStatisticsPersistence;

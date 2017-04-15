@@ -33,6 +33,14 @@ create table sbam_Question (
 	rightAnswer VARCHAR(75) null
 );
 
+create table sbam_QuestionStatistics (
+	questionId LONG not null primary key,
+	answered_a LONG,
+	answered_b LONG,
+	answered_c LONG,
+	answered_d LONG
+);
+
 create table sbam_UserQuestion (
 	userId LONG,
 	userName VARCHAR(75) null,

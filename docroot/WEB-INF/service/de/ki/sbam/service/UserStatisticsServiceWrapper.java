@@ -33,6 +33,14 @@ public class UserStatisticsServiceWrapper implements UserStatisticsService,
 		_userStatisticsService = userStatisticsService;
 	}
 
+	@Override
+	public java.lang.Object invokeMethod(java.lang.String name,
+		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
+		throws java.lang.Throwable {
+		return _userStatisticsService.invokeMethod(name, parameterTypes,
+			arguments);
+	}
+
 	/**
 	* Returns the OSGi service identifier.
 	*
@@ -41,14 +49,6 @@ public class UserStatisticsServiceWrapper implements UserStatisticsService,
 	@Override
 	public java.lang.String getOSGiServiceIdentifier() {
 		return _userStatisticsService.getOSGiServiceIdentifier();
-	}
-
-	@Override
-	public java.lang.Object invokeMethod(java.lang.String name,
-		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
-		throws java.lang.Throwable {
-		return _userStatisticsService.invokeMethod(name, parameterTypes,
-			arguments);
 	}
 
 	@Override

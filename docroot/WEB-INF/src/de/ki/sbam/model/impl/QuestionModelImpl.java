@@ -122,9 +122,16 @@ public class QuestionModelImpl extends BaseModelImpl<Question>
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
 				"value.object.column.bitmask.enabled.de.ki.sbam.model.Question"),
 			true);
+<<<<<<< HEAD
 	public static final long CATEGORYID_FK_COLUMN_BITMASK = 1L;
 	public static final long DIFFICULTYID_FK_COLUMN_BITMASK = 2L;
 	public static final long QUESTIONID_COLUMN_BITMASK = 4L;
+=======
+	public static final long CATEGORY_COLUMN_BITMASK = 1L;
+	public static final long CATEGORYID_FK_COLUMN_BITMASK = 2L;
+	public static final long DIFFICULTY_COLUMN_BITMASK = 4L;
+	public static final long QUESTIONID_COLUMN_BITMASK = 8L;
+>>>>>>> 4efe1569ec40cba279a2c58de988bd69fc9b59d6
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -538,6 +545,33 @@ public class QuestionModelImpl extends BaseModelImpl<Question>
 	@Override
 	public void setCategoryId_fk(long categoryId_fk) {
 		_columnBitmask |= CATEGORYID_FK_COLUMN_BITMASK;
+<<<<<<< HEAD
+=======
+
+		if (!_setOriginalCategoryId_fk) {
+			_setOriginalCategoryId_fk = true;
+
+			_originalCategoryId_fk = _categoryId_fk;
+		}
+
+		_categoryId_fk = categoryId_fk;
+	}
+
+	public long getOriginalCategoryId_fk() {
+		return _originalCategoryId_fk;
+	}
+
+	@JSON
+	@Override
+	public String getCategory() {
+		if (_category == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _category;
+		}
+	}
+>>>>>>> 4efe1569ec40cba279a2c58de988bd69fc9b59d6
 
 		if (!_setOriginalCategoryId_fk) {
 			_setOriginalCategoryId_fk = true;
@@ -714,6 +748,11 @@ public class QuestionModelImpl extends BaseModelImpl<Question>
 		questionModelImpl._originalCategoryId_fk = questionModelImpl._categoryId_fk;
 
 		questionModelImpl._setOriginalCategoryId_fk = false;
+<<<<<<< HEAD
+=======
+
+		questionModelImpl._originalCategory = questionModelImpl._category;
+>>>>>>> 4efe1569ec40cba279a2c58de988bd69fc9b59d6
 
 		questionModelImpl._originalDifficultyId_fk = questionModelImpl._difficultyId_fk;
 
@@ -950,9 +989,17 @@ public class QuestionModelImpl extends BaseModelImpl<Question>
 	private long _categoryId_fk;
 	private long _originalCategoryId_fk;
 	private boolean _setOriginalCategoryId_fk;
+<<<<<<< HEAD
 	private long _difficultyId_fk;
 	private long _originalDifficultyId_fk;
 	private boolean _setOriginalDifficultyId_fk;
+=======
+	private String _category;
+	private String _originalCategory;
+	private int _difficulty;
+	private int _originalDifficulty;
+	private boolean _setOriginalDifficulty;
+>>>>>>> 4efe1569ec40cba279a2c58de988bd69fc9b59d6
 	private String _rightAnswer;
 	private long _columnBitmask;
 	private Question _escapedModel;

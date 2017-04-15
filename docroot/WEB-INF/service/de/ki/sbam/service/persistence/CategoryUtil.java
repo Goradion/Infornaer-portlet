@@ -109,6 +109,62 @@ public class CategoryUtil {
 	}
 
 	/**
+	* Returns the category where categoryName = &#63; or throws a {@link NoSuchCategoryException} if it could not be found.
+	*
+	* @param categoryName the category name
+	* @return the matching category
+	* @throws NoSuchCategoryException if a matching category could not be found
+	*/
+	public static Category findByCategoryName(java.lang.String categoryName)
+		throws de.ki.sbam.exception.NoSuchCategoryException {
+		return getPersistence().findByCategoryName(categoryName);
+	}
+
+	/**
+	* Returns the category where categoryName = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param categoryName the category name
+	* @return the matching category, or <code>null</code> if a matching category could not be found
+	*/
+	public static Category fetchByCategoryName(java.lang.String categoryName) {
+		return getPersistence().fetchByCategoryName(categoryName);
+	}
+
+	/**
+	* Returns the category where categoryName = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param categoryName the category name
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the matching category, or <code>null</code> if a matching category could not be found
+	*/
+	public static Category fetchByCategoryName(java.lang.String categoryName,
+		boolean retrieveFromCache) {
+		return getPersistence()
+				   .fetchByCategoryName(categoryName, retrieveFromCache);
+	}
+
+	/**
+	* Removes the category where categoryName = &#63; from the database.
+	*
+	* @param categoryName the category name
+	* @return the category that was removed
+	*/
+	public static Category removeByCategoryName(java.lang.String categoryName)
+		throws de.ki.sbam.exception.NoSuchCategoryException {
+		return getPersistence().removeByCategoryName(categoryName);
+	}
+
+	/**
+	* Returns the number of categories where categoryName = &#63;.
+	*
+	* @param categoryName the category name
+	* @return the number of matching categories
+	*/
+	public static int countByCategoryName(java.lang.String categoryName) {
+		return getPersistence().countByCategoryName(categoryName);
+	}
+
+	/**
 	* Caches the category in the entity cache if it is enabled.
 	*
 	* @param category the category

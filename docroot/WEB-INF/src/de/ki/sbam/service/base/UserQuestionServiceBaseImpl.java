@@ -645,7 +645,7 @@ public abstract class UserQuestionServiceBaseImpl extends BaseServiceImpl
 	protected QuestionPersistence questionPersistence;
 	@BeanReference(type = de.ki.sbam.service.UserQuestionLocalService.class)
 	protected de.ki.sbam.service.UserQuestionLocalService userQuestionLocalService;
-	@BeanReference(type = de.ki.sbam.service.UserQuestionService.class)
+	@BeanReference(type = UserQuestionService.class)
 	protected UserQuestionService userQuestionService;
 	@BeanReference(type = UserQuestionPersistence.class)
 	protected UserQuestionPersistence userQuestionPersistence;

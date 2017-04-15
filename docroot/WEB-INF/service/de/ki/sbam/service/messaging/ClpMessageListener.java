@@ -28,8 +28,8 @@ import de.ki.sbam.service.HighscoreLocalServiceUtil;
 import de.ki.sbam.service.HighscoreServiceUtil;
 import de.ki.sbam.service.QuestionLocalServiceUtil;
 import de.ki.sbam.service.QuestionServiceUtil;
-import de.ki.sbam.service.UserQuestionLocalServiceUtil;
-import de.ki.sbam.service.UserQuestionServiceUtil;
+import de.ki.sbam.service.QuestionStatisticsLocalServiceUtil;
+import de.ki.sbam.service.QuestionStatisticsServiceUtil;
 import de.ki.sbam.service.UserStatisticsLocalServiceUtil;
 import de.ki.sbam.service.UserStatisticsServiceUtil;
 
@@ -61,9 +61,9 @@ public class ClpMessageListener extends BaseMessageListener {
 			QuestionLocalServiceUtil.clearService();
 
 			QuestionServiceUtil.clearService();
-			UserQuestionLocalServiceUtil.clearService();
+			QuestionStatisticsLocalServiceUtil.clearService();
 
-			UserQuestionServiceUtil.clearService();
+			QuestionStatisticsServiceUtil.clearService();
 			UserStatisticsLocalServiceUtil.clearService();
 
 			UserStatisticsServiceUtil.clearService();

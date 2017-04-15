@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<hint-collection name="TEXTAREA">
+		<hint name="display-height">105</hint>
+		<hint name="display-width">500</hint>
+		<hint name="max-length">4000</hint>
+	</hint-collection>
+	<model name="de.ki.sbam.model.Category">
+		<field name="categoryId" type="long" />
+		<field name="categoryName" type="String" />
+	</model>
+	<model name="de.ki.sbam.model.Difficulty">
+		<field name="difficultyId" type="long" />
+		<field name="difficultyName" type="String" />
+	</model>
+	<model name="de.ki.sbam.model.Highscore">
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="score" type="long" />
+	</model>
+	<model name="de.ki.sbam.model.Question">
+		<field name="questionId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="questionContent" type="String">
+			<hint-collection name="TEXTAREA" />
+		</field>
+		<field name="answerA" type="String" />
+		<field name="answerB" type="String" />
+		<field name="answerC" type="String" />
+		<field name="answerD" type="String" />
+		<field name="categoryId_fk" type="long" />
+		<field name="difficultyId_fk" type="long" />
+		<field name="rightAnswer" type="String" />
+	</model>
+	<model name="de.ki.sbam.model.QuestionStatistics">
+		<field name="questionId" type="long" />
+		<field name="answered_a" type="long" />
+		<field name="answered_b" type="long" />
+		<field name="answered_c" type="long" />
+		<field name="answered_d" type="long" />
+	</model>
+	<model name="de.ki.sbam.model.UserStatistics">
+		<field name="userId" type="long" />
+		<field name="gamesWon" type="long" />
+		<field name="gamesLost" type="long" />
+		<field name="rightAnswers" type="long" />
+		<field name="wrongAnswers" type="long" />
+	</model>
+</model-hints>

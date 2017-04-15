@@ -20,13 +20,13 @@ import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -170,13 +170,68 @@ public class QuestionWrapper implements Question, ModelWrapper<Question> {
 	}
 
 	@Override
-	public java.lang.Object clone() {
-		return new QuestionWrapper((Question)_question.clone());
+	public boolean isCachedModel() {
+		return _question.isCachedModel();
+	}
+
+	@Override
+	public boolean isEscapedModel() {
+		return _question.isEscapedModel();
+	}
+
+	@Override
+	public boolean isNew() {
+		return _question.isNew();
+	}
+
+	@Override
+	public ExpandoBridge getExpandoBridge() {
+		return _question.getExpandoBridge();
+	}
+
+	@Override
+	public com.liferay.portal.kernel.model.CacheModel<de.ki.sbam.model.Question> toCacheModel() {
+		return _question.toCacheModel();
+	}
+
+	@Override
+	public de.ki.sbam.model.Question toEscapedModel() {
+		return new QuestionWrapper(_question.toEscapedModel());
+	}
+
+	@Override
+	public de.ki.sbam.model.Question toUnescapedModel() {
+		return new QuestionWrapper(_question.toUnescapedModel());
 	}
 
 	@Override
 	public int compareTo(de.ki.sbam.model.Question question) {
 		return _question.compareTo(question);
+	}
+
+	/**
+	* Returns the difficulty of this question.
+	*
+	* @return the difficulty of this question
+	*/
+	@Override
+	public int getDifficulty() {
+		return _question.getDifficulty();
+	}
+
+	@Override
+	public int hashCode() {
+		return _question.hashCode();
+	}
+
+	@Override
+	public Serializable getPrimaryKeyObj() {
+		return _question.getPrimaryKeyObj();
+	}
+
+	@Override
+	public java.lang.Object clone() {
+		return new QuestionWrapper((Question)_question.clone());
 	}
 
 	/**
@@ -220,6 +275,100 @@ public class QuestionWrapper implements Question, ModelWrapper<Question> {
 	}
 
 	/**
+<<<<<<< HEAD
+	* Returns the category id_fk of this question.
+=======
+	* Returns the category of this question.
+	*
+	* @return the category of this question
+	*/
+	@Override
+	public java.lang.String getCategory() {
+		return _question.getCategory();
+	}
+
+	/**
+	* Returns the question content of this question.
+>>>>>>> 4efe1569ec40cba279a2c58de988bd69fc9b59d6
+	*
+	* @return the question content of this question
+	*/
+	@Override
+	public java.lang.String getQuestionContent() {
+		return _question.getQuestionContent();
+	}
+
+	/**
+	* Returns the right answer of this question.
+	*
+	* @return the right answer of this question
+	*/
+	@Override
+	public java.lang.String getRightAnswer() {
+		return _question.getRightAnswer();
+	}
+
+	/**
+	* Returns the user name of this question.
+	*
+	* @return the user name of this question
+	*/
+	@Override
+	public java.lang.String getUserName() {
+		return _question.getUserName();
+	}
+
+	/**
+<<<<<<< HEAD
+	* Returns the difficulty id_fk of this question.
+	*
+	* @return the difficulty id_fk of this question
+	*/
+	@Override
+	public long getDifficultyId_fk() {
+		return _question.getDifficultyId_fk();
+=======
+	* Returns the user uuid of this question.
+	*
+	* @return the user uuid of this question
+	*/
+	@Override
+	public java.lang.String getUserUuid() {
+		return _question.getUserUuid();
+>>>>>>> 4efe1569ec40cba279a2c58de988bd69fc9b59d6
+	}
+
+	@Override
+	public java.lang.String toString() {
+		return _question.toString();
+	}
+
+	@Override
+	public java.lang.String toXmlString() {
+		return _question.toXmlString();
+	}
+
+	/**
+	* Returns the create date of this question.
+	*
+	* @return the create date of this question
+	*/
+	@Override
+	public Date getCreateDate() {
+		return _question.getCreateDate();
+	}
+
+	/**
+	* Returns the modified date of this question.
+	*
+	* @return the modified date of this question
+	*/
+	@Override
+	public Date getModifiedDate() {
+		return _question.getModifiedDate();
+	}
+
+	/**
 	* Returns the category id_fk of this question.
 	*
 	* @return the category id_fk of this question
@@ -240,31 +389,6 @@ public class QuestionWrapper implements Question, ModelWrapper<Question> {
 	}
 
 	/**
-	* Returns the create date of this question.
-	*
-	* @return the create date of this question
-	*/
-	@Override
-	public Date getCreateDate() {
-		return _question.getCreateDate();
-	}
-
-	/**
-	* Returns the difficulty id_fk of this question.
-	*
-	* @return the difficulty id_fk of this question
-	*/
-	@Override
-	public long getDifficultyId_fk() {
-		return _question.getDifficultyId_fk();
-	}
-
-	@Override
-	public ExpandoBridge getExpandoBridge() {
-		return _question.getExpandoBridge();
-	}
-
-	/**
 	* Returns the group ID of this question.
 	*
 	* @return the group ID of this question
@@ -275,16 +399,6 @@ public class QuestionWrapper implements Question, ModelWrapper<Question> {
 	}
 
 	/**
-	* Returns the modified date of this question.
-	*
-	* @return the modified date of this question
-	*/
-	@Override
-	public Date getModifiedDate() {
-		return _question.getModifiedDate();
-	}
-
-	/**
 	* Returns the primary key of this question.
 	*
 	* @return the primary key of this question
@@ -292,21 +406,6 @@ public class QuestionWrapper implements Question, ModelWrapper<Question> {
 	@Override
 	public long getPrimaryKey() {
 		return _question.getPrimaryKey();
-	}
-
-	@Override
-	public Serializable getPrimaryKeyObj() {
-		return _question.getPrimaryKeyObj();
-	}
-
-	/**
-	* Returns the question content of this question.
-	*
-	* @return the question content of this question
-	*/
-	@Override
-	public java.lang.String getQuestionContent() {
-		return _question.getQuestionContent();
 	}
 
 	/**
@@ -320,16 +419,6 @@ public class QuestionWrapper implements Question, ModelWrapper<Question> {
 	}
 
 	/**
-	* Returns the right answer of this question.
-	*
-	* @return the right answer of this question
-	*/
-	@Override
-	public java.lang.String getRightAnswer() {
-		return _question.getRightAnswer();
-	}
-
-	/**
 	* Returns the user ID of this question.
 	*
 	* @return the user ID of this question
@@ -337,46 +426,6 @@ public class QuestionWrapper implements Question, ModelWrapper<Question> {
 	@Override
 	public long getUserId() {
 		return _question.getUserId();
-	}
-
-	/**
-	* Returns the user name of this question.
-	*
-	* @return the user name of this question
-	*/
-	@Override
-	public java.lang.String getUserName() {
-		return _question.getUserName();
-	}
-
-	/**
-	* Returns the user uuid of this question.
-	*
-	* @return the user uuid of this question
-	*/
-	@Override
-	public java.lang.String getUserUuid() {
-		return _question.getUserUuid();
-	}
-
-	@Override
-	public int hashCode() {
-		return _question.hashCode();
-	}
-
-	@Override
-	public boolean isCachedModel() {
-		return _question.isCachedModel();
-	}
-
-	@Override
-	public boolean isEscapedModel() {
-		return _question.isEscapedModel();
-	}
-
-	@Override
-	public boolean isNew() {
-		return _question.isNew();
 	}
 
 	@Override
@@ -470,14 +519,14 @@ public class QuestionWrapper implements Question, ModelWrapper<Question> {
 	}
 
 	@Override
-	public void setExpandoBridgeAttributes(
-		com.liferay.portal.kernel.model.BaseModel<?> baseModel) {
-		_question.setExpandoBridgeAttributes(baseModel);
+	public void setExpandoBridgeAttributes(ExpandoBridge expandoBridge) {
+		_question.setExpandoBridgeAttributes(expandoBridge);
 	}
 
 	@Override
-	public void setExpandoBridgeAttributes(ExpandoBridge expandoBridge) {
-		_question.setExpandoBridgeAttributes(expandoBridge);
+	public void setExpandoBridgeAttributes(
+		com.liferay.portal.kernel.model.BaseModel<?> baseModel) {
+		_question.setExpandoBridgeAttributes(baseModel);
 	}
 
 	@Override
@@ -586,31 +635,6 @@ public class QuestionWrapper implements Question, ModelWrapper<Question> {
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<de.ki.sbam.model.Question> toCacheModel() {
-		return _question.toCacheModel();
-	}
-
-	@Override
-	public de.ki.sbam.model.Question toEscapedModel() {
-		return new QuestionWrapper(_question.toEscapedModel());
-	}
-
-	@Override
-	public java.lang.String toString() {
-		return _question.toString();
-	}
-
-	@Override
-	public de.ki.sbam.model.Question toUnescapedModel() {
-		return new QuestionWrapper(_question.toUnescapedModel());
-	}
-
-	@Override
-	public java.lang.String toXmlString() {
-		return _question.toXmlString();
-	}
-
-	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
@@ -622,7 +646,7 @@ public class QuestionWrapper implements Question, ModelWrapper<Question> {
 
 		QuestionWrapper questionWrapper = (QuestionWrapper)obj;
 
-		if (Validator.equals(_question, questionWrapper._question)) {
+		if (Objects.equals(_question, questionWrapper._question)) {
 			return true;
 		}
 

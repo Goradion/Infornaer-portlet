@@ -89,7 +89,11 @@ public class CategoryModelImpl extends BaseModelImpl<Category>
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
 				"value.object.finder.cache.enabled.de.ki.sbam.model.Category"),
 			true);
-	public static final boolean COLUMN_BITMASK_ENABLED = false;
+	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
+				"value.object.column.bitmask.enabled.de.ki.sbam.model.Category"),
+			true);
+	public static final long CATEGORYNAME_COLUMN_BITMASK = 1L;
+	public static final long CATEGORYID_COLUMN_BITMASK = 2L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -218,7 +222,21 @@ public class CategoryModelImpl extends BaseModelImpl<Category>
 
 	@Override
 	public void setCategoryName(String categoryName) {
+		_columnBitmask |= CATEGORYNAME_COLUMN_BITMASK;
+
+		if (_originalCategoryName == null) {
+			_originalCategoryName = _categoryName;
+		}
+
 		_categoryName = categoryName;
+	}
+
+	public String getOriginalCategoryName() {
+		return GetterUtil.getString(_originalCategoryName);
+	}
+
+	public long getColumnBitmask() {
+		return _columnBitmask;
 	}
 
 	@Override
@@ -310,6 +328,11 @@ public class CategoryModelImpl extends BaseModelImpl<Category>
 
 	@Override
 	public void resetOriginalValues() {
+		CategoryModelImpl categoryModelImpl = this;
+
+		categoryModelImpl._originalCategoryName = categoryModelImpl._categoryName;
+
+		categoryModelImpl._columnBitmask = 0;
 	}
 
 	@Override
@@ -370,5 +393,7 @@ public class CategoryModelImpl extends BaseModelImpl<Category>
 		};
 	private long _categoryId;
 	private String _categoryName;
+	private String _originalCategoryName;
+	private long _columnBitmask;
 	private Category _escapedModel;
 }

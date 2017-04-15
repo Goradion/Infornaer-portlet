@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean class="de.ki.sbam.service.impl.CategoryLocalServiceImpl" id="de.ki.sbam.service.CategoryLocalService" />
+	<bean class="de.ki.sbam.service.impl.CategoryServiceImpl" id="de.ki.sbam.service.CategoryService" />
+	<bean class="de.ki.sbam.service.persistence.impl.CategoryPersistenceImpl" id="de.ki.sbam.service.persistence.CategoryPersistence" parent="basePersistence" />
+	<bean class="de.ki.sbam.service.impl.DifficultyLocalServiceImpl" id="de.ki.sbam.service.DifficultyLocalService" />
+	<bean class="de.ki.sbam.service.impl.DifficultyServiceImpl" id="de.ki.sbam.service.DifficultyService" />
+	<bean class="de.ki.sbam.service.persistence.impl.DifficultyPersistenceImpl" id="de.ki.sbam.service.persistence.DifficultyPersistence" parent="basePersistence" />
+	<bean class="de.ki.sbam.service.impl.HighscoreLocalServiceImpl" id="de.ki.sbam.service.HighscoreLocalService" />
+	<bean class="de.ki.sbam.service.impl.HighscoreServiceImpl" id="de.ki.sbam.service.HighscoreService" />
+	<bean class="de.ki.sbam.service.persistence.impl.HighscorePersistenceImpl" id="de.ki.sbam.service.persistence.HighscorePersistence" parent="basePersistence" />
+	<bean class="de.ki.sbam.service.impl.QuestionLocalServiceImpl" id="de.ki.sbam.service.QuestionLocalService" />
+	<bean class="de.ki.sbam.service.impl.QuestionServiceImpl" id="de.ki.sbam.service.QuestionService" />
+	<bean class="de.ki.sbam.service.persistence.impl.QuestionPersistenceImpl" id="de.ki.sbam.service.persistence.QuestionPersistence" parent="basePersistence" />
+	<bean class="de.ki.sbam.service.impl.QuestionStatisticsLocalServiceImpl" id="de.ki.sbam.service.QuestionStatisticsLocalService" />
+	<bean class="de.ki.sbam.service.impl.QuestionStatisticsServiceImpl" id="de.ki.sbam.service.QuestionStatisticsService" />
+	<bean class="de.ki.sbam.service.persistence.impl.QuestionStatisticsPersistenceImpl" id="de.ki.sbam.service.persistence.QuestionStatisticsPersistence" parent="basePersistence" />
+	<bean class="de.ki.sbam.service.impl.UserStatisticsLocalServiceImpl" id="de.ki.sbam.service.UserStatisticsLocalService" />
+	<bean class="de.ki.sbam.service.impl.UserStatisticsServiceImpl" id="de.ki.sbam.service.UserStatisticsService" />
+	<bean class="de.ki.sbam.service.persistence.impl.UserStatisticsPersistenceImpl" id="de.ki.sbam.service.persistence.UserStatisticsPersistence" parent="basePersistence" />
+</beans>

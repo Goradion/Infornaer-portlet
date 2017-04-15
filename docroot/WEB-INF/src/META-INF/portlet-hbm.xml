@@ -6,7 +6,7 @@
 	<import class="de.ki.sbam.model.Difficulty" />
 	<import class="de.ki.sbam.model.Highscore" />
 	<import class="de.ki.sbam.model.Question" />
-	<import class="de.ki.sbam.model.UserQuestion" />
+	<import class="de.ki.sbam.model.QuestionStatistics" />
 	<import class="de.ki.sbam.model.UserStatistics" />
 	<class name="de.ki.sbam.model.impl.CategoryImpl" table="sbam_Category">
 		<id name="categoryId" type="long">
@@ -46,20 +46,14 @@
 		<property name="difficultyId_fk" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="rightAnswer" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
-	<class name="de.ki.sbam.model.impl.UserQuestionImpl" table="sbam_UserQuestion">
+	<class name="de.ki.sbam.model.impl.QuestionStatisticsImpl" table="sbam_QuestionStatistics">
 		<id name="questionId" type="long">
 			<generator class="assigned" />
 		</id>
-		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="question" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="answerA" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="answerB" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="answerC" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="answerD" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="category" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="difficulty" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
-		<property name="rightAnswer" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="answered_a" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="answered_b" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="answered_c" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="answered_d" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>
 	<class name="de.ki.sbam.model.impl.UserStatisticsImpl" table="sbam_UserStatistics">
 		<id name="userId" type="long">

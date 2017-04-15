@@ -42,6 +42,51 @@ public interface CategoryPersistence extends BasePersistence<Category> {
 	 */
 
 	/**
+	* Returns the category where categoryName = &#63; or throws a {@link NoSuchCategoryException} if it could not be found.
+	*
+	* @param categoryName the category name
+	* @return the matching category
+	* @throws NoSuchCategoryException if a matching category could not be found
+	*/
+	public Category findByCategoryName(java.lang.String categoryName)
+		throws NoSuchCategoryException;
+
+	/**
+	* Returns the category where categoryName = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param categoryName the category name
+	* @return the matching category, or <code>null</code> if a matching category could not be found
+	*/
+	public Category fetchByCategoryName(java.lang.String categoryName);
+
+	/**
+	* Returns the category where categoryName = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param categoryName the category name
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the matching category, or <code>null</code> if a matching category could not be found
+	*/
+	public Category fetchByCategoryName(java.lang.String categoryName,
+		boolean retrieveFromCache);
+
+	/**
+	* Removes the category where categoryName = &#63; from the database.
+	*
+	* @param categoryName the category name
+	* @return the category that was removed
+	*/
+	public Category removeByCategoryName(java.lang.String categoryName)
+		throws NoSuchCategoryException;
+
+	/**
+	* Returns the number of categories where categoryName = &#63;.
+	*
+	* @param categoryName the category name
+	* @return the number of matching categories
+	*/
+	public int countByCategoryName(java.lang.String categoryName);
+
+	/**
 	* Caches the category in the entity cache if it is enabled.
 	*
 	* @param category the category
