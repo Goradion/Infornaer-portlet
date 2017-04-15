@@ -4,7 +4,11 @@
 <portlet:actionURL name="gotoEditMode" var="editMode"></portlet:actionURL>
 <portlet:actionURL name="uploadQuestions" var="fileAdded"></portlet:actionURL>
 <portlet:actionURL name="gotoNewQuestion" var="newQuestion"></portlet:actionURL>
-
+<h1>Fragen aus Datei laden</h1>
+<p>Hinweis zum Format: <br/>
+	frage | antwortA | antwortB | antwortC | antwortD | richtigeAntort(A|B|C|D) | Kategorie | Schwierigkeit
+<br/>Bsp.: Wer wird Infonär? | Ich | Du | Er | Sie | A | Infonaer-Kategorie | 15
+</p>
 <%if(portletSession.getAttribute("questions")==null) {%>
 	<aui:form action="<%=fileAdded %>" method="POST" >
 		<aui:input name="uploadedFile" id="uploadFile" type="file" required="true">

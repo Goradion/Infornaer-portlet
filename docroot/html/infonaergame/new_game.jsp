@@ -1,8 +1,10 @@
+<<<<<<< HEAD
 <%@ include file="/init.jsp"%>
 
 
 <portlet:actionURL name="gotoGameOver" var="gameOver"></portlet:actionURL>
 <portlet:actionURL name="startSimonGame" var="startSGame"></portlet:actionURL>
+<portlet:actionURL name="startGame" var="game"></portlet:actionURL>
 
 <h1>New Game View</h1>
 <form method="POST" action="${startSGame}"> <h3>Kreuzen Sie die gewünschten Kategorien an:</h3> 
@@ -14,5 +16,6 @@
 </fieldset>
 <input type="submit" value="Los gehts">
 </form>
-
+<p><a href=<%=game%>> start the game </a></p>
 <p><a href=<%=gameOver%>> To Game Over </a></p>
+

@@ -1,17 +1,6 @@
 package game.infonaer.portlet;
 
-import static game.infonaer.constants.Constants.CATEGORY_OVERVIEW_JSP;
-import static game.infonaer.constants.Constants.EDIT_CATEGORY_JSP;
-import static game.infonaer.constants.Constants.EDIT_JSP;
-import static game.infonaer.constants.Constants.EDIT_QUESTION_JSP;
-import static game.infonaer.constants.Constants.GAME_OVER_JSP;
-import static game.infonaer.constants.Constants.HIGHSCORES_JSP;
-import static game.infonaer.constants.Constants.LOAD_QUESTION_FROM_FILE_JSP;
-import static game.infonaer.constants.Constants.NEW_CATEGORY_JSP;
-import static game.infonaer.constants.Constants.NEW_GAME_JSP;
-import static game.infonaer.constants.Constants.NEW_QUESTION_JSP;
-import static game.infonaer.constants.Constants.QUESTION_OVERVIEW_JSP;
-import static game.infonaer.constants.Constants.VIEW_JSP;
+import static game.infonaer.constants.Constants.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -402,5 +391,19 @@ public class InfonaerGamePortlet extends MVCPortlet {
 			e.printStackTrace();
 		}
 		categoryPagination(actionRequest, actionResponse);
+	}
+	
+	public void evalAnswer(ActionRequest actionRequest, ActionResponse actionResponse){
+		
+	}
+	
+	public void startGame(ActionRequest actionRequest, ActionResponse actionResponse){
+		actionRequest.getPortletSession().setAttribute("currentPage", GAME_JSP, PortletSession.PORTLET_SCOPE);
+		Question question = QuestionLocalServiceUtil.findByDifficulty(1).get(0);
+		actionRequest.setAttribute("question", question);
+	}
+	
+	public void leaveCurrentGame(ActionRequest actionRequest, ActionResponse actionResponse){
+			
 	}
 }
