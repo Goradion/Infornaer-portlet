@@ -11,6 +11,7 @@ import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
@@ -201,19 +202,20 @@ public class InfonaerGamePortlet extends MVCPortlet {
 		System.out.println("Uploading questions requested...");
 		ThemeDisplay td = (ThemeDisplay) actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
 		UploadPortletRequest uploadPortletRequest = PortalUtil.getUploadPortletRequest(actionRequest);
-
-		// String fileName = uploadPortletRequest.getFileName("uploadedFile");
-		QuestionFromFileBuilder qffb = null;
-		if(actionRequest.getPortletSession().getAttribute("qffb")!=null)
-			qffb = (QuestionFromFileBuilder) actionRequest.getPortletSession().getAttribute("qffb");
-		if (qffb == null) {
+		if(actionRequest.getPortletSession().getAttribute("questions")==null){
 			File file = uploadPortletRequest.getFile("uploadedFile");
-			qffb = new QuestionFromFileBuilder(file);
+			QuestionFromFileBuilder qffb = new QuestionFromFileBuilder(file);
 			qffb.buildQuestions();
-			actionRequest.getPortletSession().setAttribute("qffb", qffb);
-		} else {
-			List<String[]> questions = qffb.getLoadedQuestions();
-			for (String[] q : questions) {
+			LinkedList<String[]> tokenizedQuestions = new LinkedList<String[]>(qffb.questionsTokenized);
+			if(!tokenizedQuestions.isEmpty()){
+				// pass to view
+				actionRequest.getPortletSession().setAttribute("questions", tokenizedQuestions);
+				return;
+			}
+		}else{
+			// create questions
+			LinkedList<String[]> tokenizedQuestions = (LinkedList<String[]>)actionRequest.getPortletSession().getAttribute("questions");
+			for (String[] q : tokenizedQuestions) {
 				try {
 					// löse catName zu catId auf 
 					long catId = CategoryLocalServiceUtil.getCategoryByName(q[6]).getCategoryId();
@@ -227,8 +229,7 @@ public class InfonaerGamePortlet extends MVCPortlet {
 					e.printStackTrace();
 				}
 			}
-			System.out.println("Questions uploaded and saved to DB.");
-			actionRequest.getPortletSession().removeAttribute("qffb");
+			actionRequest.getPortletSession().removeAttribute("questions");
 		}
 	}
 

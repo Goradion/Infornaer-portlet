@@ -15,14 +15,14 @@ public class QuestionFromFileBuilder {
 	File file;
 	String fileName;
 	LinkedList<String> questions;
-	LinkedList<String[]> questionsSplitted;
+	LinkedList<String[]> questionsTokenized;
 	public QuestionFromFileBuilder(File file) {
 		this.file = file;
 		this.fileName = file.getName();
 	}
 	
 	public void buildQuestions() throws IOException{
-		questionsSplitted = new LinkedList<String[]>();
+		questionsTokenized = new LinkedList<String[]>();
 		try{
 			questions = new LinkedList<String>();
 			List<String> lines = Files.readAllLines(file.toPath());
@@ -31,7 +31,7 @@ public class QuestionFromFileBuilder {
 				String[] splitLine = line.split("\\|");
 				if(splitLine.length==8){
 					if(isValidQuestion(splitLine))
-						questionsSplitted.add(splitLine);
+						questionsTokenized.add(splitLine);
 				}		
 			}
 		}catch(IOException ioe){
@@ -40,7 +40,7 @@ public class QuestionFromFileBuilder {
 	}
 	
 	public LinkedList<String[]> getLoadedQuestions(){
-		return questionsSplitted;
+		return questionsTokenized;
 	}
 	
 	private boolean isValidQuestion(String[] q){
