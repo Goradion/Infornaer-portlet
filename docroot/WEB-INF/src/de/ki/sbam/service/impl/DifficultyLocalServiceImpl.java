@@ -14,9 +14,12 @@
 
 package de.ki.sbam.service.impl;
 
-import aQute.bnd.annotation.ProviderType;
+import java.util.List;
 
+import aQute.bnd.annotation.ProviderType;
+import de.ki.sbam.model.Difficulty;
 import de.ki.sbam.service.base.DifficultyLocalServiceBaseImpl;
+import de.ki.sbam.service.persistence.DifficultyUtil;
 
 /**
  * The implementation of the difficulty local service.
@@ -39,4 +42,8 @@ public class DifficultyLocalServiceImpl extends DifficultyLocalServiceBaseImpl {
 	 *
 	 * Never reference this class directly. Always use {@link de.ki.sbam.service.DifficultyLocalServiceUtil} to access the difficulty local service.
 	 */
+	
+	public List<Difficulty> findAll(){
+		return DifficultyUtil.findAll();
+	}
 }

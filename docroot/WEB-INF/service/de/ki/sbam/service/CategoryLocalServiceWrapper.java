@@ -215,6 +215,11 @@ public class CategoryLocalServiceWrapper implements CategoryLocalService,
 	}
 
 	@Override
+	public java.util.List<de.ki.sbam.model.Category> findAll() {
+		return _categoryLocalService.findAll();
+	}
+
+	@Override
 	public com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery getActionableDynamicQuery() {
 		return _categoryLocalService.getActionableDynamicQuery();
 	}

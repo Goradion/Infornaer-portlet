@@ -42,8 +42,11 @@ import com.liferay.portal.kernel.util.WebKeys;
 
 import de.ki.sbam.exception.NoSuchCategoryException;
 import de.ki.sbam.model.Category;
+import de.ki.sbam.model.Difficulty;
 import de.ki.sbam.model.Question;
 import de.ki.sbam.service.CategoryLocalServiceUtil;
+import de.ki.sbam.service.DifficultyLocalServiceUtil;
+import de.ki.sbam.service.DifficultyServiceUtil;
 import de.ki.sbam.service.QuestionLocalServiceUtil;
 
 /**
@@ -70,48 +73,6 @@ public class InfonaerGamePortlet extends MVCPortlet {
 		if (o != null) {
 			curPage = o.toString();
 			portletRequestDispatcher = portletContext.getRequestDispatcher(curPage);
-			// if (curPage.equals(VIEW_JSP)) {
-			// portletRequestDispatcher =
-			// portletContext.getRequestDispatcher(VIEW_JSP);
-			// } else {
-			// switch (curPage) {
-			// case VIEW_JSP:
-			// portletRequestDispatcher =
-			// portletContext.getRequestDispatcher(VIEW_JSP);
-			// break;
-			// case EDIT_JSP:
-			// portletRequestDispatcher =
-			// portletContext.getRequestDispatcher(EDIT_JSP);
-			// break;
-			// case EDIT_MANUALLY_JSP:
-			// portletRequestDispatcher =
-			// portletContext.getRequestDispatcher(EDIT_MANUALLY_JSP);
-			// break;
-			// case HELP_JSP:
-			// portletRequestDispatcher =
-			// portletContext.getRequestDispatcher(HELP_JSP);
-			// break;
-			// case NEW_GAME_JSP:
-			// portletRequestDispatcher =
-			// portletContext.getRequestDispatcher(NEW_GAME_JSP);
-			// break;
-			// case HIGHSCORES_JSP:
-			// portletRequestDispatcher =
-			// portletContext.getRequestDispatcher(HIGHSCORES_JSP);
-			// break;
-			// case GAME_OVER_JSP:
-			// portletRequestDispatcher =
-			// portletContext.getRequestDispatcher(GAME_OVER_JSP);
-			// break;
-			// case LOAD_QUESTION_FROM_FILE_JSP:
-			// portletRequestDispatcher =
-			// portletContext.getRequestDispatcher(LOAD_QUESTION_FROM_FILE_JSP);
-			// break;
-			// default:
-			// break;
-			// }
-			//
-			// }
 		}
 
 		portletRequestDispatcher.include(renderRequest, renderResponse);
@@ -163,17 +124,23 @@ public class InfonaerGamePortlet extends MVCPortlet {
 			throws IOException, PortletException {
 		actionRequest.getPortletSession().setAttribute("currentPage", NEW_QUESTION_JSP, PortletSession.PORTLET_SCOPE);
 		insertCategories(actionRequest, actionResponse);
+		insertDifficulties(actionRequest, actionResponse);
 	}
 	
-	public void insertCategories(ActionRequest actionRequest, ActionResponse actionResponse){
-		int categoriesCount = CategoryLocalServiceUtil.getCategoriesCount();
-		List<Category> categories = CategoryLocalServiceUtil.getCategories(0, categoriesCount);
+	private void insertCategories(ActionRequest actionRequest, ActionResponse actionResponse){
+		List<Category> categories = CategoryLocalServiceUtil.findAll();
 		actionRequest.setAttribute("cList", categories);
+	}
+	
+	private void insertDifficulties(ActionRequest actionRequest, ActionResponse actionResponse){
+		List<Difficulty> difficulties = DifficultyLocalServiceUtil.findAll();
+		actionRequest.setAttribute("dList", difficulties);
 	}
 	public void gotoEditQuestion(ActionRequest actionRequest, ActionResponse actionResponse)
 			throws IOException, PortletException {
 		actionRequest.getPortletSession().setAttribute("currentPage", EDIT_QUESTION_JSP, PortletSession.PORTLET_SCOPE);
 		insertCategories(actionRequest, actionResponse);
+		insertDifficulties(actionRequest, actionResponse);
 		fillEditForm(actionRequest, actionResponse);
 	}
 

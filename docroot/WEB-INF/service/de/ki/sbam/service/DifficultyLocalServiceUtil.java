@@ -179,6 +179,10 @@ public class DifficultyLocalServiceUtil {
 		return getService().fetchDifficulty(difficultyId);
 	}
 
+	public static java.util.List<de.ki.sbam.model.Difficulty> findAll() {
+		return getService().findAll();
+	}
+
 	public static com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery getActionableDynamicQuery() {
 		return getService().getActionableDynamicQuery();
 	}

@@ -120,6 +120,10 @@ public class DifficultyLocalServiceClpInvoker {
 		_methodName58 = "getOSGiServiceIdentifier";
 
 		_methodParameterTypes58 = new String[] {  };
+
+		_methodName63 = "findAll";
+
+		_methodParameterTypes63 = new String[] {  };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -231,6 +235,11 @@ public class DifficultyLocalServiceClpInvoker {
 			return DifficultyLocalServiceUtil.getOSGiServiceIdentifier();
 		}
 
+		if (_methodName63.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes63, parameterTypes)) {
+			return DifficultyLocalServiceUtil.findAll();
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -274,4 +283,6 @@ public class DifficultyLocalServiceClpInvoker {
 	private String[] _methodParameterTypes19;
 	private String _methodName58;
 	private String[] _methodParameterTypes58;
+	private String _methodName63;
+	private String[] _methodParameterTypes63;
 }

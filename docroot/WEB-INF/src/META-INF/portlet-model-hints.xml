@@ -14,6 +14,7 @@
 		<field name="difficultyId" type="long" />
 		<field name="difficultyName" type="String" />
 		<field name="guaranteed" type="boolean" />
+		<field name="score" type="int" />
 	</model>
 	<model name="de.ki.sbam.model.Highscore">
 		<field name="userId" type="long" />

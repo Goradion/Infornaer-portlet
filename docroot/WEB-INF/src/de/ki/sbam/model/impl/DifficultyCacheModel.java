@@ -64,7 +64,7 @@ public class DifficultyCacheModel implements CacheModel<Difficulty>,
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(7);
+		StringBundler sb = new StringBundler(9);
 
 		sb.append("{difficultyId=");
 		sb.append(difficultyId);
@@ -72,6 +72,8 @@ public class DifficultyCacheModel implements CacheModel<Difficulty>,
 		sb.append(difficultyName);
 		sb.append(", guaranteed=");
 		sb.append(guaranteed);
+		sb.append(", score=");
+		sb.append(score);
 		sb.append("}");
 
 		return sb.toString();
@@ -91,6 +93,7 @@ public class DifficultyCacheModel implements CacheModel<Difficulty>,
 		}
 
 		difficultyImpl.setGuaranteed(guaranteed);
+		difficultyImpl.setScore(score);
 
 		difficultyImpl.resetOriginalValues();
 
@@ -103,6 +106,8 @@ public class DifficultyCacheModel implements CacheModel<Difficulty>,
 		difficultyName = objectInput.readUTF();
 
 		guaranteed = objectInput.readBoolean();
+
+		score = objectInput.readInt();
 	}
 
 	@Override
@@ -118,9 +123,12 @@ public class DifficultyCacheModel implements CacheModel<Difficulty>,
 		}
 
 		objectOutput.writeBoolean(guaranteed);
+
+		objectOutput.writeInt(score);
 	}
 
 	public long difficultyId;
 	public String difficultyName;
 	public boolean guaranteed;
+	public int score;
 }

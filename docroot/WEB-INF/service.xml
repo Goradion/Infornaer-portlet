@@ -71,6 +71,7 @@
 		<column name="difficultyId" type="long" primary="true"></column>
 		<column name="difficultyName" type="String"></column>
 		<column name="guaranteed" type="boolean"></column>
+		<column name="score" type ="int"></column>
 		<column name="questions" type="Collection" entity="Question"></column>
 	</entity>
 	

@@ -59,6 +59,7 @@ public class DifficultyWrapper implements Difficulty, ModelWrapper<Difficulty> {
 		attributes.put("difficultyId", getDifficultyId());
 		attributes.put("difficultyName", getDifficultyName());
 		attributes.put("guaranteed", getGuaranteed());
+		attributes.put("score", getScore());
 
 		return attributes;
 	}
@@ -81,6 +82,12 @@ public class DifficultyWrapper implements Difficulty, ModelWrapper<Difficulty> {
 
 		if (guaranteed != null) {
 			setGuaranteed(guaranteed);
+		}
+
+		Integer score = (Integer)attributes.get("score");
+
+		if (score != null) {
+			setScore(score);
 		}
 	}
 
@@ -142,6 +149,16 @@ public class DifficultyWrapper implements Difficulty, ModelWrapper<Difficulty> {
 	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _difficulty.getPrimaryKeyObj();
+	}
+
+	/**
+	* Returns the score of this difficulty.
+	*
+	* @return the score of this difficulty
+	*/
+	@Override
+	public int getScore() {
+		return _difficulty.getScore();
 	}
 
 	@Override
@@ -248,6 +265,16 @@ public class DifficultyWrapper implements Difficulty, ModelWrapper<Difficulty> {
 	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		_difficulty.setPrimaryKeyObj(primaryKeyObj);
+	}
+
+	/**
+	* Sets the score of this difficulty.
+	*
+	* @param score the score of this difficulty
+	*/
+	@Override
+	public void setScore(int score) {
+		_difficulty.setScore(score);
 	}
 
 	@Override
