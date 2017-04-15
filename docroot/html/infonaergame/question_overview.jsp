@@ -34,8 +34,8 @@
       <td><c:out value="${q.getAnswerC()}" /></td>
       <td><c:out value="${q.getAnswerD()}" /></td>
       <td><c:out value="${q.getRightAnswer()}" /></td>
-      <td><c:out value="${q.getDifficulty()}" /></td>
-      <td><c:out value="${question.getCategoryId_fk()}" /></td>
+      <td><c:out value="${q.getDifficultyId_fk()}" /></td>
+      <td><c:out value="${q.getCategoryId_fk()}" /></td>
     </tr>
   </c:forEach>
 </table>
@@ -72,7 +72,7 @@
 	</c:if>
 	
 <p>
-	<a href=<%=newQuestion%>>Neue Nachricht</a>
+	<a href=<%=newQuestion%>>Neue Frage</a>
 </p>
 <p>
 	<a href=<%=editMode%>>Back</a>
