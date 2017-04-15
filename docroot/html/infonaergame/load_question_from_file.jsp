@@ -6,7 +6,8 @@
 <portlet:actionURL name="gotoNewQuestion" var="newQuestion"></portlet:actionURL>
 <h1>Fragen aus Datei laden</h1>
 <p>Hinweis zum Format: <br/>
-	frage|antwortA|antwortB|antwortC|antwortD|richtigeAntort(A|B|C|D)|Kategorie|Schwierigkeit
+	frage | antwortA | antwortB | antwortC | antwortD | richtigeAntort(A|B|C|D) | Kategorie | Schwierigkeit
+<br/>Bsp.: Wer wird Infonär? | Ich | Du | Er | Sie | A | Infonaer-Kategorie | 15
 </p>
 <%if(portletSession.getAttribute("questions")==null) {%>
 	<aui:form action="<%=fileAdded %>" method="POST" >
