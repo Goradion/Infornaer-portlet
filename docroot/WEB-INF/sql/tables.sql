@@ -5,7 +5,8 @@ create table sbam_Category (
 
 create table sbam_Difficulty (
 	difficultyId LONG not null primary key,
-	difficultyName VARCHAR(75) null
+	difficultyName VARCHAR(75) null,
+	guaranteed BOOLEAN
 );
 
 create table sbam_Highscore (
@@ -28,8 +29,7 @@ create table sbam_Question (
 	answerC VARCHAR(75) null,
 	answerD VARCHAR(75) null,
 	categoryId_fk LONG,
-	category VARCHAR(75) null,
-	difficulty INTEGER,
+	difficultyId_fk LONG,
 	rightAnswer VARCHAR(75) null
 );
 

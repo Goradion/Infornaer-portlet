@@ -89,6 +89,27 @@ public interface DifficultyModel extends BaseModel<Difficulty> {
 	 */
 	public void setDifficultyName(String difficultyName);
 
+	/**
+	 * Returns the guaranteed of this difficulty.
+	 *
+	 * @return the guaranteed of this difficulty
+	 */
+	public boolean getGuaranteed();
+
+	/**
+	 * Returns <code>true</code> if this difficulty is guaranteed.
+	 *
+	 * @return <code>true</code> if this difficulty is guaranteed; <code>false</code> otherwise
+	 */
+	public boolean isGuaranteed();
+
+	/**
+	 * Sets whether this difficulty is guaranteed.
+	 *
+	 * @param guaranteed the guaranteed of this difficulty
+	 */
+	public void setGuaranteed(boolean guaranteed);
+
 	@Override
 	public boolean isNew();
 

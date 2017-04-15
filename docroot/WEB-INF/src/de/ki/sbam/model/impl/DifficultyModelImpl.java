@@ -67,16 +67,18 @@ public class DifficultyModelImpl extends BaseModelImpl<Difficulty>
 	public static final String TABLE_NAME = "sbam_Difficulty";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "difficultyId", Types.BIGINT },
-			{ "difficultyName", Types.VARCHAR }
+			{ "difficultyName", Types.VARCHAR },
+			{ "guaranteed", Types.BOOLEAN }
 		};
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP = new HashMap<String, Integer>();
 
 	static {
 		TABLE_COLUMNS_MAP.put("difficultyId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("difficultyName", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("guaranteed", Types.BOOLEAN);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table sbam_Difficulty (difficultyId LONG not null primary key,difficultyName VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table sbam_Difficulty (difficultyId LONG not null primary key,difficultyName VARCHAR(75) null,guaranteed BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table sbam_Difficulty";
 	public static final String ORDER_BY_JPQL = " ORDER BY difficulty.difficultyId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY sbam_Difficulty.difficultyId ASC";
@@ -106,6 +108,7 @@ public class DifficultyModelImpl extends BaseModelImpl<Difficulty>
 
 		model.setDifficultyId(soapModel.getDifficultyId());
 		model.setDifficultyName(soapModel.getDifficultyName());
+		model.setGuaranteed(soapModel.getGuaranteed());
 
 		return model;
 	}
@@ -172,6 +175,7 @@ public class DifficultyModelImpl extends BaseModelImpl<Difficulty>
 
 		attributes.put("difficultyId", getDifficultyId());
 		attributes.put("difficultyName", getDifficultyName());
+		attributes.put("guaranteed", getGuaranteed());
 
 		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
 		attributes.put("finderCacheEnabled", isFinderCacheEnabled());
@@ -191,6 +195,12 @@ public class DifficultyModelImpl extends BaseModelImpl<Difficulty>
 
 		if (difficultyName != null) {
 			setDifficultyName(difficultyName);
+		}
+
+		Boolean guaranteed = (Boolean)attributes.get("guaranteed");
+
+		if (guaranteed != null) {
+			setGuaranteed(guaranteed);
 		}
 	}
 
@@ -219,6 +229,22 @@ public class DifficultyModelImpl extends BaseModelImpl<Difficulty>
 	@Override
 	public void setDifficultyName(String difficultyName) {
 		_difficultyName = difficultyName;
+	}
+
+	@JSON
+	@Override
+	public boolean getGuaranteed() {
+		return _guaranteed;
+	}
+
+	@Override
+	public boolean isGuaranteed() {
+		return _guaranteed;
+	}
+
+	@Override
+	public void setGuaranteed(boolean guaranteed) {
+		_guaranteed = guaranteed;
 	}
 
 	@Override
@@ -250,6 +276,7 @@ public class DifficultyModelImpl extends BaseModelImpl<Difficulty>
 
 		difficultyImpl.setDifficultyId(getDifficultyId());
 		difficultyImpl.setDifficultyName(getDifficultyName());
+		difficultyImpl.setGuaranteed(getGuaranteed());
 
 		difficultyImpl.resetOriginalValues();
 
@@ -326,17 +353,21 @@ public class DifficultyModelImpl extends BaseModelImpl<Difficulty>
 			difficultyCacheModel.difficultyName = null;
 		}
 
+		difficultyCacheModel.guaranteed = getGuaranteed();
+
 		return difficultyCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(5);
+		StringBundler sb = new StringBundler(7);
 
 		sb.append("{difficultyId=");
 		sb.append(getDifficultyId());
 		sb.append(", difficultyName=");
 		sb.append(getDifficultyName());
+		sb.append(", guaranteed=");
+		sb.append(getGuaranteed());
 		sb.append("}");
 
 		return sb.toString();
@@ -344,7 +375,7 @@ public class DifficultyModelImpl extends BaseModelImpl<Difficulty>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(10);
+		StringBundler sb = new StringBundler(13);
 
 		sb.append("<model><model-name>");
 		sb.append("de.ki.sbam.model.Difficulty");
@@ -358,6 +389,10 @@ public class DifficultyModelImpl extends BaseModelImpl<Difficulty>
 			"<column><column-name>difficultyName</column-name><column-value><![CDATA[");
 		sb.append(getDifficultyName());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>guaranteed</column-name><column-value><![CDATA[");
+		sb.append(getGuaranteed());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -370,5 +405,6 @@ public class DifficultyModelImpl extends BaseModelImpl<Difficulty>
 		};
 	private long _difficultyId;
 	private String _difficultyName;
+	private boolean _guaranteed;
 	private Difficulty _escapedModel;
 }

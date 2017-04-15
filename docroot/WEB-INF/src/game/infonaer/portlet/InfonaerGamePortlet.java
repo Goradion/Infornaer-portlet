@@ -243,7 +243,7 @@ public class InfonaerGamePortlet extends MVCPortlet {
 		String answerC = actionRequest.getParameter("answerC");
 		String answerD = actionRequest.getParameter("answerD");
 		String rightAnswer = actionRequest.getParameter("rightAnswer");
-		long difficulty = Long.parseLong(actionRequest.getParameter("difficulty"));
+		long difficultyId = Long.parseLong(actionRequest.getParameter("difficulty"));
 		String categoryString = actionRequest.getParameter("category");
 		long categoryId = Long.parseLong(categoryString);
 		ThemeDisplay td = (ThemeDisplay) actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
@@ -253,7 +253,7 @@ public class InfonaerGamePortlet extends MVCPortlet {
 			user = UserLocalServiceUtil.getUser(td.getUserId());
 			if (questionId == null) {
 				QuestionLocalServiceUtil.addQuestion(questionContent, answerA, answerB, answerC, answerD, rightAnswer,
-						categoryId, difficulty, user);
+						categoryId, difficultyId, user);
 			} else {
 				long id = Long.parseLong(questionId);
 				
@@ -265,12 +265,12 @@ public class InfonaerGamePortlet extends MVCPortlet {
 				question.setAnswerC(answerC);
 				question.setAnswerD(answerD);
 				question.setRightAnswer(rightAnswer);
-				question.setDifficultyId_fk(difficulty);
+				question.setDifficultyId_fk(difficultyId);
 				question.setCategoryId_fk(categoryId);
 				question.setModifiedDate(new Date());
 				QuestionLocalServiceUtil.updateQuestion(question);
-				goToQuestionOverview(actionRequest, actionResponse);
 			}
+			goToQuestionOverview(actionRequest, actionResponse);
 		} catch (PortalException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

@@ -316,6 +316,7 @@ public class DifficultyPersistenceImpl extends BasePersistenceImpl<Difficulty>
 
 		difficultyImpl.setDifficultyId(difficulty.getDifficultyId());
 		difficultyImpl.setDifficultyName(difficulty.getDifficultyName());
+		difficultyImpl.setGuaranteed(difficulty.isGuaranteed());
 
 		return difficultyImpl;
 	}

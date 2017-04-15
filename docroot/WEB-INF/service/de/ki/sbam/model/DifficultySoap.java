@@ -35,6 +35,7 @@ public class DifficultySoap implements Serializable {
 
 		soapModel.setDifficultyId(model.getDifficultyId());
 		soapModel.setDifficultyName(model.getDifficultyName());
+		soapModel.setGuaranteed(model.getGuaranteed());
 
 		return soapModel;
 	}
@@ -103,6 +104,19 @@ public class DifficultySoap implements Serializable {
 		_difficultyName = difficultyName;
 	}
 
+	public boolean getGuaranteed() {
+		return _guaranteed;
+	}
+
+	public boolean isGuaranteed() {
+		return _guaranteed;
+	}
+
+	public void setGuaranteed(boolean guaranteed) {
+		_guaranteed = guaranteed;
+	}
+
 	private long _difficultyId;
 	private String _difficultyName;
+	private boolean _guaranteed;
 }

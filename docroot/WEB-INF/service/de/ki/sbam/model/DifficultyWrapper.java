@@ -58,6 +58,7 @@ public class DifficultyWrapper implements Difficulty, ModelWrapper<Difficulty> {
 
 		attributes.put("difficultyId", getDifficultyId());
 		attributes.put("difficultyName", getDifficultyName());
+		attributes.put("guaranteed", getGuaranteed());
 
 		return attributes;
 	}
@@ -74,6 +75,12 @@ public class DifficultyWrapper implements Difficulty, ModelWrapper<Difficulty> {
 
 		if (difficultyName != null) {
 			setDifficultyName(difficultyName);
+		}
+
+		Boolean guaranteed = (Boolean)attributes.get("guaranteed");
+
+		if (guaranteed != null) {
+			setGuaranteed(guaranteed);
 		}
 	}
 
@@ -113,6 +120,16 @@ public class DifficultyWrapper implements Difficulty, ModelWrapper<Difficulty> {
 	}
 
 	/**
+	* Returns the guaranteed of this difficulty.
+	*
+	* @return the guaranteed of this difficulty
+	*/
+	@Override
+	public boolean getGuaranteed() {
+		return _difficulty.getGuaranteed();
+	}
+
+	/**
 	* Returns the primary key of this difficulty.
 	*
 	* @return the primary key of this difficulty
@@ -140,6 +157,16 @@ public class DifficultyWrapper implements Difficulty, ModelWrapper<Difficulty> {
 	@Override
 	public boolean isEscapedModel() {
 		return _difficulty.isEscapedModel();
+	}
+
+	/**
+	* Returns <code>true</code> if this difficulty is guaranteed.
+	*
+	* @return <code>true</code> if this difficulty is guaranteed; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isGuaranteed() {
+		return _difficulty.isGuaranteed();
 	}
 
 	@Override
@@ -191,6 +218,16 @@ public class DifficultyWrapper implements Difficulty, ModelWrapper<Difficulty> {
 	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		_difficulty.setExpandoBridgeAttributes(serviceContext);
+	}
+
+	/**
+	* Sets whether this difficulty is guaranteed.
+	*
+	* @param guaranteed the guaranteed of this difficulty
+	*/
+	@Override
+	public void setGuaranteed(boolean guaranteed) {
+		_difficulty.setGuaranteed(guaranteed);
 	}
 
 	@Override

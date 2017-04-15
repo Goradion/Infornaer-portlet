@@ -14,9 +14,12 @@
 
 package de.ki.sbam.service.impl;
 
+import java.util.List;
+
 import aQute.bnd.annotation.ProviderType;
 import de.ki.sbam.exception.NoSuchCategoryException;
 import de.ki.sbam.model.Category;
+import de.ki.sbam.model.Question;
 import de.ki.sbam.service.base.CategoryLocalServiceBaseImpl;
 import de.ki.sbam.service.persistence.CategoryUtil;
 

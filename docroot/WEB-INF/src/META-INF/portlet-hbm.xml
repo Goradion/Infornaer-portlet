@@ -19,6 +19,7 @@
 			<generator class="assigned" />
 		</id>
 		<property name="difficultyName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="guaranteed" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 	</class>
 	<class name="de.ki.sbam.model.impl.HighscoreImpl" table="sbam_Highscore">
 		<id name="userId" type="long">
