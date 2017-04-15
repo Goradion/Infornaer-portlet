@@ -16,6 +16,7 @@ import static game.infonaer.constants.Constants.VIEW_JSP;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -46,14 +47,14 @@ import de.ki.sbam.model.Difficulty;
 import de.ki.sbam.model.Question;
 import de.ki.sbam.service.CategoryLocalServiceUtil;
 import de.ki.sbam.service.DifficultyLocalServiceUtil;
-import de.ki.sbam.service.DifficultyServiceUtil;
 import de.ki.sbam.service.QuestionLocalServiceUtil;
+import game.infonaer.game.InfonaerGame;
 
 /**
  * Portlet implementation class InfonaerGame
  */
 public class InfonaerGamePortlet extends MVCPortlet {
-
+	private User user;
 	@Override
 	public void doEdit(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {
@@ -74,7 +75,6 @@ public class InfonaerGamePortlet extends MVCPortlet {
 			curPage = o.toString();
 			portletRequestDispatcher = portletContext.getRequestDispatcher(curPage);
 		}
-
 		portletRequestDispatcher.include(renderRequest, renderResponse);
 	}
 
@@ -90,6 +90,24 @@ public class InfonaerGamePortlet extends MVCPortlet {
 			throws IOException, PortletException {
 
 		actionRequest.getPortletSession().setAttribute("currentPage", NEW_GAME_JSP, PortletSession.PORTLET_SCOPE);
+		insertCategories(actionRequest, actionResponse);
+	}
+	
+	public void startSimonGame(ActionRequest actionRequest, ActionResponse actionResponse){
+		List<Category> categories = CategoryLocalServiceUtil.findAll();
+		List<Category> selectedCategories = new ArrayList<>();
+		for (Category cat: categories){
+			if (actionRequest.getParameter(cat.getCategoryName()) != null){
+				selectedCategories.add(cat);
+			}
+		}
+		List<Difficulty> difficulties = DifficultyLocalServiceUtil.findAll();
+		ThemeDisplay td = (ThemeDisplay) actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
+		User user = td.getUser();
+		this.user = user;
+		new InfonaerGame(user, selectedCategories, difficulties);
+		
+		
 	}
 
 	public void gotoHighscores(ActionRequest actionRequest, ActionResponse actionResponse)
@@ -241,8 +259,10 @@ public class InfonaerGamePortlet extends MVCPortlet {
 		} catch (PortalException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
+		} catch (NumberFormatException e2){
+			
 		}
-
+		
 	}
 
 	public void deleteQuestion(ActionRequest actionRequest, ActionResponse actionResponse) {
