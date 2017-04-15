@@ -639,7 +639,7 @@ public abstract class QuestionServiceBaseImpl extends BaseServiceImpl
 	protected HighscorePersistence highscorePersistence;
 	@BeanReference(type = de.ki.sbam.service.QuestionLocalService.class)
 	protected de.ki.sbam.service.QuestionLocalService questionLocalService;
-	@BeanReference(type = QuestionService.class)
+	@BeanReference(type = de.ki.sbam.service.QuestionService.class)
 	protected QuestionService questionService;
 	@BeanReference(type = QuestionPersistence.class)
 	protected QuestionPersistence questionPersistence;

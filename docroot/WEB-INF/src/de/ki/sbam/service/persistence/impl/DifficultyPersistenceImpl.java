@@ -210,8 +210,8 @@ public class DifficultyPersistenceImpl extends BasePersistenceImpl<Difficulty>
 					primaryKey);
 
 			if (difficulty == null) {
-				if (_log.isDebugEnabled()) {
-					_log.debug(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
+				if (_log.isWarnEnabled()) {
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchDifficultyException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
@@ -333,8 +333,8 @@ public class DifficultyPersistenceImpl extends BasePersistenceImpl<Difficulty>
 		Difficulty difficulty = fetchByPrimaryKey(primaryKey);
 
 		if (difficulty == null) {
-			if (_log.isDebugEnabled()) {
-				_log.debug(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
+			if (_log.isWarnEnabled()) {
+				_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 			}
 
 			throw new NoSuchDifficultyException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +

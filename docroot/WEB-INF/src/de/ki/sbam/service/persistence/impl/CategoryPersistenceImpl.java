@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 
 import de.ki.sbam.exception.NoSuchCategoryException;
 import de.ki.sbam.model.Category;
@@ -48,7 +49,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -117,8 +117,8 @@ public class CategoryPersistenceImpl extends BasePersistenceImpl<Category>
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
-			if (_log.isDebugEnabled()) {
-				_log.debug(msg.toString());
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
 			}
 
 			throw new NoSuchCategoryException(msg.toString());
@@ -160,7 +160,7 @@ public class CategoryPersistenceImpl extends BasePersistenceImpl<Category>
 		if (result instanceof Category) {
 			Category category = (Category)result;
 
-			if (!Objects.equals(categoryName, category.getCategoryName())) {
+			if (!Validator.equals(categoryName, category.getCategoryName())) {
 				result = null;
 			}
 		}
@@ -498,8 +498,8 @@ public class CategoryPersistenceImpl extends BasePersistenceImpl<Category>
 					primaryKey);
 
 			if (category == null) {
-				if (_log.isDebugEnabled()) {
-					_log.debug(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
+				if (_log.isWarnEnabled()) {
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchCategoryException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
@@ -626,8 +626,8 @@ public class CategoryPersistenceImpl extends BasePersistenceImpl<Category>
 		Category category = fetchByPrimaryKey(primaryKey);
 
 		if (category == null) {
-			if (_log.isDebugEnabled()) {
-				_log.debug(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
+			if (_log.isWarnEnabled()) {
+				_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 			}
 
 			throw new NoSuchCategoryException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +

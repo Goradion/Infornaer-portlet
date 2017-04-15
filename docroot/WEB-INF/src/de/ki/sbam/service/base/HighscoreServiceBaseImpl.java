@@ -633,7 +633,7 @@ public abstract class HighscoreServiceBaseImpl extends BaseServiceImpl
 	protected DifficultyPersistence difficultyPersistence;
 	@BeanReference(type = de.ki.sbam.service.HighscoreLocalService.class)
 	protected de.ki.sbam.service.HighscoreLocalService highscoreLocalService;
-	@BeanReference(type = HighscoreService.class)
+	@BeanReference(type = de.ki.sbam.service.HighscoreService.class)
 	protected HighscoreService highscoreService;
 	@BeanReference(type = HighscorePersistence.class)
 	protected HighscorePersistence highscorePersistence;

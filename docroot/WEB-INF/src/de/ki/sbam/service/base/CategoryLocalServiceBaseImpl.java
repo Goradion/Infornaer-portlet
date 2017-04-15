@@ -231,7 +231,7 @@ public abstract class CategoryLocalServiceBaseImpl extends BaseLocalServiceImpl
 	public ActionableDynamicQuery getActionableDynamicQuery() {
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
-		actionableDynamicQuery.setBaseLocalService(categoryLocalService);
+		actionableDynamicQuery.setBaseLocalService(de.ki.sbam.service.CategoryLocalServiceUtil.getService());
 		actionableDynamicQuery.setClassLoader(getClassLoader());
 		actionableDynamicQuery.setModelClass(Category.class);
 
@@ -244,7 +244,7 @@ public abstract class CategoryLocalServiceBaseImpl extends BaseLocalServiceImpl
 	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery() {
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
-		indexableActionableDynamicQuery.setBaseLocalService(categoryLocalService);
+		indexableActionableDynamicQuery.setBaseLocalService(de.ki.sbam.service.CategoryLocalServiceUtil.getService());
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
 		indexableActionableDynamicQuery.setModelClass(Category.class);
 
@@ -255,7 +255,7 @@ public abstract class CategoryLocalServiceBaseImpl extends BaseLocalServiceImpl
 
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
-		actionableDynamicQuery.setBaseLocalService(categoryLocalService);
+		actionableDynamicQuery.setBaseLocalService(de.ki.sbam.service.CategoryLocalServiceUtil.getService());
 		actionableDynamicQuery.setClassLoader(getClassLoader());
 		actionableDynamicQuery.setModelClass(Category.class);
 
@@ -731,7 +731,7 @@ public abstract class CategoryLocalServiceBaseImpl extends BaseLocalServiceImpl
 		}
 	}
 
-	@BeanReference(type = CategoryLocalService.class)
+	@BeanReference(type = de.ki.sbam.service.CategoryLocalService.class)
 	protected CategoryLocalService categoryLocalService;
 	@BeanReference(type = CategoryPersistence.class)
 	protected CategoryPersistence categoryPersistence;

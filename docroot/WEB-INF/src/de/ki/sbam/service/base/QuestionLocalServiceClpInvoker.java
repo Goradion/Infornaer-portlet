@@ -129,23 +129,17 @@ public class QuestionLocalServiceClpInvoker {
 				"long", "long", "com.liferay.portal.kernel.model.User"
 			};
 
-<<<<<<< HEAD
-		_methodName64 = "findByCategoryAndDifficulty";
-
-		_methodParameterTypes64 = new String[] { "long", "long" };
-=======
 		_methodName64 = "findByDifficulty";
 
-		_methodParameterTypes64 = new String[] { "int" };
+		_methodParameterTypes64 = new String[] { "long" };
 
 		_methodName65 = "findByCategory";
 
-		_methodParameterTypes65 = new String[] { "java.lang.String" };
+		_methodParameterTypes65 = new String[] { "long" };
 
-		_methodName66 = "findByCategoryId";
+		_methodName66 = "findByCategoryAndDifficulty";
 
-		_methodParameterTypes66 = new String[] { "long" };
->>>>>>> 4efe1569ec40cba279a2c58de988bd69fc9b59d6
+		_methodParameterTypes66 = new String[] { "long", "long" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -270,22 +264,18 @@ public class QuestionLocalServiceClpInvoker {
 
 		if (_methodName64.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes64, parameterTypes)) {
-<<<<<<< HEAD
-			return QuestionLocalServiceUtil.findByCategoryAndDifficulty(((Long)arguments[0]).longValue(),
-				((Long)arguments[1]).longValue());
-=======
-			return QuestionLocalServiceUtil.findByDifficulty(((Integer)arguments[0]).intValue());
+			return QuestionLocalServiceUtil.findByDifficulty(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName65.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes65, parameterTypes)) {
-			return QuestionLocalServiceUtil.findByCategory((java.lang.String)arguments[0]);
+			return QuestionLocalServiceUtil.findByCategory(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName66.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes66, parameterTypes)) {
-			return QuestionLocalServiceUtil.findByCategoryId(((Long)arguments[0]).longValue());
->>>>>>> 4efe1569ec40cba279a2c58de988bd69fc9b59d6
+			return QuestionLocalServiceUtil.findByCategoryAndDifficulty(((Long)arguments[0]).longValue(),
+				((Long)arguments[1]).longValue());
 		}
 
 		throw new UnsupportedOperationException();
@@ -335,11 +325,8 @@ public class QuestionLocalServiceClpInvoker {
 	private String[] _methodParameterTypes63;
 	private String _methodName64;
 	private String[] _methodParameterTypes64;
-<<<<<<< HEAD
-=======
 	private String _methodName65;
 	private String[] _methodParameterTypes65;
 	private String _methodName66;
 	private String[] _methodParameterTypes66;
->>>>>>> 4efe1569ec40cba279a2c58de988bd69fc9b59d6
 }

@@ -233,7 +233,7 @@ public abstract class UserStatisticsLocalServiceBaseImpl
 	public ActionableDynamicQuery getActionableDynamicQuery() {
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
-		actionableDynamicQuery.setBaseLocalService(userStatisticsLocalService);
+		actionableDynamicQuery.setBaseLocalService(de.ki.sbam.service.UserStatisticsLocalServiceUtil.getService());
 		actionableDynamicQuery.setClassLoader(getClassLoader());
 		actionableDynamicQuery.setModelClass(UserStatistics.class);
 
@@ -246,7 +246,7 @@ public abstract class UserStatisticsLocalServiceBaseImpl
 	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery() {
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
-		indexableActionableDynamicQuery.setBaseLocalService(userStatisticsLocalService);
+		indexableActionableDynamicQuery.setBaseLocalService(de.ki.sbam.service.UserStatisticsLocalServiceUtil.getService());
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
 		indexableActionableDynamicQuery.setModelClass(UserStatistics.class);
 
@@ -257,7 +257,7 @@ public abstract class UserStatisticsLocalServiceBaseImpl
 
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
-		actionableDynamicQuery.setBaseLocalService(userStatisticsLocalService);
+		actionableDynamicQuery.setBaseLocalService(de.ki.sbam.service.UserStatisticsLocalServiceUtil.getService());
 		actionableDynamicQuery.setClassLoader(getClassLoader());
 		actionableDynamicQuery.setModelClass(UserStatistics.class);
 
@@ -753,7 +753,7 @@ public abstract class UserStatisticsLocalServiceBaseImpl
 	protected de.ki.sbam.service.QuestionStatisticsLocalService questionStatisticsLocalService;
 	@BeanReference(type = QuestionStatisticsPersistence.class)
 	protected QuestionStatisticsPersistence questionStatisticsPersistence;
-	@BeanReference(type = UserStatisticsLocalService.class)
+	@BeanReference(type = de.ki.sbam.service.UserStatisticsLocalService.class)
 	protected UserStatisticsLocalService userStatisticsLocalService;
 	@BeanReference(type = UserStatisticsPersistence.class)
 	protected UserStatisticsPersistence userStatisticsPersistence;

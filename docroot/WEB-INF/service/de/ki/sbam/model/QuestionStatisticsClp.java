@@ -434,7 +434,7 @@ public class QuestionStatisticsClp extends BaseModelImpl<QuestionStatistics>
 	private long _answered_c;
 	private long _answered_d;
 	private BaseModel<?> _questionStatisticsRemoteModel;
-	private Class<?> _clpSerializerClass = ClpSerializer.class;
+	private Class<?> _clpSerializerClass = de.ki.sbam.service.ClpSerializer.class;
 	private boolean _entityCacheEnabled;
 	private boolean _finderCacheEnabled;
 }

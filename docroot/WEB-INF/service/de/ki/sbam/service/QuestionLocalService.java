@@ -90,7 +90,7 @@ public interface QuestionLocalService extends BaseLocalService,
 	the right answer (should be A || B || C || D)
 	* @param category
 	category to which this question belongs
-	* @param difficultyId
+	* @param difficulty
 	difficulty of the question
 	* @param userId
 	id of the user who added the question
@@ -199,8 +199,12 @@ public interface QuestionLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public Question fetchQuestion(long questionId);
 
+	public List<Question> findByCategory(long categoryId);
+
 	public List<Question> findByCategoryAndDifficulty(long categoryId,
 		long difficultyId);
+
+	public List<Question> findByDifficulty(long difficulty);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ActionableDynamicQuery getActionableDynamicQuery();

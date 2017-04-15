@@ -233,7 +233,7 @@ public abstract class DifficultyLocalServiceBaseImpl
 	public ActionableDynamicQuery getActionableDynamicQuery() {
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
-		actionableDynamicQuery.setBaseLocalService(difficultyLocalService);
+		actionableDynamicQuery.setBaseLocalService(de.ki.sbam.service.DifficultyLocalServiceUtil.getService());
 		actionableDynamicQuery.setClassLoader(getClassLoader());
 		actionableDynamicQuery.setModelClass(Difficulty.class);
 
@@ -246,7 +246,7 @@ public abstract class DifficultyLocalServiceBaseImpl
 	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery() {
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
-		indexableActionableDynamicQuery.setBaseLocalService(difficultyLocalService);
+		indexableActionableDynamicQuery.setBaseLocalService(de.ki.sbam.service.DifficultyLocalServiceUtil.getService());
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
 		indexableActionableDynamicQuery.setModelClass(Difficulty.class);
 
@@ -258,7 +258,7 @@ public abstract class DifficultyLocalServiceBaseImpl
 
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
-		actionableDynamicQuery.setBaseLocalService(difficultyLocalService);
+		actionableDynamicQuery.setBaseLocalService(de.ki.sbam.service.DifficultyLocalServiceUtil.getService());
 		actionableDynamicQuery.setClassLoader(getClassLoader());
 		actionableDynamicQuery.setModelClass(Difficulty.class);
 
@@ -738,7 +738,7 @@ public abstract class DifficultyLocalServiceBaseImpl
 	protected de.ki.sbam.service.CategoryLocalService categoryLocalService;
 	@BeanReference(type = CategoryPersistence.class)
 	protected CategoryPersistence categoryPersistence;
-	@BeanReference(type = DifficultyLocalService.class)
+	@BeanReference(type = de.ki.sbam.service.DifficultyLocalService.class)
 	protected DifficultyLocalService difficultyLocalService;
 	@BeanReference(type = DifficultyPersistence.class)
 	protected DifficultyPersistence difficultyPersistence;

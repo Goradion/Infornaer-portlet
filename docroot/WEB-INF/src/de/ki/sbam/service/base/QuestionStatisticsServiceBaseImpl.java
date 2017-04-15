@@ -646,7 +646,7 @@ public abstract class QuestionStatisticsServiceBaseImpl extends BaseServiceImpl
 	protected QuestionPersistence questionPersistence;
 	@BeanReference(type = de.ki.sbam.service.QuestionStatisticsLocalService.class)
 	protected de.ki.sbam.service.QuestionStatisticsLocalService questionStatisticsLocalService;
-	@BeanReference(type = QuestionStatisticsService.class)
+	@BeanReference(type = de.ki.sbam.service.QuestionStatisticsService.class)
 	protected QuestionStatisticsService questionStatisticsService;
 	@BeanReference(type = QuestionStatisticsPersistence.class)
 	protected QuestionStatisticsPersistence questionStatisticsPersistence;

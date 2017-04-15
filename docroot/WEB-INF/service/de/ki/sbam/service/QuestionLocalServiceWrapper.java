@@ -33,38 +33,6 @@ public class QuestionLocalServiceWrapper implements QuestionLocalService,
 		_questionLocalService = questionLocalService;
 	}
 
-	@Override
-	public com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery getActionableDynamicQuery() {
-		return _questionLocalService.getActionableDynamicQuery();
-	}
-
-	@Override
-	public com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery() {
-		return _questionLocalService.dynamicQuery();
-	}
-
-	@Override
-	public com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery getIndexableActionableDynamicQuery() {
-		return _questionLocalService.getIndexableActionableDynamicQuery();
-	}
-
-	/**
-	* @throws PortalException
-	*/
-	@Override
-	public com.liferay.portal.kernel.model.PersistedModel deletePersistedModel(
-		com.liferay.portal.kernel.model.PersistedModel persistedModel)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _questionLocalService.deletePersistedModel(persistedModel);
-	}
-
-	@Override
-	public com.liferay.portal.kernel.model.PersistedModel getPersistedModel(
-		java.io.Serializable primaryKeyObj)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _questionLocalService.getPersistedModel(primaryKeyObj);
-	}
-
 	/**
 	* Adds the question to the database. Also notifies the appropriate model listeners.
 	*
@@ -94,7 +62,7 @@ public class QuestionLocalServiceWrapper implements QuestionLocalService,
 	the right answer (should be A || B || C || D)
 	* @param category
 	category to which this question belongs
-	* @param difficultyId
+	* @param difficulty
 	difficulty of the question
 	* @param userId
 	id of the user who added the question
@@ -126,6 +94,16 @@ public class QuestionLocalServiceWrapper implements QuestionLocalService,
 	}
 
 	/**
+	* @throws PortalException
+	*/
+	@Override
+	public com.liferay.portal.kernel.model.PersistedModel deletePersistedModel(
+		com.liferay.portal.kernel.model.PersistedModel persistedModel)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _questionLocalService.deletePersistedModel(persistedModel);
+	}
+
+	/**
 	* Deletes the question from the database. Also notifies the appropriate model listeners.
 	*
 	* @param question the question
@@ -151,61 +129,8 @@ public class QuestionLocalServiceWrapper implements QuestionLocalService,
 	}
 
 	@Override
-	public de.ki.sbam.model.Question fetchQuestion(long questionId) {
-		return _questionLocalService.fetchQuestion(questionId);
-	}
-
-	/**
-	* Returns the question with the primary key.
-	*
-	* @param questionId the primary key of the question
-	* @return the question
-	* @throws PortalException if a question with the primary key could not be found
-	*/
-	@Override
-	public de.ki.sbam.model.Question getQuestion(long questionId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _questionLocalService.getQuestion(questionId);
-	}
-
-	/**
-	* Updates the question in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
-	*
-	* @param question the question
-	* @return the question that was updated
-	*/
-	@Override
-	public de.ki.sbam.model.Question updateQuestion(
-		de.ki.sbam.model.Question question) {
-		return _questionLocalService.updateQuestion(question);
-	}
-
-	/**
-	* Returns the number of questions.
-	*
-	* @return the number of questions
-	*/
-	@Override
-	public int getQuestionsCount() {
-		return _questionLocalService.getQuestionsCount();
-	}
-
-	@Override
-	public java.lang.Object invokeMethod(java.lang.String name,
-		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
-		throws java.lang.Throwable {
-		return _questionLocalService.invokeMethod(name, parameterTypes,
-			arguments);
-	}
-
-	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
-	@Override
-	public java.lang.String getOSGiServiceIdentifier() {
-		return _questionLocalService.getOSGiServiceIdentifier();
+	public com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery() {
+		return _questionLocalService.dynamicQuery();
 	}
 
 	/**
@@ -261,7 +186,6 @@ public class QuestionLocalServiceWrapper implements QuestionLocalService,
 			orderByComparator);
 	}
 
-<<<<<<< HEAD
 	/**
 	* Returns the number of rows matching the dynamic query.
 	*
@@ -294,10 +218,22 @@ public class QuestionLocalServiceWrapper implements QuestionLocalService,
 	}
 
 	@Override
+	public java.util.List<de.ki.sbam.model.Question> findByCategory(
+		long categoryId) {
+		return _questionLocalService.findByCategory(categoryId);
+	}
+
+	@Override
 	public java.util.List<de.ki.sbam.model.Question> findByCategoryAndDifficulty(
 		long categoryId, long difficultyId) {
 		return _questionLocalService.findByCategoryAndDifficulty(categoryId,
 			difficultyId);
+	}
+
+	@Override
+	public java.util.List<de.ki.sbam.model.Question> findByDifficulty(
+		long difficulty) {
+		return _questionLocalService.findByDifficulty(difficulty);
 	}
 
 	@Override
@@ -315,24 +251,29 @@ public class QuestionLocalServiceWrapper implements QuestionLocalService,
 	*
 	* @return the OSGi service identifier
 	*/
-=======
->>>>>>> 4efe1569ec40cba279a2c58de988bd69fc9b59d6
 	@Override
-	public java.util.List<de.ki.sbam.model.Question> findByCategory(
-		java.lang.String category) {
-		return _questionLocalService.findByCategory(category);
+	public java.lang.String getOSGiServiceIdentifier() {
+		return _questionLocalService.getOSGiServiceIdentifier();
 	}
 
 	@Override
-	public java.util.List<de.ki.sbam.model.Question> findByCategoryId(
-		long categoryId) {
-		return _questionLocalService.findByCategoryId(categoryId);
+	public com.liferay.portal.kernel.model.PersistedModel getPersistedModel(
+		java.io.Serializable primaryKeyObj)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _questionLocalService.getPersistedModel(primaryKeyObj);
 	}
 
+	/**
+	* Returns the question with the primary key.
+	*
+	* @param questionId the primary key of the question
+	* @return the question
+	* @throws PortalException if a question with the primary key could not be found
+	*/
 	@Override
-	public java.util.List<de.ki.sbam.model.Question> findByDifficulty(
-		int difficulty) {
-		return _questionLocalService.findByDifficulty(difficulty);
+	public de.ki.sbam.model.Question getQuestion(long questionId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _questionLocalService.getQuestion(questionId);
 	}
 
 	/**
@@ -353,29 +294,33 @@ public class QuestionLocalServiceWrapper implements QuestionLocalService,
 	}
 
 	/**
-	* Returns the number of rows matching the dynamic query.
+	* Returns the number of questions.
 	*
-	* @param dynamicQuery the dynamic query
-	* @return the number of rows matching the dynamic query
+	* @return the number of questions
 	*/
 	@Override
-	public long dynamicQueryCount(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery) {
-		return _questionLocalService.dynamicQueryCount(dynamicQuery);
+	public int getQuestionsCount() {
+		return _questionLocalService.getQuestionsCount();
+	}
+
+	@Override
+	public java.lang.Object invokeMethod(java.lang.String name,
+		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
+		throws java.lang.Throwable {
+		return _questionLocalService.invokeMethod(name, parameterTypes,
+			arguments);
 	}
 
 	/**
-	* Returns the number of rows matching the dynamic query.
+	* Updates the question in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
 	*
-	* @param dynamicQuery the dynamic query
-	* @param projection the projection to apply to the query
-	* @return the number of rows matching the dynamic query
+	* @param question the question
+	* @return the question that was updated
 	*/
 	@Override
-	public long dynamicQueryCount(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery,
-		com.liferay.portal.kernel.dao.orm.Projection projection) {
-		return _questionLocalService.dynamicQueryCount(dynamicQuery, projection);
+	public de.ki.sbam.model.Question updateQuestion(
+		de.ki.sbam.model.Question question) {
+		return _questionLocalService.updateQuestion(question);
 	}
 
 	@Override
