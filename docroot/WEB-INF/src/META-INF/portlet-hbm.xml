@@ -20,6 +20,7 @@
 		</id>
 		<property name="difficultyName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="guaranteed" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="score" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 	</class>
 	<class name="de.ki.sbam.model.impl.HighscoreImpl" table="sbam_Highscore">
 		<id name="userId" type="long">

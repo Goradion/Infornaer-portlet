@@ -79,6 +79,7 @@ public class DifficultyClp extends BaseModelImpl<Difficulty>
 		attributes.put("difficultyId", getDifficultyId());
 		attributes.put("difficultyName", getDifficultyName());
 		attributes.put("guaranteed", getGuaranteed());
+		attributes.put("score", getScore());
 
 		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
 		attributes.put("finderCacheEnabled", isFinderCacheEnabled());
@@ -104,6 +105,12 @@ public class DifficultyClp extends BaseModelImpl<Difficulty>
 
 		if (guaranteed != null) {
 			setGuaranteed(guaranteed);
+		}
+
+		Integer score = (Integer)attributes.get("score");
+
+		if (score != null) {
+			setScore(score);
 		}
 
 		_entityCacheEnabled = GetterUtil.getBoolean("entityCacheEnabled");
@@ -185,6 +192,29 @@ public class DifficultyClp extends BaseModelImpl<Difficulty>
 		}
 	}
 
+	@Override
+	public int getScore() {
+		return _score;
+	}
+
+	@Override
+	public void setScore(int score) {
+		_score = score;
+
+		if (_difficultyRemoteModel != null) {
+			try {
+				Class<?> clazz = _difficultyRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setScore", int.class);
+
+				method.invoke(_difficultyRemoteModel, score);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
 	public BaseModel<?> getDifficultyRemoteModel() {
 		return _difficultyRemoteModel;
 	}
@@ -257,6 +287,7 @@ public class DifficultyClp extends BaseModelImpl<Difficulty>
 		clone.setDifficultyId(getDifficultyId());
 		clone.setDifficultyName(getDifficultyName());
 		clone.setGuaranteed(getGuaranteed());
+		clone.setScore(getScore());
 
 		return clone;
 	}
@@ -319,7 +350,7 @@ public class DifficultyClp extends BaseModelImpl<Difficulty>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(7);
+		StringBundler sb = new StringBundler(9);
 
 		sb.append("{difficultyId=");
 		sb.append(getDifficultyId());
@@ -327,6 +358,8 @@ public class DifficultyClp extends BaseModelImpl<Difficulty>
 		sb.append(getDifficultyName());
 		sb.append(", guaranteed=");
 		sb.append(getGuaranteed());
+		sb.append(", score=");
+		sb.append(getScore());
 		sb.append("}");
 
 		return sb.toString();
@@ -334,7 +367,7 @@ public class DifficultyClp extends BaseModelImpl<Difficulty>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(13);
+		StringBundler sb = new StringBundler(16);
 
 		sb.append("<model><model-name>");
 		sb.append("de.ki.sbam.model.Difficulty");
@@ -352,6 +385,10 @@ public class DifficultyClp extends BaseModelImpl<Difficulty>
 			"<column><column-name>guaranteed</column-name><column-value><![CDATA[");
 		sb.append(getGuaranteed());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>score</column-name><column-value><![CDATA[");
+		sb.append(getScore());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -361,6 +398,7 @@ public class DifficultyClp extends BaseModelImpl<Difficulty>
 	private long _difficultyId;
 	private String _difficultyName;
 	private boolean _guaranteed;
+	private int _score;
 	private BaseModel<?> _difficultyRemoteModel;
 	private Class<?> _clpSerializerClass = de.ki.sbam.service.ClpSerializer.class;
 	private boolean _entityCacheEnabled;

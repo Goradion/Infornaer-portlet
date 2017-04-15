@@ -28,10 +28,10 @@
 	</select>
 	<br />
 	Schwierigkeit: <br />
-	<select name="<portlet:namespace />difficulty" >
-	    <option value="1">Leicht</option>
-	    <option value="2">Mittel</option>
-	    <option value="3">Schwer</option>
+	<select name= "<portlet:namespace />difficulty" >
+		<c:forEach items="${dList}" var="d">
+			<option value="${d.getDifficutltyId()}">${d.getDifficultyName()}</option>
+		</c:forEach>
 	</select>
 	<br/>
 	Kategorie: <br />

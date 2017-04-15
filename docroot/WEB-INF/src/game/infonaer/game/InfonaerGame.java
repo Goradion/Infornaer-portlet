@@ -5,26 +5,33 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 
+import com.liferay.portal.kernel.model.User;
+
 import de.ki.sbam.model.Category;
 import de.ki.sbam.model.Difficulty;
 import de.ki.sbam.model.Question;
+import de.ki.sbam.service.DifficultyLocalServiceUtil;
 import de.ki.sbam.service.QuestionLocalService;
 import de.ki.sbam.service.QuestionLocalServiceUtil;
 import de.ki.sbam.service.impl.QuestionLocalServiceImpl;
 
 public class InfonaerGame {
 	private Random randomGenerator;
+	private User player;
 	private List<Category> categories;
 	private int currentDifficulty = 0;
 	private List<Difficulty> difficulties;
 	private Question currentQuestion; 
 	private int score = 0;
+	private int guaranteedScore = 0;
 	private boolean fifyFiftyUsed = false;
 	private boolean audienceUsed = false;
 	private boolean gameOver = false;
+	private boolean won = false;
 	private HashSet<HashMap<Integer,HashSet<String>>> questions;
 	
-	public InfonaerGame(List<Category> categories, List<Difficulty> difficulties){
+	public InfonaerGame(User user, List<Category> categories, List<Difficulty> difficulties){
+		player = user;
 		this.categories = categories;
 		this.difficulties = difficulties;
 		this.questions = new HashSet<HashMap<Integer,HashSet<String>>>();
@@ -57,32 +64,46 @@ public class InfonaerGame {
 	
 	public boolean evaluateAnswer(String answer) {
 		//TODO log answer for stats
-		if (currentQuestion.getRightAnswer().equals(answer)){
-			addScore(currentQuestion.getDifficultyId_fk());
+		if (!gameOver && currentQuestion.getRightAnswer().equals(answer)){
+			
 			if (currentDifficulty < difficulties.size()){
+				Difficulty difficulty = difficulties.get(currentDifficulty);
+				addScore(difficulty);
+				if (difficulty.isGuaranteed()){
+					guaranteedScore = difficulty.getScore();
+				}
 				currentDifficulty++;
 			} else {
-				// win
+				win();
 			}
 			return true;
-			
 		} else {
+			lose();
 			return false;
 		}
 		
 	}
 
-	public int win(){
-		
-		return score;
+
+	private void win(){
+		won = true;
+		gameOver();
 	}
+	
+
 	public int retire(){
-		gameOver = true;
+		gameOver();
 		return score;
 	}
-	private int lose() {
-		// TODO drop to lifeline
-		return score;
+	
+	private void lose() {
+		score = guaranteedScore;
+		gameOver();
+	}
+	
+	private void gameOver() {
+		gameOver = true;
+		saveHighscore();		
 	}
 
 	private void saveHighscore() {
@@ -90,8 +111,8 @@ public class InfonaerGame {
 		
 	}
 
-	private void addScore(long difficultyId) {
-		// TODO Auto-generated method stub
+	private void addScore(Difficulty difficulty) {
+		score = difficulty.getScore();
 		
 	}
 }

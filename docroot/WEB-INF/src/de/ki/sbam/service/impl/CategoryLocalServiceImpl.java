@@ -52,10 +52,17 @@ public class CategoryLocalServiceImpl extends CategoryLocalServiceBaseImpl {
 	 * @return Category category added
 	 */
 	public Category addCategory(String categoryName) {
-		long categoryId = counterLocalService.increment();
-		Category category = categoryPersistence.create(categoryId);
-		category.setCategoryName(categoryName);
-		categoryPersistence.update(category);
+		Category category = null;
+		try {
+			category = categoryPersistence.findByCategoryName(categoryName);
+			
+		} catch (NoSuchCategoryException e) {
+			
+			long categoryId = counterLocalService.increment();
+			category = categoryPersistence.create(categoryId);
+			category.setCategoryName(categoryName);
+			categoryPersistence.update(category);
+		}
 		return category;
 	}
 
@@ -106,5 +113,9 @@ public class CategoryLocalServiceImpl extends CategoryLocalServiceBaseImpl {
 	
 	public Category getCategoryByName(String categoryName) throws NoSuchCategoryException{
 		return CategoryUtil.findByCategoryName(categoryName);
+	}
+	
+	public List<Category> findAll(){
+		return CategoryUtil.findAll();
 	}
 }

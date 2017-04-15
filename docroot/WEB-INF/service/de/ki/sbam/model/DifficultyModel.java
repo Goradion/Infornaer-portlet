@@ -110,6 +110,20 @@ public interface DifficultyModel extends BaseModel<Difficulty> {
 	 */
 	public void setGuaranteed(boolean guaranteed);
 
+	/**
+	 * Returns the score of this difficulty.
+	 *
+	 * @return the score of this difficulty
+	 */
+	public int getScore();
+
+	/**
+	 * Sets the score of this difficulty.
+	 *
+	 * @param score the score of this difficulty
+	 */
+	public void setScore(int score);
+
 	@Override
 	public boolean isNew();
 

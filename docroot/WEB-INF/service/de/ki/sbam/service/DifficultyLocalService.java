@@ -168,6 +168,8 @@ public interface DifficultyLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public Difficulty fetchDifficulty(long difficultyId);
 
+	public List<Difficulty> findAll();
+
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ActionableDynamicQuery getActionableDynamicQuery();
 

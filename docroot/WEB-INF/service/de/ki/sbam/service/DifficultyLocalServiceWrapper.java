@@ -182,6 +182,11 @@ public class DifficultyLocalServiceWrapper implements DifficultyLocalService,
 	}
 
 	@Override
+	public java.util.List<de.ki.sbam.model.Difficulty> findAll() {
+		return _difficultyLocalService.findAll();
+	}
+
+	@Override
 	public com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery getActionableDynamicQuery() {
 		return _difficultyLocalService.getActionableDynamicQuery();
 	}
