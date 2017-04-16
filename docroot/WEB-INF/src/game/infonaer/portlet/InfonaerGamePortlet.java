@@ -37,6 +37,7 @@ import de.ki.sbam.model.Question;
 import de.ki.sbam.service.CategoryLocalServiceUtil;
 import de.ki.sbam.service.DifficultyLocalServiceUtil;
 import de.ki.sbam.service.QuestionLocalServiceUtil;
+import game.infonaer.constants.Constants;
 import game.infonaer.game.InfonaerGame;
 
 /**
@@ -404,6 +405,6 @@ public class InfonaerGamePortlet extends MVCPortlet {
 	}
 	
 	public void leaveCurrentGame(ActionRequest actionRequest, ActionResponse actionResponse){
-			
+		actionRequest.getPortletSession().setAttribute("currentPage",NEW_GAME_JSP, PortletSession.PORTLET_SCOPE);
 	}
 }
