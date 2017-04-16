@@ -33,6 +33,12 @@ public class DifficultyLocalServiceWrapper implements DifficultyLocalService,
 		_difficultyLocalService = difficultyLocalService;
 	}
 
+	@Override
+	public de.ki.sbam.model.Difficulty addDifficultry(int score,
+		boolean guaranteed) {
+		return _difficultyLocalService.addDifficultry(score, guaranteed);
+	}
+
 	/**
 	* Adds the difficulty to the database. Also notifies the appropriate model listeners.
 	*
@@ -48,12 +54,12 @@ public class DifficultyLocalServiceWrapper implements DifficultyLocalService,
 	/**
 	* Creates a new difficulty with the primary key. Does not add the difficulty to the database.
 	*
-	* @param difficultyId the primary key for the new difficulty
+	* @param score the primary key for the new difficulty
 	* @return the new difficulty
 	*/
 	@Override
-	public de.ki.sbam.model.Difficulty createDifficulty(long difficultyId) {
-		return _difficultyLocalService.createDifficulty(difficultyId);
+	public de.ki.sbam.model.Difficulty createDifficulty(int score) {
+		return _difficultyLocalService.createDifficulty(score);
 	}
 
 	/**
@@ -71,14 +77,14 @@ public class DifficultyLocalServiceWrapper implements DifficultyLocalService,
 	/**
 	* Deletes the difficulty with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param difficultyId the primary key of the difficulty
+	* @param score the primary key of the difficulty
 	* @return the difficulty that was removed
 	* @throws PortalException if a difficulty with the primary key could not be found
 	*/
 	@Override
-	public de.ki.sbam.model.Difficulty deleteDifficulty(long difficultyId)
+	public de.ki.sbam.model.Difficulty deleteDifficulty(int score)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _difficultyLocalService.deleteDifficulty(difficultyId);
+		return _difficultyLocalService.deleteDifficulty(score);
 	}
 
 	/**
@@ -177,8 +183,8 @@ public class DifficultyLocalServiceWrapper implements DifficultyLocalService,
 	}
 
 	@Override
-	public de.ki.sbam.model.Difficulty fetchDifficulty(long difficultyId) {
-		return _difficultyLocalService.fetchDifficulty(difficultyId);
+	public de.ki.sbam.model.Difficulty fetchDifficulty(int score) {
+		return _difficultyLocalService.fetchDifficulty(score);
 	}
 
 	@Override
@@ -221,14 +227,14 @@ public class DifficultyLocalServiceWrapper implements DifficultyLocalService,
 	/**
 	* Returns the difficulty with the primary key.
 	*
-	* @param difficultyId the primary key of the difficulty
+	* @param score the primary key of the difficulty
 	* @return the difficulty
 	* @throws PortalException if a difficulty with the primary key could not be found
 	*/
 	@Override
-	public de.ki.sbam.model.Difficulty getDifficulty(long difficultyId)
+	public de.ki.sbam.model.Difficulty getDifficulty(int score)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _difficultyLocalService.getDifficulty(difficultyId);
+		return _difficultyLocalService.getDifficulty(score);
 	}
 
 	@Override

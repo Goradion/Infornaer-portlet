@@ -18,7 +18,6 @@ import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.expando.kernel.model.ExpandoBridge;
 
-import com.liferay.portal.kernel.bean.AutoEscape;
 import com.liferay.portal.kernel.model.BaseModel;
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -51,43 +50,14 @@ public interface DifficultyModel extends BaseModel<Difficulty> {
 	 *
 	 * @return the primary key of this difficulty
 	 */
-	public long getPrimaryKey();
+	public int getPrimaryKey();
 
 	/**
 	 * Sets the primary key of this difficulty.
 	 *
 	 * @param primaryKey the primary key of this difficulty
 	 */
-	public void setPrimaryKey(long primaryKey);
-
-	/**
-	 * Returns the difficulty ID of this difficulty.
-	 *
-	 * @return the difficulty ID of this difficulty
-	 */
-	public long getDifficultyId();
-
-	/**
-	 * Sets the difficulty ID of this difficulty.
-	 *
-	 * @param difficultyId the difficulty ID of this difficulty
-	 */
-	public void setDifficultyId(long difficultyId);
-
-	/**
-	 * Returns the difficulty name of this difficulty.
-	 *
-	 * @return the difficulty name of this difficulty
-	 */
-	@AutoEscape
-	public String getDifficultyName();
-
-	/**
-	 * Sets the difficulty name of this difficulty.
-	 *
-	 * @param difficultyName the difficulty name of this difficulty
-	 */
-	public void setDifficultyName(String difficultyName);
+	public void setPrimaryKey(int primaryKey);
 
 	/**
 	 * Returns the guaranteed of this difficulty.

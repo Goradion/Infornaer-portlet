@@ -201,12 +201,14 @@ public class CategoryLocalServiceWrapper implements CategoryLocalService,
 	id of the category to edit
 	* @param categoryName_new
 	new name of the edited category
+	* @param unlocked
 	* @return
 	*/
 	@Override
 	public de.ki.sbam.model.Category editCategory(long categoryId,
-		java.lang.String categoryName_new) {
-		return _categoryLocalService.editCategory(categoryId, categoryName_new);
+		java.lang.String categoryName_new, boolean unlocked) {
+		return _categoryLocalService.editCategory(categoryId, categoryName_new,
+			unlocked);
 	}
 
 	@Override

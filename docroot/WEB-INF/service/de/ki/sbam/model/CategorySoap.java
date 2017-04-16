@@ -35,6 +35,7 @@ public class CategorySoap implements Serializable {
 
 		soapModel.setCategoryId(model.getCategoryId());
 		soapModel.setCategoryName(model.getCategoryName());
+		soapModel.setUnlocked(model.getUnlocked());
 
 		return soapModel;
 	}
@@ -103,6 +104,19 @@ public class CategorySoap implements Serializable {
 		_categoryName = categoryName;
 	}
 
+	public boolean getUnlocked() {
+		return _unlocked;
+	}
+
+	public boolean isUnlocked() {
+		return _unlocked;
+	}
+
+	public void setUnlocked(boolean unlocked) {
+		_unlocked = unlocked;
+	}
+
 	private long _categoryId;
 	private String _categoryName;
+	private boolean _unlocked;
 }

@@ -17,6 +17,7 @@ package de.ki.sbam.service.impl;
 import java.util.List;
 
 import aQute.bnd.annotation.ProviderType;
+import de.ki.sbam.exception.NoSuchDifficultyException;
 import de.ki.sbam.model.Difficulty;
 import de.ki.sbam.service.base.DifficultyLocalServiceBaseImpl;
 import de.ki.sbam.service.persistence.DifficultyUtil;
@@ -25,10 +26,14 @@ import de.ki.sbam.service.persistence.DifficultyUtil;
  * The implementation of the difficulty local service.
  *
  * <p>
- * All custom service methods should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link de.ki.sbam.service.DifficultyLocalService} interface.
+ * All custom service methods should be put in this class. Whenever methods are
+ * added, rerun ServiceBuilder to copy their definitions into the
+ * {@link de.ki.sbam.service.DifficultyLocalService} interface.
  *
  * <p>
- * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
+ * This is a local service. Methods of this service will not have security
+ * checks based on the propagated JAAS credentials because this service can only
+ * be accessed from within the same VM.
  * </p>
  *
  * @author Alexander Mueller
@@ -40,10 +45,23 @@ public class DifficultyLocalServiceImpl extends DifficultyLocalServiceBaseImpl {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never reference this class directly. Always use {@link de.ki.sbam.service.DifficultyLocalServiceUtil} to access the difficulty local service.
+	 * Never reference this class directly. Always use {@link
+	 * de.ki.sbam.service.DifficultyLocalServiceUtil} to access the difficulty
+	 * local service.
 	 */
-	
-	public List<Difficulty> findAll(){
+	public Difficulty addDifficultry(int score, boolean guaranteed) {
+		Difficulty difficulty = difficultyPersistence.fetchByPrimaryKey(score);
+		if (difficulty == null) {
+			difficulty = difficultyPersistence.create(score);
+			difficulty.setGuaranteed(guaranteed);
+			difficultyPersistence.update(difficulty);
+		}
+		return difficulty;
+
+	}
+
+	public List<Difficulty> findAll() {
 		return DifficultyUtil.findAll();
 	}
+
 }

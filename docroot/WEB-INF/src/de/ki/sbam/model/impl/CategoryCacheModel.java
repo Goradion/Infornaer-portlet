@@ -63,12 +63,14 @@ public class CategoryCacheModel implements CacheModel<Category>, Externalizable 
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(5);
+		StringBundler sb = new StringBundler(7);
 
 		sb.append("{categoryId=");
 		sb.append(categoryId);
 		sb.append(", categoryName=");
 		sb.append(categoryName);
+		sb.append(", unlocked=");
+		sb.append(unlocked);
 		sb.append("}");
 
 		return sb.toString();
@@ -87,6 +89,8 @@ public class CategoryCacheModel implements CacheModel<Category>, Externalizable 
 			categoryImpl.setCategoryName(categoryName);
 		}
 
+		categoryImpl.setUnlocked(unlocked);
+
 		categoryImpl.resetOriginalValues();
 
 		return categoryImpl;
@@ -96,6 +100,8 @@ public class CategoryCacheModel implements CacheModel<Category>, Externalizable 
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		categoryId = objectInput.readLong();
 		categoryName = objectInput.readUTF();
+
+		unlocked = objectInput.readBoolean();
 	}
 
 	@Override
@@ -109,8 +115,11 @@ public class CategoryCacheModel implements CacheModel<Category>, Externalizable 
 		else {
 			objectOutput.writeUTF(categoryName);
 		}
+
+		objectOutput.writeBoolean(unlocked);
 	}
 
 	public long categoryId;
 	public String categoryName;
+	public boolean unlocked;
 }

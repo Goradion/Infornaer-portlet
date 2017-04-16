@@ -41,6 +41,10 @@ public class DifficultyLocalServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to {@link de.ki.sbam.service.impl.DifficultyLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
+	public static de.ki.sbam.model.Difficulty addDifficultry(int score,
+		boolean guaranteed) {
+		return getService().addDifficultry(score, guaranteed);
+	}
 
 	/**
 	* Adds the difficulty to the database. Also notifies the appropriate model listeners.
@@ -56,12 +60,11 @@ public class DifficultyLocalServiceUtil {
 	/**
 	* Creates a new difficulty with the primary key. Does not add the difficulty to the database.
 	*
-	* @param difficultyId the primary key for the new difficulty
+	* @param score the primary key for the new difficulty
 	* @return the new difficulty
 	*/
-	public static de.ki.sbam.model.Difficulty createDifficulty(
-		long difficultyId) {
-		return getService().createDifficulty(difficultyId);
+	public static de.ki.sbam.model.Difficulty createDifficulty(int score) {
+		return getService().createDifficulty(score);
 	}
 
 	/**
@@ -78,14 +81,13 @@ public class DifficultyLocalServiceUtil {
 	/**
 	* Deletes the difficulty with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param difficultyId the primary key of the difficulty
+	* @param score the primary key of the difficulty
 	* @return the difficulty that was removed
 	* @throws PortalException if a difficulty with the primary key could not be found
 	*/
-	public static de.ki.sbam.model.Difficulty deleteDifficulty(
-		long difficultyId)
+	public static de.ki.sbam.model.Difficulty deleteDifficulty(int score)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().deleteDifficulty(difficultyId);
+		return getService().deleteDifficulty(score);
 	}
 
 	/**
@@ -175,8 +177,8 @@ public class DifficultyLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery, projection);
 	}
 
-	public static de.ki.sbam.model.Difficulty fetchDifficulty(long difficultyId) {
-		return getService().fetchDifficulty(difficultyId);
+	public static de.ki.sbam.model.Difficulty fetchDifficulty(int score) {
+		return getService().fetchDifficulty(score);
 	}
 
 	public static java.util.List<de.ki.sbam.model.Difficulty> findAll() {
@@ -215,13 +217,13 @@ public class DifficultyLocalServiceUtil {
 	/**
 	* Returns the difficulty with the primary key.
 	*
-	* @param difficultyId the primary key of the difficulty
+	* @param score the primary key of the difficulty
 	* @return the difficulty
 	* @throws PortalException if a difficulty with the primary key could not be found
 	*/
-	public static de.ki.sbam.model.Difficulty getDifficulty(long difficultyId)
+	public static de.ki.sbam.model.Difficulty getDifficulty(int score)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().getDifficulty(difficultyId);
+		return getService().getDifficulty(score);
 	}
 
 	public static com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery getIndexableActionableDynamicQuery() {

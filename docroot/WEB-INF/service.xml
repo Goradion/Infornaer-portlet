@@ -59,20 +59,30 @@
 	</entity>
 	
 	<entity name="Category" local-service="true" remote-service="true">
-		<column name="categoryId" type="long" primary="true"></column>
-		<column name="categoryName" type="String"></column>
-		<column name="questions" type="Collection" entity="Question"></column>
+		<column name="categoryId" type="long" primary="true"/>
+		<column name="categoryName" type="String"/>
+		<column name="unlocked" type="boolean"/>
+		<column name="questions" type="Collection" entity="Question"/>
 		<finder return-type="Category" name="CategoryName">
 			<finder-column name="categoryName"></finder-column>
+		</finder>
+		<finder return-type="Collection" name="Unlocked">
+			<finder-column name="unlocked"></finder-column>
 		</finder>
 	</entity>
 	
 	<entity name="Difficulty" local-service="true" remote-service="true">
-		<column name="difficultyId" type="long" primary="true"></column>
-		<column name="difficultyName" type="String"></column>
 		<column name="guaranteed" type="boolean"></column>
-		<column name="score" type ="int"></column>
+		<column name="score" type ="int" primary="true"></column>
 		<column name="questions" type="Collection" entity="Question"></column>
+		
+		<order by="asc">
+			<order-column name="score" />
+		</order>
+		
+		<finder name="Score" return-type="Difficulty" unique ="true">
+			<finder-column name="score" />
+		</finder>
 	</entity>
 	
 	<entity name="Highscore" local-service="true" remote-service="true">

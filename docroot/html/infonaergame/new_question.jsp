@@ -30,7 +30,7 @@
 	Schwierigkeit: <br />
 	<select name= "<portlet:namespace />difficulty" >
 		<c:forEach items="${dList}" var="d">
-			<option value="${d.getDifficutltyId()}">${d.getDifficultyName()}</option>
+			<option value="${d.getScore()}">${d.getScore()}</option>
 		</c:forEach>
 	</select>
 	<br/>

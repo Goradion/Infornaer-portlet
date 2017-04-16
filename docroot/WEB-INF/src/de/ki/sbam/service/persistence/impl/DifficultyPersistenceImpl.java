@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.dao.orm.FinderCache;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
+import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.log.Log;
@@ -82,6 +83,206 @@ public class DifficultyPersistenceImpl extends BasePersistenceImpl<Difficulty>
 	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(DifficultyModelImpl.ENTITY_CACHE_ENABLED,
 			DifficultyModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll", new String[0]);
+	public static final FinderPath FINDER_PATH_FETCH_BY_SCORE = new FinderPath(DifficultyModelImpl.ENTITY_CACHE_ENABLED,
+			DifficultyModelImpl.FINDER_CACHE_ENABLED, DifficultyImpl.class,
+			FINDER_CLASS_NAME_ENTITY, "fetchByScore",
+			new String[] { Integer.class.getName() },
+			DifficultyModelImpl.SCORE_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_SCORE = new FinderPath(DifficultyModelImpl.ENTITY_CACHE_ENABLED,
+			DifficultyModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByScore",
+			new String[] { Integer.class.getName() });
+
+	/**
+	 * Returns the difficulty where score = &#63; or throws a {@link NoSuchDifficultyException} if it could not be found.
+	 *
+	 * @param score the score
+	 * @return the matching difficulty
+	 * @throws NoSuchDifficultyException if a matching difficulty could not be found
+	 */
+	@Override
+	public Difficulty findByScore(int score) throws NoSuchDifficultyException {
+		Difficulty difficulty = fetchByScore(score);
+
+		if (difficulty == null) {
+			StringBundler msg = new StringBundler(4);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("score=");
+			msg.append(score);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchDifficultyException(msg.toString());
+		}
+
+		return difficulty;
+	}
+
+	/**
+	 * Returns the difficulty where score = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param score the score
+	 * @return the matching difficulty, or <code>null</code> if a matching difficulty could not be found
+	 */
+	@Override
+	public Difficulty fetchByScore(int score) {
+		return fetchByScore(score, true);
+	}
+
+	/**
+	 * Returns the difficulty where score = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param score the score
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the matching difficulty, or <code>null</code> if a matching difficulty could not be found
+	 */
+	@Override
+	public Difficulty fetchByScore(int score, boolean retrieveFromCache) {
+		Object[] finderArgs = new Object[] { score };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = finderCache.getResult(FINDER_PATH_FETCH_BY_SCORE,
+					finderArgs, this);
+		}
+
+		if (result instanceof Difficulty) {
+			Difficulty difficulty = (Difficulty)result;
+
+			if ((score != difficulty.getScore())) {
+				result = null;
+			}
+		}
+
+		if (result == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_SELECT_DIFFICULTY_WHERE);
+
+			query.append(_FINDER_COLUMN_SCORE_SCORE_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(score);
+
+				List<Difficulty> list = q.list();
+
+				if (list.isEmpty()) {
+					finderCache.putResult(FINDER_PATH_FETCH_BY_SCORE,
+						finderArgs, list);
+				}
+				else {
+					Difficulty difficulty = list.get(0);
+
+					result = difficulty;
+
+					cacheResult(difficulty);
+
+					if ((difficulty.getScore() != score)) {
+						finderCache.putResult(FINDER_PATH_FETCH_BY_SCORE,
+							finderArgs, difficulty);
+					}
+				}
+			}
+			catch (Exception e) {
+				finderCache.removeResult(FINDER_PATH_FETCH_BY_SCORE, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		if (result instanceof List<?>) {
+			return null;
+		}
+		else {
+			return (Difficulty)result;
+		}
+	}
+
+	/**
+	 * Removes the difficulty where score = &#63; from the database.
+	 *
+	 * @param score the score
+	 * @return the difficulty that was removed
+	 */
+	@Override
+	public Difficulty removeByScore(int score) throws NoSuchDifficultyException {
+		Difficulty difficulty = findByScore(score);
+
+		return remove(difficulty);
+	}
+
+	/**
+	 * Returns the number of difficulties where score = &#63;.
+	 *
+	 * @param score the score
+	 * @return the number of matching difficulties
+	 */
+	@Override
+	public int countByScore(int score) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_SCORE;
+
+		Object[] finderArgs = new Object[] { score };
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_DIFFICULTY_WHERE);
+
+			query.append(_FINDER_COLUMN_SCORE_SCORE_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(score);
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_SCORE_SCORE_2 = "difficulty.score = ?";
 
 	public DifficultyPersistenceImpl() {
 		setModelClass(Difficulty.class);
@@ -96,6 +297,9 @@ public class DifficultyPersistenceImpl extends BasePersistenceImpl<Difficulty>
 	public void cacheResult(Difficulty difficulty) {
 		entityCache.putResult(DifficultyModelImpl.ENTITY_CACHE_ENABLED,
 			DifficultyImpl.class, difficulty.getPrimaryKey(), difficulty);
+
+		finderCache.putResult(FINDER_PATH_FETCH_BY_SCORE,
+			new Object[] { difficulty.getScore() }, difficulty);
 
 		difficulty.resetOriginalValues();
 	}
@@ -149,6 +353,8 @@ public class DifficultyPersistenceImpl extends BasePersistenceImpl<Difficulty>
 
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		clearUniqueFindersCache((DifficultyModelImpl)difficulty);
 	}
 
 	@Override
@@ -159,21 +365,62 @@ public class DifficultyPersistenceImpl extends BasePersistenceImpl<Difficulty>
 		for (Difficulty difficulty : difficulties) {
 			entityCache.removeResult(DifficultyModelImpl.ENTITY_CACHE_ENABLED,
 				DifficultyImpl.class, difficulty.getPrimaryKey());
+
+			clearUniqueFindersCache((DifficultyModelImpl)difficulty);
+		}
+	}
+
+	protected void cacheUniqueFindersCache(
+		DifficultyModelImpl difficultyModelImpl, boolean isNew) {
+		if (isNew) {
+			Object[] args = new Object[] { difficultyModelImpl.getScore() };
+
+			finderCache.putResult(FINDER_PATH_COUNT_BY_SCORE, args,
+				Long.valueOf(1));
+			finderCache.putResult(FINDER_PATH_FETCH_BY_SCORE, args,
+				difficultyModelImpl);
+		}
+		else {
+			if ((difficultyModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_SCORE.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] { difficultyModelImpl.getScore() };
+
+				finderCache.putResult(FINDER_PATH_COUNT_BY_SCORE, args,
+					Long.valueOf(1));
+				finderCache.putResult(FINDER_PATH_FETCH_BY_SCORE, args,
+					difficultyModelImpl);
+			}
+		}
+	}
+
+	protected void clearUniqueFindersCache(
+		DifficultyModelImpl difficultyModelImpl) {
+		Object[] args = new Object[] { difficultyModelImpl.getScore() };
+
+		finderCache.removeResult(FINDER_PATH_COUNT_BY_SCORE, args);
+		finderCache.removeResult(FINDER_PATH_FETCH_BY_SCORE, args);
+
+		if ((difficultyModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_SCORE.getColumnBitmask()) != 0) {
+			args = new Object[] { difficultyModelImpl.getOriginalScore() };
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_SCORE, args);
+			finderCache.removeResult(FINDER_PATH_FETCH_BY_SCORE, args);
 		}
 	}
 
 	/**
 	 * Creates a new difficulty with the primary key. Does not add the difficulty to the database.
 	 *
-	 * @param difficultyId the primary key for the new difficulty
+	 * @param score the primary key for the new difficulty
 	 * @return the new difficulty
 	 */
 	@Override
-	public Difficulty create(long difficultyId) {
+	public Difficulty create(int score) {
 		Difficulty difficulty = new DifficultyImpl();
 
 		difficulty.setNew(true);
-		difficulty.setPrimaryKey(difficultyId);
+		difficulty.setPrimaryKey(score);
 
 		return difficulty;
 	}
@@ -181,14 +428,13 @@ public class DifficultyPersistenceImpl extends BasePersistenceImpl<Difficulty>
 	/**
 	 * Removes the difficulty with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param difficultyId the primary key of the difficulty
+	 * @param score the primary key of the difficulty
 	 * @return the difficulty that was removed
 	 * @throws NoSuchDifficultyException if a difficulty with the primary key could not be found
 	 */
 	@Override
-	public Difficulty remove(long difficultyId)
-		throws NoSuchDifficultyException {
-		return remove((Serializable)difficultyId);
+	public Difficulty remove(int score) throws NoSuchDifficultyException {
+		return remove((Serializable)score);
 	}
 
 	/**
@@ -269,6 +515,8 @@ public class DifficultyPersistenceImpl extends BasePersistenceImpl<Difficulty>
 
 		boolean isNew = difficulty.isNew();
 
+		DifficultyModelImpl difficultyModelImpl = (DifficultyModelImpl)difficulty;
+
 		Session session = null;
 
 		try {
@@ -292,12 +540,15 @@ public class DifficultyPersistenceImpl extends BasePersistenceImpl<Difficulty>
 
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 
-		if (isNew) {
+		if (isNew || !DifficultyModelImpl.COLUMN_BITMASK_ENABLED) {
 			finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 		}
 
 		entityCache.putResult(DifficultyModelImpl.ENTITY_CACHE_ENABLED,
 			DifficultyImpl.class, difficulty.getPrimaryKey(), difficulty, false);
+
+		clearUniqueFindersCache(difficultyModelImpl);
+		cacheUniqueFindersCache(difficultyModelImpl, isNew);
 
 		difficulty.resetOriginalValues();
 
@@ -314,8 +565,6 @@ public class DifficultyPersistenceImpl extends BasePersistenceImpl<Difficulty>
 		difficultyImpl.setNew(difficulty.isNew());
 		difficultyImpl.setPrimaryKey(difficulty.getPrimaryKey());
 
-		difficultyImpl.setDifficultyId(difficulty.getDifficultyId());
-		difficultyImpl.setDifficultyName(difficulty.getDifficultyName());
 		difficultyImpl.setGuaranteed(difficulty.isGuaranteed());
 		difficultyImpl.setScore(difficulty.getScore());
 
@@ -349,14 +598,14 @@ public class DifficultyPersistenceImpl extends BasePersistenceImpl<Difficulty>
 	/**
 	 * Returns the difficulty with the primary key or throws a {@link NoSuchDifficultyException} if it could not be found.
 	 *
-	 * @param difficultyId the primary key of the difficulty
+	 * @param score the primary key of the difficulty
 	 * @return the difficulty
 	 * @throws NoSuchDifficultyException if a difficulty with the primary key could not be found
 	 */
 	@Override
-	public Difficulty findByPrimaryKey(long difficultyId)
+	public Difficulty findByPrimaryKey(int score)
 		throws NoSuchDifficultyException {
-		return findByPrimaryKey((Serializable)difficultyId);
+		return findByPrimaryKey((Serializable)score);
 	}
 
 	/**
@@ -408,12 +657,12 @@ public class DifficultyPersistenceImpl extends BasePersistenceImpl<Difficulty>
 	/**
 	 * Returns the difficulty with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param difficultyId the primary key of the difficulty
+	 * @param score the primary key of the difficulty
 	 * @return the difficulty, or <code>null</code> if a difficulty with the primary key could not be found
 	 */
 	@Override
-	public Difficulty fetchByPrimaryKey(long difficultyId) {
-		return fetchByPrimaryKey((Serializable)difficultyId);
+	public Difficulty fetchByPrimaryKey(int score) {
+		return fetchByPrimaryKey((Serializable)score);
 	}
 
 	@Override
@@ -720,10 +969,13 @@ public class DifficultyPersistenceImpl extends BasePersistenceImpl<Difficulty>
 	protected EntityCache entityCache = EntityCacheUtil.getEntityCache();
 	protected FinderCache finderCache = FinderCacheUtil.getFinderCache();
 	private static final String _SQL_SELECT_DIFFICULTY = "SELECT difficulty FROM Difficulty difficulty";
-	private static final String _SQL_SELECT_DIFFICULTY_WHERE_PKS_IN = "SELECT difficulty FROM Difficulty difficulty WHERE difficultyId IN (";
+	private static final String _SQL_SELECT_DIFFICULTY_WHERE_PKS_IN = "SELECT difficulty FROM Difficulty difficulty WHERE score IN (";
+	private static final String _SQL_SELECT_DIFFICULTY_WHERE = "SELECT difficulty FROM Difficulty difficulty WHERE ";
 	private static final String _SQL_COUNT_DIFFICULTY = "SELECT COUNT(difficulty) FROM Difficulty difficulty";
+	private static final String _SQL_COUNT_DIFFICULTY_WHERE = "SELECT COUNT(difficulty) FROM Difficulty difficulty WHERE ";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "difficulty.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No Difficulty exists with the primary key ";
+	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No Difficulty exists with the key {";
 	private static final Log _log = LogFactoryUtil.getLog(DifficultyPersistenceImpl.class);
 	private static final Difficulty _nullDifficulty = new DifficultyImpl() {
 			@Override

@@ -1,13 +1,12 @@
 create table sbam_Category (
 	categoryId LONG not null primary key,
-	categoryName VARCHAR(75) null
+	categoryName VARCHAR(75) null,
+	unlocked BOOLEAN
 );
 
 create table sbam_Difficulty (
-	difficultyId LONG not null primary key,
-	difficultyName VARCHAR(75) null,
 	guaranteed BOOLEAN,
-	score INTEGER
+	score INTEGER not null primary key
 );
 
 create table sbam_Highscore (

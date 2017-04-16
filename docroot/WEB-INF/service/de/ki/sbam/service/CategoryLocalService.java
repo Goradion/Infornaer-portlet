@@ -185,10 +185,11 @@ public interface CategoryLocalService extends BaseLocalService,
 	id of the category to edit
 	* @param categoryName_new
 	new name of the edited category
+	* @param unlocked
 	* @return
 	*/
 	public Category editCategory(long categoryId,
-		java.lang.String categoryName_new);
+		java.lang.String categoryName_new, boolean unlocked);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public Category fetchCategory(long categoryId);

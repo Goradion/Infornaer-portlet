@@ -89,6 +89,27 @@ public interface CategoryModel extends BaseModel<Category> {
 	 */
 	public void setCategoryName(String categoryName);
 
+	/**
+	 * Returns the unlocked of this category.
+	 *
+	 * @return the unlocked of this category
+	 */
+	public boolean getUnlocked();
+
+	/**
+	 * Returns <code>true</code> if this category is unlocked.
+	 *
+	 * @return <code>true</code> if this category is unlocked; <code>false</code> otherwise
+	 */
+	public boolean isUnlocked();
+
+	/**
+	 * Sets whether this category is unlocked.
+	 *
+	 * @param unlocked the unlocked of this category
+	 */
+	public void setUnlocked(boolean unlocked);
+
 	@Override
 	public boolean isNew();
 

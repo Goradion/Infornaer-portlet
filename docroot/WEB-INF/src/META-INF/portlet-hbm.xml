@@ -13,14 +13,13 @@
 			<generator class="assigned" />
 		</id>
 		<property name="categoryName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="unlocked" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 	</class>
 	<class name="de.ki.sbam.model.impl.DifficultyImpl" table="sbam_Difficulty">
-		<id name="difficultyId" type="long">
+		<id name="score" type="int">
 			<generator class="assigned" />
 		</id>
-		<property name="difficultyName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="guaranteed" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
-		<property name="score" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 	</class>
 	<class name="de.ki.sbam.model.impl.HighscoreImpl" table="sbam_Highscore">
 		<id name="userId" type="long">

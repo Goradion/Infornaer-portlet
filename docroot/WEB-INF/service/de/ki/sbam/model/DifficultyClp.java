@@ -53,31 +53,29 @@ public class DifficultyClp extends BaseModelImpl<Difficulty>
 	}
 
 	@Override
-	public long getPrimaryKey() {
-		return _difficultyId;
+	public int getPrimaryKey() {
+		return _score;
 	}
 
 	@Override
-	public void setPrimaryKey(long primaryKey) {
-		setDifficultyId(primaryKey);
+	public void setPrimaryKey(int primaryKey) {
+		setScore(primaryKey);
 	}
 
 	@Override
 	public Serializable getPrimaryKeyObj() {
-		return _difficultyId;
+		return _score;
 	}
 
 	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
-		setPrimaryKey(((Long)primaryKeyObj).longValue());
+		setPrimaryKey(((Integer)primaryKeyObj).intValue());
 	}
 
 	@Override
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
-		attributes.put("difficultyId", getDifficultyId());
-		attributes.put("difficultyName", getDifficultyName());
 		attributes.put("guaranteed", getGuaranteed());
 		attributes.put("score", getScore());
 
@@ -89,18 +87,6 @@ public class DifficultyClp extends BaseModelImpl<Difficulty>
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
-		Long difficultyId = (Long)attributes.get("difficultyId");
-
-		if (difficultyId != null) {
-			setDifficultyId(difficultyId);
-		}
-
-		String difficultyName = (String)attributes.get("difficultyName");
-
-		if (difficultyName != null) {
-			setDifficultyName(difficultyName);
-		}
-
 		Boolean guaranteed = (Boolean)attributes.get("guaranteed");
 
 		if (guaranteed != null) {
@@ -115,53 +101,6 @@ public class DifficultyClp extends BaseModelImpl<Difficulty>
 
 		_entityCacheEnabled = GetterUtil.getBoolean("entityCacheEnabled");
 		_finderCacheEnabled = GetterUtil.getBoolean("finderCacheEnabled");
-	}
-
-	@Override
-	public long getDifficultyId() {
-		return _difficultyId;
-	}
-
-	@Override
-	public void setDifficultyId(long difficultyId) {
-		_difficultyId = difficultyId;
-
-		if (_difficultyRemoteModel != null) {
-			try {
-				Class<?> clazz = _difficultyRemoteModel.getClass();
-
-				Method method = clazz.getMethod("setDifficultyId", long.class);
-
-				method.invoke(_difficultyRemoteModel, difficultyId);
-			}
-			catch (Exception e) {
-				throw new UnsupportedOperationException(e);
-			}
-		}
-	}
-
-	@Override
-	public String getDifficultyName() {
-		return _difficultyName;
-	}
-
-	@Override
-	public void setDifficultyName(String difficultyName) {
-		_difficultyName = difficultyName;
-
-		if (_difficultyRemoteModel != null) {
-			try {
-				Class<?> clazz = _difficultyRemoteModel.getClass();
-
-				Method method = clazz.getMethod("setDifficultyName",
-						String.class);
-
-				method.invoke(_difficultyRemoteModel, difficultyName);
-			}
-			catch (Exception e) {
-				throw new UnsupportedOperationException(e);
-			}
-		}
 	}
 
 	@Override
@@ -284,8 +223,6 @@ public class DifficultyClp extends BaseModelImpl<Difficulty>
 	public Object clone() {
 		DifficultyClp clone = new DifficultyClp();
 
-		clone.setDifficultyId(getDifficultyId());
-		clone.setDifficultyName(getDifficultyName());
 		clone.setGuaranteed(getGuaranteed());
 		clone.setScore(getScore());
 
@@ -294,17 +231,23 @@ public class DifficultyClp extends BaseModelImpl<Difficulty>
 
 	@Override
 	public int compareTo(Difficulty difficulty) {
-		long primaryKey = difficulty.getPrimaryKey();
+		int value = 0;
 
-		if (getPrimaryKey() < primaryKey) {
-			return -1;
+		if (getScore() < difficulty.getScore()) {
+			value = -1;
 		}
-		else if (getPrimaryKey() > primaryKey) {
-			return 1;
+		else if (getScore() > difficulty.getScore()) {
+			value = 1;
 		}
 		else {
-			return 0;
+			value = 0;
 		}
+
+		if (value != 0) {
+			return value;
+		}
+
+		return 0;
 	}
 
 	@Override
@@ -319,7 +262,7 @@ public class DifficultyClp extends BaseModelImpl<Difficulty>
 
 		DifficultyClp difficulty = (DifficultyClp)obj;
 
-		long primaryKey = difficulty.getPrimaryKey();
+		int primaryKey = difficulty.getPrimaryKey();
 
 		if (getPrimaryKey() == primaryKey) {
 			return true;
@@ -335,7 +278,7 @@ public class DifficultyClp extends BaseModelImpl<Difficulty>
 
 	@Override
 	public int hashCode() {
-		return (int)getPrimaryKey();
+		return getPrimaryKey();
 	}
 
 	@Override
@@ -350,13 +293,9 @@ public class DifficultyClp extends BaseModelImpl<Difficulty>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(9);
+		StringBundler sb = new StringBundler(5);
 
-		sb.append("{difficultyId=");
-		sb.append(getDifficultyId());
-		sb.append(", difficultyName=");
-		sb.append(getDifficultyName());
-		sb.append(", guaranteed=");
+		sb.append("{guaranteed=");
 		sb.append(getGuaranteed());
 		sb.append(", score=");
 		sb.append(getScore());
@@ -367,20 +306,12 @@ public class DifficultyClp extends BaseModelImpl<Difficulty>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(16);
+		StringBundler sb = new StringBundler(10);
 
 		sb.append("<model><model-name>");
 		sb.append("de.ki.sbam.model.Difficulty");
 		sb.append("</model-name>");
 
-		sb.append(
-			"<column><column-name>difficultyId</column-name><column-value><![CDATA[");
-		sb.append(getDifficultyId());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>difficultyName</column-name><column-value><![CDATA[");
-		sb.append(getDifficultyName());
-		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>guaranteed</column-name><column-value><![CDATA[");
 		sb.append(getGuaranteed());
@@ -395,8 +326,6 @@ public class DifficultyClp extends BaseModelImpl<Difficulty>
 		return sb.toString();
 	}
 
-	private long _difficultyId;
-	private String _difficultyName;
 	private boolean _guaranteed;
 	private int _score;
 	private BaseModel<?> _difficultyRemoteModel;

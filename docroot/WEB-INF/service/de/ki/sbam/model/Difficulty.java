@@ -37,15 +37,15 @@ public interface Difficulty extends DifficultyModel, PersistedModel {
 	 *
 	 * Never modify this interface directly. Add methods to {@link de.ki.sbam.model.impl.DifficultyImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<Difficulty, Long> DIFFICULTY_ID_ACCESSOR = new Accessor<Difficulty, Long>() {
+	public static final Accessor<Difficulty, Integer> SCORE_ACCESSOR = new Accessor<Difficulty, Integer>() {
 			@Override
-			public Long get(Difficulty difficulty) {
-				return difficulty.getDifficultyId();
+			public Integer get(Difficulty difficulty) {
+				return difficulty.getScore();
 			}
 
 			@Override
-			public Class<Long> getAttributeClass() {
-				return Long.class;
+			public Class<Integer> getAttributeClass() {
+				return Integer.class;
 			}
 
 			@Override

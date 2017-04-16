@@ -110,6 +110,60 @@ public class DifficultyUtil {
 	}
 
 	/**
+	* Returns the difficulty where score = &#63; or throws a {@link NoSuchDifficultyException} if it could not be found.
+	*
+	* @param score the score
+	* @return the matching difficulty
+	* @throws NoSuchDifficultyException if a matching difficulty could not be found
+	*/
+	public static Difficulty findByScore(int score)
+		throws de.ki.sbam.exception.NoSuchDifficultyException {
+		return getPersistence().findByScore(score);
+	}
+
+	/**
+	* Returns the difficulty where score = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param score the score
+	* @return the matching difficulty, or <code>null</code> if a matching difficulty could not be found
+	*/
+	public static Difficulty fetchByScore(int score) {
+		return getPersistence().fetchByScore(score);
+	}
+
+	/**
+	* Returns the difficulty where score = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param score the score
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the matching difficulty, or <code>null</code> if a matching difficulty could not be found
+	*/
+	public static Difficulty fetchByScore(int score, boolean retrieveFromCache) {
+		return getPersistence().fetchByScore(score, retrieveFromCache);
+	}
+
+	/**
+	* Removes the difficulty where score = &#63; from the database.
+	*
+	* @param score the score
+	* @return the difficulty that was removed
+	*/
+	public static Difficulty removeByScore(int score)
+		throws de.ki.sbam.exception.NoSuchDifficultyException {
+		return getPersistence().removeByScore(score);
+	}
+
+	/**
+	* Returns the number of difficulties where score = &#63;.
+	*
+	* @param score the score
+	* @return the number of matching difficulties
+	*/
+	public static int countByScore(int score) {
+		return getPersistence().countByScore(score);
+	}
+
+	/**
 	* Caches the difficulty in the entity cache if it is enabled.
 	*
 	* @param difficulty the difficulty
@@ -130,23 +184,23 @@ public class DifficultyUtil {
 	/**
 	* Creates a new difficulty with the primary key. Does not add the difficulty to the database.
 	*
-	* @param difficultyId the primary key for the new difficulty
+	* @param score the primary key for the new difficulty
 	* @return the new difficulty
 	*/
-	public static Difficulty create(long difficultyId) {
-		return getPersistence().create(difficultyId);
+	public static Difficulty create(int score) {
+		return getPersistence().create(score);
 	}
 
 	/**
 	* Removes the difficulty with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param difficultyId the primary key of the difficulty
+	* @param score the primary key of the difficulty
 	* @return the difficulty that was removed
 	* @throws NoSuchDifficultyException if a difficulty with the primary key could not be found
 	*/
-	public static Difficulty remove(long difficultyId)
+	public static Difficulty remove(int score)
 		throws de.ki.sbam.exception.NoSuchDifficultyException {
-		return getPersistence().remove(difficultyId);
+		return getPersistence().remove(score);
 	}
 
 	public static Difficulty updateImpl(Difficulty difficulty) {
@@ -156,23 +210,23 @@ public class DifficultyUtil {
 	/**
 	* Returns the difficulty with the primary key or throws a {@link NoSuchDifficultyException} if it could not be found.
 	*
-	* @param difficultyId the primary key of the difficulty
+	* @param score the primary key of the difficulty
 	* @return the difficulty
 	* @throws NoSuchDifficultyException if a difficulty with the primary key could not be found
 	*/
-	public static Difficulty findByPrimaryKey(long difficultyId)
+	public static Difficulty findByPrimaryKey(int score)
 		throws de.ki.sbam.exception.NoSuchDifficultyException {
-		return getPersistence().findByPrimaryKey(difficultyId);
+		return getPersistence().findByPrimaryKey(score);
 	}
 
 	/**
 	* Returns the difficulty with the primary key or returns <code>null</code> if it could not be found.
 	*
-	* @param difficultyId the primary key of the difficulty
+	* @param score the primary key of the difficulty
 	* @return the difficulty, or <code>null</code> if a difficulty with the primary key could not be found
 	*/
-	public static Difficulty fetchByPrimaryKey(long difficultyId) {
-		return getPersistence().fetchByPrimaryKey(difficultyId);
+	public static Difficulty fetchByPrimaryKey(int score) {
+		return getPersistence().fetchByPrimaryKey(score);
 	}
 
 	public static java.util.Map<java.io.Serializable, Difficulty> fetchByPrimaryKeys(

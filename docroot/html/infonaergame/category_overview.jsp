@@ -2,6 +2,7 @@
 <%@ include file="/init.jsp"%>
 <%@page import="com.liferay.portal.kernel.util.ListUtil"%>
 <%@page import="java.util.List"%>
+<%@page import="de.ki.sbam.service.QuestionLocalServiceUtil" %>
 
 
 <portlet:actionURL name="gotoEditMode" var="editMode"></portlet:actionURL>
@@ -10,6 +11,8 @@
 	<tr>
 		<th>Id</th>
 		<th>Name</th>
+		<th>Freigeschaltet</th>
+		<th>Anzahl Fragen</th>
 	</tr>
 	<c:forEach items="${cList}" var="c">
 		<portlet:actionURL name="gotoEditCategory" var="edit">
@@ -21,7 +24,9 @@
 		<tr>
 			<td><a href=<%=edit%>>Ändern</a> <a href=<%=delete%>>Löschen</a></td>
 			<td><c:out value="${c.getCategoryName()}" /></td>
-
+			<td><c:out value="${c.isUnlocked() ? 'Ja' : 'Nein'}" /></td>
+			<td><c:out value="${QuestionLocalServiceUtil.findByCategory(c.getCategoryId())}" /></td>
+			
 		</tr>
 	</c:forEach>
 </table>
