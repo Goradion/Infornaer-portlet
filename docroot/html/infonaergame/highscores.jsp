@@ -14,7 +14,7 @@
 
 <liferay-ui:search-container var="searchContainer" delta="5"
 	compactEmptyResultsMessage="No highscores yet."
-	deltaConfigurable="false" iteratorURL="<%=iteratorURL%>">
+	deltaConfigurable="true" iteratorURL="<%=iteratorURL%>">
 <liferay-ui:search-container-results> 
 <%
 results = HighscoreLocalServiceUtil.getHighscores(searchContainer.getStart(), searchContainer.getEnd());

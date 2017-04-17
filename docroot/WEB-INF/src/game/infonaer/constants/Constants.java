@@ -17,11 +17,14 @@ public final class Constants {
 	public static final String NEW_CATEGORY_JSP ="/html/infonaergame/new_category.jsp";
 	public static final String EDIT_CATEGORY_JSP ="/html/infonaergame/edit_category.jsp";
 	public static final String GAME_JSP = "/html/infonaergame/game.jsp";
+	public static final String ADMIN_ACTION_CATEGORY = "/html/infonaergame/admin_action_category.jsp";
+	public static final String ADMIN_ACTION_QUESTION = "/html/infonaergame/admin_action_question.jsp";
+	
 	/* Difficulty levels */
-	public static int EASY = 0;
-	public static int NORMAL = 1;
-	public static int ADVANCED = 2;
-	public static int EXPERT = 3;
+//	public static int EASY = 0;
+//	public static int NORMAL = 1;
+//	public static int ADVANCED = 2;
+//	public static int EXPERT = 3;
 	
 	/* Modules/Categories */
 	

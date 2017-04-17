@@ -16,6 +16,7 @@ import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletContext;
 import javax.portlet.PortletException;
+import javax.portlet.PortletMode;
 import javax.portlet.PortletRequestDispatcher;
 import javax.portlet.PortletSession;
 import javax.portlet.ProcessAction;
@@ -69,6 +70,7 @@ public class InfonaerGamePortlet extends MVCPortlet {
 			throws IOException, PortletException {
 		// TODO Auto-generated method stub
 		super.doEdit(renderRequest, renderResponse);
+
 	}
 
 	@Override
@@ -85,6 +87,7 @@ public class InfonaerGamePortlet extends MVCPortlet {
 			portletRequestDispatcher = portletContext.getRequestDispatcher(curPage);
 		}
 		portletRequestDispatcher.include(renderRequest, renderResponse);
+		
 	}
 
 	@ProcessAction(name = "clearEntities")
@@ -133,7 +136,7 @@ public class InfonaerGamePortlet extends MVCPortlet {
 //			highscores.put(h.getUserName(), h.getScore());
 //		}
 //		actionRequest.setAttribute("highscores", highscores);
-		testHighscores();
+//		testHighscores();
 	}
 	public void highscoresPagination(ActionRequest actionRequest, ActionResponse actionResponse) {
 		int page = 1;
@@ -149,11 +152,6 @@ public class InfonaerGamePortlet extends MVCPortlet {
 			end = highscoresCount;
 		}
 		List<Highscore> highscores = HighscoreLocalServiceUtil.getHighscores(start, end);
-		
-		for(Highscore h : HighscoreLocalServiceUtil.getHighscores(QueryUtil.ALL_POS, QueryUtil.ALL_POS)){
-			System.out.println(h.getScore()+" "+h.getUserName());
-		}
-		
 		actionRequest.setAttribute("highscoresList", highscores);
 		actionRequest.setAttribute("noOfPages", noOfPages);
 		actionRequest.setAttribute("currentPage", page);
@@ -172,6 +170,7 @@ public class InfonaerGamePortlet extends MVCPortlet {
 	public void gotoEditMode(ActionRequest actionRequest, ActionResponse actionResponse)
 			throws IOException, PortletException {
 		actionRequest.getPortletSession().setAttribute("currentPage", EDIT_JSP, PortletSession.PORTLET_SCOPE);
+
 	}
 
 	public void gotoLoadQuestionFromFile(ActionRequest actionRequest, ActionResponse actionResponse)

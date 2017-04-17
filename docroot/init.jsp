@@ -5,14 +5,17 @@
 <%@ taglib uri="http://liferay.com/tld/portlet" prefix="liferay-portlet" %>
 <%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui"%>
 
+<%@ page import="com.liferay.portal.kernel.dao.search.ResultRow"%>
 <%@ page import="game.infonaer.constants.Constants"%>
 <%@ page import="de.ki.sbam.service.QuestionLocalServiceUtil"%>
 <%@ page import="de.ki.sbam.model.Question"%>
 <%@ page import="de.ki.sbam.model.Category"%>
 <%@ page import="de.ki.sbam.model.Highscore"%>
 <%@ page import="de.ki.sbam.service.persistence.QuestionUtil"%>
+<%@page import="de.ki.sbam.service.CategoryLocalServiceUtil"%>
 <%@ page import="game.infonaer.portlet.QuestionFromFileBuilder" %>
 <%@ page import="java.util.*" %>
+
 
 <portlet:defineObjects/>
 <theme:defineObjects/>
