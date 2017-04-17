@@ -68,6 +68,8 @@
 		<%
 			}
 		%>
+		<div>Punkte: <%=gameState.getScore()%></div>
+		<div>Sicher: <%=gameState.getGuaranteedScore() %> </div>
 	</aui:button-row>
 	<aui:row>
 
@@ -134,19 +136,18 @@
 <portlet:actionURL name="gotoMainMenu" var="mainMenu"></portlet:actionURL>
 <p>
 	<a href=<%=mainMenu%>>Back</a> </br>
-	<%=gameState.toString()%>
 </p>
 
 <%
 	}
 	} else {
 %>
-<!-- 
+
 	<aui:container>
 		<h1>Hier ist was falsch gelaufen!</h1>
 		<h2><a href=<portlet:actionURL name="gotoMainMenu"></portlet:actionURL>>Zurück zum Hauptmenü</a></h2>
 	</aui:container>
-	-->
+	
 <%
 	}
 %>
