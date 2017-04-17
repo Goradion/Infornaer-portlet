@@ -2,7 +2,7 @@ package game.infonaer.portlet;
 
 import static game.infonaer.constants.Constants.CATEGORY_OVERVIEW_JSP;
 import static game.infonaer.constants.Constants.EDIT_CATEGORY_JSP;
-import static game.infonaer.constants.Constants.EDIT_JSP;
+import static game.infonaer.constants.Constants.EDIT_CONTENT_JSP;
 import static game.infonaer.constants.Constants.EDIT_QUESTION_JSP;
 import static game.infonaer.constants.Constants.GAME_ERROR_JSP;
 import static game.infonaer.constants.Constants.GAME_JSP;
@@ -225,7 +225,7 @@ public class InfonaerGamePortlet extends MVCPortlet {
 
 	public void gotoEditMode(ActionRequest actionRequest, ActionResponse actionResponse)
 			throws IOException, PortletException {
-		actionRequest.getPortletSession().setAttribute("currentPage", EDIT_JSP, PortletSession.PORTLET_SCOPE);
+		actionRequest.getPortletSession().setAttribute("currentPage", EDIT_CONTENT_JSP, PortletSession.PORTLET_SCOPE);
 
 	}
 

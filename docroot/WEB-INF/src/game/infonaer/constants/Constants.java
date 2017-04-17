@@ -3,7 +3,8 @@ package game.infonaer.constants;
 public final class Constants {
 	
 	/* Jsp pages */
-	public static final String EDIT_JSP = "/html/infonaergame/edit.jsp";
+	public static final String EDIT_CONTENT_JSP = "/html/infonaergame/edit_content.jsp";
+	public static final String EDIT_JSP ="/html/infonaergame/edit.jsp";
 	public static final String NEW_QUESTION_JSP = "/html/infonaergame/new_question.jsp";
 	public static final String EDIT_QUESTION_JSP ="/html/infonaergame/edit_question.jsp";
 	public static final String VIEW_JSP = "/html/infonaergame/view.jsp";
