@@ -12,7 +12,10 @@
 <portlet:actionURL name="evalAnswer" var="answerD">
 	<portlet:param name="answer" value="d" />
 </portlet:actionURL>
+
 <portlet:actionURL name="leaveCurrentGame" var="leave"></portlet:actionURL>
+<portlet:actionURL name="fiftyFiftyJoker" var="fiftyFiftyJoker"></portlet:actionURL>
+<portlet:actionURL name="publicJoker" var="publicJoker"></portlet:actionURL>
 
 <%
 	//Question question = null;  !!!!!!!!!!!Question!!!!!!!!!!!!!!!!!!
@@ -29,18 +32,18 @@
 	<aui:col span="1"></aui:col>
 		<aui:col span="1">
 			<aui:form>
-				<aui:button type="submit" formaction="<%=leave%>" value="Aussteigen"></aui:button>
+				<aui:button type="submit" href='<%=leave%>' value="Aussteigen"></aui:button>
 			</aui:form>
 		</aui:col>
 		<aui:col span="7"></aui:col>
 		<aui:col span="1">
 			<aui:form>
-				<aui:button type="submit" formaction="" value="50:50"></aui:button>
+				<aui:button type="submit" href='<%=fiftyFiftyJoker %>' value="50:50"></aui:button>
 			</aui:form>
 		</aui:col>
 		<aui:col span="1">
 			<aui:form>
-				<aui:button type="submit" formaction="" value="Publikum"></aui:button>
+				<aui:button type="submit" href='<%=publicJoker %>' value="Publikum"></aui:button>
 			</aui:form>
 		</aui:col>
 		<aui:col span="1"></aui:col>

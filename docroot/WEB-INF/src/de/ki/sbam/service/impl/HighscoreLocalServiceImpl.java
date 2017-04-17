@@ -14,18 +14,28 @@
 
 package de.ki.sbam.service.impl;
 
+import com.liferay.portal.kernel.model.User;
+
 import aQute.bnd.annotation.ProviderType;
+import de.ki.sbam.exception.NoSuchHighscoreException;
+import de.ki.sbam.model.Highscore;
 import de.ki.sbam.service.HighscoreLocalServiceUtil;
 import de.ki.sbam.service.base.HighscoreLocalServiceBaseImpl;
+import de.ki.sbam.service.persistence.HighscorePersistence;
+import de.ki.sbam.service.persistence.HighscoreUtil;
 
 /**
  * The implementation of the highscore local service.
  *
  * <p>
- * All custom service methods should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link de.ki.sbam.service.HighscoreLocalService} interface.
+ * All custom service methods should be put in this class. Whenever methods are
+ * added, rerun ServiceBuilder to copy their definitions into the
+ * {@link de.ki.sbam.service.HighscoreLocalService} interface.
  *
  * <p>
- * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
+ * This is a local service. Methods of this service will not have security
+ * checks based on the propagated JAAS credentials because this service can only
+ * be accessed from within the same VM.
  * </p>
  *
  * @author Alexander Mueller
@@ -37,6 +47,27 @@ public class HighscoreLocalServiceImpl extends HighscoreLocalServiceBaseImpl {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never reference this class directly. Always use {@link de.ki.sbam.service.HighscoreLocalServiceUtil} to access the highscore local service.
+	 * Never reference this class directly. Always use {@link
+	 * de.ki.sbam.service.HighscoreLocalServiceUtil} to access the highscore
+	 * local service.
 	 */
+
+	public Highscore addHighscore(long score, User user) {
+		Highscore hs = highscorePersistence.fetchByUserId(user.getUserId());
+		if (hs != null) {
+			if (hs.getScore() < score) {
+				hs.setScore(score);
+				highscorePersistence.update(hs);
+				return hs;
+			} else {
+				return hs;
+			}
+		} else {
+			hs = highscorePersistence.create(user.getUserId());
+			hs.setScore(score);
+			hs.setUserName(user.getFullName());
+			highscorePersistence.update(hs);
+			return hs;
+		}
+	}
 }

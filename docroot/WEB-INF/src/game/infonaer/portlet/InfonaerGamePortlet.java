@@ -7,8 +7,10 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -20,6 +22,7 @@ import javax.portlet.ProcessAction;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.NoSuchUserException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.User;
@@ -31,11 +34,14 @@ import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 
 import de.ki.sbam.exception.NoSuchCategoryException;
+import de.ki.sbam.exception.NoSuchHighscoreException;
 import de.ki.sbam.model.Category;
 import de.ki.sbam.model.Difficulty;
+import de.ki.sbam.model.Highscore;
 import de.ki.sbam.model.Question;
 import de.ki.sbam.service.CategoryLocalServiceUtil;
 import de.ki.sbam.service.DifficultyLocalServiceUtil;
+import de.ki.sbam.service.HighscoreLocalServiceUtil;
 import de.ki.sbam.service.QuestionLocalServiceUtil;
 import game.infonaer.constants.Constants;
 import game.infonaer.game.InfonaerGame;
@@ -103,6 +109,35 @@ public class InfonaerGamePortlet extends MVCPortlet {
 	public void gotoHighscores(ActionRequest actionRequest, ActionResponse actionResponse)
 			throws IOException, PortletException {
 		actionRequest.getPortletSession().setAttribute("currentPage", HIGHSCORES_JSP, PortletSession.PORTLET_SCOPE);
+//		HashMap<String,Long> highscores = new HashMap<String,Long>();
+//		for(Highscore h: HighscoreLocalServiceUtil.getHighscores(QueryUtil.ALL_POS, QueryUtil.ALL_POS)){
+//			highscores.put(h.getUserName(), h.getScore());
+//		}
+//		actionRequest.setAttribute("highscores", highscores);
+		testHighscores();
+	}
+	public void highscoresPagination(ActionRequest actionRequest, ActionResponse actionResponse) {
+		int page = 1;
+		int recordsPerPage = 5;
+		if (actionRequest.getParameter("page") != null) {
+			page = Integer.parseInt(actionRequest.getParameter("page"));
+		}
+		int highscoresCount = HighscoreLocalServiceUtil.getHighscoresCount();
+		int noOfPages = (int) Math.ceil(highscoresCount * 1.0 / recordsPerPage);
+		int start = (page - 1) * recordsPerPage;
+		int end = start + recordsPerPage;
+		if (end > highscoresCount) {
+			end = highscoresCount;
+		}
+		List<Highscore> highscores = HighscoreLocalServiceUtil.getHighscores(start, end);
+		
+		for(Highscore h : HighscoreLocalServiceUtil.getHighscores(QueryUtil.ALL_POS, QueryUtil.ALL_POS)){
+			System.out.println(h.getScore()+" "+h.getUserName());
+		}
+		
+		actionRequest.setAttribute("highscoresList", highscores);
+		actionRequest.setAttribute("noOfPages", noOfPages);
+		actionRequest.setAttribute("currentPage", page);
 	}
 
 	public void gotoMainMenu(ActionRequest actionRequest, ActionResponse actionResponse)
@@ -406,5 +441,27 @@ public class InfonaerGamePortlet extends MVCPortlet {
 	
 	public void leaveCurrentGame(ActionRequest actionRequest, ActionResponse actionResponse){
 		actionRequest.getPortletSession().setAttribute("currentPage",NEW_GAME_JSP, PortletSession.PORTLET_SCOPE);
+	}
+	
+	public void fiftyFiftyJoker(ActionRequest actionRequest, ActionResponse actionResponse){
+		//TODO
+		System.out.println("fiftyJoker");
+	}
+	
+	public void publicJoker(ActionRequest actionRequest, ActionResponse actionResponse){
+		System.out.println("pulicJoker");
+	}
+	
+	private void testHighscores(){ 
+		List<User> users = UserLocalServiceUtil.getUsers(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		for(User u : users){
+			System.out.println(u.getUserId()+" "+u.getFullName());
+		}
+		for (int i = 0; i<50; i++){			
+			HighscoreLocalServiceUtil.addHighscore(new Random().nextLong(),users.get(i%users.size()));
+		}
+		for(Highscore h : HighscoreLocalServiceUtil.getHighscores(QueryUtil.ALL_POS, QueryUtil.ALL_POS)){
+			System.out.println(h.getScore()+" "+h.getUserName());
+		}
 	}
 }
