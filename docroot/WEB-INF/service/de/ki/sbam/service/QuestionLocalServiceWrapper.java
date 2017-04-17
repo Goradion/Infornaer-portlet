@@ -311,6 +311,17 @@ public class QuestionLocalServiceWrapper implements QuestionLocalService,
 			arguments);
 	}
 
+	@Override
+	public de.ki.sbam.model.Question removeQuestion(
+		de.ki.sbam.model.Question question) {
+		return _questionLocalService.removeQuestion(question);
+	}
+
+	@Override
+	public de.ki.sbam.model.Question removeQuestion(long questionId) {
+		return _questionLocalService.removeQuestion(questionId);
+	}
+
 	/**
 	* Updates the question in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
 	*

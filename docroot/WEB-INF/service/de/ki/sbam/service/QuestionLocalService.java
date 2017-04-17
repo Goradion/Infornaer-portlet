@@ -261,6 +261,10 @@ public interface QuestionLocalService extends BaseLocalService,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
 
+	public Question removeQuestion(Question question);
+
+	public Question removeQuestion(long questionId);
+
 	/**
 	* Updates the question in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
 	*

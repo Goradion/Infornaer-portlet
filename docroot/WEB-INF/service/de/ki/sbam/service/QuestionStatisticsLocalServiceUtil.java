@@ -41,6 +41,10 @@ public class QuestionStatisticsLocalServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to {@link de.ki.sbam.service.impl.QuestionStatisticsLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
+	public static de.ki.sbam.model.QuestionStatistics addAnswer(
+		long questionId, java.lang.String answer) {
+		return getService().addAnswer(questionId, answer);
+	}
 
 	/**
 	* Adds the question statistics to the database. Also notifies the appropriate model listeners.

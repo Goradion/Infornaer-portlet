@@ -137,9 +137,17 @@ public class QuestionLocalServiceClp implements QuestionLocalService {
 
 		_methodParameterTypes22 = new String[] {  };
 
-		_methodName24 = "updateQuestion";
+		_methodName24 = "removeQuestion";
 
 		_methodParameterTypes24 = new String[] { "de.ki.sbam.model.Question" };
+
+		_methodName25 = "removeQuestion";
+
+		_methodParameterTypes25 = new String[] { "long" };
+
+		_methodName26 = "updateQuestion";
+
+		_methodParameterTypes26 = new String[] { "de.ki.sbam.model.Question" };
 	}
 
 	@Override
@@ -773,13 +781,61 @@ public class QuestionLocalServiceClp implements QuestionLocalService {
 	}
 
 	@Override
-	public de.ki.sbam.model.Question updateQuestion(
+	public de.ki.sbam.model.Question removeQuestion(
 		de.ki.sbam.model.Question question) {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName24,
 					_methodParameterTypes24,
+					new Object[] { ClpSerializer.translateInput(question) });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (de.ki.sbam.model.Question)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public de.ki.sbam.model.Question removeQuestion(long questionId) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName25,
+					_methodParameterTypes25, new Object[] { questionId });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (de.ki.sbam.model.Question)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public de.ki.sbam.model.Question updateQuestion(
+		de.ki.sbam.model.Question question) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName26,
+					_methodParameterTypes26,
 					new Object[] { ClpSerializer.translateInput(question) });
 		}
 		catch (Throwable t) {
@@ -846,4 +902,8 @@ public class QuestionLocalServiceClp implements QuestionLocalService {
 	private String[] _methodParameterTypes22;
 	private String _methodName24;
 	private String[] _methodParameterTypes24;
+	private String _methodName25;
+	private String[] _methodParameterTypes25;
+	private String _methodName26;
+	private String[] _methodParameterTypes26;
 }

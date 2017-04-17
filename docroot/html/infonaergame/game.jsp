@@ -1,5 +1,6 @@
 <%@ include file="/init.jsp"%>
-
+<%@page import="game.infonaer.game.GameState"%>
+<%@page import="game.infonaer.game.AudienceJokerResult"%>
 <portlet:actionURL name="evalAnswer" var="answerA">
 	<portlet:param name="answer" value="a" />
 </portlet:actionURL>
@@ -15,45 +16,64 @@
 
 <portlet:actionURL name="leaveCurrentGame" var="leave"></portlet:actionURL>
 <portlet:actionURL name="fiftyFiftyJoker" var="fiftyFiftyJoker"></portlet:actionURL>
-<portlet:actionURL name="publicJoker" var="publicJoker"></portlet:actionURL>
+<portlet:actionURL name="audienceJoker" var="audienceJoker"></portlet:actionURL>
 
 <%
-	//Question question = null;  !!!!!!!!!!!Question!!!!!!!!!!!!!!!!!!
-	//if(actionRequest.getAttribute("question")!=null){				\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-	//	question = (Question)actionRequest.getAttribute("question"); actionRequest ist hier null, frag mich nicht warum!
-	//}																////////////////////////////////////////////////////
-%>
+	GameState gameState = (GameState) portletSession.getAttribute("gameState");
+	if (gameState != null) {
+		AudienceJokerResult audienceJokerResult = (AudienceJokerResult) portletSession.getAttribute("audienceJokerResult");
+		String audienceGuessA = "";
+		String audienceGuessB = "";
+		String audienceGuessC = "";
+		String audienceGuessD = "";
+		if (audienceJokerResult != null){
+			audienceGuessA = Double.toString(audienceJokerResult.getPercentA());
+			audienceGuessB = Double.toString(audienceJokerResult.getPercentB());
+			audienceGuessC = Double.toString(audienceJokerResult.getPercentC());
+			audienceGuessD = Double.toString(audienceJokerResult.getPercentD());
+		}
+		Question question = gameState.getCurrentQuestion();
 
-<%
-	//if(question==null) {
+		if (question != null) {
 %>
 <aui:container cssClass="jumbotron">
 	<aui:button-row>
-	<aui:col span="1"></aui:col>
+		<aui:col span="1"></aui:col>
 		<aui:col span="1">
 			<aui:form>
 				<aui:button type="submit" href='<%=leave%>' value="Aussteigen"></aui:button>
 			</aui:form>
 		</aui:col>
 		<aui:col span="7"></aui:col>
+		<%
+			if (!gameState.isFifyFiftyUsed()) {
+		%>
 		<aui:col span="1">
 			<aui:form>
-				<aui:button type="submit" href='<%=fiftyFiftyJoker %>' value="50:50"></aui:button>
+				<aui:button type="submit" href='<%=fiftyFiftyJoker%>' value="50:50"></aui:button>
 			</aui:form>
 		</aui:col>
+		<%
+			}
+							if (!gameState.isAudienceUsed()) {
+		%>
+
 		<aui:col span="1">
 			<aui:form>
-				<aui:button type="submit" href='<%=publicJoker %>' value="Publikum"></aui:button>
+				<aui:button type="submit" href='<%=audienceJoker%>'
+					value="Publikum"></aui:button>
 			</aui:form>
 		</aui:col>
 		<aui:col span="1"></aui:col>
-
+		<%
+			}
+		%>
 	</aui:button-row>
 	<aui:row>
 
 		<aui:col span="1"></aui:col>
 		<aui:col span="10">
-			<p>${question.getQuestionContent()}</p>
+			<p><%=question.getQuestionContent()%></p>
 		</aui:col>
 		<aui:col span="1"></aui:col>
 	</aui:row>
@@ -65,8 +85,9 @@
 							<portlet:param name="answer" value="a"/>
 						</portlet:actionURL>
 				method="post">
-				<button type="submit" class="btn btn-primary">A:
-					${question.getAnswerA()}</button>
+				<button type="submit" class="btn btn-primary">
+					A:
+					<%=question.getAnswerA()%> <%=audienceGuessA%></button>
 			</form>
 		</aui:col>
 		<aui:col span="5">
@@ -75,8 +96,9 @@
 							<portlet:param name="answer" value="b"/>
 						</portlet:actionURL>
 				method="post">
-				<button type="submit" class="btn btn-primary">B:
-					${question.getAnswerB()}</button>
+				<button type="submit" class="btn btn-primary">
+					B:
+					<%=question.getAnswerB()%> <%=audienceGuessB%></button>
 			</form>
 		</aui:col>
 		<aui:col span="1"></aui:col>
@@ -89,8 +111,9 @@
 							<portlet:param name="answer" value="c"/>
 						</portlet:actionURL>
 				method="post">
-				<button type="submit" class="btn btn-primary">C:
-					${question.getAnswerC()}</button>
+				<button type="submit" class="btn btn-primary">
+					C:
+					<%=question.getAnswerC()%> <%=audienceGuessC %></button>
 			</form>
 		</aui:col>
 		<aui:col span="5">
@@ -99,8 +122,9 @@
 							<portlet:param name="answer" value="d"/>
 						</portlet:actionURL>
 				method="post">
-				<button type="submit" class="btn btn-primary">D:
-					${question.getAnswerD()}</button>
+				<button type="submit" class="btn btn-primary">
+					D:
+					<%=question.getAnswerD()%> <%=audienceGuessD%></button>
 			</form>
 		</aui:col>
 		<aui:col span="1"></aui:col>
@@ -109,11 +133,13 @@
 <!-- debug zurück zum Haupmenue -->
 <portlet:actionURL name="gotoMainMenu" var="mainMenu"></portlet:actionURL>
 <p>
-	<a href=<%=mainMenu%>>Back</a>
+	<a href=<%=mainMenu%>>Back</a> </br>
+	<%=gameState.toString()%>
 </p>
 
 <%
-	//} else {
+	}
+	} else {
 %>
 <!-- 
 	<aui:container>
@@ -122,5 +148,5 @@
 	</aui:container>
 	-->
 <%
-	//}
+	}
 %>

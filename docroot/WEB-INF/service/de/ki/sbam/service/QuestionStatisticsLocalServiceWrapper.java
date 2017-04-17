@@ -34,6 +34,12 @@ public class QuestionStatisticsLocalServiceWrapper
 		_questionStatisticsLocalService = questionStatisticsLocalService;
 	}
 
+	@Override
+	public de.ki.sbam.model.QuestionStatistics addAnswer(long questionId,
+		java.lang.String answer) {
+		return _questionStatisticsLocalService.addAnswer(questionId, answer);
+	}
+
 	/**
 	* Adds the question statistics to the database. Also notifies the appropriate model listeners.
 	*

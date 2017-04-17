@@ -61,6 +61,7 @@ public interface QuestionStatisticsLocalService extends BaseLocalService,
 	 *
 	 * Never modify or reference this interface directly. Always use {@link QuestionStatisticsLocalServiceUtil} to access the question statistics local service. Add custom service methods to {@link de.ki.sbam.service.impl.QuestionStatisticsLocalServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
+	public QuestionStatistics addAnswer(long questionId, java.lang.String answer);
 
 	/**
 	* Adds the question statistics to the database. Also notifies the appropriate model listeners.

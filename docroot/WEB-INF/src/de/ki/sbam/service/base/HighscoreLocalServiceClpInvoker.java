@@ -120,6 +120,12 @@ public class HighscoreLocalServiceClpInvoker {
 		_methodName58 = "getOSGiServiceIdentifier";
 
 		_methodParameterTypes58 = new String[] {  };
+
+		_methodName63 = "addHighscore";
+
+		_methodParameterTypes63 = new String[] {
+				"long", "com.liferay.portal.kernel.model.User"
+			};
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -231,6 +237,12 @@ public class HighscoreLocalServiceClpInvoker {
 			return HighscoreLocalServiceUtil.getOSGiServiceIdentifier();
 		}
 
+		if (_methodName63.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes63, parameterTypes)) {
+			return HighscoreLocalServiceUtil.addHighscore(((Long)arguments[0]).longValue(),
+				(com.liferay.portal.kernel.model.User)arguments[1]);
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -274,4 +286,6 @@ public class HighscoreLocalServiceClpInvoker {
 	private String[] _methodParameterTypes19;
 	private String _methodName58;
 	private String[] _methodParameterTypes58;
+	private String _methodName63;
+	private String[] _methodParameterTypes63;
 }

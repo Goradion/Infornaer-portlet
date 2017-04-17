@@ -294,6 +294,15 @@ public class QuestionLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static de.ki.sbam.model.Question removeQuestion(
+		de.ki.sbam.model.Question question) {
+		return getService().removeQuestion(question);
+	}
+
+	public static de.ki.sbam.model.Question removeQuestion(long questionId) {
+		return getService().removeQuestion(questionId);
+	}
+
 	/**
 	* Updates the question in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
 	*

@@ -126,6 +126,10 @@ public class QuestionStatisticsLocalServiceClpInvoker {
 		_methodName58 = "getOSGiServiceIdentifier";
 
 		_methodParameterTypes58 = new String[] {  };
+
+		_methodName63 = "addAnswer";
+
+		_methodParameterTypes63 = new String[] { "long", "java.lang.String" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -237,6 +241,12 @@ public class QuestionStatisticsLocalServiceClpInvoker {
 			return QuestionStatisticsLocalServiceUtil.getOSGiServiceIdentifier();
 		}
 
+		if (_methodName63.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes63, parameterTypes)) {
+			return QuestionStatisticsLocalServiceUtil.addAnswer(((Long)arguments[0]).longValue(),
+				(java.lang.String)arguments[1]);
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -280,4 +290,6 @@ public class QuestionStatisticsLocalServiceClpInvoker {
 	private String[] _methodParameterTypes19;
 	private String _methodName58;
 	private String[] _methodParameterTypes58;
+	private String _methodName63;
+	private String[] _methodParameterTypes63;
 }

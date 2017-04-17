@@ -214,6 +214,10 @@ public class CategoryLocalServiceUtil {
 		return getService().findAll();
 	}
 
+	public static java.util.List<de.ki.sbam.model.Category> findUnlocked() {
+		return getService().findUnlocked();
+	}
+
 	public static com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery getActionableDynamicQuery() {
 		return getService().getActionableDynamicQuery();
 	}

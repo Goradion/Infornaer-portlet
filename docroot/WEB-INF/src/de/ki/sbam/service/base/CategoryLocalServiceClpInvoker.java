@@ -150,6 +150,10 @@ public class CategoryLocalServiceClpInvoker {
 		_methodName69 = "findAll";
 
 		_methodParameterTypes69 = new String[] {  };
+
+		_methodName70 = "findUnlocked";
+
+		_methodParameterTypes70 = new String[] {  };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -300,6 +304,11 @@ public class CategoryLocalServiceClpInvoker {
 			return CategoryLocalServiceUtil.findAll();
 		}
 
+		if (_methodName70.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes70, parameterTypes)) {
+			return CategoryLocalServiceUtil.findUnlocked();
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -357,4 +366,6 @@ public class CategoryLocalServiceClpInvoker {
 	private String[] _methodParameterTypes68;
 	private String _methodName69;
 	private String[] _methodParameterTypes69;
+	private String _methodName70;
+	private String[] _methodParameterTypes70;
 }

@@ -129,17 +129,25 @@ public class QuestionLocalServiceClpInvoker {
 				"long", "long", "com.liferay.portal.kernel.model.User"
 			};
 
-		_methodName64 = "findByDifficulty";
+		_methodName64 = "removeQuestion";
 
 		_methodParameterTypes64 = new String[] { "long" };
 
-		_methodName65 = "findByCategory";
+		_methodName65 = "removeQuestion";
 
-		_methodParameterTypes65 = new String[] { "long" };
+		_methodParameterTypes65 = new String[] { "de.ki.sbam.model.Question" };
 
-		_methodName66 = "findByCategoryAndDifficulty";
+		_methodName66 = "findByDifficulty";
 
-		_methodParameterTypes66 = new String[] { "long", "long" };
+		_methodParameterTypes66 = new String[] { "long" };
+
+		_methodName67 = "findByCategory";
+
+		_methodParameterTypes67 = new String[] { "long" };
+
+		_methodName68 = "findByCategoryAndDifficulty";
+
+		_methodParameterTypes68 = new String[] { "long", "long" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -264,16 +272,26 @@ public class QuestionLocalServiceClpInvoker {
 
 		if (_methodName64.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes64, parameterTypes)) {
-			return QuestionLocalServiceUtil.findByDifficulty(((Long)arguments[0]).longValue());
+			return QuestionLocalServiceUtil.removeQuestion(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName65.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes65, parameterTypes)) {
-			return QuestionLocalServiceUtil.findByCategory(((Long)arguments[0]).longValue());
+			return QuestionLocalServiceUtil.removeQuestion((de.ki.sbam.model.Question)arguments[0]);
 		}
 
 		if (_methodName66.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes66, parameterTypes)) {
+			return QuestionLocalServiceUtil.findByDifficulty(((Long)arguments[0]).longValue());
+		}
+
+		if (_methodName67.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes67, parameterTypes)) {
+			return QuestionLocalServiceUtil.findByCategory(((Long)arguments[0]).longValue());
+		}
+
+		if (_methodName68.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes68, parameterTypes)) {
 			return QuestionLocalServiceUtil.findByCategoryAndDifficulty(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue());
 		}
@@ -329,4 +347,8 @@ public class QuestionLocalServiceClpInvoker {
 	private String[] _methodParameterTypes65;
 	private String _methodName66;
 	private String[] _methodParameterTypes66;
+	private String _methodName67;
+	private String[] _methodParameterTypes67;
+	private String _methodName68;
+	private String[] _methodParameterTypes68;
 }

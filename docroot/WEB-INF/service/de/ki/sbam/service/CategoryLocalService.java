@@ -196,6 +196,8 @@ public interface CategoryLocalService extends BaseLocalService,
 
 	public List<Category> findAll();
 
+	public List<Category> findUnlocked();
+
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ActionableDynamicQuery getActionableDynamicQuery();
 

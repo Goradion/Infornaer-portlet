@@ -45,6 +45,12 @@ public class HighscoreLocalServiceWrapper implements HighscoreLocalService,
 		return _highscoreLocalService.addHighscore(highscore);
 	}
 
+	@Override
+	public de.ki.sbam.model.Highscore addHighscore(long score,
+		com.liferay.portal.kernel.model.User user) {
+		return _highscoreLocalService.addHighscore(score, user);
+	}
+
 	/**
 	* Creates a new highscore with the primary key. Does not add the highscore to the database.
 	*

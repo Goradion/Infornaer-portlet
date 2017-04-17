@@ -23,7 +23,10 @@ import com.liferay.portal.kernel.model.Role;
 import com.liferay.portal.kernel.model.User;
 
 import aQute.bnd.annotation.ProviderType;
+import de.ki.sbam.exception.NoSuchQuestionException;
+import de.ki.sbam.exception.NoSuchQuestionStatisticsException;
 import de.ki.sbam.model.Question;
+import de.ki.sbam.model.QuestionStatistics;
 import de.ki.sbam.service.QuestionLocalServiceUtil;
 import de.ki.sbam.service.base.QuestionLocalServiceBaseImpl;
 import de.ki.sbam.service.persistence.QuestionUtil;
@@ -83,30 +86,54 @@ public class QuestionLocalServiceImpl extends QuestionLocalServiceBaseImpl {
 	public Question addQuestion(String questionContent, String answerA, String answerB, String answerC, String answerD,
 			String rightAnswer, long categoryId, long difficultyId, User user) throws NoSuchUserException {
 		// ob ein Benutzer eine Frage hizufügen darf wird im Portal eingestellt
-			long questionId = counterLocalService.increment();
-			Question question = questionPersistence.create(questionId);			
-			question.setQuestionContent(questionContent);
-			question.setAnswerA(answerA);
-			question.setAnswerB(answerB);
-			question.setAnswerC(answerC);
-			question.setAnswerD(answerD);
-			question.setRightAnswer(rightAnswer);
-			question.setCategoryId_fk(categoryId);
-			question.setDifficultyId_fk(difficultyId);
-			question.setUserId(user.getUserId());
-			questionPersistence.update(question);
-			return question;
+		long questionId = counterLocalService.increment();
+		Question question = questionPersistence.create(questionId);
+		question.setQuestionContent(questionContent);
+		question.setAnswerA(answerA);
+		question.setAnswerB(answerB);
+		question.setAnswerC(answerC);
+		question.setAnswerD(answerD);
+		question.setRightAnswer(rightAnswer);
+		question.setCategoryId_fk(categoryId);
+		question.setDifficultyId_fk(difficultyId);
+		question.setUserId(user.getUserId());
+		QuestionStatistics questionStatistics = questionStatisticsPersistence.create(questionId);
+		questionPersistence.update(question);
+		questionStatisticsPersistence.update(questionStatistics);
+		return question;
 	}
-	
-	public List<Question> findByDifficulty(long difficulty){
+
+	public Question removeQuestion(long questionId) {
+		try {
+			questionStatisticsPersistence.remove(questionId);
+			return questionPersistence.remove(questionId);
+		} catch (NoSuchQuestionException | NoSuchQuestionStatisticsException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public Question removeQuestion(Question question) {
+		try {
+			questionStatisticsPersistence.remove(question.getQuestionId());
+			return questionPersistence.remove(question);
+		} catch (NoSuchQuestionStatisticsException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	public List<Question> findByDifficulty(long difficulty) {
 		return QuestionUtil.findByDifficulty(difficulty);
 	}
-	
-	public List<Question> findByCategory(long categoryId){
+
+	public List<Question> findByCategory(long categoryId) {
 		return QuestionUtil.findByCategory(categoryId);
 	}
-	
-	public List<Question> findByCategoryAndDifficulty(long categoryId, long difficultyId){
+
+	public List<Question> findByCategoryAndDifficulty(long categoryId, long difficultyId) {
 		return questionPersistence.findByCategoryAndDifficulty(categoryId, difficultyId);
 	}
 

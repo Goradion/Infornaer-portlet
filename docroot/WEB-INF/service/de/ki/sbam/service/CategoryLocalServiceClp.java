@@ -107,41 +107,45 @@ public class CategoryLocalServiceClp implements CategoryLocalService {
 
 		_methodParameterTypes15 = new String[] {  };
 
-		_methodName16 = "getActionableDynamicQuery";
+		_methodName16 = "findUnlocked";
 
 		_methodParameterTypes16 = new String[] {  };
 
-		_methodName17 = "getCategories";
+		_methodName17 = "getActionableDynamicQuery";
 
-		_methodParameterTypes17 = new String[] { "int", "int" };
+		_methodParameterTypes17 = new String[] {  };
 
-		_methodName18 = "getCategoriesCount";
+		_methodName18 = "getCategories";
 
-		_methodParameterTypes18 = new String[] {  };
+		_methodParameterTypes18 = new String[] { "int", "int" };
 
-		_methodName19 = "getCategory";
+		_methodName19 = "getCategoriesCount";
 
-		_methodParameterTypes19 = new String[] { "long" };
+		_methodParameterTypes19 = new String[] {  };
 
-		_methodName20 = "getCategoryByName";
+		_methodName20 = "getCategory";
 
-		_methodParameterTypes20 = new String[] { "java.lang.String" };
+		_methodParameterTypes20 = new String[] { "long" };
 
-		_methodName21 = "getIndexableActionableDynamicQuery";
+		_methodName21 = "getCategoryByName";
 
-		_methodParameterTypes21 = new String[] {  };
+		_methodParameterTypes21 = new String[] { "java.lang.String" };
 
-		_methodName22 = "getOSGiServiceIdentifier";
+		_methodName22 = "getIndexableActionableDynamicQuery";
 
 		_methodParameterTypes22 = new String[] {  };
 
-		_methodName23 = "getPersistedModel";
+		_methodName23 = "getOSGiServiceIdentifier";
 
-		_methodParameterTypes23 = new String[] { "java.io.Serializable" };
+		_methodParameterTypes23 = new String[] {  };
 
-		_methodName25 = "updateCategory";
+		_methodName24 = "getPersistedModel";
 
-		_methodParameterTypes25 = new String[] { "de.ki.sbam.model.Category" };
+		_methodParameterTypes24 = new String[] { "java.io.Serializable" };
+
+		_methodName26 = "updateCategory";
+
+		_methodParameterTypes26 = new String[] { "de.ki.sbam.model.Category" };
 	}
 
 	@Override
@@ -571,12 +575,35 @@ public class CategoryLocalServiceClp implements CategoryLocalService {
 	}
 
 	@Override
-	public com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery getActionableDynamicQuery() {
+	public java.util.List<de.ki.sbam.model.Category> findUnlocked() {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName16,
 					_methodParameterTypes16, new Object[] {  });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<de.ki.sbam.model.Category>)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery getActionableDynamicQuery() {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName17,
+					_methodParameterTypes17, new Object[] {  });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -599,8 +626,8 @@ public class CategoryLocalServiceClp implements CategoryLocalService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName17,
-					_methodParameterTypes17, new Object[] { start, end });
+			returnObj = _invokableLocalService.invokeMethod(_methodName18,
+					_methodParameterTypes18, new Object[] { start, end });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -622,8 +649,8 @@ public class CategoryLocalServiceClp implements CategoryLocalService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName18,
-					_methodParameterTypes18, new Object[] {  });
+			returnObj = _invokableLocalService.invokeMethod(_methodName19,
+					_methodParameterTypes19, new Object[] {  });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -646,8 +673,8 @@ public class CategoryLocalServiceClp implements CategoryLocalService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName19,
-					_methodParameterTypes19, new Object[] { categoryId });
+			returnObj = _invokableLocalService.invokeMethod(_methodName20,
+					_methodParameterTypes20, new Object[] { categoryId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -675,8 +702,8 @@ public class CategoryLocalServiceClp implements CategoryLocalService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName20,
-					_methodParameterTypes20,
+			returnObj = _invokableLocalService.invokeMethod(_methodName21,
+					_methodParameterTypes21,
 					new Object[] { ClpSerializer.translateInput(categoryName) });
 		}
 		catch (Throwable t) {
@@ -703,8 +730,8 @@ public class CategoryLocalServiceClp implements CategoryLocalService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName21,
-					_methodParameterTypes21, new Object[] {  });
+			returnObj = _invokableLocalService.invokeMethod(_methodName22,
+					_methodParameterTypes22, new Object[] {  });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -726,8 +753,8 @@ public class CategoryLocalServiceClp implements CategoryLocalService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName22,
-					_methodParameterTypes22, new Object[] {  });
+			returnObj = _invokableLocalService.invokeMethod(_methodName23,
+					_methodParameterTypes23, new Object[] {  });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -751,8 +778,8 @@ public class CategoryLocalServiceClp implements CategoryLocalService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName23,
-					_methodParameterTypes23,
+			returnObj = _invokableLocalService.invokeMethod(_methodName24,
+					_methodParameterTypes24,
 					new Object[] { ClpSerializer.translateInput(primaryKeyObj) });
 		}
 		catch (Throwable t) {
@@ -787,8 +814,8 @@ public class CategoryLocalServiceClp implements CategoryLocalService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName25,
-					_methodParameterTypes25,
+			returnObj = _invokableLocalService.invokeMethod(_methodName26,
+					_methodParameterTypes26,
 					new Object[] { ClpSerializer.translateInput(category) });
 		}
 		catch (Throwable t) {
@@ -855,6 +882,8 @@ public class CategoryLocalServiceClp implements CategoryLocalService {
 	private String[] _methodParameterTypes22;
 	private String _methodName23;
 	private String[] _methodParameterTypes23;
-	private String _methodName25;
-	private String[] _methodParameterTypes25;
+	private String _methodName24;
+	private String[] _methodParameterTypes24;
+	private String _methodName26;
+	private String[] _methodParameterTypes26;
 }

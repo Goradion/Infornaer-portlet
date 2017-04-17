@@ -10,6 +10,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Random;
 
 import javax.portlet.ActionRequest;
@@ -43,6 +45,7 @@ import de.ki.sbam.service.CategoryLocalServiceUtil;
 import de.ki.sbam.service.DifficultyLocalServiceUtil;
 import de.ki.sbam.service.HighscoreLocalServiceUtil;
 import de.ki.sbam.service.QuestionLocalServiceUtil;
+import game.infonaer.game.AudienceJokerResult;
 import game.infonaer.game.GameState;
 import game.infonaer.game.InfonaerGameUtil;
 import game.infonaer.constants.Constants;
@@ -95,15 +98,52 @@ public class InfonaerGamePortlet extends MVCPortlet {
 		// DifficultyLocalServiceUtil.deleteAllDifficulties();
 	}
 
-	public void gotoNewGame(ActionRequest actionRequest, ActionResponse actionResponse)
-			throws IOException, PortletException {
-
+	public void gotoNewGame(ActionRequest actionRequest, ActionResponse actionResponse) {
+		GameState gameState = (GameState) actionRequest.getPortletSession().getAttribute("gameState");
+		if (gameState == null){
 		actionRequest.getPortletSession().setAttribute("currentPage", NEW_GAME_JSP, PortletSession.PORTLET_SCOPE);
-		insertCategories(actionRequest, actionResponse);
+		insertUnlockedCategories(actionRequest, actionResponse);
+		} else {
+			navigateByGameState(actionRequest, actionResponse);
+		}
+	}
+
+	private void navigateByGameState(ActionRequest actionRequest, ActionResponse actionResponse) {
+		GameState gameState = (GameState) actionRequest.getPortletSession().getAttribute("gameState");
+		if (gameState == null){
+			gotoNewGame(actionRequest, actionResponse);
+		} else {
+			if(gameState.isGameOver()){
+				if (gameState.isWon()){
+					gotoGameWon(actionRequest, actionResponse);
+				}
+			} else {
+				gotoGameQuestion(actionRequest, actionResponse);
+			}
+		}
+		
+	}
+
+	private void gotoGameWon(ActionRequest actionRequest, ActionResponse actionResponse) {
+		actionRequest.getPortletSession().setAttribute("currentPage", GAME_WON_JSP, PortletSession.PORTLET_SCOPE);
+		
+	}
+
+	public void gotoGameOver(ActionRequest actionRequest, ActionResponse actionResponse)
+			throws IOException, PortletException {
+		actionRequest.getPortletSession().setAttribute("currentPage", GAME_OVER_JSP, PortletSession.PORTLET_SCOPE);
+	}
+	
+	private void gotoGameQuestion(ActionRequest actionRequest, ActionResponse actionResponse) {
+		actionRequest.getPortletSession().setAttribute("currentPage", GAME_JSP, PortletSession.PORTLET_SCOPE);
 	}
 
 	public void startSimonGame(ActionRequest actionRequest, ActionResponse actionResponse) {
 		String[] categoryNames = actionRequest.getParameterValues("categories");
+		if (categoryNames == null){
+			gotoMainMenu(actionRequest, actionResponse);
+			return;
+		}
 		List<Category> selectedCategories = new ArrayList<>();
 
 		for (String categoryName : categoryNames) {
@@ -120,21 +160,30 @@ public class InfonaerGamePortlet extends MVCPortlet {
 		User user = td.getUser();
 		GameState gameState = new GameState(user, selectedCategories, difficulties);
 		InfonaerGameUtil.pickQuestion(gameState);
-		actionRequest.getPortletSession().setAttribute("gameState", gameState, PortletSession.APPLICATION_SCOPE);
-//		actionRequest.getPortletSession().setAttribute("currentPage", NEW_GAME_JSP, PortletSession.PORTLET_SCOPE);
-
+		actionRequest.getPortletSession().setAttribute("gameState", gameState, PortletSession.PORTLET_SCOPE);
+		actionRequest.getPortletSession().setAttribute("currentPage", GAME_JSP, PortletSession.PORTLET_SCOPE);
+	}
+	
+	public void endGame(ActionRequest actionRequest, ActionResponse actionResponse){
+		PortletSession portletSession = actionRequest.getPortletSession();
+		portletSession.removeAttribute("gameState");
+		portletSession.removeAttribute("audienceJokerResult");
+		gotoMainMenu(actionRequest, actionResponse);
 	}
 
 	public void gotoHighscores(ActionRequest actionRequest, ActionResponse actionResponse)
 			throws IOException, PortletException {
 		actionRequest.getPortletSession().setAttribute("currentPage", HIGHSCORES_JSP, PortletSession.PORTLET_SCOPE);
-//		HashMap<String,Long> highscores = new HashMap<String,Long>();
-//		for(Highscore h: HighscoreLocalServiceUtil.getHighscores(QueryUtil.ALL_POS, QueryUtil.ALL_POS)){
-//			highscores.put(h.getUserName(), h.getScore());
-//		}
-//		actionRequest.setAttribute("highscores", highscores);
+		// HashMap<String,Long> highscores = new HashMap<String,Long>();
+		// for(Highscore h:
+		// HighscoreLocalServiceUtil.getHighscores(QueryUtil.ALL_POS,
+		// QueryUtil.ALL_POS)){
+		// highscores.put(h.getUserName(), h.getScore());
+		// }
+		// actionRequest.setAttribute("highscores", highscores);
 		testHighscores();
 	}
+
 	public void highscoresPagination(ActionRequest actionRequest, ActionResponse actionResponse) {
 		int page = 1;
 		int recordsPerPage = 5;
@@ -149,25 +198,21 @@ public class InfonaerGamePortlet extends MVCPortlet {
 			end = highscoresCount;
 		}
 		List<Highscore> highscores = HighscoreLocalServiceUtil.getHighscores(start, end);
-		
-		for(Highscore h : HighscoreLocalServiceUtil.getHighscores(QueryUtil.ALL_POS, QueryUtil.ALL_POS)){
-			System.out.println(h.getScore()+" "+h.getUserName());
+
+		for (Highscore h : HighscoreLocalServiceUtil.getHighscores(QueryUtil.ALL_POS, QueryUtil.ALL_POS)) {
+			System.out.println(h.getScore() + " " + h.getUserName());
 		}
-		
+
 		actionRequest.setAttribute("highscoresList", highscores);
 		actionRequest.setAttribute("noOfPages", noOfPages);
 		actionRequest.setAttribute("currentPage", page);
 	}
 
-	public void gotoMainMenu(ActionRequest actionRequest, ActionResponse actionResponse)
-			throws IOException, PortletException {
+	public void gotoMainMenu(ActionRequest actionRequest, ActionResponse actionResponse){
 		actionRequest.getPortletSession().setAttribute("currentPage", VIEW_JSP, PortletSession.PORTLET_SCOPE);
 	}
 
-	public void gotoGameOver(ActionRequest actionRequest, ActionResponse actionResponse)
-			throws IOException, PortletException {
-		actionRequest.getPortletSession().setAttribute("currentPage", GAME_OVER_JSP, PortletSession.PORTLET_SCOPE);
-	}
+	
 
 	public void gotoEditMode(ActionRequest actionRequest, ActionResponse actionResponse)
 			throws IOException, PortletException {
@@ -189,6 +234,11 @@ public class InfonaerGamePortlet extends MVCPortlet {
 
 	private void insertCategories(ActionRequest actionRequest, ActionResponse actionResponse) {
 		List<Category> categories = CategoryLocalServiceUtil.findAll();
+		actionRequest.getPortletSession().setAttribute("cList", categories, PortletSession.APPLICATION_SCOPE);
+	}
+
+	private void insertUnlockedCategories(ActionRequest actionRequest, ActionResponse actionResponse) {
+		List<Category> categories = CategoryLocalServiceUtil.findUnlocked();
 		actionRequest.getPortletSession().setAttribute("cList", categories, PortletSession.APPLICATION_SCOPE);
 	}
 
@@ -366,13 +416,14 @@ public class InfonaerGamePortlet extends MVCPortlet {
 		String categoryId = actionRequest.getParameter("categoryId");
 		String categoryName = actionRequest.getParameter("categoryName");
 		String unlocked = actionRequest.getParameter("unlocked");
+		boolean isUnlocked = (unlocked != null);
 		try {
 			if (categoryId == null) {
 				CategoryLocalServiceUtil.addCategory(categoryName);
 			} else {
 				Category category = CategoryLocalServiceUtil.getCategory(Long.parseLong(categoryId));
 				category.setCategoryName(categoryName);
-				category.setUnlocked(Boolean.getBoolean(unlocked));
+				category.setUnlocked(isUnlocked);
 				CategoryLocalServiceUtil.updateCategory(category);
 			}
 		} catch (NumberFormatException e) {
@@ -452,11 +503,16 @@ public class InfonaerGamePortlet extends MVCPortlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		categoryPagination(actionRequest, actionResponse);
 	}
-
 	public void evalAnswer(ActionRequest actionRequest, ActionResponse actionResponse) {
-
+		actionRequest.getPortletSession().removeAttribute("audienceJokerResult");
+		GameState gameState = (GameState) actionRequest.getPortletSession().getAttribute("gameState");
+		if (gameState == null){
+			gotoMainMenu(actionRequest, actionResponse);
+		} else {
+			String answer = actionRequest.getParameter("answer");
+			boolean evaluateAnswer = InfonaerGameUtil.evaluateAnswer(gameState, answer.toUpperCase());
+		}
 	}
 
 	public void startGame(ActionRequest actionRequest, ActionResponse actionResponse) {
@@ -465,30 +521,33 @@ public class InfonaerGamePortlet extends MVCPortlet {
 		actionRequest.setAttribute("question", question);
 	}
 
-	
-	public void leaveCurrentGame(ActionRequest actionRequest, ActionResponse actionResponse){
-		actionRequest.getPortletSession().setAttribute("currentPage",NEW_GAME_JSP, PortletSession.PORTLET_SCOPE);
+	public void leaveCurrentGame(ActionRequest actionRequest, ActionResponse actionResponse) {
+		actionRequest.getPortletSession().setAttribute("currentPage", NEW_GAME_JSP, PortletSession.PORTLET_SCOPE);
 	}
-	
-	public void fiftyFiftyJoker(ActionRequest actionRequest, ActionResponse actionResponse){
-		//TODO
-		System.out.println("fiftyJoker");
+
+	public void fiftyFiftyJoker(ActionRequest actionRequest, ActionResponse actionResponse) {
+		GameState gameState = (GameState) actionRequest.getPortletSession().getAttribute("gameState");
+		InfonaerGameUtil.useFiftyFifty(gameState);
 	}
-	
-	public void publicJoker(ActionRequest actionRequest, ActionResponse actionResponse){
-		System.out.println("pulicJoker");
+
+	public void audienceJoker(ActionRequest actionRequest, ActionResponse actionResponse) {
+		GameState gameState = (GameState) actionRequest.getPortletSession().getAttribute("gameState");
+		AudienceJokerResult useAudience = InfonaerGameUtil.useAudience(gameState);
+		actionRequest.getPortletSession().setAttribute("audienceJokerResult", useAudience);
+		System.out.println("publicJoker"); // TODO remove
+		System.out.println(useAudience);
 	}
-	
-	private void testHighscores(){ 
+
+	private void testHighscores() {
 		List<User> users = UserLocalServiceUtil.getUsers(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
-		for(User u : users){
-			System.out.println(u.getUserId()+" "+u.getFullName());
+		for (User u : users) {
+			System.out.println(u.getUserId() + " " + u.getFullName());
 		}
-		for (int i = 0; i<50; i++){			
-			HighscoreLocalServiceUtil.addHighscore(new Random().nextLong(),users.get(i%users.size()));
+		for (int i = 0; i < 50; i++) {
+			HighscoreLocalServiceUtil.addHighscore(new Random().nextLong(), users.get(i % users.size()));
 		}
-		for(Highscore h : HighscoreLocalServiceUtil.getHighscores(QueryUtil.ALL_POS, QueryUtil.ALL_POS)){
-			System.out.println(h.getScore()+" "+h.getUserName());
+		for (Highscore h : HighscoreLocalServiceUtil.getHighscores(QueryUtil.ALL_POS, QueryUtil.ALL_POS)) {
+			System.out.println(h.getScore() + " " + h.getUserName());
 		}
 	}
 }

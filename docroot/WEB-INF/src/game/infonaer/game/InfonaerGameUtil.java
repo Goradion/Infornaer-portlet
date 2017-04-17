@@ -1,23 +1,17 @@
 package game.infonaer.game;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 
-import org.junit.experimental.categories.Categories;
-
-import com.liferay.portal.kernel.model.User;
-
 import de.ki.sbam.model.Category;
 import de.ki.sbam.model.Difficulty;
+import de.ki.sbam.model.Highscore;
 import de.ki.sbam.model.Question;
-import de.ki.sbam.service.DifficultyLocalServiceUtil;
-import de.ki.sbam.service.QuestionLocalService;
+import de.ki.sbam.model.QuestionStatistics;
+import de.ki.sbam.service.HighscoreLocalServiceUtil;
 import de.ki.sbam.service.QuestionLocalServiceUtil;
-import de.ki.sbam.service.impl.QuestionLocalServiceImpl;
-import edu.emory.mathcs.backport.java.util.Arrays;
+import de.ki.sbam.service.QuestionStatisticsLocalServiceUtil;
 
 public class InfonaerGameUtil {
 	private static Random randomGenerator = new Random();
@@ -39,9 +33,10 @@ public class InfonaerGameUtil {
 	}
 
 	public static boolean evaluateAnswer(GameState gameState, String answer) {
-		// TODO log answer for stats
+		Question currentQuestion = gameState.getCurrentQuestion();
+		QuestionStatisticsLocalServiceUtil.addAnswer(currentQuestion.getQuestionId(), answer);
 		List<Difficulty> difficulties = gameState.getDifficulties();
-		if (!gameState.isGameOver() && gameState.getCurrentQuestion().getRightAnswer().equals(answer)) {
+		if (!gameState.isGameOver() && currentQuestion.getRightAnswer().equals(answer)) {
 
 			if (gameState.getCurrentDifficulty() < difficulties.size()) {
 				Difficulty difficulty = difficulties.get(gameState.getCurrentDifficulty());
@@ -52,7 +47,6 @@ public class InfonaerGameUtil {
 				gameState.increaseCurrentDifficulty();
 			} else {
 				win(gameState);
-
 			}
 			return true;
 		} else {
@@ -98,6 +92,47 @@ public class InfonaerGameUtil {
 		}
 	}
 
+	public static AudienceJokerResult useAudience(GameState gameState) {
+		Question currentQuestion = gameState.getCurrentQuestion();
+		QuestionStatistics questionStats = QuestionStatisticsLocalServiceUtil
+				.fetchQuestionStatistics(currentQuestion.getQuestionId());
+
+		long answeredA = 0;
+		long answeredB = 0;
+		long answeredC = 0;
+		long answeredD = 0;
+
+		// Nachricht kann durch 50:50 entfernt worden sein
+		if (currentQuestion.getAnswerA() != null) {
+			answeredA = questionStats.getAnswered_a();
+		}
+		if (currentQuestion.getAnswerB() != null) {
+			answeredB = questionStats.getAnswered_b();
+		}
+		if (currentQuestion.getAnswerC() != null) {
+			answeredC = questionStats.getAnswered_c();
+		}
+		if (currentQuestion.getAnswerD() != null) {
+			answeredD = questionStats.getAnswered_d();
+		}
+		long totalAnswers = answeredA + answeredB + answeredC + answeredD;
+
+		double percentA = 0.0;
+		double percentB = 0.0;
+		double percentC = 0.0;
+		double percentD = 0.0;
+
+		if (totalAnswers != 0) {
+			percentA = answeredA * 100.0 / totalAnswers;
+			percentB = answeredB * 100.0 / totalAnswers;
+			percentC = answeredC * 100.0 / totalAnswers;
+			percentD = answeredD * 100.0 / totalAnswers;
+		}
+
+		return new AudienceJokerResult(percentA, percentB, percentC, percentD);
+
+	}
+
 	private static void win(GameState gameState) {
 		gameState.win();
 		saveHighscore(gameState);
@@ -114,8 +149,14 @@ public class InfonaerGameUtil {
 	}
 
 	private static void saveHighscore(GameState gameState) {
-		// TODO Auto-generated method stub
-
+		long userId = gameState.getPlayer().getUserId();
+		Highscore highscore = HighscoreLocalServiceUtil.fetchHighscore(userId);
+		if (highscore == null) {
+			highscore = HighscoreLocalServiceUtil.createHighscore(userId);
+		}
+		long score = highscore.getScore();
+		highscore.setScore(score + gameState.getScore());
+		// TODO userstats
 	}
 
 }

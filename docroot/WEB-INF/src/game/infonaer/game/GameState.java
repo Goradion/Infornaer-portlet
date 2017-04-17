@@ -115,6 +115,14 @@ public class GameState {
 	public void useAudience() {
 		this.audienceUsed = true;
 	}
+
+	@Override
+	public String toString() {
+		return "GameState [player=" + player.getUserId() + ", categories=" + categories + ", difficulties=" + difficulties
+				+ ", currentDifficulty=" + currentDifficulty + ", currentQuestion=" + currentQuestion
+				+ ", guaranteedScore=" + guaranteedScore + ", score=" + score + ", fifyFiftyUsed=" + fifyFiftyUsed
+				+ ", audienceUsed=" + audienceUsed + ", gameOver=" + gameOver + ", won=" + won + "]";
+	}
 	
 	
 	

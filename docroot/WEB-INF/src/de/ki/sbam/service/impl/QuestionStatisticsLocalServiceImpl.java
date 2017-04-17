@@ -14,18 +14,25 @@
 
 package de.ki.sbam.service.impl;
 
-import aQute.bnd.annotation.ProviderType;
+import java.io.Serializable;
 
+import aQute.bnd.annotation.ProviderType;
+import de.ki.sbam.model.QuestionStatistics;
+import de.ki.sbam.service.QuestionServiceUtil;
 import de.ki.sbam.service.base.QuestionStatisticsLocalServiceBaseImpl;
 
 /**
  * The implementation of the question statistics local service.
  *
  * <p>
- * All custom service methods should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link de.ki.sbam.service.QuestionStatisticsLocalService} interface.
+ * All custom service methods should be put in this class. Whenever methods are
+ * added, rerun ServiceBuilder to copy their definitions into the
+ * {@link de.ki.sbam.service.QuestionStatisticsLocalService} interface.
  *
  * <p>
- * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
+ * This is a local service. Methods of this service will not have security
+ * checks based on the propagated JAAS credentials because this service can only
+ * be accessed from within the same VM.
  * </p>
  *
  * @author Alexander Mueller, Simon Bastian
@@ -33,11 +40,40 @@ import de.ki.sbam.service.base.QuestionStatisticsLocalServiceBaseImpl;
  * @see de.ki.sbam.service.QuestionStatisticsLocalServiceUtil
  */
 @ProviderType
-public class QuestionStatisticsLocalServiceImpl
-	extends QuestionStatisticsLocalServiceBaseImpl {
+public class QuestionStatisticsLocalServiceImpl extends QuestionStatisticsLocalServiceBaseImpl {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never reference this class directly. Always use {@link de.ki.sbam.service.QuestionStatisticsLocalServiceUtil} to access the question statistics local service.
+	 * Never reference this class directly. Always use {@link
+	 * de.ki.sbam.service.QuestionStatisticsLocalServiceUtil} to access the
+	 * question statistics local service.
 	 */
+	public QuestionStatistics addAnswer(long questionId, String answer) {
+		QuestionStatistics questionStats = questionStatisticsPersistence.fetchByPrimaryKey(questionId);
+		if (questionStats != null) {
+			switch (answer) {
+			case "A":
+				long answered_a = questionStats.getAnswered_a() + 1;
+				questionStats.setAnswered_a(answered_a);
+				break;
+			case "B":
+				long answered_b = questionStats.getAnswered_b() + 1;
+				questionStats.setAnswered_b(answered_b);
+				break;
+			case "C":
+				long answered_c = questionStats.getAnswered_c() + 1;
+				questionStats.setAnswered_c(answered_c);
+				break;
+			case "D":
+				long answered_d = questionStats.getAnswered_d() + 1;
+				questionStats.setAnswered_d(answered_d);
+				break;
+			default:
+				System.out.println("invalid answer:" + answer); //TODO
+				break;
+			}
+			questionStatisticsPersistence.update(questionStats);
+		}
+		return questionStats;
+	}
 }
