@@ -12,7 +12,7 @@
 
 <h1>Highscores</h1>
 
-<liferay-ui:search-container var="searchContainer" delta="2"
+<liferay-ui:search-container var="searchContainer" delta="5"
 	compactEmptyResultsMessage="No highscores yet."
 	deltaConfigurable="false" iteratorURL="<%=iteratorURL%>">
 <liferay-ui:search-container-results> 

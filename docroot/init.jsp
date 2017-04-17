@@ -8,6 +8,7 @@
 <%@ page import="game.infonaer.constants.Constants"%>
 <%@ page import="de.ki.sbam.service.QuestionLocalServiceUtil"%>
 <%@ page import="de.ki.sbam.model.Question"%>
+<%@ page import="de.ki.sbam.model.Category"%>
 <%@ page import="de.ki.sbam.model.Highscore"%>
 <%@ page import="de.ki.sbam.service.persistence.QuestionUtil"%>
 <%@ page import="game.infonaer.portlet.QuestionFromFileBuilder" %>

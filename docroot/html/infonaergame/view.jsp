@@ -6,8 +6,8 @@
 
 <h1>Wer Wird Infonär</h1>
 <ol>
-	<li><a href=<%=newGame %>>Neues Spiel</a> starten kann </li>
-	<li><a href=<%=highscores %>>Highscores</a> ansehen kann </li>
+	<li><a href=<%=newGame %>>Neues Spiel</a></li>
+	<li><a href=<%=highscores %>>Highscores</a></li>
 </ol>
 
 <hr>
