@@ -1,12 +1,9 @@
 package game.infonaer;
 
-import static game.infonaer.constants.Constants.EASY;
 
 import java.util.HashSet;
-import java.util.Random;
 
 import de.ki.sbam.model.Question;
-import de.ki.sbam.service.QuestionLocalServiceUtil;
 
 
 
