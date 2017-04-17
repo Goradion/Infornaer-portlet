@@ -4,12 +4,13 @@
 
 <resource-action-mapping>
     <portlet-resource>
-        <portlet-name>guestbook</portlet-name>
+        <portlet-name>infonaer-game</portlet-name>
         <permissions>
             <supports>
                 <action-key>ADD_TO_PAGE</action-key>
                 <action-key>CONFIGURATION</action-key>
                 <action-key>VIEW</action-key>
+                <action-key>EDIT_CONTENT</action-key>
             </supports>
             <site-member-defaults>
                 <action-key>VIEW</action-key>
@@ -17,27 +18,10 @@
             <guest-defaults>
                 <action-key>VIEW</action-key>
             </guest-defaults>
-            <guest-unsupported />
+            <guest-unsupported>
+            	<action-key>EDIT_CONTENT</action-key>
+            	<action-key>CONFIGURATION</action-key>
+            </guest-unsupported>
         </permissions>
     </portlet-resource>
-
-    <model-resource>
-        <model-name>de.ki.sbam.model</model-name>
-        <portlet-ref>
-            <portlet-name>infonaer-game</portlet-name>
-        </portlet-ref>
-        <permissions>
-        <supports>
-            <action-key>EDIT_CONTENT</action-key>
-        </supports>
-        <site-member-defaults>
-            <action-key>ADD_ENTRY</action-key>
-        </site-member-defaults>
-        <guest-defaults />
-        <guest-unsupported>
-            <action-key>EDIT_CONTENT</action-key>
-        </guest-unsupported>
-        </permissions>
-    </model-resource>
-
 </resource-action-mapping>

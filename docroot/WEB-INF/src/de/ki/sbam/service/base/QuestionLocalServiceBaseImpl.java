@@ -229,7 +229,7 @@ public abstract class QuestionLocalServiceBaseImpl extends BaseLocalServiceImpl
 	public ActionableDynamicQuery getActionableDynamicQuery() {
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
-		actionableDynamicQuery.setBaseLocalService(de.ki.sbam.service.QuestionLocalServiceUtil.getService());
+		actionableDynamicQuery.setBaseLocalService(questionLocalService);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
 		actionableDynamicQuery.setModelClass(Question.class);
 
@@ -242,7 +242,7 @@ public abstract class QuestionLocalServiceBaseImpl extends BaseLocalServiceImpl
 	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery() {
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
-		indexableActionableDynamicQuery.setBaseLocalService(de.ki.sbam.service.QuestionLocalServiceUtil.getService());
+		indexableActionableDynamicQuery.setBaseLocalService(questionLocalService);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
 		indexableActionableDynamicQuery.setModelClass(Question.class);
 
@@ -253,7 +253,7 @@ public abstract class QuestionLocalServiceBaseImpl extends BaseLocalServiceImpl
 
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
-		actionableDynamicQuery.setBaseLocalService(de.ki.sbam.service.QuestionLocalServiceUtil.getService());
+		actionableDynamicQuery.setBaseLocalService(questionLocalService);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
 		actionableDynamicQuery.setModelClass(Question.class);
 
@@ -741,7 +741,7 @@ public abstract class QuestionLocalServiceBaseImpl extends BaseLocalServiceImpl
 	protected de.ki.sbam.service.HighscoreLocalService highscoreLocalService;
 	@BeanReference(type = HighscorePersistence.class)
 	protected HighscorePersistence highscorePersistence;
-	@BeanReference(type = de.ki.sbam.service.QuestionLocalService.class)
+	@BeanReference(type = QuestionLocalService.class)
 	protected QuestionLocalService questionLocalService;
 	@BeanReference(type = QuestionPersistence.class)
 	protected QuestionPersistence questionPersistence;

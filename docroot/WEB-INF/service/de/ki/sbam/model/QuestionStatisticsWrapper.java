@@ -20,12 +20,12 @@ import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -100,13 +100,68 @@ public class QuestionStatisticsWrapper implements QuestionStatistics,
 	}
 
 	@Override
-	public java.lang.Object clone() {
-		return new QuestionStatisticsWrapper((QuestionStatistics)_questionStatistics.clone());
+	public boolean isCachedModel() {
+		return _questionStatistics.isCachedModel();
+	}
+
+	@Override
+	public boolean isEscapedModel() {
+		return _questionStatistics.isEscapedModel();
+	}
+
+	@Override
+	public boolean isNew() {
+		return _questionStatistics.isNew();
+	}
+
+	@Override
+	public ExpandoBridge getExpandoBridge() {
+		return _questionStatistics.getExpandoBridge();
+	}
+
+	@Override
+	public com.liferay.portal.kernel.model.CacheModel<de.ki.sbam.model.QuestionStatistics> toCacheModel() {
+		return _questionStatistics.toCacheModel();
+	}
+
+	@Override
+	public de.ki.sbam.model.QuestionStatistics toEscapedModel() {
+		return new QuestionStatisticsWrapper(_questionStatistics.toEscapedModel());
+	}
+
+	@Override
+	public de.ki.sbam.model.QuestionStatistics toUnescapedModel() {
+		return new QuestionStatisticsWrapper(_questionStatistics.toUnescapedModel());
 	}
 
 	@Override
 	public int compareTo(de.ki.sbam.model.QuestionStatistics questionStatistics) {
 		return _questionStatistics.compareTo(questionStatistics);
+	}
+
+	@Override
+	public int hashCode() {
+		return _questionStatistics.hashCode();
+	}
+
+	@Override
+	public Serializable getPrimaryKeyObj() {
+		return _questionStatistics.getPrimaryKeyObj();
+	}
+
+	@Override
+	public java.lang.Object clone() {
+		return new QuestionStatisticsWrapper((QuestionStatistics)_questionStatistics.clone());
+	}
+
+	@Override
+	public java.lang.String toString() {
+		return _questionStatistics.toString();
+	}
+
+	@Override
+	public java.lang.String toXmlString() {
+		return _questionStatistics.toXmlString();
 	}
 
 	/**
@@ -149,11 +204,6 @@ public class QuestionStatisticsWrapper implements QuestionStatistics,
 		return _questionStatistics.getAnswered_d();
 	}
 
-	@Override
-	public ExpandoBridge getExpandoBridge() {
-		return _questionStatistics.getExpandoBridge();
-	}
-
 	/**
 	* Returns the primary key of this question statistics.
 	*
@@ -164,11 +214,6 @@ public class QuestionStatisticsWrapper implements QuestionStatistics,
 		return _questionStatistics.getPrimaryKey();
 	}
 
-	@Override
-	public Serializable getPrimaryKeyObj() {
-		return _questionStatistics.getPrimaryKeyObj();
-	}
-
 	/**
 	* Returns the question ID of this question statistics.
 	*
@@ -177,26 +222,6 @@ public class QuestionStatisticsWrapper implements QuestionStatistics,
 	@Override
 	public long getQuestionId() {
 		return _questionStatistics.getQuestionId();
-	}
-
-	@Override
-	public int hashCode() {
-		return _questionStatistics.hashCode();
-	}
-
-	@Override
-	public boolean isCachedModel() {
-		return _questionStatistics.isCachedModel();
-	}
-
-	@Override
-	public boolean isEscapedModel() {
-		return _questionStatistics.isEscapedModel();
-	}
-
-	@Override
-	public boolean isNew() {
-		return _questionStatistics.isNew();
 	}
 
 	@Override
@@ -250,14 +275,14 @@ public class QuestionStatisticsWrapper implements QuestionStatistics,
 	}
 
 	@Override
-	public void setExpandoBridgeAttributes(
-		com.liferay.portal.kernel.model.BaseModel<?> baseModel) {
-		_questionStatistics.setExpandoBridgeAttributes(baseModel);
+	public void setExpandoBridgeAttributes(ExpandoBridge expandoBridge) {
+		_questionStatistics.setExpandoBridgeAttributes(expandoBridge);
 	}
 
 	@Override
-	public void setExpandoBridgeAttributes(ExpandoBridge expandoBridge) {
-		_questionStatistics.setExpandoBridgeAttributes(expandoBridge);
+	public void setExpandoBridgeAttributes(
+		com.liferay.portal.kernel.model.BaseModel<?> baseModel) {
+		_questionStatistics.setExpandoBridgeAttributes(baseModel);
 	}
 
 	@Override
@@ -296,31 +321,6 @@ public class QuestionStatisticsWrapper implements QuestionStatistics,
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<de.ki.sbam.model.QuestionStatistics> toCacheModel() {
-		return _questionStatistics.toCacheModel();
-	}
-
-	@Override
-	public de.ki.sbam.model.QuestionStatistics toEscapedModel() {
-		return new QuestionStatisticsWrapper(_questionStatistics.toEscapedModel());
-	}
-
-	@Override
-	public java.lang.String toString() {
-		return _questionStatistics.toString();
-	}
-
-	@Override
-	public de.ki.sbam.model.QuestionStatistics toUnescapedModel() {
-		return new QuestionStatisticsWrapper(_questionStatistics.toUnescapedModel());
-	}
-
-	@Override
-	public java.lang.String toXmlString() {
-		return _questionStatistics.toXmlString();
-	}
-
-	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
@@ -332,7 +332,7 @@ public class QuestionStatisticsWrapper implements QuestionStatistics,
 
 		QuestionStatisticsWrapper questionStatisticsWrapper = (QuestionStatisticsWrapper)obj;
 
-		if (Validator.equals(_questionStatistics,
+		if (Objects.equals(_questionStatistics,
 					questionStatisticsWrapper._questionStatistics)) {
 			return true;
 		}

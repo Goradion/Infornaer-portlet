@@ -20,12 +20,12 @@ import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -77,21 +77,6 @@ public class DifficultyWrapper implements Difficulty, ModelWrapper<Difficulty> {
 		}
 	}
 
-	@Override
-	public java.lang.Object clone() {
-		return new DifficultyWrapper((Difficulty)_difficulty.clone());
-	}
-
-	@Override
-	public int compareTo(de.ki.sbam.model.Difficulty difficulty) {
-		return _difficulty.compareTo(difficulty);
-	}
-
-	@Override
-	public ExpandoBridge getExpandoBridge() {
-		return _difficulty.getExpandoBridge();
-	}
-
 	/**
 	* Returns the guaranteed of this difficulty.
 	*
@@ -100,36 +85,6 @@ public class DifficultyWrapper implements Difficulty, ModelWrapper<Difficulty> {
 	@Override
 	public boolean getGuaranteed() {
 		return _difficulty.getGuaranteed();
-	}
-
-	/**
-	* Returns the primary key of this difficulty.
-	*
-	* @return the primary key of this difficulty
-	*/
-	@Override
-	public long getPrimaryKey() {
-		return _difficulty.getPrimaryKey();
-	}
-
-	@Override
-	public Serializable getPrimaryKeyObj() {
-		return _difficulty.getPrimaryKeyObj();
-	}
-
-	/**
-	* Returns the score of this difficulty.
-	*
-	* @return the score of this difficulty
-	*/
-	@Override
-	public long getScore() {
-		return _difficulty.getScore();
-	}
-
-	@Override
-	public int hashCode() {
-		return _difficulty.hashCode();
 	}
 
 	@Override
@@ -158,6 +113,76 @@ public class DifficultyWrapper implements Difficulty, ModelWrapper<Difficulty> {
 	}
 
 	@Override
+	public ExpandoBridge getExpandoBridge() {
+		return _difficulty.getExpandoBridge();
+	}
+
+	@Override
+	public com.liferay.portal.kernel.model.CacheModel<de.ki.sbam.model.Difficulty> toCacheModel() {
+		return _difficulty.toCacheModel();
+	}
+
+	@Override
+	public de.ki.sbam.model.Difficulty toEscapedModel() {
+		return new DifficultyWrapper(_difficulty.toEscapedModel());
+	}
+
+	@Override
+	public de.ki.sbam.model.Difficulty toUnescapedModel() {
+		return new DifficultyWrapper(_difficulty.toUnescapedModel());
+	}
+
+	@Override
+	public int compareTo(de.ki.sbam.model.Difficulty difficulty) {
+		return _difficulty.compareTo(difficulty);
+	}
+
+	@Override
+	public int hashCode() {
+		return _difficulty.hashCode();
+	}
+
+	@Override
+	public Serializable getPrimaryKeyObj() {
+		return _difficulty.getPrimaryKeyObj();
+	}
+
+	@Override
+	public java.lang.Object clone() {
+		return new DifficultyWrapper((Difficulty)_difficulty.clone());
+	}
+
+	@Override
+	public java.lang.String toString() {
+		return _difficulty.toString();
+	}
+
+	@Override
+	public java.lang.String toXmlString() {
+		return _difficulty.toXmlString();
+	}
+
+	/**
+	* Returns the primary key of this difficulty.
+	*
+	* @return the primary key of this difficulty
+	*/
+	@Override
+	public long getPrimaryKey() {
+		return _difficulty.getPrimaryKey();
+	}
+
+	/**
+	* Returns the score of this difficulty.
+	*
+	* @return the score of this difficulty
+	*/
+	@Override
+	public long getScore() {
+		return _difficulty.getScore();
+	}
+
+	@Override
 	public void persist() {
 		_difficulty.persist();
 	}
@@ -168,14 +193,14 @@ public class DifficultyWrapper implements Difficulty, ModelWrapper<Difficulty> {
 	}
 
 	@Override
-	public void setExpandoBridgeAttributes(
-		com.liferay.portal.kernel.model.BaseModel<?> baseModel) {
-		_difficulty.setExpandoBridgeAttributes(baseModel);
+	public void setExpandoBridgeAttributes(ExpandoBridge expandoBridge) {
+		_difficulty.setExpandoBridgeAttributes(expandoBridge);
 	}
 
 	@Override
-	public void setExpandoBridgeAttributes(ExpandoBridge expandoBridge) {
-		_difficulty.setExpandoBridgeAttributes(expandoBridge);
+	public void setExpandoBridgeAttributes(
+		com.liferay.portal.kernel.model.BaseModel<?> baseModel) {
+		_difficulty.setExpandoBridgeAttributes(baseModel);
 	}
 
 	@Override
@@ -224,31 +249,6 @@ public class DifficultyWrapper implements Difficulty, ModelWrapper<Difficulty> {
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<de.ki.sbam.model.Difficulty> toCacheModel() {
-		return _difficulty.toCacheModel();
-	}
-
-	@Override
-	public de.ki.sbam.model.Difficulty toEscapedModel() {
-		return new DifficultyWrapper(_difficulty.toEscapedModel());
-	}
-
-	@Override
-	public java.lang.String toString() {
-		return _difficulty.toString();
-	}
-
-	@Override
-	public de.ki.sbam.model.Difficulty toUnescapedModel() {
-		return new DifficultyWrapper(_difficulty.toUnescapedModel());
-	}
-
-	@Override
-	public java.lang.String toXmlString() {
-		return _difficulty.toXmlString();
-	}
-
-	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
@@ -260,7 +260,7 @@ public class DifficultyWrapper implements Difficulty, ModelWrapper<Difficulty> {
 
 		DifficultyWrapper difficultyWrapper = (DifficultyWrapper)obj;
 
-		if (Validator.equals(_difficulty, difficultyWrapper._difficulty)) {
+		if (Objects.equals(_difficulty, difficultyWrapper._difficulty)) {
 			return true;
 		}
 

@@ -230,7 +230,7 @@ public abstract class HighscoreLocalServiceBaseImpl extends BaseLocalServiceImpl
 	public ActionableDynamicQuery getActionableDynamicQuery() {
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
-		actionableDynamicQuery.setBaseLocalService(de.ki.sbam.service.HighscoreLocalServiceUtil.getService());
+		actionableDynamicQuery.setBaseLocalService(highscoreLocalService);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
 		actionableDynamicQuery.setModelClass(Highscore.class);
 
@@ -243,7 +243,7 @@ public abstract class HighscoreLocalServiceBaseImpl extends BaseLocalServiceImpl
 	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery() {
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
-		indexableActionableDynamicQuery.setBaseLocalService(de.ki.sbam.service.HighscoreLocalServiceUtil.getService());
+		indexableActionableDynamicQuery.setBaseLocalService(highscoreLocalService);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
 		indexableActionableDynamicQuery.setModelClass(Highscore.class);
 
@@ -254,7 +254,7 @@ public abstract class HighscoreLocalServiceBaseImpl extends BaseLocalServiceImpl
 
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
-		actionableDynamicQuery.setBaseLocalService(de.ki.sbam.service.HighscoreLocalServiceUtil.getService());
+		actionableDynamicQuery.setBaseLocalService(highscoreLocalService);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
 		actionableDynamicQuery.setModelClass(Highscore.class);
 
@@ -738,7 +738,7 @@ public abstract class HighscoreLocalServiceBaseImpl extends BaseLocalServiceImpl
 	protected de.ki.sbam.service.DifficultyLocalService difficultyLocalService;
 	@BeanReference(type = DifficultyPersistence.class)
 	protected DifficultyPersistence difficultyPersistence;
-	@BeanReference(type = de.ki.sbam.service.HighscoreLocalService.class)
+	@BeanReference(type = HighscoreLocalService.class)
 	protected HighscoreLocalService highscoreLocalService;
 	@BeanReference(type = HighscorePersistence.class)
 	protected HighscorePersistence highscorePersistence;

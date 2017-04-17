@@ -621,7 +621,7 @@ public abstract class CategoryServiceBaseImpl extends BaseServiceImpl
 
 	@BeanReference(type = de.ki.sbam.service.CategoryLocalService.class)
 	protected de.ki.sbam.service.CategoryLocalService categoryLocalService;
-	@BeanReference(type = de.ki.sbam.service.CategoryService.class)
+	@BeanReference(type = CategoryService.class)
 	protected CategoryService categoryService;
 	@BeanReference(type = CategoryPersistence.class)
 	protected CategoryPersistence categoryPersistence;

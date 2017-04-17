@@ -20,12 +20,12 @@ import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -100,8 +100,38 @@ public class UserStatisticsWrapper implements UserStatistics,
 	}
 
 	@Override
-	public java.lang.Object clone() {
-		return new UserStatisticsWrapper((UserStatistics)_userStatistics.clone());
+	public boolean isCachedModel() {
+		return _userStatistics.isCachedModel();
+	}
+
+	@Override
+	public boolean isEscapedModel() {
+		return _userStatistics.isEscapedModel();
+	}
+
+	@Override
+	public boolean isNew() {
+		return _userStatistics.isNew();
+	}
+
+	@Override
+	public ExpandoBridge getExpandoBridge() {
+		return _userStatistics.getExpandoBridge();
+	}
+
+	@Override
+	public com.liferay.portal.kernel.model.CacheModel<de.ki.sbam.model.UserStatistics> toCacheModel() {
+		return _userStatistics.toCacheModel();
+	}
+
+	@Override
+	public de.ki.sbam.model.UserStatistics toEscapedModel() {
+		return new UserStatisticsWrapper(_userStatistics.toEscapedModel());
+	}
+
+	@Override
+	public de.ki.sbam.model.UserStatistics toUnescapedModel() {
+		return new UserStatisticsWrapper(_userStatistics.toUnescapedModel());
 	}
 
 	@Override
@@ -110,8 +140,38 @@ public class UserStatisticsWrapper implements UserStatistics,
 	}
 
 	@Override
-	public ExpandoBridge getExpandoBridge() {
-		return _userStatistics.getExpandoBridge();
+	public int hashCode() {
+		return _userStatistics.hashCode();
+	}
+
+	@Override
+	public Serializable getPrimaryKeyObj() {
+		return _userStatistics.getPrimaryKeyObj();
+	}
+
+	@Override
+	public java.lang.Object clone() {
+		return new UserStatisticsWrapper((UserStatistics)_userStatistics.clone());
+	}
+
+	/**
+	* Returns the user uuid of this user statistics.
+	*
+	* @return the user uuid of this user statistics
+	*/
+	@Override
+	public java.lang.String getUserUuid() {
+		return _userStatistics.getUserUuid();
+	}
+
+	@Override
+	public java.lang.String toString() {
+		return _userStatistics.toString();
+	}
+
+	@Override
+	public java.lang.String toXmlString() {
+		return _userStatistics.toXmlString();
 	}
 
 	/**
@@ -144,11 +204,6 @@ public class UserStatisticsWrapper implements UserStatistics,
 		return _userStatistics.getPrimaryKey();
 	}
 
-	@Override
-	public Serializable getPrimaryKeyObj() {
-		return _userStatistics.getPrimaryKeyObj();
-	}
-
 	/**
 	* Returns the right answers of this user statistics.
 	*
@@ -170,16 +225,6 @@ public class UserStatisticsWrapper implements UserStatistics,
 	}
 
 	/**
-	* Returns the user uuid of this user statistics.
-	*
-	* @return the user uuid of this user statistics
-	*/
-	@Override
-	public java.lang.String getUserUuid() {
-		return _userStatistics.getUserUuid();
-	}
-
-	/**
 	* Returns the wrong answers of this user statistics.
 	*
 	* @return the wrong answers of this user statistics
@@ -187,26 +232,6 @@ public class UserStatisticsWrapper implements UserStatistics,
 	@Override
 	public long getWrongAnswers() {
 		return _userStatistics.getWrongAnswers();
-	}
-
-	@Override
-	public int hashCode() {
-		return _userStatistics.hashCode();
-	}
-
-	@Override
-	public boolean isCachedModel() {
-		return _userStatistics.isCachedModel();
-	}
-
-	@Override
-	public boolean isEscapedModel() {
-		return _userStatistics.isEscapedModel();
-	}
-
-	@Override
-	public boolean isNew() {
-		return _userStatistics.isNew();
 	}
 
 	@Override
@@ -220,14 +245,14 @@ public class UserStatisticsWrapper implements UserStatistics,
 	}
 
 	@Override
-	public void setExpandoBridgeAttributes(
-		com.liferay.portal.kernel.model.BaseModel<?> baseModel) {
-		_userStatistics.setExpandoBridgeAttributes(baseModel);
+	public void setExpandoBridgeAttributes(ExpandoBridge expandoBridge) {
+		_userStatistics.setExpandoBridgeAttributes(expandoBridge);
 	}
 
 	@Override
-	public void setExpandoBridgeAttributes(ExpandoBridge expandoBridge) {
-		_userStatistics.setExpandoBridgeAttributes(expandoBridge);
+	public void setExpandoBridgeAttributes(
+		com.liferay.portal.kernel.model.BaseModel<?> baseModel) {
+		_userStatistics.setExpandoBridgeAttributes(baseModel);
 	}
 
 	@Override
@@ -316,31 +341,6 @@ public class UserStatisticsWrapper implements UserStatistics,
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<de.ki.sbam.model.UserStatistics> toCacheModel() {
-		return _userStatistics.toCacheModel();
-	}
-
-	@Override
-	public de.ki.sbam.model.UserStatistics toEscapedModel() {
-		return new UserStatisticsWrapper(_userStatistics.toEscapedModel());
-	}
-
-	@Override
-	public java.lang.String toString() {
-		return _userStatistics.toString();
-	}
-
-	@Override
-	public de.ki.sbam.model.UserStatistics toUnescapedModel() {
-		return new UserStatisticsWrapper(_userStatistics.toUnescapedModel());
-	}
-
-	@Override
-	public java.lang.String toXmlString() {
-		return _userStatistics.toXmlString();
-	}
-
-	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
@@ -352,7 +352,7 @@ public class UserStatisticsWrapper implements UserStatistics,
 
 		UserStatisticsWrapper userStatisticsWrapper = (UserStatisticsWrapper)obj;
 
-		if (Validator.equals(_userStatistics,
+		if (Objects.equals(_userStatistics,
 					userStatisticsWrapper._userStatistics)) {
 			return true;
 		}

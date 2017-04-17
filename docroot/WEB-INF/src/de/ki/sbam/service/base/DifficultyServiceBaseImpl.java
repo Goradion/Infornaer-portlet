@@ -627,7 +627,7 @@ public abstract class DifficultyServiceBaseImpl extends BaseServiceImpl
 	protected CategoryPersistence categoryPersistence;
 	@BeanReference(type = de.ki.sbam.service.DifficultyLocalService.class)
 	protected de.ki.sbam.service.DifficultyLocalService difficultyLocalService;
-	@BeanReference(type = de.ki.sbam.service.DifficultyService.class)
+	@BeanReference(type = DifficultyService.class)
 	protected DifficultyService difficultyService;
 	@BeanReference(type = DifficultyPersistence.class)
 	protected DifficultyPersistence difficultyPersistence;
