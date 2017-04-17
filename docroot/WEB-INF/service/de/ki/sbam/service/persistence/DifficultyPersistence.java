@@ -42,6 +42,48 @@ public interface DifficultyPersistence extends BasePersistence<Difficulty> {
 	 */
 
 	/**
+	* Returns the difficulty where score = &#63; or throws a {@link NoSuchDifficultyException} if it could not be found.
+	*
+	* @param score the score
+	* @return the matching difficulty
+	* @throws NoSuchDifficultyException if a matching difficulty could not be found
+	*/
+	public Difficulty findByScore(int score) throws NoSuchDifficultyException;
+
+	/**
+	* Returns the difficulty where score = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param score the score
+	* @return the matching difficulty, or <code>null</code> if a matching difficulty could not be found
+	*/
+	public Difficulty fetchByScore(int score);
+
+	/**
+	* Returns the difficulty where score = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param score the score
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the matching difficulty, or <code>null</code> if a matching difficulty could not be found
+	*/
+	public Difficulty fetchByScore(int score, boolean retrieveFromCache);
+
+	/**
+	* Removes the difficulty where score = &#63; from the database.
+	*
+	* @param score the score
+	* @return the difficulty that was removed
+	*/
+	public Difficulty removeByScore(int score) throws NoSuchDifficultyException;
+
+	/**
+	* Returns the number of difficulties where score = &#63;.
+	*
+	* @param score the score
+	* @return the number of matching difficulties
+	*/
+	public int countByScore(int score);
+
+	/**
 	* Caches the difficulty in the entity cache if it is enabled.
 	*
 	* @param difficulty the difficulty
@@ -58,40 +100,39 @@ public interface DifficultyPersistence extends BasePersistence<Difficulty> {
 	/**
 	* Creates a new difficulty with the primary key. Does not add the difficulty to the database.
 	*
-	* @param difficultyId the primary key for the new difficulty
+	* @param score the primary key for the new difficulty
 	* @return the new difficulty
 	*/
-	public Difficulty create(long difficultyId);
+	public Difficulty create(int score);
 
 	/**
 	* Removes the difficulty with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param difficultyId the primary key of the difficulty
+	* @param score the primary key of the difficulty
 	* @return the difficulty that was removed
 	* @throws NoSuchDifficultyException if a difficulty with the primary key could not be found
 	*/
-	public Difficulty remove(long difficultyId)
-		throws NoSuchDifficultyException;
+	public Difficulty remove(int score) throws NoSuchDifficultyException;
 
 	public Difficulty updateImpl(Difficulty difficulty);
 
 	/**
 	* Returns the difficulty with the primary key or throws a {@link NoSuchDifficultyException} if it could not be found.
 	*
-	* @param difficultyId the primary key of the difficulty
+	* @param score the primary key of the difficulty
 	* @return the difficulty
 	* @throws NoSuchDifficultyException if a difficulty with the primary key could not be found
 	*/
-	public Difficulty findByPrimaryKey(long difficultyId)
+	public Difficulty findByPrimaryKey(int score)
 		throws NoSuchDifficultyException;
 
 	/**
 	* Returns the difficulty with the primary key or returns <code>null</code> if it could not be found.
 	*
-	* @param difficultyId the primary key of the difficulty
+	* @param score the primary key of the difficulty
 	* @return the difficulty, or <code>null</code> if a difficulty with the primary key could not be found
 	*/
-	public Difficulty fetchByPrimaryKey(long difficultyId);
+	public Difficulty fetchByPrimaryKey(int score);
 
 	@Override
 	public java.util.Map<java.io.Serializable, Difficulty> fetchByPrimaryKeys(

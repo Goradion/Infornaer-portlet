@@ -16,18 +16,13 @@ package de.ki.sbam.model.impl;
 
 import aQute.bnd.annotation.ProviderType;
 
-import com.liferay.expando.kernel.model.ExpandoBridge;
-import com.liferay.expando.kernel.util.ExpandoBridgeFactoryUtil;
-
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.model.impl.BaseModelImpl;
-import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
-import com.liferay.portal.kernel.util.StringPool;
 
 import de.ki.sbam.model.Difficulty;
 import de.ki.sbam.model.DifficultyModel;
@@ -66,24 +61,20 @@ public class DifficultyModelImpl extends BaseModelImpl<Difficulty>
 	 */
 	public static final String TABLE_NAME = "sbam_Difficulty";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "difficultyId", Types.BIGINT },
-			{ "difficultyName", Types.VARCHAR },
 			{ "guaranteed", Types.BOOLEAN },
 			{ "score", Types.INTEGER }
 		};
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP = new HashMap<String, Integer>();
 
 	static {
-		TABLE_COLUMNS_MAP.put("difficultyId", Types.BIGINT);
-		TABLE_COLUMNS_MAP.put("difficultyName", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("guaranteed", Types.BOOLEAN);
 		TABLE_COLUMNS_MAP.put("score", Types.INTEGER);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table sbam_Difficulty (difficultyId LONG not null primary key,difficultyName VARCHAR(75) null,guaranteed BOOLEAN,score INTEGER)";
+	public static final String TABLE_SQL_CREATE = "create table sbam_Difficulty (guaranteed BOOLEAN,score INTEGER not null primary key)";
 	public static final String TABLE_SQL_DROP = "drop table sbam_Difficulty";
-	public static final String ORDER_BY_JPQL = " ORDER BY difficulty.difficultyId ASC";
-	public static final String ORDER_BY_SQL = " ORDER BY sbam_Difficulty.difficultyId ASC";
+	public static final String ORDER_BY_JPQL = " ORDER BY difficulty.score ASC";
+	public static final String ORDER_BY_SQL = " ORDER BY sbam_Difficulty.score ASC";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
@@ -93,7 +84,10 @@ public class DifficultyModelImpl extends BaseModelImpl<Difficulty>
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
 				"value.object.finder.cache.enabled.de.ki.sbam.model.Difficulty"),
 			true);
-	public static final boolean COLUMN_BITMASK_ENABLED = false;
+	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
+				"value.object.column.bitmask.enabled.de.ki.sbam.model.Difficulty"),
+			true);
+	public static final long SCORE_COLUMN_BITMASK = 1L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -108,8 +102,6 @@ public class DifficultyModelImpl extends BaseModelImpl<Difficulty>
 
 		Difficulty model = new DifficultyImpl();
 
-		model.setDifficultyId(soapModel.getDifficultyId());
-		model.setDifficultyName(soapModel.getDifficultyName());
 		model.setGuaranteed(soapModel.getGuaranteed());
 		model.setScore(soapModel.getScore());
 
@@ -143,23 +135,23 @@ public class DifficultyModelImpl extends BaseModelImpl<Difficulty>
 	}
 
 	@Override
-	public long getPrimaryKey() {
-		return _difficultyId;
+	public int getPrimaryKey() {
+		return _score;
 	}
 
 	@Override
-	public void setPrimaryKey(long primaryKey) {
-		setDifficultyId(primaryKey);
+	public void setPrimaryKey(int primaryKey) {
+		setScore(primaryKey);
 	}
 
 	@Override
 	public Serializable getPrimaryKeyObj() {
-		return _difficultyId;
+		return _score;
 	}
 
 	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
-		setPrimaryKey(((Long)primaryKeyObj).longValue());
+		setPrimaryKey(((Integer)primaryKeyObj).intValue());
 	}
 
 	@Override
@@ -176,8 +168,6 @@ public class DifficultyModelImpl extends BaseModelImpl<Difficulty>
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
-		attributes.put("difficultyId", getDifficultyId());
-		attributes.put("difficultyName", getDifficultyName());
 		attributes.put("guaranteed", getGuaranteed());
 		attributes.put("score", getScore());
 
@@ -189,18 +179,6 @@ public class DifficultyModelImpl extends BaseModelImpl<Difficulty>
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
-		Long difficultyId = (Long)attributes.get("difficultyId");
-
-		if (difficultyId != null) {
-			setDifficultyId(difficultyId);
-		}
-
-		String difficultyName = (String)attributes.get("difficultyName");
-
-		if (difficultyName != null) {
-			setDifficultyName(difficultyName);
-		}
-
 		Boolean guaranteed = (Boolean)attributes.get("guaranteed");
 
 		if (guaranteed != null) {
@@ -212,33 +190,6 @@ public class DifficultyModelImpl extends BaseModelImpl<Difficulty>
 		if (score != null) {
 			setScore(score);
 		}
-	}
-
-	@JSON
-	@Override
-	public long getDifficultyId() {
-		return _difficultyId;
-	}
-
-	@Override
-	public void setDifficultyId(long difficultyId) {
-		_difficultyId = difficultyId;
-	}
-
-	@JSON
-	@Override
-	public String getDifficultyName() {
-		if (_difficultyName == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _difficultyName;
-		}
-	}
-
-	@Override
-	public void setDifficultyName(String difficultyName) {
-		_difficultyName = difficultyName;
 	}
 
 	@JSON
@@ -265,20 +216,23 @@ public class DifficultyModelImpl extends BaseModelImpl<Difficulty>
 
 	@Override
 	public void setScore(int score) {
+		_columnBitmask = -1L;
+
+		if (!_setOriginalScore) {
+			_setOriginalScore = true;
+
+			_originalScore = _score;
+		}
+
 		_score = score;
 	}
 
-	@Override
-	public ExpandoBridge getExpandoBridge() {
-		return ExpandoBridgeFactoryUtil.getExpandoBridge(0,
-			Difficulty.class.getName(), getPrimaryKey());
+	public int getOriginalScore() {
+		return _originalScore;
 	}
 
-	@Override
-	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
-		ExpandoBridge expandoBridge = getExpandoBridge();
-
-		expandoBridge.setAttributes(serviceContext);
+	public long getColumnBitmask() {
+		return _columnBitmask;
 	}
 
 	@Override
@@ -295,8 +249,6 @@ public class DifficultyModelImpl extends BaseModelImpl<Difficulty>
 	public Object clone() {
 		DifficultyImpl difficultyImpl = new DifficultyImpl();
 
-		difficultyImpl.setDifficultyId(getDifficultyId());
-		difficultyImpl.setDifficultyName(getDifficultyName());
 		difficultyImpl.setGuaranteed(getGuaranteed());
 		difficultyImpl.setScore(getScore());
 
@@ -307,17 +259,23 @@ public class DifficultyModelImpl extends BaseModelImpl<Difficulty>
 
 	@Override
 	public int compareTo(Difficulty difficulty) {
-		long primaryKey = difficulty.getPrimaryKey();
+		int value = 0;
 
-		if (getPrimaryKey() < primaryKey) {
-			return -1;
+		if (getScore() < difficulty.getScore()) {
+			value = -1;
 		}
-		else if (getPrimaryKey() > primaryKey) {
-			return 1;
+		else if (getScore() > difficulty.getScore()) {
+			value = 1;
 		}
 		else {
-			return 0;
+			value = 0;
 		}
+
+		if (value != 0) {
+			return value;
+		}
+
+		return 0;
 	}
 
 	@Override
@@ -332,7 +290,7 @@ public class DifficultyModelImpl extends BaseModelImpl<Difficulty>
 
 		Difficulty difficulty = (Difficulty)obj;
 
-		long primaryKey = difficulty.getPrimaryKey();
+		int primaryKey = difficulty.getPrimaryKey();
 
 		if (getPrimaryKey() == primaryKey) {
 			return true;
@@ -344,7 +302,7 @@ public class DifficultyModelImpl extends BaseModelImpl<Difficulty>
 
 	@Override
 	public int hashCode() {
-		return (int)getPrimaryKey();
+		return getPrimaryKey();
 	}
 
 	@Override
@@ -359,21 +317,18 @@ public class DifficultyModelImpl extends BaseModelImpl<Difficulty>
 
 	@Override
 	public void resetOriginalValues() {
+		DifficultyModelImpl difficultyModelImpl = this;
+
+		difficultyModelImpl._originalScore = difficultyModelImpl._score;
+
+		difficultyModelImpl._setOriginalScore = false;
+
+		difficultyModelImpl._columnBitmask = 0;
 	}
 
 	@Override
 	public CacheModel<Difficulty> toCacheModel() {
 		DifficultyCacheModel difficultyCacheModel = new DifficultyCacheModel();
-
-		difficultyCacheModel.difficultyId = getDifficultyId();
-
-		difficultyCacheModel.difficultyName = getDifficultyName();
-
-		String difficultyName = difficultyCacheModel.difficultyName;
-
-		if ((difficultyName != null) && (difficultyName.length() == 0)) {
-			difficultyCacheModel.difficultyName = null;
-		}
 
 		difficultyCacheModel.guaranteed = getGuaranteed();
 
@@ -384,13 +339,9 @@ public class DifficultyModelImpl extends BaseModelImpl<Difficulty>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(9);
+		StringBundler sb = new StringBundler(5);
 
-		sb.append("{difficultyId=");
-		sb.append(getDifficultyId());
-		sb.append(", difficultyName=");
-		sb.append(getDifficultyName());
-		sb.append(", guaranteed=");
+		sb.append("{guaranteed=");
 		sb.append(getGuaranteed());
 		sb.append(", score=");
 		sb.append(getScore());
@@ -401,20 +352,12 @@ public class DifficultyModelImpl extends BaseModelImpl<Difficulty>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(16);
+		StringBundler sb = new StringBundler(10);
 
 		sb.append("<model><model-name>");
 		sb.append("de.ki.sbam.model.Difficulty");
 		sb.append("</model-name>");
 
-		sb.append(
-			"<column><column-name>difficultyId</column-name><column-value><![CDATA[");
-		sb.append(getDifficultyId());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>difficultyName</column-name><column-value><![CDATA[");
-		sb.append(getDifficultyName());
-		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>guaranteed</column-name><column-value><![CDATA[");
 		sb.append(getGuaranteed());
@@ -433,9 +376,10 @@ public class DifficultyModelImpl extends BaseModelImpl<Difficulty>
 	private static final Class<?>[] _escapedModelInterfaces = new Class[] {
 			Difficulty.class
 		};
-	private long _difficultyId;
-	private String _difficultyName;
 	private boolean _guaranteed;
 	private int _score;
+	private int _originalScore;
+	private boolean _setOriginalScore;
+	private long _columnBitmask;
 	private Difficulty _escapedModel;
 }

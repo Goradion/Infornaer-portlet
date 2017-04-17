@@ -33,8 +33,6 @@ public class DifficultySoap implements Serializable {
 	public static DifficultySoap toSoapModel(Difficulty model) {
 		DifficultySoap soapModel = new DifficultySoap();
 
-		soapModel.setDifficultyId(model.getDifficultyId());
-		soapModel.setDifficultyName(model.getDifficultyName());
 		soapModel.setGuaranteed(model.getGuaranteed());
 		soapModel.setScore(model.getScore());
 
@@ -81,28 +79,12 @@ public class DifficultySoap implements Serializable {
 	public DifficultySoap() {
 	}
 
-	public long getPrimaryKey() {
-		return _difficultyId;
+	public int getPrimaryKey() {
+		return _score;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setDifficultyId(pk);
-	}
-
-	public long getDifficultyId() {
-		return _difficultyId;
-	}
-
-	public void setDifficultyId(long difficultyId) {
-		_difficultyId = difficultyId;
-	}
-
-	public String getDifficultyName() {
-		return _difficultyName;
-	}
-
-	public void setDifficultyName(String difficultyName) {
-		_difficultyName = difficultyName;
+	public void setPrimaryKey(int pk) {
+		setScore(pk);
 	}
 
 	public boolean getGuaranteed() {
@@ -125,8 +107,6 @@ public class DifficultySoap implements Serializable {
 		_score = score;
 	}
 
-	private long _difficultyId;
-	private String _difficultyName;
 	private boolean _guaranteed;
 	private int _score;
 }

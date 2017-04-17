@@ -77,6 +77,7 @@ public class CategoryClp extends BaseModelImpl<Category> implements Category {
 
 		attributes.put("categoryId", getCategoryId());
 		attributes.put("categoryName", getCategoryName());
+		attributes.put("unlocked", getUnlocked());
 
 		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
 		attributes.put("finderCacheEnabled", isFinderCacheEnabled());
@@ -96,6 +97,12 @@ public class CategoryClp extends BaseModelImpl<Category> implements Category {
 
 		if (categoryName != null) {
 			setCategoryName(categoryName);
+		}
+
+		Boolean unlocked = (Boolean)attributes.get("unlocked");
+
+		if (unlocked != null) {
+			setUnlocked(unlocked);
 		}
 
 		_entityCacheEnabled = GetterUtil.getBoolean("entityCacheEnabled");
@@ -141,6 +148,34 @@ public class CategoryClp extends BaseModelImpl<Category> implements Category {
 				Method method = clazz.getMethod("setCategoryName", String.class);
 
 				method.invoke(_categoryRemoteModel, categoryName);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public boolean getUnlocked() {
+		return _unlocked;
+	}
+
+	@Override
+	public boolean isUnlocked() {
+		return _unlocked;
+	}
+
+	@Override
+	public void setUnlocked(boolean unlocked) {
+		_unlocked = unlocked;
+
+		if (_categoryRemoteModel != null) {
+			try {
+				Class<?> clazz = _categoryRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setUnlocked", boolean.class);
+
+				method.invoke(_categoryRemoteModel, unlocked);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -219,6 +254,7 @@ public class CategoryClp extends BaseModelImpl<Category> implements Category {
 
 		clone.setCategoryId(getCategoryId());
 		clone.setCategoryName(getCategoryName());
+		clone.setUnlocked(getUnlocked());
 
 		return clone;
 	}
@@ -281,12 +317,14 @@ public class CategoryClp extends BaseModelImpl<Category> implements Category {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(5);
+		StringBundler sb = new StringBundler(7);
 
 		sb.append("{categoryId=");
 		sb.append(getCategoryId());
 		sb.append(", categoryName=");
 		sb.append(getCategoryName());
+		sb.append(", unlocked=");
+		sb.append(getUnlocked());
 		sb.append("}");
 
 		return sb.toString();
@@ -294,7 +332,7 @@ public class CategoryClp extends BaseModelImpl<Category> implements Category {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(10);
+		StringBundler sb = new StringBundler(13);
 
 		sb.append("<model><model-name>");
 		sb.append("de.ki.sbam.model.Category");
@@ -308,6 +346,10 @@ public class CategoryClp extends BaseModelImpl<Category> implements Category {
 			"<column><column-name>categoryName</column-name><column-value><![CDATA[");
 		sb.append(getCategoryName());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>unlocked</column-name><column-value><![CDATA[");
+		sb.append(getUnlocked());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -316,6 +358,7 @@ public class CategoryClp extends BaseModelImpl<Category> implements Category {
 
 	private long _categoryId;
 	private String _categoryName;
+	private boolean _unlocked;
 	private BaseModel<?> _categoryRemoteModel;
 	private Class<?> _clpSerializerClass = de.ki.sbam.service.ClpSerializer.class;
 	private boolean _entityCacheEnabled;

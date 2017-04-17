@@ -127,7 +127,9 @@ public class CategoryLocalServiceClpInvoker {
 
 		_methodName64 = "editCategory";
 
-		_methodParameterTypes64 = new String[] { "long", "java.lang.String" };
+		_methodParameterTypes64 = new String[] {
+				"long", "java.lang.String", "boolean"
+			};
 
 		_methodName65 = "deleteCategory";
 
@@ -267,7 +269,8 @@ public class CategoryLocalServiceClpInvoker {
 		if (_methodName64.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes64, parameterTypes)) {
 			return CategoryLocalServiceUtil.editCategory(((Long)arguments[0]).longValue(),
-				(java.lang.String)arguments[1]);
+				(java.lang.String)arguments[1],
+				((Boolean)arguments[2]).booleanValue());
 		}
 
 		if (_methodName65.equals(name) &&

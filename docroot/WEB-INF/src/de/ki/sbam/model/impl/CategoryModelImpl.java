@@ -67,16 +67,18 @@ public class CategoryModelImpl extends BaseModelImpl<Category>
 	public static final String TABLE_NAME = "sbam_Category";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "categoryId", Types.BIGINT },
-			{ "categoryName", Types.VARCHAR }
+			{ "categoryName", Types.VARCHAR },
+			{ "unlocked", Types.BOOLEAN }
 		};
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP = new HashMap<String, Integer>();
 
 	static {
 		TABLE_COLUMNS_MAP.put("categoryId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("categoryName", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("unlocked", Types.BOOLEAN);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table sbam_Category (categoryId LONG not null primary key,categoryName VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table sbam_Category (categoryId LONG not null primary key,categoryName VARCHAR(75) null,unlocked BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table sbam_Category";
 	public static final String ORDER_BY_JPQL = " ORDER BY category.categoryId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY sbam_Category.categoryId ASC";
@@ -93,7 +95,8 @@ public class CategoryModelImpl extends BaseModelImpl<Category>
 				"value.object.column.bitmask.enabled.de.ki.sbam.model.Category"),
 			true);
 	public static final long CATEGORYNAME_COLUMN_BITMASK = 1L;
-	public static final long CATEGORYID_COLUMN_BITMASK = 2L;
+	public static final long UNLOCKED_COLUMN_BITMASK = 2L;
+	public static final long CATEGORYID_COLUMN_BITMASK = 4L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -110,6 +113,7 @@ public class CategoryModelImpl extends BaseModelImpl<Category>
 
 		model.setCategoryId(soapModel.getCategoryId());
 		model.setCategoryName(soapModel.getCategoryName());
+		model.setUnlocked(soapModel.getUnlocked());
 
 		return model;
 	}
@@ -176,6 +180,7 @@ public class CategoryModelImpl extends BaseModelImpl<Category>
 
 		attributes.put("categoryId", getCategoryId());
 		attributes.put("categoryName", getCategoryName());
+		attributes.put("unlocked", getUnlocked());
 
 		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
 		attributes.put("finderCacheEnabled", isFinderCacheEnabled());
@@ -195,6 +200,12 @@ public class CategoryModelImpl extends BaseModelImpl<Category>
 
 		if (categoryName != null) {
 			setCategoryName(categoryName);
+		}
+
+		Boolean unlocked = (Boolean)attributes.get("unlocked");
+
+		if (unlocked != null) {
+			setUnlocked(unlocked);
 		}
 	}
 
@@ -235,6 +246,34 @@ public class CategoryModelImpl extends BaseModelImpl<Category>
 		return GetterUtil.getString(_originalCategoryName);
 	}
 
+	@JSON
+	@Override
+	public boolean getUnlocked() {
+		return _unlocked;
+	}
+
+	@Override
+	public boolean isUnlocked() {
+		return _unlocked;
+	}
+
+	@Override
+	public void setUnlocked(boolean unlocked) {
+		_columnBitmask |= UNLOCKED_COLUMN_BITMASK;
+
+		if (!_setOriginalUnlocked) {
+			_setOriginalUnlocked = true;
+
+			_originalUnlocked = _unlocked;
+		}
+
+		_unlocked = unlocked;
+	}
+
+	public boolean getOriginalUnlocked() {
+		return _originalUnlocked;
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -268,6 +307,7 @@ public class CategoryModelImpl extends BaseModelImpl<Category>
 
 		categoryImpl.setCategoryId(getCategoryId());
 		categoryImpl.setCategoryName(getCategoryName());
+		categoryImpl.setUnlocked(getUnlocked());
 
 		categoryImpl.resetOriginalValues();
 
@@ -332,6 +372,10 @@ public class CategoryModelImpl extends BaseModelImpl<Category>
 
 		categoryModelImpl._originalCategoryName = categoryModelImpl._categoryName;
 
+		categoryModelImpl._originalUnlocked = categoryModelImpl._unlocked;
+
+		categoryModelImpl._setOriginalUnlocked = false;
+
 		categoryModelImpl._columnBitmask = 0;
 	}
 
@@ -349,17 +393,21 @@ public class CategoryModelImpl extends BaseModelImpl<Category>
 			categoryCacheModel.categoryName = null;
 		}
 
+		categoryCacheModel.unlocked = getUnlocked();
+
 		return categoryCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(5);
+		StringBundler sb = new StringBundler(7);
 
 		sb.append("{categoryId=");
 		sb.append(getCategoryId());
 		sb.append(", categoryName=");
 		sb.append(getCategoryName());
+		sb.append(", unlocked=");
+		sb.append(getUnlocked());
 		sb.append("}");
 
 		return sb.toString();
@@ -367,7 +415,7 @@ public class CategoryModelImpl extends BaseModelImpl<Category>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(10);
+		StringBundler sb = new StringBundler(13);
 
 		sb.append("<model><model-name>");
 		sb.append("de.ki.sbam.model.Category");
@@ -380,6 +428,10 @@ public class CategoryModelImpl extends BaseModelImpl<Category>
 		sb.append(
 			"<column><column-name>categoryName</column-name><column-value><![CDATA[");
 		sb.append(getCategoryName());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>unlocked</column-name><column-value><![CDATA[");
+		sb.append(getUnlocked());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -394,6 +446,9 @@ public class CategoryModelImpl extends BaseModelImpl<Category>
 	private long _categoryId;
 	private String _categoryName;
 	private String _originalCategoryName;
+	private boolean _unlocked;
+	private boolean _originalUnlocked;
+	private boolean _setOriginalUnlocked;
 	private long _columnBitmask;
 	private Category _escapedModel;
 }

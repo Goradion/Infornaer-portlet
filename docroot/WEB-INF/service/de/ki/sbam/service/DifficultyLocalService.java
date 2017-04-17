@@ -61,6 +61,7 @@ public interface DifficultyLocalService extends BaseLocalService,
 	 *
 	 * Never modify or reference this interface directly. Always use {@link DifficultyLocalServiceUtil} to access the difficulty local service. Add custom service methods to {@link de.ki.sbam.service.impl.DifficultyLocalServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
+	public Difficulty addDifficultry(int score, boolean guaranteed);
 
 	/**
 	* Adds the difficulty to the database. Also notifies the appropriate model listeners.
@@ -74,10 +75,10 @@ public interface DifficultyLocalService extends BaseLocalService,
 	/**
 	* Creates a new difficulty with the primary key. Does not add the difficulty to the database.
 	*
-	* @param difficultyId the primary key for the new difficulty
+	* @param score the primary key for the new difficulty
 	* @return the new difficulty
 	*/
-	public Difficulty createDifficulty(long difficultyId);
+	public Difficulty createDifficulty(int score);
 
 	/**
 	* Deletes the difficulty from the database. Also notifies the appropriate model listeners.
@@ -91,13 +92,12 @@ public interface DifficultyLocalService extends BaseLocalService,
 	/**
 	* Deletes the difficulty with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param difficultyId the primary key of the difficulty
+	* @param score the primary key of the difficulty
 	* @return the difficulty that was removed
 	* @throws PortalException if a difficulty with the primary key could not be found
 	*/
 	@Indexable(type = IndexableType.DELETE)
-	public Difficulty deleteDifficulty(long difficultyId)
-		throws PortalException;
+	public Difficulty deleteDifficulty(int score) throws PortalException;
 
 	/**
 	* @throws PortalException
@@ -166,7 +166,7 @@ public interface DifficultyLocalService extends BaseLocalService,
 		Projection projection);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public Difficulty fetchDifficulty(long difficultyId);
+	public Difficulty fetchDifficulty(int score);
 
 	public List<Difficulty> findAll();
 
@@ -198,13 +198,12 @@ public interface DifficultyLocalService extends BaseLocalService,
 	/**
 	* Returns the difficulty with the primary key.
 	*
-	* @param difficultyId the primary key of the difficulty
+	* @param score the primary key of the difficulty
 	* @return the difficulty
 	* @throws PortalException if a difficulty with the primary key could not be found
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public Difficulty getDifficulty(long difficultyId)
-		throws PortalException;
+	public Difficulty getDifficulty(int score) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery();

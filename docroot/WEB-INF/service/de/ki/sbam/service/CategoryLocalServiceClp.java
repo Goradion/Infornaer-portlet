@@ -95,7 +95,9 @@ public class CategoryLocalServiceClp implements CategoryLocalService {
 
 		_methodName13 = "editCategory";
 
-		_methodParameterTypes13 = new String[] { "long", "java.lang.String" };
+		_methodParameterTypes13 = new String[] {
+				"long", "java.lang.String", "boolean"
+			};
 
 		_methodName14 = "fetchCategory";
 
@@ -493,7 +495,7 @@ public class CategoryLocalServiceClp implements CategoryLocalService {
 
 	@Override
 	public de.ki.sbam.model.Category editCategory(long categoryId,
-		java.lang.String categoryName_new) {
+		java.lang.String categoryName_new, boolean unlocked) {
 		Object returnObj = null;
 
 		try {
@@ -502,7 +504,9 @@ public class CategoryLocalServiceClp implements CategoryLocalService {
 					new Object[] {
 						categoryId,
 						
-					ClpSerializer.translateInput(categoryName_new)
+					ClpSerializer.translateInput(categoryName_new),
+						
+					unlocked
 					});
 		}
 		catch (Throwable t) {

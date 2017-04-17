@@ -6,6 +6,7 @@
 <portlet:actionURL name="gotoMainMenu" var="mainMenu"></portlet:actionURL>
 <portlet:actionURL name="goToCategoryOverview" var="categoryOverview"></portlet:actionURL>
 <portlet:actionURL name="goToQuestionOverview" var="questionOverview"></portlet:actionURL>
+<portlet:actionURL name="test" var="testURL"></portlet:actionURL>
 
 <h1>Editor Modus</h1>
 <p>Hier soll es möglich sein für berechtigte Spieler/Administratoren
@@ -28,4 +29,7 @@
 </p>
 <p>
 	<a href=<%=questionOverview%>>Fragen</a>
+</p>
+<p>
+	<a href=<%=testURL%>>Test</a>
 </p>

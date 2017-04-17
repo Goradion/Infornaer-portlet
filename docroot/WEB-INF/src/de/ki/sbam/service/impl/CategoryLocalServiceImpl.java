@@ -27,10 +27,14 @@ import de.ki.sbam.service.persistence.CategoryUtil;
  * The implementation of the category local service.
  *
  * <p>
- * All custom service methods should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link de.ki.sbam.service.CategoryLocalService} interface.
+ * All custom service methods should be put in this class. Whenever methods are
+ * added, rerun ServiceBuilder to copy their definitions into the
+ * {@link de.ki.sbam.service.CategoryLocalService} interface.
  *
  * <p>
- * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
+ * This is a local service. Methods of this service will not have security
+ * checks based on the propagated JAAS credentials because this service can only
+ * be accessed from within the same VM.
  * </p>
  *
  * @author Alexander Mueller
@@ -42,7 +46,9 @@ public class CategoryLocalServiceImpl extends CategoryLocalServiceBaseImpl {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never reference this class directly. Always use {@link com.liferay.sample.service.CategoryLocalServiceUtil} to access the category local service.
+	 * Never reference this class directly. Always use {@link
+	 * com.liferay.sample.service.CategoryLocalServiceUtil} to access the
+	 * category local service.
 	 */
 	/**
 	 * Adds a category
@@ -52,17 +58,15 @@ public class CategoryLocalServiceImpl extends CategoryLocalServiceBaseImpl {
 	 * @return Category category added
 	 */
 	public Category addCategory(String categoryName) {
-		Category category = null;
-		try {
-			category = categoryPersistence.findByCategoryName(categoryName);
-			
-		} catch (NoSuchCategoryException e) {
-			
+		Category category = categoryPersistence.fetchByCategoryName(categoryName);
+		if (category == null) {
 			long categoryId = counterLocalService.increment();
 			category = categoryPersistence.create(categoryId);
 			category.setCategoryName(categoryName);
 			categoryPersistence.update(category);
+			category.setUnlocked(false);
 		}
+
 		return category;
 	}
 
@@ -73,11 +77,13 @@ public class CategoryLocalServiceImpl extends CategoryLocalServiceBaseImpl {
 	 *            id of the category to edit
 	 * @param categoryName_new
 	 *            new name of the edited category
+	 * @param unlocked 
 	 * @return
 	 */
-	public Category editCategory(long categoryId, String categoryName_new) {
+	public Category editCategory(long categoryId, String categoryName_new, boolean unlocked) {
 		Category category = categoryPersistence.fetchByPrimaryKey(categoryId);
 		category.setCategoryName(categoryName_new);
+		category.setUnlocked(unlocked);
 		categoryPersistence.update(category);
 		return category;
 	}
@@ -106,16 +112,20 @@ public class CategoryLocalServiceImpl extends CategoryLocalServiceBaseImpl {
 	public Category deleteCategory(Category category) {
 		return categoryPersistence.remove(category);
 	}
-	
-	public void deleteAllCategories(){
+
+	public void deleteAllCategories() {
 		CategoryUtil.removeAll();
 	}
-	
-	public Category getCategoryByName(String categoryName) throws NoSuchCategoryException{
+
+	public Category getCategoryByName(String categoryName) throws NoSuchCategoryException {
 		return CategoryUtil.findByCategoryName(categoryName);
 	}
-	
-	public List<Category> findAll(){
+
+	public List<Category> findAll() {
 		return CategoryUtil.findAll();
+	}
+	
+	public List<Category> findUnlocked(){
+		return CategoryUtil.findByUnlocked(true);
 	}
 }

@@ -19,7 +19,6 @@ import aQute.bnd.annotation.ProviderType;
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
-import com.liferay.portal.kernel.util.StringPool;
 
 import de.ki.sbam.model.Difficulty;
 
@@ -50,7 +49,7 @@ public class DifficultyCacheModel implements CacheModel<Difficulty>,
 
 		DifficultyCacheModel difficultyCacheModel = (DifficultyCacheModel)obj;
 
-		if (difficultyId == difficultyCacheModel.difficultyId) {
+		if (score == difficultyCacheModel.score) {
 			return true;
 		}
 
@@ -59,18 +58,14 @@ public class DifficultyCacheModel implements CacheModel<Difficulty>,
 
 	@Override
 	public int hashCode() {
-		return HashUtil.hash(0, difficultyId);
+		return HashUtil.hash(0, score);
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(9);
+		StringBundler sb = new StringBundler(5);
 
-		sb.append("{difficultyId=");
-		sb.append(difficultyId);
-		sb.append(", difficultyName=");
-		sb.append(difficultyName);
-		sb.append(", guaranteed=");
+		sb.append("{guaranteed=");
 		sb.append(guaranteed);
 		sb.append(", score=");
 		sb.append(score);
@@ -83,15 +78,6 @@ public class DifficultyCacheModel implements CacheModel<Difficulty>,
 	public Difficulty toEntityModel() {
 		DifficultyImpl difficultyImpl = new DifficultyImpl();
 
-		difficultyImpl.setDifficultyId(difficultyId);
-
-		if (difficultyName == null) {
-			difficultyImpl.setDifficultyName(StringPool.BLANK);
-		}
-		else {
-			difficultyImpl.setDifficultyName(difficultyName);
-		}
-
 		difficultyImpl.setGuaranteed(guaranteed);
 		difficultyImpl.setScore(score);
 
@@ -102,9 +88,6 @@ public class DifficultyCacheModel implements CacheModel<Difficulty>,
 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
-		difficultyId = objectInput.readLong();
-		difficultyName = objectInput.readUTF();
-
 		guaranteed = objectInput.readBoolean();
 
 		score = objectInput.readInt();
@@ -113,22 +96,11 @@ public class DifficultyCacheModel implements CacheModel<Difficulty>,
 	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
-		objectOutput.writeLong(difficultyId);
-
-		if (difficultyName == null) {
-			objectOutput.writeUTF(StringPool.BLANK);
-		}
-		else {
-			objectOutput.writeUTF(difficultyName);
-		}
-
 		objectOutput.writeBoolean(guaranteed);
 
 		objectOutput.writeInt(score);
 	}
 
-	public long difficultyId;
-	public String difficultyName;
 	public boolean guaranteed;
 	public int score;
 }

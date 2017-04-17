@@ -58,6 +58,7 @@ public class CategoryWrapper implements Category, ModelWrapper<Category> {
 
 		attributes.put("categoryId", getCategoryId());
 		attributes.put("categoryName", getCategoryName());
+		attributes.put("unlocked", getUnlocked());
 
 		return attributes;
 	}
@@ -74,6 +75,12 @@ public class CategoryWrapper implements Category, ModelWrapper<Category> {
 
 		if (categoryName != null) {
 			setCategoryName(categoryName);
+		}
+
+		Boolean unlocked = (Boolean)attributes.get("unlocked");
+
+		if (unlocked != null) {
+			setUnlocked(unlocked);
 		}
 	}
 
@@ -127,6 +134,16 @@ public class CategoryWrapper implements Category, ModelWrapper<Category> {
 		return _category.getPrimaryKeyObj();
 	}
 
+	/**
+	* Returns the unlocked of this category.
+	*
+	* @return the unlocked of this category
+	*/
+	@Override
+	public boolean getUnlocked() {
+		return _category.getUnlocked();
+	}
+
 	@Override
 	public int hashCode() {
 		return _category.hashCode();
@@ -145,6 +162,16 @@ public class CategoryWrapper implements Category, ModelWrapper<Category> {
 	@Override
 	public boolean isNew() {
 		return _category.isNew();
+	}
+
+	/**
+	* Returns <code>true</code> if this category is unlocked.
+	*
+	* @return <code>true</code> if this category is unlocked; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isUnlocked() {
+		return _category.isUnlocked();
 	}
 
 	@Override
@@ -211,6 +238,16 @@ public class CategoryWrapper implements Category, ModelWrapper<Category> {
 	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		_category.setPrimaryKeyObj(primaryKeyObj);
+	}
+
+	/**
+	* Sets whether this category is unlocked.
+	*
+	* @param unlocked the unlocked of this category
+	*/
+	@Override
+	public void setUnlocked(boolean unlocked) {
+		_category.setUnlocked(unlocked);
 	}
 
 	@Override

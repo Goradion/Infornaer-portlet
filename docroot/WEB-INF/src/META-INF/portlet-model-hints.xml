@@ -9,10 +9,9 @@
 	<model name="de.ki.sbam.model.Category">
 		<field name="categoryId" type="long" />
 		<field name="categoryName" type="String" />
+		<field name="unlocked" type="boolean" />
 	</model>
 	<model name="de.ki.sbam.model.Difficulty">
-		<field name="difficultyId" type="long" />
-		<field name="difficultyName" type="String" />
 		<field name="guaranteed" type="boolean" />
 		<field name="score" type="int" />
 	</model>

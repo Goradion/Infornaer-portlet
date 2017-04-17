@@ -9,32 +9,32 @@
 <h1>Frage ändern</h1>
 <form method="POST" action="${addQuestionURL}">
 	<input type="text" name="<portlet:namespace />questionId"
-		value="${questionId}" maxlength="75" readonly hidden="true" /> <br />
+		value="${sessionScope.questionId}" maxlength="75" readonly hidden="true" /> <br />
 	Frage: <br />
-	<textarea name="<portlet:namespace />question" rows="5">${question}</textarea>
+	<textarea name="<portlet:namespace />question" rows="5">$sessionScope.{question}</textarea>
 	<br /> Antwort A: <br /> <input type="text"
-		name="<portlet:namespace />answerA" value="${answerA}" maxlength="75"
+		name="<portlet:namespace />answerA" value="${sessionScope.answerA}" maxlength="75"
 		required /> <br /> Antwort B: <br /> <input type="text"
-		name="<portlet:namespace />answerB" value="${answerB}" maxlength="75"
+		name="<portlet:namespace />answerB" value="${sessionScope.answerB}" maxlength="75"
 		required /> <br /> Antwort C: <br /> <input type="text"
-		name="<portlet:namespace />answerC" value="${answerC}" maxlength="75"
+		name="<portlet:namespace />answerC" value="${sessionScope.answerC}" maxlength="75"
 		required /> <br /> Antwort D: <br /> <input type="text"
-		name="<portlet:namespace />answerD" value="${answerD}" maxlength="75"
+		name="<portlet:namespace />answerD" value="${sessionScope.answerD}" maxlength="75"
 		required /> <br /> Richtige Antwort: <br /> <select
 		name="<portlet:namespace />rightAnswer">
-		<option value="A" ${rightAnswer.equals("A") ? 'selected' : ''}>A</option>
-		<option value="B" ${rightAnswer.equals("B") ? 'selected' : ''}>B</option>
-		<option value="C" ${rightAnswer.equals("C") ? 'selected' : ''}>C</option>
-		<option value="D" ${rightAnswer.equals("D") ? 'selected' : ''}>D</option>
+		<option value="A" ${sessionScope.rightAnswer.equals("A") ? 'selected' : ''}>A</option>
+		<option value="B" ${sessionScope.rightAnswer.equals("B") ? 'selected' : ''}>B</option>
+		<option value="C" ${sessionScope.rightAnswer.equals("C") ? 'selected' : ''}>C</option>
+		<option value="D" ${sessionScope.rightAnswer.equals("D") ? 'selected' : ''}>D</option>
 	</select> Schwierigkeit: <br /> <select name="<portlet:namespace />difficulty">
-		<option value="1" ${difficulty == 1 ? 'selected' : ''}>Leicht</option>
-		<option value="2" ${difficulty == 2 ? 'selected' : ''}>Mittel</option>
-		<option value="3" ${difficulty == 3 ? 'selected' : ''}>Schwer</option>
+		<c:forEach items="${sessionScope.dList}" var="d">
+			<option value="${d.getScore()}" ${difficulty == d.getScore() ? 'selected' : ''}>${d.getScore()}</option>
+		</c:forEach>
 	</select> 
 	<br /> 
 	Kategorie: <br /> 
 	<select name= "<portlet:namespace />category" >
-		<c:forEach items="${cList}" var="c">
+		<c:forEach items="${sessionScope.cList}" var="c">
 			<option value="${c.getCategoryId()}" ${category == c.getCategoryId() ? 'selected' : ''}>${c.getCategoryName()}</option>
 		</c:forEach>
 	</select>

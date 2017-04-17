@@ -198,11 +198,12 @@ public class CategoryLocalServiceUtil {
 	id of the category to edit
 	* @param categoryName_new
 	new name of the edited category
+	* @param unlocked
 	* @return
 	*/
 	public static de.ki.sbam.model.Category editCategory(long categoryId,
-		java.lang.String categoryName_new) {
-		return getService().editCategory(categoryId, categoryName_new);
+		java.lang.String categoryName_new, boolean unlocked) {
+		return getService().editCategory(categoryId, categoryName_new, unlocked);
 	}
 
 	public static de.ki.sbam.model.Category fetchCategory(long categoryId) {

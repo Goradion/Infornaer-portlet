@@ -94,26 +94,25 @@ public abstract class DifficultyLocalServiceBaseImpl
 	/**
 	 * Creates a new difficulty with the primary key. Does not add the difficulty to the database.
 	 *
-	 * @param difficultyId the primary key for the new difficulty
+	 * @param score the primary key for the new difficulty
 	 * @return the new difficulty
 	 */
 	@Override
-	public Difficulty createDifficulty(long difficultyId) {
-		return difficultyPersistence.create(difficultyId);
+	public Difficulty createDifficulty(int score) {
+		return difficultyPersistence.create(score);
 	}
 
 	/**
 	 * Deletes the difficulty with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param difficultyId the primary key of the difficulty
+	 * @param score the primary key of the difficulty
 	 * @return the difficulty that was removed
 	 * @throws PortalException if a difficulty with the primary key could not be found
 	 */
 	@Indexable(type = IndexableType.DELETE)
 	@Override
-	public Difficulty deleteDifficulty(long difficultyId)
-		throws PortalException {
-		return difficultyPersistence.remove(difficultyId);
+	public Difficulty deleteDifficulty(int score) throws PortalException {
+		return difficultyPersistence.remove(score);
 	}
 
 	/**
@@ -212,21 +211,20 @@ public abstract class DifficultyLocalServiceBaseImpl
 	}
 
 	@Override
-	public Difficulty fetchDifficulty(long difficultyId) {
-		return difficultyPersistence.fetchByPrimaryKey(difficultyId);
+	public Difficulty fetchDifficulty(int score) {
+		return difficultyPersistence.fetchByPrimaryKey(score);
 	}
 
 	/**
 	 * Returns the difficulty with the primary key.
 	 *
-	 * @param difficultyId the primary key of the difficulty
+	 * @param score the primary key of the difficulty
 	 * @return the difficulty
 	 * @throws PortalException if a difficulty with the primary key could not be found
 	 */
 	@Override
-	public Difficulty getDifficulty(long difficultyId)
-		throws PortalException {
-		return difficultyPersistence.findByPrimaryKey(difficultyId);
+	public Difficulty getDifficulty(int score) throws PortalException {
+		return difficultyPersistence.findByPrimaryKey(score);
 	}
 
 	@Override
@@ -237,7 +235,7 @@ public abstract class DifficultyLocalServiceBaseImpl
 		actionableDynamicQuery.setClassLoader(getClassLoader());
 		actionableDynamicQuery.setModelClass(Difficulty.class);
 
-		actionableDynamicQuery.setPrimaryKeyPropertyName("difficultyId");
+		actionableDynamicQuery.setPrimaryKeyPropertyName("score");
 
 		return actionableDynamicQuery;
 	}
@@ -250,8 +248,7 @@ public abstract class DifficultyLocalServiceBaseImpl
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
 		indexableActionableDynamicQuery.setModelClass(Difficulty.class);
 
-		indexableActionableDynamicQuery.setPrimaryKeyPropertyName(
-			"difficultyId");
+		indexableActionableDynamicQuery.setPrimaryKeyPropertyName("score");
 
 		return indexableActionableDynamicQuery;
 	}
@@ -262,7 +259,7 @@ public abstract class DifficultyLocalServiceBaseImpl
 		actionableDynamicQuery.setClassLoader(getClassLoader());
 		actionableDynamicQuery.setModelClass(Difficulty.class);
 
-		actionableDynamicQuery.setPrimaryKeyPropertyName("difficultyId");
+		actionableDynamicQuery.setPrimaryKeyPropertyName("score");
 	}
 
 	/**
