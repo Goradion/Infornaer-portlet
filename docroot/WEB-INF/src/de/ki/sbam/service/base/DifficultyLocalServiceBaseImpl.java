@@ -98,7 +98,7 @@ public abstract class DifficultyLocalServiceBaseImpl
 	 * @return the new difficulty
 	 */
 	@Override
-	public Difficulty createDifficulty(int score) {
+	public Difficulty createDifficulty(long score) {
 		return difficultyPersistence.create(score);
 	}
 
@@ -111,7 +111,7 @@ public abstract class DifficultyLocalServiceBaseImpl
 	 */
 	@Indexable(type = IndexableType.DELETE)
 	@Override
-	public Difficulty deleteDifficulty(int score) throws PortalException {
+	public Difficulty deleteDifficulty(long score) throws PortalException {
 		return difficultyPersistence.remove(score);
 	}
 
@@ -211,7 +211,7 @@ public abstract class DifficultyLocalServiceBaseImpl
 	}
 
 	@Override
-	public Difficulty fetchDifficulty(int score) {
+	public Difficulty fetchDifficulty(long score) {
 		return difficultyPersistence.fetchByPrimaryKey(score);
 	}
 
@@ -223,7 +223,7 @@ public abstract class DifficultyLocalServiceBaseImpl
 	 * @throws PortalException if a difficulty with the primary key could not be found
 	 */
 	@Override
-	public Difficulty getDifficulty(int score) throws PortalException {
+	public Difficulty getDifficulty(long score) throws PortalException {
 		return difficultyPersistence.findByPrimaryKey(score);
 	}
 

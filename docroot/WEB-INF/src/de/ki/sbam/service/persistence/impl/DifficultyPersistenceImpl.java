@@ -86,12 +86,12 @@ public class DifficultyPersistenceImpl extends BasePersistenceImpl<Difficulty>
 	public static final FinderPath FINDER_PATH_FETCH_BY_SCORE = new FinderPath(DifficultyModelImpl.ENTITY_CACHE_ENABLED,
 			DifficultyModelImpl.FINDER_CACHE_ENABLED, DifficultyImpl.class,
 			FINDER_CLASS_NAME_ENTITY, "fetchByScore",
-			new String[] { Integer.class.getName() },
+			new String[] { Long.class.getName() },
 			DifficultyModelImpl.SCORE_COLUMN_BITMASK);
 	public static final FinderPath FINDER_PATH_COUNT_BY_SCORE = new FinderPath(DifficultyModelImpl.ENTITY_CACHE_ENABLED,
 			DifficultyModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByScore",
-			new String[] { Integer.class.getName() });
+			new String[] { Long.class.getName() });
 
 	/**
 	 * Returns the difficulty where score = &#63; or throws a {@link NoSuchDifficultyException} if it could not be found.
@@ -101,7 +101,7 @@ public class DifficultyPersistenceImpl extends BasePersistenceImpl<Difficulty>
 	 * @throws NoSuchDifficultyException if a matching difficulty could not be found
 	 */
 	@Override
-	public Difficulty findByScore(int score) throws NoSuchDifficultyException {
+	public Difficulty findByScore(long score) throws NoSuchDifficultyException {
 		Difficulty difficulty = fetchByScore(score);
 
 		if (difficulty == null) {
@@ -131,7 +131,7 @@ public class DifficultyPersistenceImpl extends BasePersistenceImpl<Difficulty>
 	 * @return the matching difficulty, or <code>null</code> if a matching difficulty could not be found
 	 */
 	@Override
-	public Difficulty fetchByScore(int score) {
+	public Difficulty fetchByScore(long score) {
 		return fetchByScore(score, true);
 	}
 
@@ -143,7 +143,7 @@ public class DifficultyPersistenceImpl extends BasePersistenceImpl<Difficulty>
 	 * @return the matching difficulty, or <code>null</code> if a matching difficulty could not be found
 	 */
 	@Override
-	public Difficulty fetchByScore(int score, boolean retrieveFromCache) {
+	public Difficulty fetchByScore(long score, boolean retrieveFromCache) {
 		Object[] finderArgs = new Object[] { score };
 
 		Object result = null;
@@ -225,7 +225,8 @@ public class DifficultyPersistenceImpl extends BasePersistenceImpl<Difficulty>
 	 * @return the difficulty that was removed
 	 */
 	@Override
-	public Difficulty removeByScore(int score) throws NoSuchDifficultyException {
+	public Difficulty removeByScore(long score)
+		throws NoSuchDifficultyException {
 		Difficulty difficulty = findByScore(score);
 
 		return remove(difficulty);
@@ -238,7 +239,7 @@ public class DifficultyPersistenceImpl extends BasePersistenceImpl<Difficulty>
 	 * @return the number of matching difficulties
 	 */
 	@Override
-	public int countByScore(int score) {
+	public int countByScore(long score) {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_SCORE;
 
 		Object[] finderArgs = new Object[] { score };
@@ -416,7 +417,7 @@ public class DifficultyPersistenceImpl extends BasePersistenceImpl<Difficulty>
 	 * @return the new difficulty
 	 */
 	@Override
-	public Difficulty create(int score) {
+	public Difficulty create(long score) {
 		Difficulty difficulty = new DifficultyImpl();
 
 		difficulty.setNew(true);
@@ -433,7 +434,7 @@ public class DifficultyPersistenceImpl extends BasePersistenceImpl<Difficulty>
 	 * @throws NoSuchDifficultyException if a difficulty with the primary key could not be found
 	 */
 	@Override
-	public Difficulty remove(int score) throws NoSuchDifficultyException {
+	public Difficulty remove(long score) throws NoSuchDifficultyException {
 		return remove((Serializable)score);
 	}
 
@@ -603,7 +604,7 @@ public class DifficultyPersistenceImpl extends BasePersistenceImpl<Difficulty>
 	 * @throws NoSuchDifficultyException if a difficulty with the primary key could not be found
 	 */
 	@Override
-	public Difficulty findByPrimaryKey(int score)
+	public Difficulty findByPrimaryKey(long score)
 		throws NoSuchDifficultyException {
 		return findByPrimaryKey((Serializable)score);
 	}
@@ -661,7 +662,7 @@ public class DifficultyPersistenceImpl extends BasePersistenceImpl<Difficulty>
 	 * @return the difficulty, or <code>null</code> if a difficulty with the primary key could not be found
 	 */
 	@Override
-	public Difficulty fetchByPrimaryKey(int score) {
+	public Difficulty fetchByPrimaryKey(long score) {
 		return fetchByPrimaryKey((Serializable)score);
 	}
 

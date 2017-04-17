@@ -16,7 +16,7 @@
 		<property name="unlocked" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 	</class>
 	<class name="de.ki.sbam.model.impl.DifficultyImpl" table="sbam_Difficulty">
-		<id name="score" type="int">
+		<id name="score" type="long">
 			<generator class="assigned" />
 		</id>
 		<property name="guaranteed" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />

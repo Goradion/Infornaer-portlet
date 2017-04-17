@@ -49,7 +49,7 @@ public class DifficultyLocalServiceImpl extends DifficultyLocalServiceBaseImpl {
 	 * de.ki.sbam.service.DifficultyLocalServiceUtil} to access the difficulty
 	 * local service.
 	 */
-	public Difficulty addDifficultry(int score, boolean guaranteed) {
+	public Difficulty addDifficultry(long score, boolean guaranteed) {
 		Difficulty difficulty = difficultyPersistence.fetchByPrimaryKey(score);
 		if (difficulty == null) {
 			difficulty = difficultyPersistence.create(score);

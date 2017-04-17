@@ -116,7 +116,7 @@ public class DifficultyUtil {
 	* @return the matching difficulty
 	* @throws NoSuchDifficultyException if a matching difficulty could not be found
 	*/
-	public static Difficulty findByScore(int score)
+	public static Difficulty findByScore(long score)
 		throws de.ki.sbam.exception.NoSuchDifficultyException {
 		return getPersistence().findByScore(score);
 	}
@@ -127,7 +127,7 @@ public class DifficultyUtil {
 	* @param score the score
 	* @return the matching difficulty, or <code>null</code> if a matching difficulty could not be found
 	*/
-	public static Difficulty fetchByScore(int score) {
+	public static Difficulty fetchByScore(long score) {
 		return getPersistence().fetchByScore(score);
 	}
 
@@ -138,7 +138,7 @@ public class DifficultyUtil {
 	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching difficulty, or <code>null</code> if a matching difficulty could not be found
 	*/
-	public static Difficulty fetchByScore(int score, boolean retrieveFromCache) {
+	public static Difficulty fetchByScore(long score, boolean retrieveFromCache) {
 		return getPersistence().fetchByScore(score, retrieveFromCache);
 	}
 
@@ -148,7 +148,7 @@ public class DifficultyUtil {
 	* @param score the score
 	* @return the difficulty that was removed
 	*/
-	public static Difficulty removeByScore(int score)
+	public static Difficulty removeByScore(long score)
 		throws de.ki.sbam.exception.NoSuchDifficultyException {
 		return getPersistence().removeByScore(score);
 	}
@@ -159,7 +159,7 @@ public class DifficultyUtil {
 	* @param score the score
 	* @return the number of matching difficulties
 	*/
-	public static int countByScore(int score) {
+	public static int countByScore(long score) {
 		return getPersistence().countByScore(score);
 	}
 
@@ -187,7 +187,7 @@ public class DifficultyUtil {
 	* @param score the primary key for the new difficulty
 	* @return the new difficulty
 	*/
-	public static Difficulty create(int score) {
+	public static Difficulty create(long score) {
 		return getPersistence().create(score);
 	}
 
@@ -198,7 +198,7 @@ public class DifficultyUtil {
 	* @return the difficulty that was removed
 	* @throws NoSuchDifficultyException if a difficulty with the primary key could not be found
 	*/
-	public static Difficulty remove(int score)
+	public static Difficulty remove(long score)
 		throws de.ki.sbam.exception.NoSuchDifficultyException {
 		return getPersistence().remove(score);
 	}
@@ -214,7 +214,7 @@ public class DifficultyUtil {
 	* @return the difficulty
 	* @throws NoSuchDifficultyException if a difficulty with the primary key could not be found
 	*/
-	public static Difficulty findByPrimaryKey(int score)
+	public static Difficulty findByPrimaryKey(long score)
 		throws de.ki.sbam.exception.NoSuchDifficultyException {
 		return getPersistence().findByPrimaryKey(score);
 	}
@@ -225,7 +225,7 @@ public class DifficultyUtil {
 	* @param score the primary key of the difficulty
 	* @return the difficulty, or <code>null</code> if a difficulty with the primary key could not be found
 	*/
-	public static Difficulty fetchByPrimaryKey(int score) {
+	public static Difficulty fetchByPrimaryKey(long score) {
 		return getPersistence().fetchByPrimaryKey(score);
 	}
 

@@ -90,7 +90,7 @@ public class DifficultyCacheModel implements CacheModel<Difficulty>,
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		guaranteed = objectInput.readBoolean();
 
-		score = objectInput.readInt();
+		score = objectInput.readLong();
 	}
 
 	@Override
@@ -98,9 +98,9 @@ public class DifficultyCacheModel implements CacheModel<Difficulty>,
 		throws IOException {
 		objectOutput.writeBoolean(guaranteed);
 
-		objectOutput.writeInt(score);
+		objectOutput.writeLong(score);
 	}
 
 	public boolean guaranteed;
-	public int score;
+	public long score;
 }

@@ -79,11 +79,11 @@ public class DifficultySoap implements Serializable {
 	public DifficultySoap() {
 	}
 
-	public int getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _score;
 	}
 
-	public void setPrimaryKey(int pk) {
+	public void setPrimaryKey(long pk) {
 		setScore(pk);
 	}
 
@@ -99,14 +99,14 @@ public class DifficultySoap implements Serializable {
 		_guaranteed = guaranteed;
 	}
 
-	public int getScore() {
+	public long getScore() {
 		return _score;
 	}
 
-	public void setScore(int score) {
+	public void setScore(long score) {
 		_score = score;
 	}
 
 	private boolean _guaranteed;
-	private int _score;
+	private long _score;
 }

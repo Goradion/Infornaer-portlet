@@ -33,11 +33,11 @@ public class DifficultyLocalServiceClpInvoker {
 
 		_methodName1 = "createDifficulty";
 
-		_methodParameterTypes1 = new String[] { "int" };
+		_methodParameterTypes1 = new String[] { "long" };
 
 		_methodName2 = "deleteDifficulty";
 
-		_methodParameterTypes2 = new String[] { "int" };
+		_methodParameterTypes2 = new String[] { "long" };
 
 		_methodName3 = "deleteDifficulty";
 
@@ -81,11 +81,11 @@ public class DifficultyLocalServiceClpInvoker {
 
 		_methodName10 = "fetchDifficulty";
 
-		_methodParameterTypes10 = new String[] { "int" };
+		_methodParameterTypes10 = new String[] { "long" };
 
 		_methodName11 = "getDifficulty";
 
-		_methodParameterTypes11 = new String[] { "int" };
+		_methodParameterTypes11 = new String[] { "long" };
 
 		_methodName12 = "getActionableDynamicQuery";
 
@@ -123,7 +123,7 @@ public class DifficultyLocalServiceClpInvoker {
 
 		_methodName63 = "addDifficultry";
 
-		_methodParameterTypes63 = new String[] { "int", "boolean" };
+		_methodParameterTypes63 = new String[] { "long", "boolean" };
 
 		_methodName64 = "findAll";
 
@@ -139,12 +139,12 @@ public class DifficultyLocalServiceClpInvoker {
 
 		if (_methodName1.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes1, parameterTypes)) {
-			return DifficultyLocalServiceUtil.createDifficulty(((Integer)arguments[0]).intValue());
+			return DifficultyLocalServiceUtil.createDifficulty(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName2.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes2, parameterTypes)) {
-			return DifficultyLocalServiceUtil.deleteDifficulty(((Integer)arguments[0]).intValue());
+			return DifficultyLocalServiceUtil.deleteDifficulty(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName3.equals(name) &&
@@ -190,12 +190,12 @@ public class DifficultyLocalServiceClpInvoker {
 
 		if (_methodName10.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes10, parameterTypes)) {
-			return DifficultyLocalServiceUtil.fetchDifficulty(((Integer)arguments[0]).intValue());
+			return DifficultyLocalServiceUtil.fetchDifficulty(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName11.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes11, parameterTypes)) {
-			return DifficultyLocalServiceUtil.getDifficulty(((Integer)arguments[0]).intValue());
+			return DifficultyLocalServiceUtil.getDifficulty(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName12.equals(name) &&
@@ -241,7 +241,7 @@ public class DifficultyLocalServiceClpInvoker {
 
 		if (_methodName63.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes63, parameterTypes)) {
-			return DifficultyLocalServiceUtil.addDifficultry(((Integer)arguments[0]).intValue(),
+			return DifficultyLocalServiceUtil.addDifficultry(((Long)arguments[0]).longValue(),
 				((Boolean)arguments[1]).booleanValue());
 		}
 

@@ -30,7 +30,7 @@ public class DifficultyLocalServiceClp implements DifficultyLocalService {
 
 		_methodName0 = "addDifficultry";
 
-		_methodParameterTypes0 = new String[] { "int", "boolean" };
+		_methodParameterTypes0 = new String[] { "long", "boolean" };
 
 		_methodName1 = "addDifficulty";
 
@@ -38,7 +38,7 @@ public class DifficultyLocalServiceClp implements DifficultyLocalService {
 
 		_methodName2 = "createDifficulty";
 
-		_methodParameterTypes2 = new String[] { "int" };
+		_methodParameterTypes2 = new String[] { "long" };
 
 		_methodName3 = "deleteDifficulty";
 
@@ -46,7 +46,7 @@ public class DifficultyLocalServiceClp implements DifficultyLocalService {
 
 		_methodName4 = "deleteDifficulty";
 
-		_methodParameterTypes4 = new String[] { "int" };
+		_methodParameterTypes4 = new String[] { "long" };
 
 		_methodName5 = "deletePersistedModel";
 
@@ -92,7 +92,7 @@ public class DifficultyLocalServiceClp implements DifficultyLocalService {
 
 		_methodName12 = "fetchDifficulty";
 
-		_methodParameterTypes12 = new String[] { "int" };
+		_methodParameterTypes12 = new String[] { "long" };
 
 		_methodName13 = "findAll";
 
@@ -112,7 +112,7 @@ public class DifficultyLocalServiceClp implements DifficultyLocalService {
 
 		_methodName17 = "getDifficulty";
 
-		_methodParameterTypes17 = new String[] { "int" };
+		_methodParameterTypes17 = new String[] { "long" };
 
 		_methodName18 = "getIndexableActionableDynamicQuery";
 
@@ -132,7 +132,7 @@ public class DifficultyLocalServiceClp implements DifficultyLocalService {
 	}
 
 	@Override
-	public de.ki.sbam.model.Difficulty addDifficultry(int score,
+	public de.ki.sbam.model.Difficulty addDifficultry(long score,
 		boolean guaranteed) {
 		Object returnObj = null;
 
@@ -181,7 +181,7 @@ public class DifficultyLocalServiceClp implements DifficultyLocalService {
 	}
 
 	@Override
-	public de.ki.sbam.model.Difficulty createDifficulty(int score) {
+	public de.ki.sbam.model.Difficulty createDifficulty(long score) {
 		Object returnObj = null;
 
 		try {
@@ -229,7 +229,7 @@ public class DifficultyLocalServiceClp implements DifficultyLocalService {
 	}
 
 	@Override
-	public de.ki.sbam.model.Difficulty deleteDifficulty(int score)
+	public de.ki.sbam.model.Difficulty deleteDifficulty(long score)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		Object returnObj = null;
 
@@ -457,7 +457,7 @@ public class DifficultyLocalServiceClp implements DifficultyLocalService {
 	}
 
 	@Override
-	public de.ki.sbam.model.Difficulty fetchDifficulty(int score) {
+	public de.ki.sbam.model.Difficulty fetchDifficulty(long score) {
 		Object returnObj = null;
 
 		try {
@@ -573,7 +573,7 @@ public class DifficultyLocalServiceClp implements DifficultyLocalService {
 	}
 
 	@Override
-	public de.ki.sbam.model.Difficulty getDifficulty(int score)
+	public de.ki.sbam.model.Difficulty getDifficulty(long score)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		Object returnObj = null;
 

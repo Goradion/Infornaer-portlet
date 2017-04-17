@@ -13,7 +13,7 @@
 	</model>
 	<model name="de.ki.sbam.model.Difficulty">
 		<field name="guaranteed" type="boolean" />
-		<field name="score" type="int" />
+		<field name="score" type="long" />
 	</model>
 	<model name="de.ki.sbam.model.Highscore">
 		<field name="userId" type="long" />

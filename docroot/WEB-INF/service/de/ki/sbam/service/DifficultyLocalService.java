@@ -61,7 +61,7 @@ public interface DifficultyLocalService extends BaseLocalService,
 	 *
 	 * Never modify or reference this interface directly. Always use {@link DifficultyLocalServiceUtil} to access the difficulty local service. Add custom service methods to {@link de.ki.sbam.service.impl.DifficultyLocalServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public Difficulty addDifficultry(int score, boolean guaranteed);
+	public Difficulty addDifficultry(long score, boolean guaranteed);
 
 	/**
 	* Adds the difficulty to the database. Also notifies the appropriate model listeners.
@@ -78,7 +78,7 @@ public interface DifficultyLocalService extends BaseLocalService,
 	* @param score the primary key for the new difficulty
 	* @return the new difficulty
 	*/
-	public Difficulty createDifficulty(int score);
+	public Difficulty createDifficulty(long score);
 
 	/**
 	* Deletes the difficulty from the database. Also notifies the appropriate model listeners.
@@ -97,7 +97,7 @@ public interface DifficultyLocalService extends BaseLocalService,
 	* @throws PortalException if a difficulty with the primary key could not be found
 	*/
 	@Indexable(type = IndexableType.DELETE)
-	public Difficulty deleteDifficulty(int score) throws PortalException;
+	public Difficulty deleteDifficulty(long score) throws PortalException;
 
 	/**
 	* @throws PortalException
@@ -166,7 +166,7 @@ public interface DifficultyLocalService extends BaseLocalService,
 		Projection projection);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public Difficulty fetchDifficulty(int score);
+	public Difficulty fetchDifficulty(long score);
 
 	public List<Difficulty> findAll();
 
@@ -203,7 +203,7 @@ public interface DifficultyLocalService extends BaseLocalService,
 	* @throws PortalException if a difficulty with the primary key could not be found
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public Difficulty getDifficulty(int score) throws PortalException;
+	public Difficulty getDifficulty(long score) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery();

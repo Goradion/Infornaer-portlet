@@ -48,7 +48,7 @@ public interface DifficultyPersistence extends BasePersistence<Difficulty> {
 	* @return the matching difficulty
 	* @throws NoSuchDifficultyException if a matching difficulty could not be found
 	*/
-	public Difficulty findByScore(int score) throws NoSuchDifficultyException;
+	public Difficulty findByScore(long score) throws NoSuchDifficultyException;
 
 	/**
 	* Returns the difficulty where score = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
@@ -56,7 +56,7 @@ public interface DifficultyPersistence extends BasePersistence<Difficulty> {
 	* @param score the score
 	* @return the matching difficulty, or <code>null</code> if a matching difficulty could not be found
 	*/
-	public Difficulty fetchByScore(int score);
+	public Difficulty fetchByScore(long score);
 
 	/**
 	* Returns the difficulty where score = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
@@ -65,7 +65,7 @@ public interface DifficultyPersistence extends BasePersistence<Difficulty> {
 	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching difficulty, or <code>null</code> if a matching difficulty could not be found
 	*/
-	public Difficulty fetchByScore(int score, boolean retrieveFromCache);
+	public Difficulty fetchByScore(long score, boolean retrieveFromCache);
 
 	/**
 	* Removes the difficulty where score = &#63; from the database.
@@ -73,7 +73,8 @@ public interface DifficultyPersistence extends BasePersistence<Difficulty> {
 	* @param score the score
 	* @return the difficulty that was removed
 	*/
-	public Difficulty removeByScore(int score) throws NoSuchDifficultyException;
+	public Difficulty removeByScore(long score)
+		throws NoSuchDifficultyException;
 
 	/**
 	* Returns the number of difficulties where score = &#63;.
@@ -81,7 +82,7 @@ public interface DifficultyPersistence extends BasePersistence<Difficulty> {
 	* @param score the score
 	* @return the number of matching difficulties
 	*/
-	public int countByScore(int score);
+	public int countByScore(long score);
 
 	/**
 	* Caches the difficulty in the entity cache if it is enabled.
@@ -103,7 +104,7 @@ public interface DifficultyPersistence extends BasePersistence<Difficulty> {
 	* @param score the primary key for the new difficulty
 	* @return the new difficulty
 	*/
-	public Difficulty create(int score);
+	public Difficulty create(long score);
 
 	/**
 	* Removes the difficulty with the primary key from the database. Also notifies the appropriate model listeners.
@@ -112,7 +113,7 @@ public interface DifficultyPersistence extends BasePersistence<Difficulty> {
 	* @return the difficulty that was removed
 	* @throws NoSuchDifficultyException if a difficulty with the primary key could not be found
 	*/
-	public Difficulty remove(int score) throws NoSuchDifficultyException;
+	public Difficulty remove(long score) throws NoSuchDifficultyException;
 
 	public Difficulty updateImpl(Difficulty difficulty);
 
@@ -123,7 +124,7 @@ public interface DifficultyPersistence extends BasePersistence<Difficulty> {
 	* @return the difficulty
 	* @throws NoSuchDifficultyException if a difficulty with the primary key could not be found
 	*/
-	public Difficulty findByPrimaryKey(int score)
+	public Difficulty findByPrimaryKey(long score)
 		throws NoSuchDifficultyException;
 
 	/**
@@ -132,7 +133,7 @@ public interface DifficultyPersistence extends BasePersistence<Difficulty> {
 	* @param score the primary key of the difficulty
 	* @return the difficulty, or <code>null</code> if a difficulty with the primary key could not be found
 	*/
-	public Difficulty fetchByPrimaryKey(int score);
+	public Difficulty fetchByPrimaryKey(long score);
 
 	@Override
 	public java.util.Map<java.io.Serializable, Difficulty> fetchByPrimaryKeys(

@@ -50,14 +50,14 @@ public interface DifficultyModel extends BaseModel<Difficulty> {
 	 *
 	 * @return the primary key of this difficulty
 	 */
-	public int getPrimaryKey();
+	public long getPrimaryKey();
 
 	/**
 	 * Sets the primary key of this difficulty.
 	 *
 	 * @param primaryKey the primary key of this difficulty
 	 */
-	public void setPrimaryKey(int primaryKey);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Returns the guaranteed of this difficulty.
@@ -85,14 +85,14 @@ public interface DifficultyModel extends BaseModel<Difficulty> {
 	 *
 	 * @return the score of this difficulty
 	 */
-	public int getScore();
+	public long getScore();
 
 	/**
 	 * Sets the score of this difficulty.
 	 *
 	 * @param score the score of this difficulty
 	 */
-	public void setScore(int score);
+	public void setScore(long score);
 
 	@Override
 	public boolean isNew();

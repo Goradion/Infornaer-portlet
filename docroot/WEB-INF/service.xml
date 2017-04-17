@@ -73,7 +73,7 @@
 	
 	<entity name="Difficulty" local-service="true" remote-service="true">
 		<column name="guaranteed" type="boolean"></column>
-		<column name="score" type ="int" primary="true"></column>
+		<column name="score" type ="long" primary="true"></column>
 		<column name="questions" type="Collection" entity="Question"></column>
 		
 		<order by="asc">

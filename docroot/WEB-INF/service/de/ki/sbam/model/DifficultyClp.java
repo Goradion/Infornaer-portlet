@@ -53,12 +53,12 @@ public class DifficultyClp extends BaseModelImpl<Difficulty>
 	}
 
 	@Override
-	public int getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _score;
 	}
 
 	@Override
-	public void setPrimaryKey(int primaryKey) {
+	public void setPrimaryKey(long primaryKey) {
 		setScore(primaryKey);
 	}
 
@@ -69,7 +69,7 @@ public class DifficultyClp extends BaseModelImpl<Difficulty>
 
 	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
-		setPrimaryKey(((Integer)primaryKeyObj).intValue());
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	@Override
@@ -93,7 +93,7 @@ public class DifficultyClp extends BaseModelImpl<Difficulty>
 			setGuaranteed(guaranteed);
 		}
 
-		Integer score = (Integer)attributes.get("score");
+		Long score = (Long)attributes.get("score");
 
 		if (score != null) {
 			setScore(score);
@@ -132,19 +132,19 @@ public class DifficultyClp extends BaseModelImpl<Difficulty>
 	}
 
 	@Override
-	public int getScore() {
+	public long getScore() {
 		return _score;
 	}
 
 	@Override
-	public void setScore(int score) {
+	public void setScore(long score) {
 		_score = score;
 
 		if (_difficultyRemoteModel != null) {
 			try {
 				Class<?> clazz = _difficultyRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setScore", int.class);
+				Method method = clazz.getMethod("setScore", long.class);
 
 				method.invoke(_difficultyRemoteModel, score);
 			}
@@ -262,7 +262,7 @@ public class DifficultyClp extends BaseModelImpl<Difficulty>
 
 		DifficultyClp difficulty = (DifficultyClp)obj;
 
-		int primaryKey = difficulty.getPrimaryKey();
+		long primaryKey = difficulty.getPrimaryKey();
 
 		if (getPrimaryKey() == primaryKey) {
 			return true;
@@ -278,7 +278,7 @@ public class DifficultyClp extends BaseModelImpl<Difficulty>
 
 	@Override
 	public int hashCode() {
-		return getPrimaryKey();
+		return (int)getPrimaryKey();
 	}
 
 	@Override
@@ -327,7 +327,7 @@ public class DifficultyClp extends BaseModelImpl<Difficulty>
 	}
 
 	private boolean _guaranteed;
-	private int _score;
+	private long _score;
 	private BaseModel<?> _difficultyRemoteModel;
 	private Class<?> _clpSerializerClass = de.ki.sbam.service.ClpSerializer.class;
 	private boolean _entityCacheEnabled;

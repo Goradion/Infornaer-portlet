@@ -10,7 +10,7 @@
 <h1>Neue Frage</h1>
 <form method="POST" action="${addQuestionURL}" >
 	Frage: <br/>
-	<textarea name="<portlet:namespace />question" rows="5" > </textarea> <br/>
+	<textarea name="<portlet:namespace />question" rows="5" ></textarea> <br/>
 	Antwort A: <br />
 	<input type="text" name="<portlet:namespace />answerA" value="" maxlength="75" required/> <br />
 	Antwort B: <br />
@@ -29,14 +29,14 @@
 	<br />
 	Schwierigkeit: <br />
 	<select name= "<portlet:namespace />difficulty" >
-		<c:forEach items="${dList}" var="d">
+		<c:forEach items="${sessionScope.dList}" var="d">
 			<option value="${d.getScore()}">${d.getScore()}</option>
 		</c:forEach>
 	</select>
 	<br/>
 	Kategorie: <br />
 	<select name= "<portlet:namespace />category" >
-		<c:forEach items="${cList}" var="c">
+		<c:forEach items="${sessionScope.cList}" var="c">
 			<option value="${c.getCategoryId()}">${c.getCategoryName()}</option>
 		</c:forEach>
 	</select>

@@ -16,10 +16,14 @@ package de.ki.sbam.model.impl;
 
 import aQute.bnd.annotation.ProviderType;
 
+import com.liferay.expando.kernel.model.ExpandoBridge;
+import com.liferay.expando.kernel.util.ExpandoBridgeFactoryUtil;
+
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.model.impl.BaseModelImpl;
+import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -62,16 +66,16 @@ public class DifficultyModelImpl extends BaseModelImpl<Difficulty>
 	public static final String TABLE_NAME = "sbam_Difficulty";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "guaranteed", Types.BOOLEAN },
-			{ "score", Types.INTEGER }
+			{ "score", Types.BIGINT }
 		};
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP = new HashMap<String, Integer>();
 
 	static {
 		TABLE_COLUMNS_MAP.put("guaranteed", Types.BOOLEAN);
-		TABLE_COLUMNS_MAP.put("score", Types.INTEGER);
+		TABLE_COLUMNS_MAP.put("score", Types.BIGINT);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table sbam_Difficulty (guaranteed BOOLEAN,score INTEGER not null primary key)";
+	public static final String TABLE_SQL_CREATE = "create table sbam_Difficulty (guaranteed BOOLEAN,score LONG not null primary key)";
 	public static final String TABLE_SQL_DROP = "drop table sbam_Difficulty";
 	public static final String ORDER_BY_JPQL = " ORDER BY difficulty.score ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY sbam_Difficulty.score ASC";
@@ -135,12 +139,12 @@ public class DifficultyModelImpl extends BaseModelImpl<Difficulty>
 	}
 
 	@Override
-	public int getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _score;
 	}
 
 	@Override
-	public void setPrimaryKey(int primaryKey) {
+	public void setPrimaryKey(long primaryKey) {
 		setScore(primaryKey);
 	}
 
@@ -151,7 +155,7 @@ public class DifficultyModelImpl extends BaseModelImpl<Difficulty>
 
 	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
-		setPrimaryKey(((Integer)primaryKeyObj).intValue());
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	@Override
@@ -185,7 +189,7 @@ public class DifficultyModelImpl extends BaseModelImpl<Difficulty>
 			setGuaranteed(guaranteed);
 		}
 
-		Integer score = (Integer)attributes.get("score");
+		Long score = (Long)attributes.get("score");
 
 		if (score != null) {
 			setScore(score);
@@ -210,12 +214,12 @@ public class DifficultyModelImpl extends BaseModelImpl<Difficulty>
 
 	@JSON
 	@Override
-	public int getScore() {
+	public long getScore() {
 		return _score;
 	}
 
 	@Override
-	public void setScore(int score) {
+	public void setScore(long score) {
 		_columnBitmask = -1L;
 
 		if (!_setOriginalScore) {
@@ -227,12 +231,25 @@ public class DifficultyModelImpl extends BaseModelImpl<Difficulty>
 		_score = score;
 	}
 
-	public int getOriginalScore() {
+	public long getOriginalScore() {
 		return _originalScore;
 	}
 
 	public long getColumnBitmask() {
 		return _columnBitmask;
+	}
+
+	@Override
+	public ExpandoBridge getExpandoBridge() {
+		return ExpandoBridgeFactoryUtil.getExpandoBridge(0,
+			Difficulty.class.getName(), getPrimaryKey());
+	}
+
+	@Override
+	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
+		ExpandoBridge expandoBridge = getExpandoBridge();
+
+		expandoBridge.setAttributes(serviceContext);
 	}
 
 	@Override
@@ -290,7 +307,7 @@ public class DifficultyModelImpl extends BaseModelImpl<Difficulty>
 
 		Difficulty difficulty = (Difficulty)obj;
 
-		int primaryKey = difficulty.getPrimaryKey();
+		long primaryKey = difficulty.getPrimaryKey();
 
 		if (getPrimaryKey() == primaryKey) {
 			return true;
@@ -302,7 +319,7 @@ public class DifficultyModelImpl extends BaseModelImpl<Difficulty>
 
 	@Override
 	public int hashCode() {
-		return getPrimaryKey();
+		return (int)getPrimaryKey();
 	}
 
 	@Override
@@ -377,8 +394,8 @@ public class DifficultyModelImpl extends BaseModelImpl<Difficulty>
 			Difficulty.class
 		};
 	private boolean _guaranteed;
-	private int _score;
-	private int _originalScore;
+	private long _score;
+	private long _originalScore;
 	private boolean _setOriginalScore;
 	private long _columnBitmask;
 	private Difficulty _escapedModel;

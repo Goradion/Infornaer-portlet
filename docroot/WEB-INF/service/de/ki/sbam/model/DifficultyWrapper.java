@@ -70,7 +70,7 @@ public class DifficultyWrapper implements Difficulty, ModelWrapper<Difficulty> {
 			setGuaranteed(guaranteed);
 		}
 
-		Integer score = (Integer)attributes.get("score");
+		Long score = (Long)attributes.get("score");
 
 		if (score != null) {
 			setScore(score);
@@ -108,7 +108,7 @@ public class DifficultyWrapper implements Difficulty, ModelWrapper<Difficulty> {
 	* @return the primary key of this difficulty
 	*/
 	@Override
-	public int getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _difficulty.getPrimaryKey();
 	}
 
@@ -123,7 +123,7 @@ public class DifficultyWrapper implements Difficulty, ModelWrapper<Difficulty> {
 	* @return the score of this difficulty
 	*/
 	@Override
-	public int getScore() {
+	public long getScore() {
 		return _difficulty.getScore();
 	}
 
@@ -204,7 +204,7 @@ public class DifficultyWrapper implements Difficulty, ModelWrapper<Difficulty> {
 	* @param primaryKey the primary key of this difficulty
 	*/
 	@Override
-	public void setPrimaryKey(int primaryKey) {
+	public void setPrimaryKey(long primaryKey) {
 		_difficulty.setPrimaryKey(primaryKey);
 	}
 
@@ -219,7 +219,7 @@ public class DifficultyWrapper implements Difficulty, ModelWrapper<Difficulty> {
 	* @param score the score of this difficulty
 	*/
 	@Override
-	public void setScore(int score) {
+	public void setScore(long score) {
 		_difficulty.setScore(score);
 	}
 

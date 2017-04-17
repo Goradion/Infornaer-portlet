@@ -34,7 +34,7 @@ public class DifficultyLocalServiceWrapper implements DifficultyLocalService,
 	}
 
 	@Override
-	public de.ki.sbam.model.Difficulty addDifficultry(int score,
+	public de.ki.sbam.model.Difficulty addDifficultry(long score,
 		boolean guaranteed) {
 		return _difficultyLocalService.addDifficultry(score, guaranteed);
 	}
@@ -58,7 +58,7 @@ public class DifficultyLocalServiceWrapper implements DifficultyLocalService,
 	* @return the new difficulty
 	*/
 	@Override
-	public de.ki.sbam.model.Difficulty createDifficulty(int score) {
+	public de.ki.sbam.model.Difficulty createDifficulty(long score) {
 		return _difficultyLocalService.createDifficulty(score);
 	}
 
@@ -82,7 +82,7 @@ public class DifficultyLocalServiceWrapper implements DifficultyLocalService,
 	* @throws PortalException if a difficulty with the primary key could not be found
 	*/
 	@Override
-	public de.ki.sbam.model.Difficulty deleteDifficulty(int score)
+	public de.ki.sbam.model.Difficulty deleteDifficulty(long score)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _difficultyLocalService.deleteDifficulty(score);
 	}
@@ -183,7 +183,7 @@ public class DifficultyLocalServiceWrapper implements DifficultyLocalService,
 	}
 
 	@Override
-	public de.ki.sbam.model.Difficulty fetchDifficulty(int score) {
+	public de.ki.sbam.model.Difficulty fetchDifficulty(long score) {
 		return _difficultyLocalService.fetchDifficulty(score);
 	}
 
@@ -232,7 +232,7 @@ public class DifficultyLocalServiceWrapper implements DifficultyLocalService,
 	* @throws PortalException if a difficulty with the primary key could not be found
 	*/
 	@Override
-	public de.ki.sbam.model.Difficulty getDifficulty(int score)
+	public de.ki.sbam.model.Difficulty getDifficulty(long score)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _difficultyLocalService.getDifficulty(score);
 	}

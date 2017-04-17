@@ -17,7 +17,7 @@ public class GameState {
 	
 	private int currentDifficulty = 0;
 	private Question currentQuestion; 
-	private int guaranteedScore = 0;
+	private long guaranteedScore = 0;
 	private long score = 0;
 	private boolean fifyFiftyUsed = false;
 	private boolean audienceUsed = false;
@@ -60,10 +60,10 @@ public class GameState {
 	public void setCurrentQuestion(Question currentQuestion) {
 		this.currentQuestion = currentQuestion;
 	}
-	public int getGuaranteedScore() {
+	public long getGuaranteedScore() {
 		return guaranteedScore;
 	}
-	public void setGuaranteedScore(int guaranteedScore) {
+	public void setGuaranteedScore(long guaranteedScore) {
 		this.guaranteedScore = guaranteedScore;
 	}
 	public boolean isGameOver() {
