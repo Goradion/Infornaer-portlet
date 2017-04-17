@@ -15,6 +15,7 @@ import static game.infonaer.constants.Constants.NEW_GAME_JSP;
 import static game.infonaer.constants.Constants.NEW_QUESTION_JSP;
 import static game.infonaer.constants.Constants.QUESTION_OVERVIEW_JSP;
 import static game.infonaer.constants.Constants.VIEW_JSP;
+import static game.infonaer.constants.Constants.QUESTION_STATS_JSP;
 
 import java.io.File;
 import java.io.IOException;
@@ -226,7 +227,9 @@ public class InfonaerGamePortlet extends MVCPortlet {
 		actionRequest.getPortletSession().setAttribute("currentPage", EDIT_CONTENT_JSP, PortletSession.PORTLET_SCOPE);
 
 	}
-
+	public void gotoQuestionStatistics(ActionRequest actionRequest, ActionResponse actionResponse){
+		actionRequest.getPortletSession().setAttribute("currentPage", QUESTION_STATS_JSP , PortletSession.PORTLET_SCOPE);
+	}
 	public void gotoLoadQuestionFromFile(ActionRequest actionRequest, ActionResponse actionResponse)
 			throws IOException, PortletException {
 		actionRequest.getPortletSession().setAttribute("currentPage", LOAD_QUESTION_FROM_FILE_JSP,

@@ -22,6 +22,7 @@ public final class Constants {
 	public static final String GAME_JSP = "/html/infonaergame/game.jsp";
 	public static final String ADMIN_ACTION_CATEGORY = "/html/infonaergame/admin_action_category.jsp";
 	public static final String ADMIN_ACTION_QUESTION = "/html/infonaergame/admin_action_question.jsp";
+	public static final String QUESTION_STATS_JSP = "/html/infonaergame/question_statistics.jsp";
 	
 	/* Difficulty levels */
 //	public static int EASY = 0;

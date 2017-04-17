@@ -8,6 +8,8 @@
 <%@ page import="com.liferay.portal.kernel.dao.search.ResultRow"%>
 <%@ page import="game.infonaer.constants.Constants"%>
 <%@ page import="de.ki.sbam.service.QuestionLocalServiceUtil"%>
+<%@ page import="de.ki.sbam.service.QuestionStatisticsLocalServiceUtil"%>
+<%@ page import="de.ki.sbam.model.QuestionStatistics"%>
 <%@ page import="de.ki.sbam.model.Question"%>
 <%@ page import="de.ki.sbam.model.Category"%>
 <%@ page import="de.ki.sbam.model.Highscore"%>
