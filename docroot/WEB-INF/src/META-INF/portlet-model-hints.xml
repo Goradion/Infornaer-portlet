@@ -49,7 +49,7 @@
 	<model name="de.ki.sbam.model.UserStatistics">
 		<field name="userId" type="long" />
 		<field name="gamesWon" type="long" />
-		<field name="gamesLost" type="long" />
+		<field name="gamesPlayed" type="long" />
 		<field name="rightAnswers" type="long" />
 		<field name="wrongAnswers" type="long" />
 	</model>

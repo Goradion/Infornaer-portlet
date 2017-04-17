@@ -5,6 +5,8 @@
 <portlet:actionURL name="gotoMainMenu" var="mainMenu"></portlet:actionURL>
 <portlet:actionURL name="goToCategoryOverview" var="categoryOverview"></portlet:actionURL>
 <portlet:actionURL name="goToQuestionOverview" var="questionOverview"></portlet:actionURL>
+<portlet:actionURL name="goToUserStats" var="userStats"></portlet:actionURL>
+
 <portlet:actionURL name="test" var="testURL"></portlet:actionURL>
 
 <h1>Editor Modus</h1>
@@ -16,8 +18,12 @@
 	<a href=<%=questionOverview%>>Fragen</a>
 </p>
 <p>
-	<a href=<%=mainMenu%>>Back</a>
+	<a href=<%=userStats%>>Nutzerstatistiken</a>
 </p>
 <p>
-	<a href=<%=testURL%>>Test</a>
+	<a href=<%=mainMenu%>>Back</a>
 </p>
+
+<h2>Testbereich zu Demozwecken</h2>
+<div style="color:#FF0000">fügt ca. 240 Fragen in die Kategorie Test:</div>
+<p><a href=<%=testURL%>>Testfragen einfügen</a></p>

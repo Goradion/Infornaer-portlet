@@ -35,7 +35,7 @@ public class UserStatisticsSoap implements Serializable {
 
 		soapModel.setUserId(model.getUserId());
 		soapModel.setGamesWon(model.getGamesWon());
-		soapModel.setGamesLost(model.getGamesLost());
+		soapModel.setGamesPlayed(model.getGamesPlayed());
 		soapModel.setRightAnswers(model.getRightAnswers());
 		soapModel.setWrongAnswers(model.getWrongAnswers());
 
@@ -106,12 +106,12 @@ public class UserStatisticsSoap implements Serializable {
 		_gamesWon = gamesWon;
 	}
 
-	public long getGamesLost() {
-		return _gamesLost;
+	public long getGamesPlayed() {
+		return _gamesPlayed;
 	}
 
-	public void setGamesLost(long gamesLost) {
-		_gamesLost = gamesLost;
+	public void setGamesPlayed(long gamesPlayed) {
+		_gamesPlayed = gamesPlayed;
 	}
 
 	public long getRightAnswers() {
@@ -132,7 +132,7 @@ public class UserStatisticsSoap implements Serializable {
 
 	private long _userId;
 	private long _gamesWon;
-	private long _gamesLost;
+	private long _gamesPlayed;
 	private long _rightAnswers;
 	private long _wrongAnswers;
 }

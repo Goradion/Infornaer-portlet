@@ -102,18 +102,18 @@ public interface UserStatisticsModel extends BaseModel<UserStatistics> {
 	public void setGamesWon(long gamesWon);
 
 	/**
-	 * Returns the games lost of this user statistics.
+	 * Returns the games played of this user statistics.
 	 *
-	 * @return the games lost of this user statistics
+	 * @return the games played of this user statistics
 	 */
-	public long getGamesLost();
+	public long getGamesPlayed();
 
 	/**
-	 * Sets the games lost of this user statistics.
+	 * Sets the games played of this user statistics.
 	 *
-	 * @param gamesLost the games lost of this user statistics
+	 * @param gamesPlayed the games played of this user statistics
 	 */
-	public void setGamesLost(long gamesLost);
+	public void setGamesPlayed(long gamesPlayed);
 
 	/**
 	 * Returns the right answers of this user statistics.

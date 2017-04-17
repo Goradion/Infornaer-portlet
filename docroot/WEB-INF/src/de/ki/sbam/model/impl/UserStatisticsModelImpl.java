@@ -71,7 +71,7 @@ public class UserStatisticsModelImpl extends BaseModelImpl<UserStatistics>
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "userId", Types.BIGINT },
 			{ "gamesWon", Types.BIGINT },
-			{ "gamesLost", Types.BIGINT },
+			{ "gamesPlayed", Types.BIGINT },
 			{ "rightAnswers", Types.BIGINT },
 			{ "wrongAnswers", Types.BIGINT }
 		};
@@ -80,12 +80,12 @@ public class UserStatisticsModelImpl extends BaseModelImpl<UserStatistics>
 	static {
 		TABLE_COLUMNS_MAP.put("userId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("gamesWon", Types.BIGINT);
-		TABLE_COLUMNS_MAP.put("gamesLost", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("gamesPlayed", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("rightAnswers", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("wrongAnswers", Types.BIGINT);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table sbam_UserStatistics (userId LONG not null primary key,gamesWon LONG,gamesLost LONG,rightAnswers LONG,wrongAnswers LONG)";
+	public static final String TABLE_SQL_CREATE = "create table sbam_UserStatistics (userId LONG not null primary key,gamesWon LONG,gamesPlayed LONG,rightAnswers LONG,wrongAnswers LONG)";
 	public static final String TABLE_SQL_DROP = "drop table sbam_UserStatistics";
 	public static final String ORDER_BY_JPQL = " ORDER BY userStatistics.userId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY sbam_UserStatistics.userId ASC";
@@ -115,7 +115,7 @@ public class UserStatisticsModelImpl extends BaseModelImpl<UserStatistics>
 
 		model.setUserId(soapModel.getUserId());
 		model.setGamesWon(soapModel.getGamesWon());
-		model.setGamesLost(soapModel.getGamesLost());
+		model.setGamesPlayed(soapModel.getGamesPlayed());
 		model.setRightAnswers(soapModel.getRightAnswers());
 		model.setWrongAnswers(soapModel.getWrongAnswers());
 
@@ -184,7 +184,7 @@ public class UserStatisticsModelImpl extends BaseModelImpl<UserStatistics>
 
 		attributes.put("userId", getUserId());
 		attributes.put("gamesWon", getGamesWon());
-		attributes.put("gamesLost", getGamesLost());
+		attributes.put("gamesPlayed", getGamesPlayed());
 		attributes.put("rightAnswers", getRightAnswers());
 		attributes.put("wrongAnswers", getWrongAnswers());
 
@@ -208,10 +208,10 @@ public class UserStatisticsModelImpl extends BaseModelImpl<UserStatistics>
 			setGamesWon(gamesWon);
 		}
 
-		Long gamesLost = (Long)attributes.get("gamesLost");
+		Long gamesPlayed = (Long)attributes.get("gamesPlayed");
 
-		if (gamesLost != null) {
-			setGamesLost(gamesLost);
+		if (gamesPlayed != null) {
+			setGamesPlayed(gamesPlayed);
 		}
 
 		Long rightAnswers = (Long)attributes.get("rightAnswers");
@@ -267,13 +267,13 @@ public class UserStatisticsModelImpl extends BaseModelImpl<UserStatistics>
 
 	@JSON
 	@Override
-	public long getGamesLost() {
-		return _gamesLost;
+	public long getGamesPlayed() {
+		return _gamesPlayed;
 	}
 
 	@Override
-	public void setGamesLost(long gamesLost) {
-		_gamesLost = gamesLost;
+	public void setGamesPlayed(long gamesPlayed) {
+		_gamesPlayed = gamesPlayed;
 	}
 
 	@JSON
@@ -327,7 +327,7 @@ public class UserStatisticsModelImpl extends BaseModelImpl<UserStatistics>
 
 		userStatisticsImpl.setUserId(getUserId());
 		userStatisticsImpl.setGamesWon(getGamesWon());
-		userStatisticsImpl.setGamesLost(getGamesLost());
+		userStatisticsImpl.setGamesPlayed(getGamesPlayed());
 		userStatisticsImpl.setRightAnswers(getRightAnswers());
 		userStatisticsImpl.setWrongAnswers(getWrongAnswers());
 
@@ -400,7 +400,7 @@ public class UserStatisticsModelImpl extends BaseModelImpl<UserStatistics>
 
 		userStatisticsCacheModel.gamesWon = getGamesWon();
 
-		userStatisticsCacheModel.gamesLost = getGamesLost();
+		userStatisticsCacheModel.gamesPlayed = getGamesPlayed();
 
 		userStatisticsCacheModel.rightAnswers = getRightAnswers();
 
@@ -417,8 +417,8 @@ public class UserStatisticsModelImpl extends BaseModelImpl<UserStatistics>
 		sb.append(getUserId());
 		sb.append(", gamesWon=");
 		sb.append(getGamesWon());
-		sb.append(", gamesLost=");
-		sb.append(getGamesLost());
+		sb.append(", gamesPlayed=");
+		sb.append(getGamesPlayed());
 		sb.append(", rightAnswers=");
 		sb.append(getRightAnswers());
 		sb.append(", wrongAnswers=");
@@ -445,8 +445,8 @@ public class UserStatisticsModelImpl extends BaseModelImpl<UserStatistics>
 		sb.append(getGamesWon());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>gamesLost</column-name><column-value><![CDATA[");
-		sb.append(getGamesLost());
+			"<column><column-name>gamesPlayed</column-name><column-value><![CDATA[");
+		sb.append(getGamesPlayed());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>rightAnswers</column-name><column-value><![CDATA[");
@@ -468,7 +468,7 @@ public class UserStatisticsModelImpl extends BaseModelImpl<UserStatistics>
 		};
 	private long _userId;
 	private long _gamesWon;
-	private long _gamesLost;
+	private long _gamesPlayed;
 	private long _rightAnswers;
 	private long _wrongAnswers;
 	private UserStatistics _escapedModel;

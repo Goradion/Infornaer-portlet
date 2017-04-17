@@ -82,7 +82,7 @@ public class UserStatisticsClp extends BaseModelImpl<UserStatistics>
 
 		attributes.put("userId", getUserId());
 		attributes.put("gamesWon", getGamesWon());
-		attributes.put("gamesLost", getGamesLost());
+		attributes.put("gamesPlayed", getGamesPlayed());
 		attributes.put("rightAnswers", getRightAnswers());
 		attributes.put("wrongAnswers", getWrongAnswers());
 
@@ -106,10 +106,10 @@ public class UserStatisticsClp extends BaseModelImpl<UserStatistics>
 			setGamesWon(gamesWon);
 		}
 
-		Long gamesLost = (Long)attributes.get("gamesLost");
+		Long gamesPlayed = (Long)attributes.get("gamesPlayed");
 
-		if (gamesLost != null) {
-			setGamesLost(gamesLost);
+		if (gamesPlayed != null) {
+			setGamesPlayed(gamesPlayed);
 		}
 
 		Long rightAnswers = (Long)attributes.get("rightAnswers");
@@ -191,21 +191,21 @@ public class UserStatisticsClp extends BaseModelImpl<UserStatistics>
 	}
 
 	@Override
-	public long getGamesLost() {
-		return _gamesLost;
+	public long getGamesPlayed() {
+		return _gamesPlayed;
 	}
 
 	@Override
-	public void setGamesLost(long gamesLost) {
-		_gamesLost = gamesLost;
+	public void setGamesPlayed(long gamesPlayed) {
+		_gamesPlayed = gamesPlayed;
 
 		if (_userStatisticsRemoteModel != null) {
 			try {
 				Class<?> clazz = _userStatisticsRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setGamesLost", long.class);
+				Method method = clazz.getMethod("setGamesPlayed", long.class);
 
-				method.invoke(_userStatisticsRemoteModel, gamesLost);
+				method.invoke(_userStatisticsRemoteModel, gamesPlayed);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -332,7 +332,7 @@ public class UserStatisticsClp extends BaseModelImpl<UserStatistics>
 
 		clone.setUserId(getUserId());
 		clone.setGamesWon(getGamesWon());
-		clone.setGamesLost(getGamesLost());
+		clone.setGamesPlayed(getGamesPlayed());
 		clone.setRightAnswers(getRightAnswers());
 		clone.setWrongAnswers(getWrongAnswers());
 
@@ -403,8 +403,8 @@ public class UserStatisticsClp extends BaseModelImpl<UserStatistics>
 		sb.append(getUserId());
 		sb.append(", gamesWon=");
 		sb.append(getGamesWon());
-		sb.append(", gamesLost=");
-		sb.append(getGamesLost());
+		sb.append(", gamesPlayed=");
+		sb.append(getGamesPlayed());
 		sb.append(", rightAnswers=");
 		sb.append(getRightAnswers());
 		sb.append(", wrongAnswers=");
@@ -431,8 +431,8 @@ public class UserStatisticsClp extends BaseModelImpl<UserStatistics>
 		sb.append(getGamesWon());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>gamesLost</column-name><column-value><![CDATA[");
-		sb.append(getGamesLost());
+			"<column><column-name>gamesPlayed</column-name><column-value><![CDATA[");
+		sb.append(getGamesPlayed());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>rightAnswers</column-name><column-value><![CDATA[");
@@ -450,11 +450,11 @@ public class UserStatisticsClp extends BaseModelImpl<UserStatistics>
 
 	private long _userId;
 	private long _gamesWon;
-	private long _gamesLost;
+	private long _gamesPlayed;
 	private long _rightAnswers;
 	private long _wrongAnswers;
 	private BaseModel<?> _userStatisticsRemoteModel;
-	private Class<?> _clpSerializerClass = ClpSerializer.class;
+	private Class<?> _clpSerializerClass = de.ki.sbam.service.ClpSerializer.class;
 	private boolean _entityCacheEnabled;
 	private boolean _finderCacheEnabled;
 }

@@ -329,7 +329,7 @@ public class DifficultyClp extends BaseModelImpl<Difficulty>
 	private boolean _guaranteed;
 	private long _score;
 	private BaseModel<?> _difficultyRemoteModel;
-	private Class<?> _clpSerializerClass = ClpSerializer.class;
+	private Class<?> _clpSerializerClass = de.ki.sbam.service.ClpSerializer.class;
 	private boolean _entityCacheEnabled;
 	private boolean _finderCacheEnabled;
 }

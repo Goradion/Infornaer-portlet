@@ -235,7 +235,7 @@ public abstract class QuestionStatisticsLocalServiceBaseImpl
 	public ActionableDynamicQuery getActionableDynamicQuery() {
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
-		actionableDynamicQuery.setBaseLocalService(questionStatisticsLocalService);
+		actionableDynamicQuery.setBaseLocalService(de.ki.sbam.service.QuestionStatisticsLocalServiceUtil.getService());
 		actionableDynamicQuery.setClassLoader(getClassLoader());
 		actionableDynamicQuery.setModelClass(QuestionStatistics.class);
 
@@ -248,7 +248,7 @@ public abstract class QuestionStatisticsLocalServiceBaseImpl
 	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery() {
 		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
 
-		indexableActionableDynamicQuery.setBaseLocalService(questionStatisticsLocalService);
+		indexableActionableDynamicQuery.setBaseLocalService(de.ki.sbam.service.QuestionStatisticsLocalServiceUtil.getService());
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
 		indexableActionableDynamicQuery.setModelClass(QuestionStatistics.class);
 
@@ -259,7 +259,7 @@ public abstract class QuestionStatisticsLocalServiceBaseImpl
 
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
-		actionableDynamicQuery.setBaseLocalService(questionStatisticsLocalService);
+		actionableDynamicQuery.setBaseLocalService(de.ki.sbam.service.QuestionStatisticsLocalServiceUtil.getService());
 		actionableDynamicQuery.setClassLoader(getClassLoader());
 		actionableDynamicQuery.setModelClass(QuestionStatistics.class);
 
@@ -752,7 +752,7 @@ public abstract class QuestionStatisticsLocalServiceBaseImpl
 	protected de.ki.sbam.service.QuestionLocalService questionLocalService;
 	@BeanReference(type = QuestionPersistence.class)
 	protected QuestionPersistence questionPersistence;
-	@BeanReference(type = QuestionStatisticsLocalService.class)
+	@BeanReference(type = de.ki.sbam.service.QuestionStatisticsLocalService.class)
 	protected QuestionStatisticsLocalService questionStatisticsLocalService;
 	@BeanReference(type = QuestionStatisticsPersistence.class)
 	protected QuestionStatisticsPersistence questionStatisticsPersistence;

@@ -383,7 +383,7 @@ public class HighscoreClp extends BaseModelImpl<Highscore> implements Highscore 
 	private String _userName;
 	private long _score;
 	private BaseModel<?> _highscoreRemoteModel;
-	private Class<?> _clpSerializerClass = ClpSerializer.class;
+	private Class<?> _clpSerializerClass = de.ki.sbam.service.ClpSerializer.class;
 	private boolean _entityCacheEnabled;
 	private boolean _finderCacheEnabled;
 }

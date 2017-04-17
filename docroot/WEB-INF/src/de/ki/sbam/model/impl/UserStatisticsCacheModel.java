@@ -69,8 +69,8 @@ public class UserStatisticsCacheModel implements CacheModel<UserStatistics>,
 		sb.append(userId);
 		sb.append(", gamesWon=");
 		sb.append(gamesWon);
-		sb.append(", gamesLost=");
-		sb.append(gamesLost);
+		sb.append(", gamesPlayed=");
+		sb.append(gamesPlayed);
 		sb.append(", rightAnswers=");
 		sb.append(rightAnswers);
 		sb.append(", wrongAnswers=");
@@ -86,7 +86,7 @@ public class UserStatisticsCacheModel implements CacheModel<UserStatistics>,
 
 		userStatisticsImpl.setUserId(userId);
 		userStatisticsImpl.setGamesWon(gamesWon);
-		userStatisticsImpl.setGamesLost(gamesLost);
+		userStatisticsImpl.setGamesPlayed(gamesPlayed);
 		userStatisticsImpl.setRightAnswers(rightAnswers);
 		userStatisticsImpl.setWrongAnswers(wrongAnswers);
 
@@ -101,7 +101,7 @@ public class UserStatisticsCacheModel implements CacheModel<UserStatistics>,
 
 		gamesWon = objectInput.readLong();
 
-		gamesLost = objectInput.readLong();
+		gamesPlayed = objectInput.readLong();
 
 		rightAnswers = objectInput.readLong();
 
@@ -115,7 +115,7 @@ public class UserStatisticsCacheModel implements CacheModel<UserStatistics>,
 
 		objectOutput.writeLong(gamesWon);
 
-		objectOutput.writeLong(gamesLost);
+		objectOutput.writeLong(gamesPlayed);
 
 		objectOutput.writeLong(rightAnswers);
 
@@ -124,7 +124,7 @@ public class UserStatisticsCacheModel implements CacheModel<UserStatistics>,
 
 	public long userId;
 	public long gamesWon;
-	public long gamesLost;
+	public long gamesPlayed;
 	public long rightAnswers;
 	public long wrongAnswers;
 }

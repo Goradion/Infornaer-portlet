@@ -2,8 +2,6 @@ package game.infonaer.game;
 
 import java.util.List;
 
-import javax.swing.text.TabableView;
-
 import com.liferay.portal.kernel.model.User;
 
 import de.ki.sbam.model.Category;

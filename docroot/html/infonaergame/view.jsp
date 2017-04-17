@@ -15,7 +15,7 @@ String actionId = "EDIT_CONTENT";
 
 <h1>Wer Wird Infornär</h1>
 <ol>
-	<li><a href=<%=newGame %>>Neues Spiel</a></li>
+	<li><a href=<%=newGame %>>Spielen</a></li>
 	<li><a href=<%=highscores %>>Highscores</a></li>
 </ol>
 

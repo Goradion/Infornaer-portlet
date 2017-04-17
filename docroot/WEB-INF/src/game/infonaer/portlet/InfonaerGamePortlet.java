@@ -1,20 +1,6 @@
 package game.infonaer.portlet;
 
-import static game.infonaer.constants.Constants.CATEGORY_OVERVIEW_JSP;
-import static game.infonaer.constants.Constants.EDIT_CATEGORY_JSP;
-import static game.infonaer.constants.Constants.EDIT_CONTENT_JSP;
-import static game.infonaer.constants.Constants.EDIT_QUESTION_JSP;
-import static game.infonaer.constants.Constants.GAME_ERROR_JSP;
-import static game.infonaer.constants.Constants.GAME_JSP;
-import static game.infonaer.constants.Constants.GAME_OVER_JSP;
-import static game.infonaer.constants.Constants.GAME_WON_JSP;
-import static game.infonaer.constants.Constants.HIGHSCORES_JSP;
-import static game.infonaer.constants.Constants.LOAD_QUESTION_FROM_FILE_JSP;
-import static game.infonaer.constants.Constants.NEW_CATEGORY_JSP;
-import static game.infonaer.constants.Constants.NEW_GAME_JSP;
-import static game.infonaer.constants.Constants.NEW_QUESTION_JSP;
-import static game.infonaer.constants.Constants.QUESTION_OVERVIEW_JSP;
-import static game.infonaer.constants.Constants.VIEW_JSP;
+import static game.infonaer.constants.Constants.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -194,7 +180,7 @@ public class InfonaerGamePortlet extends MVCPortlet {
 		List<Difficulty> difficulties = DifficultyLocalServiceUtil.findAll();
 		ThemeDisplay td = (ThemeDisplay) actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
 		User user = td.getUser();
-		GameState gameState = new GameState(user, selectedCategories, difficulties);
+		GameState gameState = InfonaerGameUtil.startNewGame(user, selectedCategories, difficulties); 
 		InfonaerGameUtil.pickQuestion(gameState);
 		actionRequest.getPortletSession().setAttribute("gameState", gameState, PortletSession.PORTLET_SCOPE);
 		actionRequest.getPortletSession().setAttribute("currentPage", GAME_JSP, PortletSession.PORTLET_SCOPE);
@@ -221,12 +207,14 @@ public class InfonaerGamePortlet extends MVCPortlet {
 		actionRequest.getPortletSession().setAttribute("currentPage", VIEW_JSP, PortletSession.PORTLET_SCOPE);
 	}
 
-	public void gotoEditMode(ActionRequest actionRequest, ActionResponse actionResponse)
-			throws IOException, PortletException {
+	public void gotoEditMode(ActionRequest actionRequest, ActionResponse actionResponse) {
 		actionRequest.getPortletSession().setAttribute("currentPage", EDIT_CONTENT_JSP, PortletSession.PORTLET_SCOPE);
 
 	}
 
+	public void gotoUserStats(ActionRequest actionRequest, ActionResponse actionResponse){
+		actionRequest.getPortletSession().setAttribute("", USER_STATS_JSP, PortletSession.PORTLET_SCOPE);
+	}
 	public void gotoLoadQuestionFromFile(ActionRequest actionRequest, ActionResponse actionResponse)
 			throws IOException, PortletException {
 		actionRequest.getPortletSession().setAttribute("currentPage", LOAD_QUESTION_FROM_FILE_JSP,

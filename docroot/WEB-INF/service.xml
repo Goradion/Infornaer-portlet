@@ -109,7 +109,7 @@
 	<entity name="UserStatistics" local-service="true" remote-service="true">
 		<column name="userId" type="long" primary="true"></column>
 		<column name="gamesWon" type="long"></column>
-		<column name="gamesLost" type="long"></column>
+		<column name="gamesPlayed" type="long"></column>
 		<column name="rightAnswers" type="long"></column>
 		<column name="wrongAnswers" type="long"></column>
 		<!-- hier können noch mehr Sachen stehen -->

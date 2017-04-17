@@ -213,8 +213,8 @@ public class UserStatisticsPersistenceImpl extends BasePersistenceImpl<UserStati
 					primaryKey);
 
 			if (userStatistics == null) {
-				if (_log.isDebugEnabled()) {
-					_log.debug(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
+				if (_log.isWarnEnabled()) {
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchUserStatisticsException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
@@ -320,7 +320,7 @@ public class UserStatisticsPersistenceImpl extends BasePersistenceImpl<UserStati
 
 		userStatisticsImpl.setUserId(userStatistics.getUserId());
 		userStatisticsImpl.setGamesWon(userStatistics.getGamesWon());
-		userStatisticsImpl.setGamesLost(userStatistics.getGamesLost());
+		userStatisticsImpl.setGamesPlayed(userStatistics.getGamesPlayed());
 		userStatisticsImpl.setRightAnswers(userStatistics.getRightAnswers());
 		userStatisticsImpl.setWrongAnswers(userStatistics.getWrongAnswers());
 
@@ -340,8 +340,8 @@ public class UserStatisticsPersistenceImpl extends BasePersistenceImpl<UserStati
 		UserStatistics userStatistics = fetchByPrimaryKey(primaryKey);
 
 		if (userStatistics == null) {
-			if (_log.isDebugEnabled()) {
-				_log.debug(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
+			if (_log.isWarnEnabled()) {
+				_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 			}
 
 			throw new NoSuchUserStatisticsException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +

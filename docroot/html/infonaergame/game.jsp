@@ -84,7 +84,7 @@
 		<aui:col span="5">
 			<form
 				action=<portlet:actionURL name="evalAnswer">
-							<portlet:param name="answer" value="a"/>
+							<portlet:param name="answer" value="A"/>
 						</portlet:actionURL>
 				method="post">
 				<button type="submit" class="btn btn-primary">
@@ -95,7 +95,7 @@
 		<aui:col span="5">
 			<form
 				action=<portlet:actionURL name="evalAnswer">
-							<portlet:param name="answer" value="b"/>
+							<portlet:param name="answer" value="B"/>
 						</portlet:actionURL>
 				method="post">
 				<button type="submit" class="btn btn-primary">
@@ -110,7 +110,7 @@
 		<aui:col span="5">
 			<form
 				action=<portlet:actionURL name="evalAnswer">
-							<portlet:param name="answer" value="c"/>
+							<portlet:param name="answer" value="C"/>
 						</portlet:actionURL>
 				method="post">
 				<button type="submit" class="btn btn-primary">
@@ -121,7 +121,7 @@
 		<aui:col span="5">
 			<form
 				action=<portlet:actionURL name="evalAnswer">
-							<portlet:param name="answer" value="d"/>
+							<portlet:param name="answer" value="D"/>
 						</portlet:actionURL>
 				method="post">
 				<button type="submit" class="btn btn-primary">
@@ -139,7 +139,7 @@
 </p>
 
 <%
-	}
+		}
 	} else {
 %>
 

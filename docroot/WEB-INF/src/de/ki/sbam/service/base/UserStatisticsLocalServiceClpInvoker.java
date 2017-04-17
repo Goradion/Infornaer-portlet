@@ -120,6 +120,26 @@ public class UserStatisticsLocalServiceClpInvoker {
 		_methodName58 = "getOSGiServiceIdentifier";
 
 		_methodParameterTypes58 = new String[] {  };
+
+		_methodName63 = "findAll";
+
+		_methodParameterTypes63 = new String[] {  };
+
+		_methodName64 = "addRightAnswer";
+
+		_methodParameterTypes64 = new String[] { "long" };
+
+		_methodName65 = "addWrongAnswer";
+
+		_methodParameterTypes65 = new String[] { "long" };
+
+		_methodName66 = "addWonGame";
+
+		_methodParameterTypes66 = new String[] { "long" };
+
+		_methodName67 = "addPlayedGame";
+
+		_methodParameterTypes67 = new String[] { "long" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -231,6 +251,31 @@ public class UserStatisticsLocalServiceClpInvoker {
 			return UserStatisticsLocalServiceUtil.getOSGiServiceIdentifier();
 		}
 
+		if (_methodName63.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes63, parameterTypes)) {
+			return UserStatisticsLocalServiceUtil.findAll();
+		}
+
+		if (_methodName64.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes64, parameterTypes)) {
+			return UserStatisticsLocalServiceUtil.addRightAnswer(((Long)arguments[0]).longValue());
+		}
+
+		if (_methodName65.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes65, parameterTypes)) {
+			return UserStatisticsLocalServiceUtil.addWrongAnswer(((Long)arguments[0]).longValue());
+		}
+
+		if (_methodName66.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes66, parameterTypes)) {
+			return UserStatisticsLocalServiceUtil.addWonGame(((Long)arguments[0]).longValue());
+		}
+
+		if (_methodName67.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes67, parameterTypes)) {
+			return UserStatisticsLocalServiceUtil.addPlayedGame(((Long)arguments[0]).longValue());
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -274,4 +319,14 @@ public class UserStatisticsLocalServiceClpInvoker {
 	private String[] _methodParameterTypes19;
 	private String _methodName58;
 	private String[] _methodParameterTypes58;
+	private String _methodName63;
+	private String[] _methodParameterTypes63;
+	private String _methodName64;
+	private String[] _methodParameterTypes64;
+	private String _methodName65;
+	private String[] _methodParameterTypes65;
+	private String _methodName66;
+	private String[] _methodParameterTypes66;
+	private String _methodName67;
+	private String[] _methodParameterTypes67;
 }

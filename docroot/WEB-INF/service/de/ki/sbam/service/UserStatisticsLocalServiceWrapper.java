@@ -35,35 +35,13 @@ public class UserStatisticsLocalServiceWrapper
 	}
 
 	@Override
-	public com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery getActionableDynamicQuery() {
-		return _userStatisticsLocalService.getActionableDynamicQuery();
+	public de.ki.sbam.model.UserStatistics addPlayedGame(long userId) {
+		return _userStatisticsLocalService.addPlayedGame(userId);
 	}
 
 	@Override
-	public com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery() {
-		return _userStatisticsLocalService.dynamicQuery();
-	}
-
-	@Override
-	public com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery getIndexableActionableDynamicQuery() {
-		return _userStatisticsLocalService.getIndexableActionableDynamicQuery();
-	}
-
-	/**
-	* @throws PortalException
-	*/
-	@Override
-	public com.liferay.portal.kernel.model.PersistedModel deletePersistedModel(
-		com.liferay.portal.kernel.model.PersistedModel persistedModel)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _userStatisticsLocalService.deletePersistedModel(persistedModel);
-	}
-
-	@Override
-	public com.liferay.portal.kernel.model.PersistedModel getPersistedModel(
-		java.io.Serializable primaryKeyObj)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _userStatisticsLocalService.getPersistedModel(primaryKeyObj);
+	public de.ki.sbam.model.UserStatistics addRightAnswer(long userId) {
+		return _userStatisticsLocalService.addRightAnswer(userId);
 	}
 
 	/**
@@ -78,6 +56,16 @@ public class UserStatisticsLocalServiceWrapper
 		return _userStatisticsLocalService.addUserStatistics(userStatistics);
 	}
 
+	@Override
+	public de.ki.sbam.model.UserStatistics addWonGame(long userId) {
+		return _userStatisticsLocalService.addWonGame(userId);
+	}
+
+	@Override
+	public de.ki.sbam.model.UserStatistics addWrongAnswer(long userId) {
+		return _userStatisticsLocalService.addWrongAnswer(userId);
+	}
+
 	/**
 	* Creates a new user statistics with the primary key. Does not add the user statistics to the database.
 	*
@@ -90,15 +78,13 @@ public class UserStatisticsLocalServiceWrapper
 	}
 
 	/**
-	* Deletes the user statistics from the database. Also notifies the appropriate model listeners.
-	*
-	* @param userStatistics the user statistics
-	* @return the user statistics that was removed
+	* @throws PortalException
 	*/
 	@Override
-	public de.ki.sbam.model.UserStatistics deleteUserStatistics(
-		de.ki.sbam.model.UserStatistics userStatistics) {
-		return _userStatisticsLocalService.deleteUserStatistics(userStatistics);
+	public com.liferay.portal.kernel.model.PersistedModel deletePersistedModel(
+		com.liferay.portal.kernel.model.PersistedModel persistedModel)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _userStatisticsLocalService.deletePersistedModel(persistedModel);
 	}
 
 	/**
@@ -114,62 +100,21 @@ public class UserStatisticsLocalServiceWrapper
 		return _userStatisticsLocalService.deleteUserStatistics(userId);
 	}
 
-	@Override
-	public de.ki.sbam.model.UserStatistics fetchUserStatistics(long userId) {
-		return _userStatisticsLocalService.fetchUserStatistics(userId);
-	}
-
 	/**
-	* Returns the user statistics with the primary key.
-	*
-	* @param userId the primary key of the user statistics
-	* @return the user statistics
-	* @throws PortalException if a user statistics with the primary key could not be found
-	*/
-	@Override
-	public de.ki.sbam.model.UserStatistics getUserStatistics(long userId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _userStatisticsLocalService.getUserStatistics(userId);
-	}
-
-	/**
-	* Updates the user statistics in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
+	* Deletes the user statistics from the database. Also notifies the appropriate model listeners.
 	*
 	* @param userStatistics the user statistics
-	* @return the user statistics that was updated
+	* @return the user statistics that was removed
 	*/
 	@Override
-	public de.ki.sbam.model.UserStatistics updateUserStatistics(
+	public de.ki.sbam.model.UserStatistics deleteUserStatistics(
 		de.ki.sbam.model.UserStatistics userStatistics) {
-		return _userStatisticsLocalService.updateUserStatistics(userStatistics);
-	}
-
-	/**
-	* Returns the number of user statisticses.
-	*
-	* @return the number of user statisticses
-	*/
-	@Override
-	public int getUserStatisticsesCount() {
-		return _userStatisticsLocalService.getUserStatisticsesCount();
+		return _userStatisticsLocalService.deleteUserStatistics(userStatistics);
 	}
 
 	@Override
-	public java.lang.Object invokeMethod(java.lang.String name,
-		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
-		throws java.lang.Throwable {
-		return _userStatisticsLocalService.invokeMethod(name, parameterTypes,
-			arguments);
-	}
-
-	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
-	@Override
-	public java.lang.String getOSGiServiceIdentifier() {
-		return _userStatisticsLocalService.getOSGiServiceIdentifier();
+	public com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery() {
+		return _userStatisticsLocalService.dynamicQuery();
 	}
 
 	/**
@@ -226,23 +171,6 @@ public class UserStatisticsLocalServiceWrapper
 	}
 
 	/**
-	* Returns a range of all the user statisticses.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link de.ki.sbam.model.impl.UserStatisticsModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param start the lower bound of the range of user statisticses
-	* @param end the upper bound of the range of user statisticses (not inclusive)
-	* @return the range of user statisticses
-	*/
-	@Override
-	public java.util.List<de.ki.sbam.model.UserStatistics> getUserStatisticses(
-		int start, int end) {
-		return _userStatisticsLocalService.getUserStatisticses(start, end);
-	}
-
-	/**
 	* Returns the number of rows matching the dynamic query.
 	*
 	* @param dynamicQuery the dynamic query
@@ -267,6 +195,103 @@ public class UserStatisticsLocalServiceWrapper
 		com.liferay.portal.kernel.dao.orm.Projection projection) {
 		return _userStatisticsLocalService.dynamicQueryCount(dynamicQuery,
 			projection);
+	}
+
+	@Override
+	public de.ki.sbam.model.UserStatistics fetchUserStatistics(long userId) {
+		return _userStatisticsLocalService.fetchUserStatistics(userId);
+	}
+
+	@Override
+	public java.util.List<de.ki.sbam.model.UserStatistics> findAll() {
+		return _userStatisticsLocalService.findAll();
+	}
+
+	@Override
+	public com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery getActionableDynamicQuery() {
+		return _userStatisticsLocalService.getActionableDynamicQuery();
+	}
+
+	@Override
+	public com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery getIndexableActionableDynamicQuery() {
+		return _userStatisticsLocalService.getIndexableActionableDynamicQuery();
+	}
+
+	/**
+	* Returns the OSGi service identifier.
+	*
+	* @return the OSGi service identifier
+	*/
+	@Override
+	public java.lang.String getOSGiServiceIdentifier() {
+		return _userStatisticsLocalService.getOSGiServiceIdentifier();
+	}
+
+	@Override
+	public com.liferay.portal.kernel.model.PersistedModel getPersistedModel(
+		java.io.Serializable primaryKeyObj)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _userStatisticsLocalService.getPersistedModel(primaryKeyObj);
+	}
+
+	/**
+	* Returns the user statistics with the primary key.
+	*
+	* @param userId the primary key of the user statistics
+	* @return the user statistics
+	* @throws PortalException if a user statistics with the primary key could not be found
+	*/
+	@Override
+	public de.ki.sbam.model.UserStatistics getUserStatistics(long userId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _userStatisticsLocalService.getUserStatistics(userId);
+	}
+
+	/**
+	* Returns a range of all the user statisticses.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link de.ki.sbam.model.impl.UserStatisticsModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param start the lower bound of the range of user statisticses
+	* @param end the upper bound of the range of user statisticses (not inclusive)
+	* @return the range of user statisticses
+	*/
+	@Override
+	public java.util.List<de.ki.sbam.model.UserStatistics> getUserStatisticses(
+		int start, int end) {
+		return _userStatisticsLocalService.getUserStatisticses(start, end);
+	}
+
+	/**
+	* Returns the number of user statisticses.
+	*
+	* @return the number of user statisticses
+	*/
+	@Override
+	public int getUserStatisticsesCount() {
+		return _userStatisticsLocalService.getUserStatisticsesCount();
+	}
+
+	@Override
+	public java.lang.Object invokeMethod(java.lang.String name,
+		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
+		throws java.lang.Throwable {
+		return _userStatisticsLocalService.invokeMethod(name, parameterTypes,
+			arguments);
+	}
+
+	/**
+	* Updates the user statistics in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
+	*
+	* @param userStatistics the user statistics
+	* @return the user statistics that was updated
+	*/
+	@Override
+	public de.ki.sbam.model.UserStatistics updateUserStatistics(
+		de.ki.sbam.model.UserStatistics userStatistics) {
+		return _userStatisticsLocalService.updateUserStatistics(userStatistics);
 	}
 
 	@Override

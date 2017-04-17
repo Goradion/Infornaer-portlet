@@ -61,7 +61,7 @@
 			<generator class="assigned" />
 		</id>
 		<property name="gamesWon" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="gamesLost" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="gamesPlayed" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="rightAnswers" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="wrongAnswers" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>

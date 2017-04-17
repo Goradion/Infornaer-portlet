@@ -58,7 +58,7 @@ create table sbam_UserQuestion (
 create table sbam_UserStatistics (
 	userId LONG not null primary key,
 	gamesWon LONG,
-	gamesLost LONG,
+	gamesPlayed LONG,
 	rightAnswers LONG,
 	wrongAnswers LONG
 );

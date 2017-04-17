@@ -98,6 +98,7 @@ public class CategoryLocalServiceImpl extends CategoryLocalServiceBaseImpl {
 	 * @throws NoSuchCategoryException
 	 */
 	public Category deleteCategory(long categoryId) throws NoSuchCategoryException {
+		questionPersistence.removeByCategory(categoryId);
 		return categoryPersistence.remove(categoryId);
 	}
 
@@ -110,10 +111,12 @@ public class CategoryLocalServiceImpl extends CategoryLocalServiceBaseImpl {
 	 * @return Category deleted category
 	 */
 	public Category deleteCategory(Category category) {
+		questionPersistence.removeByCategory(category.getCategoryId());
 		return categoryPersistence.remove(category);
 	}
 
 	public void deleteAllCategories() {
+		questionPersistence.removeAll();
 		CategoryUtil.removeAll();
 	}
 

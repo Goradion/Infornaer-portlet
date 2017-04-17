@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import com.liferay.portal.kernel.model.User;
+
 import de.ki.sbam.model.Category;
 import de.ki.sbam.model.Difficulty;
 import de.ki.sbam.model.Highscore;
@@ -12,10 +14,25 @@ import de.ki.sbam.model.QuestionStatistics;
 import de.ki.sbam.service.HighscoreLocalServiceUtil;
 import de.ki.sbam.service.QuestionLocalServiceUtil;
 import de.ki.sbam.service.QuestionStatisticsLocalServiceUtil;
+import de.ki.sbam.service.UserStatisticsLocalServiceUtil;
 
 public class InfonaerGameUtil {
 	private static Random randomGenerator = new Random();
 
+	
+	
+	/**
+	 * creates a new gameState
+	 * adds a played game for the player
+	 * @param user
+	 * @param selectedCategories
+	 * @param difficulties
+	 * @return
+	 */
+	public static GameState startNewGame(User user, List<Category> selectedCategories, List<Difficulty> difficulties){
+		UserStatisticsLocalServiceUtil.addPlayedGame(user.getUserId());
+		return new GameState(user, selectedCategories, difficulties);
+	}
 	/**
 	 * picks a new Question for the gameState if possible
 	 * 
@@ -70,6 +87,7 @@ public class InfonaerGameUtil {
 			} else {
 				win(gameState);
 			}
+			UserStatisticsLocalServiceUtil.addRightAnswer(gameState.getPlayer().getUserId());
 			return true;
 		} else {
 			lose(gameState);
@@ -179,6 +197,7 @@ public class InfonaerGameUtil {
 	 * @param gameState
 	 */
 	private static void win(GameState gameState) {
+		UserStatisticsLocalServiceUtil.addWonGame(gameState.getPlayer().getUserId());
 		gameState.win();
 		saveHighscore(gameState);
 	}
@@ -217,7 +236,6 @@ public class InfonaerGameUtil {
 		long score = highscore.getScore();
 		highscore.setScore(score + gameState.getScore());
 		HighscoreLocalServiceUtil.updateHighscore(highscore);
-		// TODO userstats
 	}
 
 }
