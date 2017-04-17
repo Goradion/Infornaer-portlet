@@ -3,7 +3,7 @@
 
 
 
-<portlet:actionURL name="addQuestion" var="addQuestionURL" />
+<portlet:actionURL name="upsertQuestion" var="addQuestionURL" />
 
 <portlet:actionURL name="goToQuestionOverview" var="questionOverview"></portlet:actionURL>
 <h1>Frage ändern</h1>

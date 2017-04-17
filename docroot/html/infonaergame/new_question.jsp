@@ -3,7 +3,7 @@
 
 
 <portlet:actionURL name="gotoLoadQuestionFromFile" var="loadFromFile"></portlet:actionURL>
-<portlet:actionURL name="addQuestion" var="addQuestionURL"></portlet:actionURL>
+<portlet:actionURL name="upsertQuestion" var="addQuestionURL"></portlet:actionURL>
 <portlet:actionURL name="goToQuestionOverview" var="questionOverview"></portlet:actionURL>
 
 <portlet:actionURL name="gotoEditMode" var="editMode"></portlet:actionURL>
