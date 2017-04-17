@@ -5,6 +5,8 @@
 
 <portlet:actionURL name="gotoEditMode" var="editMode"></portlet:actionURL>
 <portlet:actionURL name="gotoNewQuestion" var="newQuestion"></portlet:actionURL>
+<portlet:actionURL name="gotoQuestionStatistics" var="questionStats"></portlet:actionURL>
+
 <%-- 
 <table>
   <tr>
@@ -86,7 +88,7 @@
 </liferay-portlet:renderURL>
 
 <h1>Fragen</h1>
-
+<p align="right"><a href='<%=questionStats%>'>Fragen Statistiken</a></p>
 <liferay-ui:search-container  var="searchContainer" delta="5" emptyResultsMessage="Keine Fragen wurden gefunden."
 	compactEmptyResultsMessage="Keine Fragen gefunden." deltaConfigurable="true"
 	iteratorURL="<%=iteratorURL%>">
