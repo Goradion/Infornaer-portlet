@@ -1,31 +1,39 @@
 package game.infonaer.portlet;
 
-import static game.infonaer.constants.Constants.*;
+import static game.infonaer.constants.Constants.CATEGORY_OVERVIEW_JSP;
+import static game.infonaer.constants.Constants.EDIT_CATEGORY_JSP;
+import static game.infonaer.constants.Constants.EDIT_JSP;
+import static game.infonaer.constants.Constants.EDIT_QUESTION_JSP;
+import static game.infonaer.constants.Constants.GAME_ERROR_JSP;
+import static game.infonaer.constants.Constants.GAME_JSP;
+import static game.infonaer.constants.Constants.GAME_OVER_JSP;
+import static game.infonaer.constants.Constants.GAME_WON_JSP;
+import static game.infonaer.constants.Constants.HIGHSCORES_JSP;
+import static game.infonaer.constants.Constants.LOAD_QUESTION_FROM_FILE_JSP;
+import static game.infonaer.constants.Constants.NEW_CATEGORY_JSP;
+import static game.infonaer.constants.Constants.NEW_GAME_JSP;
+import static game.infonaer.constants.Constants.NEW_QUESTION_JSP;
+import static game.infonaer.constants.Constants.QUESTION_OVERVIEW_JSP;
+import static game.infonaer.constants.Constants.VIEW_JSP;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Random;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletContext;
 import javax.portlet.PortletException;
-import javax.portlet.PortletMode;
 import javax.portlet.PortletRequestDispatcher;
 import javax.portlet.PortletSession;
 import javax.portlet.ProcessAction;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
-import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.NoSuchUserException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.User;
@@ -37,7 +45,6 @@ import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 
 import de.ki.sbam.exception.NoSuchCategoryException;
-import de.ki.sbam.exception.NoSuchHighscoreException;
 import de.ki.sbam.model.Category;
 import de.ki.sbam.model.Difficulty;
 import de.ki.sbam.model.Highscore;
@@ -49,7 +56,6 @@ import de.ki.sbam.service.QuestionLocalServiceUtil;
 import game.infonaer.game.AudienceJokerResult;
 import game.infonaer.game.GameState;
 import game.infonaer.game.InfonaerGameUtil;
-import game.infonaer.constants.Constants;
 
 /**
  * Portlet implementation class InfonaerGame
@@ -65,20 +71,13 @@ public class InfonaerGamePortlet extends MVCPortlet {
 
 		for (int i = 0; i < 15; i++) {
 			DifficultyLocalServiceUtil.addDifficultry(scores[i], guarantees[i]);
-			Category category = CategoryLocalServiceUtil.addCategory("asdf");
-			try {
-				QuestionLocalServiceUtil.addQuestion("asdf", "asdf", "qwer", "yxcv", "jkl;", "A", category.getCategoryId(), scores[i], null);
-			} catch (NoSuchUserException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 		}
+
 	}
 
 	@Override
 	public void doEdit(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {
-		// TODO Auto-generated method stub
 		super.doEdit(renderRequest, renderResponse);
 
 	}
@@ -167,7 +166,6 @@ public class InfonaerGamePortlet extends MVCPortlet {
 			try {
 				selectedCategories.add(CategoryLocalServiceUtil.getCategoryByName(categoryName));
 			} catch (NoSuchCategoryException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -290,7 +288,6 @@ public class InfonaerGamePortlet extends MVCPortlet {
 
 	public void uploadQuestions(ActionRequest actionRequest, ActionResponse actionResponse)
 			throws IOException, PortletException, URISyntaxException {
-		System.out.println("Uploading questions requested...");
 		ThemeDisplay td = (ThemeDisplay) actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
 		UploadPortletRequest uploadPortletRequest = PortalUtil.getUploadPortletRequest(actionRequest);
 		if (actionRequest.getPortletSession().getAttribute("questions") == null) {
@@ -338,7 +335,6 @@ public class InfonaerGamePortlet extends MVCPortlet {
 		String categoryString = actionRequest.getParameter("category");
 		long categoryId = Long.parseLong(categoryString);
 		ThemeDisplay td = (ThemeDisplay) actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
-		long userId = td.getUserId();
 		User user = null;
 		try {
 			user = UserLocalServiceUtil.getUser(td.getUserId());
@@ -349,7 +345,6 @@ public class InfonaerGamePortlet extends MVCPortlet {
 				long id = Long.parseLong(questionId);
 
 				Question question = QuestionLocalServiceUtil.getQuestion(id);
-				Category category = CategoryLocalServiceUtil.getCategory(categoryId);
 				question.setQuestionContent(questionContent);
 				question.setAnswerA(answerA);
 				question.setAnswerB(answerB);
@@ -382,22 +377,33 @@ public class InfonaerGamePortlet extends MVCPortlet {
 		goToQuestionOverview(actionRequest, actionResponse);
 	}
 
-	// TODO remove
 	public void test(ActionRequest actionRequest, ActionResponse actionResponse) {
-		// actionRequest.getPortletSession().setAttribute("currentPage",
-		// EDIT_QUESTION_JSP, PortletSession.PORTLET_SCOPE);
-		GameState gameState = (GameState) actionRequest.getPortletSession().getAttribute("gameState");
-		System.out.println(gameState.getCurrentDifficulty());
-	}
-
-	public void getHighscore(ActionRequest actionRequest, ActionResponse actionResponse) {
-
-	}
-
-	public void addHighscore(ActionRequest actionRequest, ActionResponse actionResponse) {
 		ThemeDisplay td = (ThemeDisplay) actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
-		// HighscoreLocalServiceUtil.createHighscore(td.getUserId());
+		long userId = td.getUserId();
+		User user = null;
+		Category category = CategoryLocalServiceUtil.addCategory("Test");
+		try {
+			user = UserLocalServiceUtil.getUser(userId);
+			List<Difficulty> difficulties = DifficultyLocalServiceUtil.findAll();
+			for (Difficulty difficulty : difficulties) {
+				for (int i = 1; i < 5; i++) {
+					QuestionLocalServiceUtil.addQuestion("TestfrageA" + " i", "Richtig", "Falsch", "Falsch", "Falsch",
+							"A", category.getCategoryId(), difficulty.getPrimaryKey(), user);
+					QuestionLocalServiceUtil.addQuestion("TestfrageB" + " i", "Falsch", "Richtig", "Falsch", "Falsch",
+							"B", category.getCategoryId(), difficulty.getPrimaryKey(), user);
+					QuestionLocalServiceUtil.addQuestion("TestfrageC" + " i", "Falsch", "Falsch", "Richtig", "Falsch",
+							"C", category.getCategoryId(), difficulty.getPrimaryKey(), user);
+					QuestionLocalServiceUtil.addQuestion("TestfrageD" + " i", "Falsch", "Falsch", "Falsch", "Richtig",
+							"D", category.getCategoryId(), difficulty.getPrimaryKey(), user);
+				}
+			}
+		} catch (PortalException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
 	}
+
 
 	public void goToQuestionOverview(ActionRequest actionRequest, ActionResponse actionResponse) {
 		actionRequest.getPortletSession().setAttribute("currentPage", QUESTION_OVERVIEW_JSP,
@@ -414,10 +420,10 @@ public class InfonaerGamePortlet extends MVCPortlet {
 		portletSession.removeAttribute("category", PortletSession.APPLICATION_SCOPE);
 		portletSession.removeAttribute("dList", PortletSession.APPLICATION_SCOPE);
 		portletSession.removeAttribute("cList", PortletSession.APPLICATION_SCOPE);
-		questionPagination(actionRequest, actionResponse);
+		//questionPagination(actionRequest, actionResponse);
 	}
 
-	public void questionPagination(ActionRequest actionRequest, ActionResponse actionResponse) {
+	private void questionPagination(ActionRequest actionRequest, ActionResponse actionResponse) {
 		int page = 1;
 		int recordsPerPage = 5;
 		if (actionRequest.getParameter("page") != null) {
@@ -441,6 +447,8 @@ public class InfonaerGamePortlet extends MVCPortlet {
 		String categoryName = actionRequest.getParameter("categoryName");
 		String unlocked = actionRequest.getParameter("unlocked");
 		boolean isUnlocked = (unlocked != null);
+		System.out.println(categoryIdString);
+		System.out.println(isUnlocked);
 		try {
 			if (categoryIdString == null) {
 				CategoryLocalServiceUtil.addCategory(categoryName);
@@ -450,6 +458,7 @@ public class InfonaerGamePortlet extends MVCPortlet {
 				category.setCategoryName(categoryName);
 				if (unlockPossible(categoryId)) {
 					category.setUnlocked(isUnlocked);
+					System.out.println("unlocked");
 				}
 				CategoryLocalServiceUtil.updateCategory(category);
 			}
@@ -490,7 +499,7 @@ public class InfonaerGamePortlet extends MVCPortlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		categoryPagination(actionRequest, actionResponse);
+		//categoryPagination(actionRequest, actionResponse);
 	}
 
 	public void goToCategoryOverview(ActionRequest actionRequest, ActionResponse actionResponse) {
@@ -500,10 +509,10 @@ public class InfonaerGamePortlet extends MVCPortlet {
 		portletSession.removeAttribute("categoryId", PortletSession.APPLICATION_SCOPE);
 		portletSession.removeAttribute("categoryName", PortletSession.APPLICATION_SCOPE);
 		portletSession.removeAttribute("unlocked", PortletSession.APPLICATION_SCOPE);
-		categoryPagination(actionRequest, actionResponse);
+		//categoryPagination(actionRequest, actionResponse);
 	}
 
-	public void categoryPagination(ActionRequest actionRequest, ActionResponse actionResponse) {
+	private void categoryPagination(ActionRequest actionRequest, ActionResponse actionResponse) {
 		int page = 1;
 		int recordsPerPage = 5;
 		if (actionRequest.getParameter("page") != null) {
@@ -567,12 +576,6 @@ public class InfonaerGamePortlet extends MVCPortlet {
 		}
 	}
 
-	public void startGame(ActionRequest actionRequest, ActionResponse actionResponse) {
-		actionRequest.getPortletSession().setAttribute("currentPage", GAME_JSP, PortletSession.PORTLET_SCOPE);
-		Question question = QuestionLocalServiceUtil.findByDifficulty(1).get(0);
-		actionRequest.setAttribute("question", question);
-	}
-
 	public void leaveCurrentGame(ActionRequest actionRequest, ActionResponse actionResponse) {
 		GameState gameState = (GameState) actionRequest.getPortletSession().getAttribute("gameState");
 		if (gameState != null) {
@@ -592,16 +595,4 @@ public class InfonaerGamePortlet extends MVCPortlet {
 		actionRequest.getPortletSession().setAttribute("audienceJokerResult", useAudience);
 	}
 
-	private void testHighscores() {
-		List<User> users = UserLocalServiceUtil.getUsers(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
-		for (User u : users) {
-			System.out.println(u.getUserId() + " " + u.getFullName());
-		}
-		for (int i = 0; i < 50; i++) {
-			HighscoreLocalServiceUtil.addHighscore(new Random().nextLong(), users.get(i % users.size()));
-		}
-		for (Highscore h : HighscoreLocalServiceUtil.getHighscores(QueryUtil.ALL_POS, QueryUtil.ALL_POS)) {
-			System.out.println(h.getScore() + " " + h.getUserName());
-		}
-	}
 }

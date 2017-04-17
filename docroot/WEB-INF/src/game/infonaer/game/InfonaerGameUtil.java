@@ -165,6 +165,7 @@ public class InfonaerGameUtil {
 		}
 		long score = highscore.getScore();
 		highscore.setScore(score + gameState.getScore());
+		HighscoreLocalServiceUtil.updateHighscore(highscore);
 		// TODO userstats
 	}
 

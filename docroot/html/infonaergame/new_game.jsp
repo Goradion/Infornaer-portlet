@@ -3,7 +3,7 @@
 
 <portlet:actionURL name="startSimonGame" var="startSGame"></portlet:actionURL>
 <portlet:actionURL name="startGame" var="game"></portlet:actionURL>
-<portlet:actionURL name="gotoMainMenue" var="mainMenu"></portlet:actionURL>
+<portlet:actionURL name="gotoMainMenu" var="mainMenu"></portlet:actionURL>
 
 <h1>New Game View</h1>
 <form method="POST" action="${startSGame}"> <h3>Kreuzen Sie die gewünschten Kategorien an:</h3> 
