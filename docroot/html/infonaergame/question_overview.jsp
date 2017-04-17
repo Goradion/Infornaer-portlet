@@ -87,7 +87,7 @@
 
 <h1>Fragen</h1>
 
-<liferay-ui:search-container  var="searchContainer" delta="5" emptyResultsMessage="Keine Fragen wurden gefunden"
+<liferay-ui:search-container  var="searchContainer" delta="5" emptyResultsMessage="Keine Fragen wurden gefunden."
 	compactEmptyResultsMessage="Keine Fragen gefunden." deltaConfigurable="true"
 	iteratorURL="<%=iteratorURL%>">
 	<liferay-ui:search-container-results>
@@ -121,7 +121,9 @@
 		<liferay-ui:search-container-column-text name="Antwort C" property="answerC"/>
 		<liferay-ui:search-container-column-text name="Antwort D" property="answerD"/>
 		<liferay-ui:search-container-column-text name="Richtige Antwort" property="rightAnswer"/>
-		<liferay-ui:search-container-column-text name="Kategorie ID" property="categoryId_fk"/>
+		<liferay-ui:search-container-column-text name="Kategorie">
+			<%=CategoryLocalServiceUtil.fetchCategory(question.getCategoryId_fk()).getCategoryName() %>
+		</liferay-ui:search-container-column-text>
 		<liferay-ui:search-container-column-text name="Schwierigkeit" property="difficultyId_fk"/>
 		<liferay-ui:search-container-column-jsp path="<%=Constants.ADMIN_ACTION_QUESTION %>"></liferay-ui:search-container-column-jsp>
 	</liferay-ui:search-container-row>

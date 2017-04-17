@@ -79,7 +79,7 @@
 <h1>Kategorien</h1>
 
 <liferay-ui:search-container var="searchContainer" delta="5"
-	compactEmptyResultsMessage="No categories." deltaConfigurable="true"
+	compactEmptyResultsMessage="Keine Kategorien gefunden." deltaConfigurable="true"
 	iteratorURL="<%=iteratorURL%>">
 	<liferay-ui:search-container-results>
 		<%

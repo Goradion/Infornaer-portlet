@@ -11,7 +11,7 @@
 	<input type="text" name="<portlet:namespace />questionId"
 		value="${sessionScope.questionId}" maxlength="75" readonly hidden="true" /> <br />
 	Frage: <br />
-	<textarea name="<portlet:namespace />question" rows="5">$sessionScope.{question}</textarea>
+	<textarea name="<portlet:namespace />question" rows="5">${sessionScope.question}</textarea>
 	<br /> Antwort A: <br /> <input type="text"
 		name="<portlet:namespace />answerA" value="${sessionScope.answerA}" maxlength="75"
 		required /> <br /> Antwort B: <br /> <input type="text"
