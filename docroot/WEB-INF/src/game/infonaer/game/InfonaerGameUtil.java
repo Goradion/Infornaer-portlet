@@ -17,19 +17,28 @@ public class InfonaerGameUtil {
 	private static Random randomGenerator = new Random();
 
 	public static void pickQuestion(GameState gameState) {
+		if (gameState.isGameOver() || gameState.isWon() || gameState.hasError()){
+			return;
+		}
 		List<Category> categories = gameState.getCategories();
 		List<Difficulty> difficulties = gameState.getDifficulties();
-		int size = categories.size();
-		if (size == 0) {
-			throw new IllegalStateException("Keine Kategorie!");
+		int currentDifficulty = gameState.getCurrentDifficulty();
+		if (categories.isEmpty() || difficulties.isEmpty() || currentDifficulty >= difficulties.size()) {
+			gameState.crash();
+			return;
 		}
-		int chosenCategoryIndex = randomGenerator.nextInt(size);
+		int chosenCategoryIndex = randomGenerator.nextInt(categories.size());
 		Category category = categories.get(chosenCategoryIndex);
-		Difficulty difficulty = difficulties.get(gameState.getCurrentDifficulty());
+		Difficulty difficulty = difficulties.get(currentDifficulty);
 		List<Question> questionPool = QuestionLocalServiceUtil.findByCategoryAndDifficulty(category.getCategoryId(),
 				difficulty.getScore());
-		int chosenQuestionIndex = randomGenerator.nextInt(questionPool.size());
-		gameState.setCurrentQuestion(questionPool.get(chosenQuestionIndex));
+		if (!questionPool.isEmpty()){
+			int chosenQuestionIndex = randomGenerator.nextInt(questionPool.size());
+			gameState.setCurrentQuestion(questionPool.get(chosenQuestionIndex));
+		} else {
+			gameState.crash();
+		}
+		
 	}
 
 	public static boolean evaluateAnswer(GameState gameState, String answer) {
@@ -38,13 +47,13 @@ public class InfonaerGameUtil {
 		List<Difficulty> difficulties = gameState.getDifficulties();
 		if (!gameState.isGameOver() && currentQuestion.getRightAnswer().equals(answer)) {
 
-			if (gameState.getCurrentDifficulty() < difficulties.size()) {
+			if (gameState.getCurrentDifficulty() < difficulties.size() ) {
 				Difficulty difficulty = difficulties.get(gameState.getCurrentDifficulty());
 				gameState.setScore(difficulty.getScore());
 				if (difficulty.isGuaranteed()) {
 					gameState.setGuaranteedScore(difficulty.getScore());
 				}
-				gameState.increaseCurrentDifficulty();
+				gameState.advanceGame();
 			} else {
 				win(gameState);
 			}

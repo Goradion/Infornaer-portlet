@@ -9,6 +9,7 @@ public final class Constants {
 	public static final String VIEW_JSP = "/html/infonaergame/view.jsp";
 	public static final String HELP_JSP = "/html/infonaergame/help.jsp";
 	public static final String HIGHSCORES_JSP = "/html/infonaergame/highscores.jsp";
+	public static final String GAME_ERROR_JSP = "/html/infonaergame/game_error.jsp";
 	public static final String GAME_OVER_JSP = "/html/infonaergame/game_over.jsp";
 	public static final String GAME_WON_JSP = "/html/infonaergame/game_won.jsp";
 	public static final String NEW_GAME_JSP = "/html/infonaergame/new_game.jsp";

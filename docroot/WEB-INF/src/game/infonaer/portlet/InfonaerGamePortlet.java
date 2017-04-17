@@ -90,7 +90,7 @@ public class InfonaerGamePortlet extends MVCPortlet {
 			portletRequestDispatcher = portletContext.getRequestDispatcher(curPage);
 		}
 		portletRequestDispatcher.include(renderRequest, renderResponse);
-		
+
 	}
 
 	@ProcessAction(name = "clearEntities")
@@ -103,9 +103,9 @@ public class InfonaerGamePortlet extends MVCPortlet {
 
 	public void gotoNewGame(ActionRequest actionRequest, ActionResponse actionResponse) {
 		GameState gameState = (GameState) actionRequest.getPortletSession().getAttribute("gameState");
-		if (gameState == null){
-		actionRequest.getPortletSession().setAttribute("currentPage", NEW_GAME_JSP, PortletSession.PORTLET_SCOPE);
-		insertUnlockedCategories(actionRequest, actionResponse);
+		if (gameState == null) {
+			actionRequest.getPortletSession().setAttribute("currentPage", NEW_GAME_JSP, PortletSession.PORTLET_SCOPE);
+			insertUnlockedCategories(actionRequest, actionResponse);
 		} else {
 			navigateByGameState(actionRequest, actionResponse);
 		}
@@ -113,37 +113,44 @@ public class InfonaerGamePortlet extends MVCPortlet {
 
 	private void navigateByGameState(ActionRequest actionRequest, ActionResponse actionResponse) {
 		GameState gameState = (GameState) actionRequest.getPortletSession().getAttribute("gameState");
-		if (gameState == null){
+		if (gameState == null) {
 			gotoNewGame(actionRequest, actionResponse);
 		} else {
-			if(gameState.isGameOver()){
-				if (gameState.isWon()){
+			if (gameState.isGameOver()) {
+				if (gameState.hasError()) {
+					gotoGameError(actionRequest, actionResponse);
+				} else if (gameState.isWon()) {
 					gotoGameWon(actionRequest, actionResponse);
+				} else {
+					gotoGameOver(actionRequest, actionResponse);
 				}
 			} else {
 				gotoGameQuestion(actionRequest, actionResponse);
 			}
 		}
+
+	}
+
+	private void gotoGameError(ActionRequest actionRequest, ActionResponse actionResponse) {
+		actionRequest.getPortletSession().setAttribute("currentPage", GAME_ERROR_JSP, PortletSession.PORTLET_SCOPE);
 		
 	}
 
 	private void gotoGameWon(ActionRequest actionRequest, ActionResponse actionResponse) {
 		actionRequest.getPortletSession().setAttribute("currentPage", GAME_WON_JSP, PortletSession.PORTLET_SCOPE);
-		
 	}
 
-	public void gotoGameOver(ActionRequest actionRequest, ActionResponse actionResponse)
-			throws IOException, PortletException {
+	public void gotoGameOver(ActionRequest actionRequest, ActionResponse actionResponse) {
 		actionRequest.getPortletSession().setAttribute("currentPage", GAME_OVER_JSP, PortletSession.PORTLET_SCOPE);
 	}
-	
+
 	private void gotoGameQuestion(ActionRequest actionRequest, ActionResponse actionResponse) {
 		actionRequest.getPortletSession().setAttribute("currentPage", GAME_JSP, PortletSession.PORTLET_SCOPE);
 	}
 
 	public void startSimonGame(ActionRequest actionRequest, ActionResponse actionResponse) {
 		String[] categoryNames = actionRequest.getParameterValues("categories");
-		if (categoryNames == null){
+		if (categoryNames == null) {
 			gotoMainMenu(actionRequest, actionResponse);
 			return;
 		}
@@ -166,8 +173,8 @@ public class InfonaerGamePortlet extends MVCPortlet {
 		actionRequest.getPortletSession().setAttribute("gameState", gameState, PortletSession.PORTLET_SCOPE);
 		actionRequest.getPortletSession().setAttribute("currentPage", GAME_JSP, PortletSession.PORTLET_SCOPE);
 	}
-	
-	public void endGame(ActionRequest actionRequest, ActionResponse actionResponse){
+
+	public void endGame(ActionRequest actionRequest, ActionResponse actionResponse) {
 		PortletSession portletSession = actionRequest.getPortletSession();
 		portletSession.removeAttribute("gameState");
 		portletSession.removeAttribute("audienceJokerResult");
@@ -178,12 +185,14 @@ public class InfonaerGamePortlet extends MVCPortlet {
 			throws IOException, PortletException {
 		actionRequest.getPortletSession().setAttribute("currentPage", HIGHSCORES_JSP, PortletSession.PORTLET_SCOPE);
 
-//		HashMap<String,Long> highscores = new HashMap<String,Long>();
-//		for(Highscore h: HighscoreLocalServiceUtil.getHighscores(QueryUtil.ALL_POS, QueryUtil.ALL_POS)){
-//			highscores.put(h.getUserName(), h.getScore());
-//		}
-//		actionRequest.setAttribute("highscores", highscores);
-//		testHighscores();
+		// HashMap<String,Long> highscores = new HashMap<String,Long>();
+		// for(Highscore h:
+		// HighscoreLocalServiceUtil.getHighscores(QueryUtil.ALL_POS,
+		// QueryUtil.ALL_POS)){
+		// highscores.put(h.getUserName(), h.getScore());
+		// }
+		// actionRequest.setAttribute("highscores", highscores);
+		// testHighscores();
 	}
 
 	public void highscoresPagination(ActionRequest actionRequest, ActionResponse actionResponse) {
@@ -205,11 +214,9 @@ public class InfonaerGamePortlet extends MVCPortlet {
 		actionRequest.setAttribute("currentPage", page);
 	}
 
-	public void gotoMainMenu(ActionRequest actionRequest, ActionResponse actionResponse){
+	public void gotoMainMenu(ActionRequest actionRequest, ActionResponse actionResponse) {
 		actionRequest.getPortletSession().setAttribute("currentPage", VIEW_JSP, PortletSession.PORTLET_SCOPE);
 	}
-
-	
 
 	public void gotoEditMode(ActionRequest actionRequest, ActionResponse actionResponse)
 			throws IOException, PortletException {
@@ -502,14 +509,19 @@ public class InfonaerGamePortlet extends MVCPortlet {
 			e.printStackTrace();
 		}
 	}
+
 	public void evalAnswer(ActionRequest actionRequest, ActionResponse actionResponse) {
 		actionRequest.getPortletSession().removeAttribute("audienceJokerResult");
 		GameState gameState = (GameState) actionRequest.getPortletSession().getAttribute("gameState");
-		if (gameState == null){
+		if (gameState == null) {
 			gotoMainMenu(actionRequest, actionResponse);
 		} else {
 			String answer = actionRequest.getParameter("answer");
 			boolean evaluateAnswer = InfonaerGameUtil.evaluateAnswer(gameState, answer.toUpperCase());
+			if (evaluateAnswer && !gameState.isGameOver()) {
+				InfonaerGameUtil.pickQuestion(gameState);
+			}
+			navigateByGameState(actionRequest, actionResponse);
 		}
 	}
 

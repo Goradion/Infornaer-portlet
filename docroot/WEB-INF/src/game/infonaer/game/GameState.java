@@ -23,6 +23,7 @@ public class GameState {
 	private boolean audienceUsed = false;
 	private boolean gameOver = false;
 	private boolean won = false;
+	private boolean error = false;
 	
 	public GameState(User player, List<Category> categories, List<Difficulty> difficulties) {
 		super();
@@ -43,8 +44,14 @@ public class GameState {
 	public int getCurrentDifficulty() {
 		return currentDifficulty;
 	}
-	public void increaseCurrentDifficulty(){
-			currentDifficulty++;
+	/**
+	 * increases difficulty and wins the game if end is reached
+	 */
+	public void advanceGame(){	
+		currentDifficulty++;
+		if (currentDifficulty >= difficulties.size()){
+			win();
+		}
 	}
 	
 	public Question getCurrentQuestion() {
@@ -61,6 +68,10 @@ public class GameState {
 	}
 	public boolean isGameOver() {
 		return gameOver;
+	}
+	
+	public boolean hasError(){
+		return error;
 	}
 
 	private void endGame() {
@@ -88,6 +99,10 @@ public class GameState {
 		return score;
 	}
 	
+	public void crash(){
+		error = true;
+		endGame();
+	}
 	private void dropScore(){
 		score = guaranteedScore;
 	}
