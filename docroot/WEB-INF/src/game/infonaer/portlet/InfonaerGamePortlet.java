@@ -387,13 +387,13 @@ public class InfonaerGamePortlet extends MVCPortlet {
 			List<Difficulty> difficulties = DifficultyLocalServiceUtil.findAll();
 			for (Difficulty difficulty : difficulties) {
 				for (int i = 1; i < 5; i++) {
-					QuestionLocalServiceUtil.addQuestion("TestfrageA" + " i", "Richtig", "Falsch", "Falsch", "Falsch",
+					QuestionLocalServiceUtil.addQuestion("TestfrageA " + i, "Richtig", "Falsch", "Falsch", "Falsch",
 							"A", category.getCategoryId(), difficulty.getPrimaryKey(), user);
-					QuestionLocalServiceUtil.addQuestion("TestfrageB" + " i", "Falsch", "Richtig", "Falsch", "Falsch",
+					QuestionLocalServiceUtil.addQuestion("TestfrageB " + i, "Falsch", "Richtig", "Falsch", "Falsch",
 							"B", category.getCategoryId(), difficulty.getPrimaryKey(), user);
-					QuestionLocalServiceUtil.addQuestion("TestfrageC" + " i", "Falsch", "Falsch", "Richtig", "Falsch",
+					QuestionLocalServiceUtil.addQuestion("TestfrageC " + i, "Falsch", "Falsch", "Richtig", "Falsch",
 							"C", category.getCategoryId(), difficulty.getPrimaryKey(), user);
-					QuestionLocalServiceUtil.addQuestion("TestfrageD" + " i", "Falsch", "Falsch", "Falsch", "Richtig",
+					QuestionLocalServiceUtil.addQuestion("TestfrageD " + i, "Falsch", "Falsch", "Falsch", "Richtig",
 							"D", category.getCategoryId(), difficulty.getPrimaryKey(), user);
 				}
 			}
@@ -403,7 +403,6 @@ public class InfonaerGamePortlet extends MVCPortlet {
 		}
 
 	}
-
 
 	public void goToQuestionOverview(ActionRequest actionRequest, ActionResponse actionResponse) {
 		actionRequest.getPortletSession().setAttribute("currentPage", QUESTION_OVERVIEW_JSP,
@@ -420,7 +419,7 @@ public class InfonaerGamePortlet extends MVCPortlet {
 		portletSession.removeAttribute("category", PortletSession.APPLICATION_SCOPE);
 		portletSession.removeAttribute("dList", PortletSession.APPLICATION_SCOPE);
 		portletSession.removeAttribute("cList", PortletSession.APPLICATION_SCOPE);
-		//questionPagination(actionRequest, actionResponse);
+		// questionPagination(actionRequest, actionResponse);
 	}
 
 	private void questionPagination(ActionRequest actionRequest, ActionResponse actionResponse) {
@@ -499,7 +498,7 @@ public class InfonaerGamePortlet extends MVCPortlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//categoryPagination(actionRequest, actionResponse);
+		// categoryPagination(actionRequest, actionResponse);
 	}
 
 	public void goToCategoryOverview(ActionRequest actionRequest, ActionResponse actionResponse) {
@@ -509,7 +508,7 @@ public class InfonaerGamePortlet extends MVCPortlet {
 		portletSession.removeAttribute("categoryId", PortletSession.APPLICATION_SCOPE);
 		portletSession.removeAttribute("categoryName", PortletSession.APPLICATION_SCOPE);
 		portletSession.removeAttribute("unlocked", PortletSession.APPLICATION_SCOPE);
-		//categoryPagination(actionRequest, actionResponse);
+		// categoryPagination(actionRequest, actionResponse);
 	}
 
 	private void categoryPagination(ActionRequest actionRequest, ActionResponse actionResponse) {
