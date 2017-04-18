@@ -41,20 +41,6 @@ create table sbam_QuestionStatistics (
 	answered_d LONG
 );
 
-create table sbam_UserQuestion (
-	userId LONG,
-	userName VARCHAR(75) null,
-	questionId LONG not null primary key,
-	question VARCHAR(75) null,
-	answerA VARCHAR(75) null,
-	answerB VARCHAR(75) null,
-	answerC VARCHAR(75) null,
-	answerD VARCHAR(75) null,
-	category VARCHAR(75) null,
-	difficulty INTEGER,
-	rightAnswer VARCHAR(75) null
-);
-
 create table sbam_UserStatistics (
 	userId LONG not null primary key,
 	gamesWon LONG,
