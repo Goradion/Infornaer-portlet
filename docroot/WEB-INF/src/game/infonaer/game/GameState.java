@@ -63,12 +63,15 @@ public class GameState {
 		return currentDifficulty;
 	}
 	/**
-	 * increases difficulty and wins the game if end is reached
+	 * increases difficulty
+	 * @return if the game can continue
 	 */
-	public void advanceGame(){	
+	public boolean advanceGame(){	
 		currentDifficulty++;
 		if (currentDifficulty >= difficulties.size()){
-			win();
+			return false;
+		}else {
+			return true;
 		}
 	}
 	

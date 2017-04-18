@@ -4,7 +4,7 @@
 
 
 <portlet:actionURL name="upsertCategory" var="upsertCategory"></portlet:actionURL>
-<portlet:actionURL name="goToCategoryOverview" var="categoryOverview"></portlet:actionURL>
+<portlet:actionURL name="gotoCategoryOverview" var="categoryOverview"></portlet:actionURL>
 <h1>Neue Kategorie</h1>
 <form method="POST" action="${upsertCategory}" >
 Name:

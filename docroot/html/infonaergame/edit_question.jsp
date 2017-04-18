@@ -5,7 +5,7 @@
 
 <portlet:actionURL name="upsertQuestion" var="addQuestionURL" />
 
-<portlet:actionURL name="goToQuestionOverview" var="questionOverview"></portlet:actionURL>
+<portlet:actionURL name="gotoQuestionOverview" var="questionOverview"></portlet:actionURL>
 <h1>Frage ändern</h1>
 <form method="POST" action="${addQuestionURL}">
 	<input type="text" name="<portlet:namespace />questionId" 

@@ -83,13 +83,15 @@ public class InfonaerGameUtil {
 				if (difficulty.isGuaranteed()) {
 					gameState.setGuaranteedScore(difficulty.getScore());
 				}
-				gameState.advanceGame();
-			} else {
-				win(gameState);
-			}
+				boolean gameContinues = gameState.advanceGame();
+				if (!gameContinues){
+					win(gameState);
+				}
+			} 
 			UserStatisticsLocalServiceUtil.addRightAnswer(gameState.getPlayer().getUserId());
 			return true;
 		} else {
+			UserStatisticsLocalServiceUtil.addWrongAnswer(gameState.getPlayer().getUserId());
 			lose(gameState);
 			return false;
 		}

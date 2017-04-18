@@ -132,10 +132,10 @@
 		<aui:col span="1"></aui:col>
 	</aui:button-row>
 </aui:container>
-<!-- debug zurück zum Haupmenue -->
+
 <portlet:actionURL name="gotoMainMenu" var="mainMenu"></portlet:actionURL>
 <p>
-	<a href=<%=mainMenu%>>Back</a> </br>
+	<a href=<%=mainMenu%>>Hauptmenü</a> </br>
 </p>
 
 <%

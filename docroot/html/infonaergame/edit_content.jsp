@@ -3,9 +3,9 @@
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 
 <portlet:actionURL name="gotoMainMenu" var="mainMenu"></portlet:actionURL>
-<portlet:actionURL name="goToCategoryOverview" var="categoryOverview"></portlet:actionURL>
-<portlet:actionURL name="goToQuestionOverview" var="questionOverview"></portlet:actionURL>
-<portlet:actionURL name="goToUserStats" var="userStats"></portlet:actionURL>
+<portlet:actionURL name="gotoCategoryOverview" var="categoryOverview"></portlet:actionURL>
+<portlet:actionURL name="gotoQuestionOverview" var="questionOverview"></portlet:actionURL>
+<portlet:actionURL name="gotoUserStats" var="userStats"></portlet:actionURL>
 
 <portlet:actionURL name="test" var="testURL"></portlet:actionURL>
 

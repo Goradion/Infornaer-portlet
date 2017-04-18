@@ -6,7 +6,7 @@
 <portlet:actionURL name="gotoMainMenu" var="mainMenu"></portlet:actionURL>
 
 <h1>Neues Spiel</h1>
-<form method="POST" action="${startSGame}"> <h3>Kreuzen Sie die gewünschten Kategorien an:</h3> 
+<form method="POST" action="${startGame}"> <h3>Kreuzen Sie die gewünschten Kategorien an:</h3> 
 <fieldset> 
 <c:if test="${sessionScope.cList == null}">keine Kategorien freigeschaltet</c:if>
 <c:forEach items="${sessionScope.cList}" var="c">

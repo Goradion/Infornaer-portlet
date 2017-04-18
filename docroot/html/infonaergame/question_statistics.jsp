@@ -1,10 +1,10 @@
 <%@ include file="/init.jsp"%>
 
-<portlet:actionURL name="goToQuestionOverview" var="questionOverview"></portlet:actionURL>
+<portlet:actionURL name="gotoQuestionOverview" var="questionOverview"></portlet:actionURL>
 
 <!-- SearchContainer START -->
 <%
-	List<QuestionStatistics> questions = QuestionStatisticsLocalServiceUtil.getQuestionStatisticses(0,
+	List<QuestionStatistics> questionsStatisticses = QuestionStatisticsLocalServiceUtil.getQuestionStatisticses(0,
 			QuestionStatisticsLocalServiceUtil.getQuestionStatisticsesCount());
 %>
 <a href=<%=questionOverview%>>Zurück</a>
@@ -29,10 +29,6 @@
 	</liferay-ui:search-container-results>
 	<liferay-ui:search-container-row className="de.ki.sbam.model.QuestionStatistics"
 		modelVar="question" keyProperty="questionId">
-<%-- 		<liferay-ui:search-container-column-text>
-			<a href=<%=edit%>>Ändern</a> <a href=<%=delete%>>Löschen</a>
-		</liferay-ui:search-container-column-text>
---%>
 		<liferay-ui:search-container-column-text property="questionId"
 			name="Id" />
 		<liferay-ui:search-container-column-text name="Frage" value="<%=QuestionLocalServiceUtil.fetchQuestion(question.getQuestionId()).getQuestionContent() %>"/>

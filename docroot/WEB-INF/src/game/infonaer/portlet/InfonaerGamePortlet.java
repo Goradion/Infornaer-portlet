@@ -39,6 +39,7 @@ import de.ki.sbam.service.CategoryLocalServiceUtil;
 import de.ki.sbam.service.DifficultyLocalServiceUtil;
 import de.ki.sbam.service.HighscoreLocalServiceUtil;
 import de.ki.sbam.service.QuestionLocalServiceUtil;
+import de.ki.sbam.service.UserStatisticsLocalServiceUtil;
 import game.infonaer.game.AudienceJokerResult;
 import game.infonaer.game.GameState;
 import game.infonaer.game.InfonaerGameUtil;
@@ -399,7 +400,7 @@ public class InfonaerGamePortlet extends MVCPortlet {
 				question.setModifiedDate(new Date());
 				QuestionLocalServiceUtil.updateQuestion(question);
 			}
-			goToQuestionOverview(actionRequest, actionResponse);
+			gotoQuestionOverview(actionRequest, actionResponse);
 		} catch (PortalException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -425,11 +426,13 @@ public class InfonaerGamePortlet extends MVCPortlet {
 			e.printStackTrace();
 		}
 
-		goToQuestionOverview(actionRequest, actionResponse);
+		gotoQuestionOverview(actionRequest, actionResponse);
 	}
 
 	/**
+	 * creates a Test category,
 	 * inserts test questions into the database to test the game
+	 * and unlocks the Test category
 	 * 
 	 * @param actionRequest
 	 * @param actionResponse
@@ -454,6 +457,8 @@ public class InfonaerGamePortlet extends MVCPortlet {
 							"D", category.getCategoryId(), difficulty.getPrimaryKey(), user);
 				}
 			}
+			category.setUnlocked(true);
+			CategoryLocalServiceUtil.updateCategory(category);
 		} catch (PortalException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -468,7 +473,7 @@ public class InfonaerGamePortlet extends MVCPortlet {
 	 * @param actionRequest
 	 * @param actionResponse
 	 */
-	public void goToQuestionOverview(ActionRequest actionRequest, ActionResponse actionResponse) {
+	public void gotoQuestionOverview(ActionRequest actionRequest, ActionResponse actionResponse) {
 		actionRequest.getPortletSession().setAttribute("currentPage", QUESTION_OVERVIEW_JSP,
 				PortletSession.PORTLET_SCOPE);
 		PortletSession portletSession = actionRequest.getPortletSession();
@@ -520,7 +525,7 @@ public class InfonaerGamePortlet extends MVCPortlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		goToCategoryOverview(actionRequest, actionResponse);
+		gotoCategoryOverview(actionRequest, actionResponse);
 	}
 
 	/**
@@ -573,7 +578,7 @@ public class InfonaerGamePortlet extends MVCPortlet {
 	 * @param actionRequest
 	 * @param actionResponse
 	 */
-	public void goToCategoryOverview(ActionRequest actionRequest, ActionResponse actionResponse) {
+	public void gotoCategoryOverview(ActionRequest actionRequest, ActionResponse actionResponse) {
 		actionRequest.getPortletSession().setAttribute("currentPage", CATEGORY_OVERVIEW_JSP,
 				PortletSession.PORTLET_SCOPE);
 		PortletSession portletSession = actionRequest.getPortletSession();
